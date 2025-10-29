@@ -1,0 +1,5 @@
+<h1>New Issue for Employee: <%= @employee.person_name %></h1>
+
+<%= render 'form', issue: @issue, employee: @employee %>
+
+<%= link_to 'Back to Issues', employee_issues_path(@employee), class: 'btn btn-secondary' %>

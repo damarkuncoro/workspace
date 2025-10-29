@@ -1,0 +1,13 @@
+<h1>My Roles</h1>
+
+<% if @roles.any? %>
+  <ul class="list-group">
+    <% @roles.each do |role| %>
+      <li class="list-group-item"><%= role.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-muted">No roles assigned.</p>
+<% end %>
+
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

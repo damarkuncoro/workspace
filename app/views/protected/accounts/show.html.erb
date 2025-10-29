@@ -1,0 +1,177 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="px-6 py-4 bg-gray-800 text-white">
+        <h1 class="text-2xl font-bold">Account Details</h1>
+      </div>
+
+      <div class="px-6 py-6">
+        <!-- Account Information Card -->
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-6">
+          <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900">Account Information</h2>
+          </div>
+          <div class="px-6 py-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <dl class="space-y-3">
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Email</dt>
+                    <dd class="text-sm text-gray-900"><%= @account.email %></dd>
+                  </div>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Name</dt>
+                    <dd class="text-sm text-gray-900"><%= @account.person&.name || 'Not provided' %></dd>
+                  </div>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Date of Birth</dt>
+                    <dd class="text-sm text-gray-900"><%= @account.person&.date_of_birth ? l(@account.person.date_of_birth) : 'Not provided' %></dd>
+                  </div>
+                </dl>
+              </div>
+              <div>
+                <dl class="space-y-3">
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Roles</dt>
+                    <dd class="text-sm text-gray-900">
+                      <div class="flex flex-wrap gap-1 mt-1">
+                        <% @account.roles.each do |role| %>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"><%= role.name %></span>
+                        <% end %>
+                      </div>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Created At</dt>
+                    <dd class="text-sm text-gray-900"><%= l(@account.created_at) %></dd>
+                  </div>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Updated At</dt>
+                    <dd class="text-sm text-gray-900"><%= l(@account.updated_at) %></dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Information Card -->
+        <% if @account.person&.customer.present? %>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-6">
+            <div class="px-6 py-4 bg-green-50 border-b border-gray-200">
+              <h2 class="text-lg font-semibold text-gray-900">Customer Information</h2>
+            </div>
+            <div class="px-6 py-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <dl class="space-y-3">
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Customer Code</dt>
+                      <dd class="text-sm text-gray-900"><%= @account.person.customer.customer_code %></dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Status</dt>
+                      <dd class="text-sm text-gray-900">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= @account.person.customer.status == 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' %>">
+                          <%= @account.person.customer.status %>
+                        </span>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <div>
+                  <dl class="space-y-3">
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Customer Created At</dt>
+                      <dd class="text-sm text-gray-900"><%= l(@account.person.customer.created_at) %></dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Customer Updated At</dt>
+                      <dd class="text-sm text-gray-900"><%= l(@account.person.customer.updated_at) %></dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <div class="mt-4 flex space-x-3">
+                <%= link_to 'View Customer Details', customer_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+                <%= link_to 'View Customer Issues', customer_issues_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
+              </div>
+            </div>
+          </div>
+        <% elsif @account.person.present? %>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-6">
+            <div class="px-6 py-4 bg-yellow-50 border-b border-gray-200">
+              <h2 class="text-lg font-semibold text-gray-900">Create Customer Profile</h2>
+            </div>
+            <div class="px-6 py-4">
+              <p class="text-sm text-gray-600 mb-4">This account doesn't have a customer profile yet. Create one to manage customer-specific information and issues.</p>
+              <%= link_to 'Create Customer Profile', new_protected_account_customer_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Employee Information Card -->
+        <% if @account.person&.employee.present? %>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-6">
+            <div class="px-6 py-4 bg-blue-50 border-b border-gray-200">
+              <h2 class="text-lg font-semibold text-gray-900">Employee Information</h2>
+            </div>
+            <div class="px-6 py-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <dl class="space-y-3">
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Employee Code</dt>
+                      <dd class="text-sm text-gray-900"><%= @account.person.employee.employee_code %></dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Status</dt>
+                      <dd class="text-sm text-gray-900">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= @account.person.employee.status == 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' %>">
+                          <%= @account.person.employee.status %>
+                        </span>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+                <div>
+                  <dl class="space-y-3">
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Employee Created At</dt>
+                      <dd class="text-sm text-gray-900"><%= l(@account.person.employee.created_at) %></dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Employee Updated At</dt>
+                      <dd class="text-sm text-gray-900"><%= l(@account.person.employee.updated_at) %></dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <div class="mt-4 flex space-x-3">
+                <%= link_to 'View Employee Details', employee_path(@account.person.employee), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+                <%= link_to 'View Employee Issues', employee_issues_path(@account.person.employee), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
+              </div>
+            </div>
+          </div>
+        <% elsif @account.person.present? %>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-6">
+            <div class="px-6 py-4 bg-yellow-50 border-b border-gray-200">
+              <h2 class="text-lg font-semibold text-gray-900">Create Employee Profile</h2>
+            </div>
+            <div class="px-6 py-4">
+              <p class="text-sm text-gray-600 mb-4">This account doesn't have an employee profile yet. Create one to manage employee-specific information and issues.</p>
+              <%= link_to 'Create Employee Profile', new_protected_account_employee_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-3 pt-6 border-t border-gray-200">
+          <%= link_to 'Edit', edit_protected_account_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
+          <%= link_to 'Back to Accounts', protected_accounts_path, class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+          <%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

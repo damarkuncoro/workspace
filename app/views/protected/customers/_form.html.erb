@@ -1,0 +1,22 @@
+<%= form_with(model: [:protected, customer], local: true) do |form| %>
+  <% if customer.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h4>
+      <ul>
+        <% customer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="mb-3">
+    <%= form.label :status, class: 'form-label' %>
+    <%= form.select :status, [['Active', 'active'], ['Inactive', 'inactive']], {}, class: 'form-select' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,130 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[8.1].define(version: 11) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+  enable_extension "pgcrypto"
+
+  create_table "account_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "role_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "role_id"], name: "index_account_roles_on_account_id_and_role_id", unique: true
+    t.index ["account_id"], name: "index_account_roles_on_account_id"
+    t.index ["role_id"], name: "index_account_roles_on_role_id"
+  end
+
+  create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_accounts_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "customer_code", null: false
+    t.uuid "person_id", null: false
+    t.string "status", default: "active", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_code"], name: "index_customers_on_customer_code", unique: true
+    t.index ["person_id"], name: "index_customers_on_person_id", unique: true
+  end
+
+  create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "employee_code", null: false
+    t.uuid "person_id", null: false
+    t.string "status", default: "active", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_code"], name: "index_employees_on_employee_code", unique: true
+    t.index ["person_id"], name: "index_employees_on_person_id", unique: true
+  end
+
+  create_table "issue_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id"
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.string "field_name"
+    t.uuid "issue_id", null: false
+    t.string "new_value"
+    t.string "old_value"
+    t.index ["account_id"], name: "index_issue_activities_on_account_id"
+    t.index ["issue_id"], name: "index_issue_activities_on_issue_id"
+  end
+
+  create_table "issue_assignments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "issue_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_issue_assignments_on_account_id"
+    t.index ["issue_id", "account_id"], name: "index_issue_assignments_on_issue_id_and_account_id", unique: true
+    t.index ["issue_id"], name: "index_issue_assignments_on_issue_id"
+  end
+
+  create_table "issue_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.boolean "internal", default: false
+    t.uuid "issue_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_issue_comments_on_account_id"
+    t.index ["issue_id"], name: "index_issue_comments_on_issue_id"
+  end
+
+  create_table "issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "assigned_to_id"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.uuid "issueable_id"
+    t.string "issueable_type"
+    t.integer "priority", default: 1, null: false
+    t.integer "status", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_issues_on_assigned_to_id"
+    t.index ["issueable_type", "issueable_id"], name: "index_issues_on_issueable"
+  end
+
+  create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.datetime "created_at", null: false
+    t.date "date_of_birth"
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_people_on_account_id", unique: true
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "account_roles", "accounts"
+  add_foreign_key "account_roles", "roles"
+  add_foreign_key "customers", "people"
+  add_foreign_key "employees", "people"
+  add_foreign_key "issue_assignments", "accounts"
+  add_foreign_key "issue_assignments", "issues"
+  add_foreign_key "issues", "accounts", column: "assigned_to_id", on_delete: :nullify
+  add_foreign_key "people", "accounts"
+end

@@ -1,0 +1,33 @@
+<h1>Profile</h1>
+
+<% if @person.incomplete? %>
+  <div class="alert alert-warning">
+    Your profile is incomplete. Please <%= link_to 'edit your profile', profile_edit_path %> to complete it.
+  </div>
+<% end %>
+
+<div class="profile-info">
+  <p><strong>Name:</strong> <%= @person.name || 'Not provided' %></p>
+  <p><strong>Date of Birth:</strong> <%= @person.date_of_birth ? l(@person.date_of_birth) : 'Not provided' %></p>
+</div>
+<% if @customer %>
+<div class="customer-info">
+
+  <p><strong>Customer Code:</strong> <%= @customer.customer_code || 'Not registered' %></p>
+  <p><strong>Status:</strong> <%= @customer.status || 'Not registered' %></p>
+  <p><strong>Registered At:</strong> <%= @customer.created_at ? l(@customer.created_at) : 'Not registered' %></p>
+</div>
+
+<% end %>
+<% if @employee %>
+<div class="employee-info">
+
+  <p><strong>Employee Code:</strong> <%= @employee.employee_code || 'Not registered' %></p>
+  <p><strong>Status:</strong> <%= @employee.status || 'Not registered' %></p>
+  <p><strong>Registered At:</strong> <%= @employee.created_at ? l(@employee.created_at) : 'Not registered' %></p>
+</div>
+<% end %>
+
+
+<%= link_to 'Edit Profile', protected_profile_edit_path, class: 'btn btn-primary' %>
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

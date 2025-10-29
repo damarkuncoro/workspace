@@ -1,0 +1,44 @@
+<h1>Customers</h1>
+
+<%= link_to 'New Customer', new_protected_account_path, class: 'btn btn-primary mb-3' %>
+
+<% if @customers.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer Code</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.customer_code %></td>
+            <td><%= customer.person_name %></td>
+            <td><%= customer.account_email %></td>
+            <td>
+              <span class="badge <%= customer.status == 'active' ? 'bg-success' : 'bg-secondary' %>">
+                <%= customer.status %>
+              </span>
+            </td>
+            <td><%= l(customer.created_at) %></td>
+            <td>
+              <%= link_to 'Show', protected_customer_path(customer), class: 'btn btn-sm btn-info' %>
+              <%= link_to 'Edit', edit_protected_customer_path(customer), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', protected_customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-muted">No customers found.</p>
+<% end %>
+
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,52 @@
+<h1>Issues for Employee: <%= @employee.person_name %></h1>
+
+<%= link_to 'New Issue', new_protected_employee_issue_path(@employee), class: 'btn btn-primary mb-3' %>
+<%= link_to 'Back to Employee', protected_employee_path(@employee), class: 'btn btn-secondary mb-3' %>
+
+<% if @issues.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Assigned To</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @issues.each do |issue| %>
+          <tr>
+            <td><%= issue.title %></td>
+            <td>
+              <span class="badge <%= issue.open? ? 'bg-success' : issue.in_progress? ? 'bg-warning' : 'bg-secondary' %>">
+                <%= issue.status&.humanize || 'Unknown' %>
+              </span>
+            </td>
+            <td>
+              <span class="badge <%= issue.high? ? 'bg-danger' : issue.medium? ? 'bg-warning' : 'bg-info' %>">
+                <%= issue.priority&.humanize || 'Unknown' %>
+              </span>
+            </td>
+            <td>
+              <%= issue.assigned_to&.person&.name || 'Unassigned' %>
+              <% if issue.assigned_accounts.any? %>
+                <br><small class="text-muted">+<%= issue.assigned_accounts.count %> more</small>
+              <% end %>
+            </td>
+            <td><%= l(issue.created_at) %></td>
+            <td>
+              <%= link_to 'Show', protected_employee_issue_path(@employee, issue), class: 'btn btn-sm btn-info' %>
+              <%= link_to 'Edit', edit_protected_employee_issue_path(@employee, issue), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', protected_employee_issue_path(@employee, issue), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-muted">No issues found for this employee.</p>
+<% end %>

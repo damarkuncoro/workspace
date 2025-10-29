@@ -1,0 +1,30 @@
+<h1>Employee Details</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Employee Information</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <p><strong>Employee Code:</strong> <%= @employee.employee_code %></p>
+        <p><strong>Name:</strong> <%= @employee.person_name %></p>
+        <p><strong>Email:</strong> <%= @employee.account_email %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Status:</strong>
+          <span class="badge <%= @employee.status == 'active' ? 'bg-success' : 'bg-secondary' %>">
+            <%= @employee.status %>
+          </span>
+        </p>
+        <p><strong>Created At:</strong> <%= l(@employee.created_at) %></p>
+        <p><strong>Updated At:</strong> <%= l(@employee.updated_at) %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <%= link_to 'Edit', edit_protected_employee_path(@employee), class: 'btn btn-warning' %>
+  <%= link_to 'Issues', protected_employee_issues_path(@employee), class: 'btn btn-warning' %>
+  <%= link_to 'Back to Employees', protected_employees_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>
+</div>

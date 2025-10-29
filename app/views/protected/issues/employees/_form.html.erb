@@ -1,0 +1,51 @@
+<%= form_with(model: [@employee, issue], local: true) do |form| %>
+  <% if issue.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h4>
+      <ul>
+        <% issue.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control', rows: 4 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: 'form-label' %>
+    <%= form.select :status, Issue.statuses.keys.map { |k| [k.humanize, k] }, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :priority, class: 'form-label' %>
+    <%= form.select :priority, Issue.priorities.keys.map { |k| [k.humanize, k] }, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :assigned_to_id, 'Primary Assigned To', class: 'form-label' %>
+    <%= form.collection_select :assigned_to_id, Account.all, :id, :person_name, { include_blank: 'Unassigned' }, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :assigned_to_id, 'Primary Assigned To', class: 'form-label' %>
+    <%= form.collection_select :assigned_to_id, Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person), :id, :person_name, { include_blank: 'Unassigned' }, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :assigned_account_ids, 'Additional Assignees', class: 'form-label' %>
+    <%= form.collection_select :assigned_account_ids, Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person), :id, :person_name, { selected: @issue&.assigned_accounts&.pluck(:id) }, { multiple: true, class: 'form-select' } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

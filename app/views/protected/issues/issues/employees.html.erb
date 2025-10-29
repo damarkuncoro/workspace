@@ -1,0 +1,62 @@
+<h1>Employee Issues</h1>
+
+<%#= link_to 'New Issue', new_protected_issues_issue_path, class: 'btn btn-primary mb-3' %>
+
+<% if @issues.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Employee</th>
+          <th>Assigned To</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @issues.each do |issue| %>
+          <tr>
+            <td><%= issue.title %></td>
+            <td>
+              <span class="badge <%= issue.status == 'open' ? 'bg-primary' : issue.status == 'in_progress' ? 'bg-warning' : issue.status == 'completed' ? 'bg-success' : 'bg-secondary' %>">
+                <%= issue.status %>
+              </span>
+            </td>
+            <td>
+              <span class="badge <%= issue.priority == 'high' ? 'bg-danger' : issue.priority == 'medium' ? 'bg-warning' : 'bg-info' %>">
+                <%= issue.priority %>
+              </span>
+            </td>
+            <td>
+              <% if issue.issueable %>
+                <%= issue.issueable.person_name %>
+              <% else %>
+                N/A
+              <% end %>
+            </td>
+            <td>
+              <% if issue.assigned_to %>
+                <%= issue.assigned_to.person_name %>
+              <% else %>
+                Unassigned
+              <% end %>
+            </td>
+            <td><%= l(issue.created_at) %></td>
+            <td>
+              <%= link_to 'Show', protected_issues_issue_path(issue), class: 'btn btn-sm btn-info' %>
+              <%= link_to 'Edit', edit_protected_issues_issue_path(issue), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', protected_issues_issue_path(issue), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-muted">No employee issues found.</p>
+<% end %>
+
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

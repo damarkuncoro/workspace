@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="px-6 py-4 bg-gray-800 text-white">
+        <h1 class="text-2xl font-bold">Edit Account</h1>
+      </div>
+
+      <div class="px-6 py-6">
+        <%= render 'form_edit', account: @account %>
+      </div>
+
+      <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-wrap gap-3">
+        <%= link_to 'Show', protected_account_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+        <%= link_to 'Back to Accounts', protected_accounts_path, class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      </div>
+    </div>
+  </div>
+</div>

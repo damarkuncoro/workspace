@@ -1,0 +1,44 @@
+<h1>Employees</h1>
+
+<%= link_to 'New Employee', new_protected_account_path, class: 'btn btn-primary mb-3' %>
+
+<% if @employees.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Employee Code</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.employee_code %></td>
+            <td><%= employee.person_name %></td>
+            <td><%= employee.account_email %></td>
+            <td>
+              <span class="badge <%= employee.status == 'active' ? 'bg-success' : 'bg-secondary' %>">
+                <%= employee.status %>
+              </span>
+            </td>
+            <td><%= l(employee.created_at) %></td>
+            <td>
+              <%= link_to 'Show', protected_employee_path(employee), class: 'btn btn-sm btn-info' %>
+              <%= link_to 'Edit', edit_protected_employee_path(employee), class: 'btn btn-sm btn-warning' %>
+              <%= link_to 'Destroy', protected_employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="text-muted">No employees found.</p>
+<% end %>
+
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,77 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
+    <p class="text-gray-600">Welcome back, <%= current_account.email %></p>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Accounts Management -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">Accounts</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Manage user accounts and permissions</p>
+      <%= link_to 'Manage Accounts', protected_accounts_path, class: 'bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+
+    <!-- Customers -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+        
+        <h3 class="text-lg font-semibold text-gray-900">Customers</h3>
+      </div>
+      <p class="text-gray-600 mb-4">View and manage customer information</p>
+      <%= link_to 'View Customers', protected_customers_path, class: 'bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+
+    <!-- Employees -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+      
+        <h3 class="text-lg font-semibold text-gray-900">Employees</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Manage employee data and assignments</p>
+      <%= link_to 'View Employees', protected_employees_path, class: 'bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+
+    <!-- Issues -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+       
+        <h3 class="text-lg font-semibold text-gray-900">Issues</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Track and resolve support issues</p>
+      <div class="space-y-2">
+        <%= link_to 'Customer Issues', protected_customers_path, class: 'block bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded transition duration-300 text-center' %>
+        <%= link_to 'Employee Issues', protected_employees_path, class: 'block bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded transition duration-300 text-center' %>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+       
+        <h3 class="text-lg font-semibold text-gray-900">Profile</h3>
+      </div>
+      <p class="text-gray-600 mb-4">Manage your personal information</p>
+      <%= link_to 'View Profile', protected_profile_show_path, class: 'bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+
+    <!-- Roles -->
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <div class="flex items-center mb-4">
+     
+        <h3 class="text-lg font-semibold text-gray-900">Roles</h3>
+      </div>
+      <p class="text-gray-600 mb-4">View and manage user roles</p>
+      <%= link_to 'Manage Roles', protected_roles_show_path, class: 'bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+  </div>
+
+  <div class="bg-white shadow-lg rounded-lg p-6">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+    <div class="flex flex-wrap gap-4">
+      <%= link_to 'Sign Out', destroy_account_session_path, data: { turbo_method: :delete }, class: 'bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded transition duration-300' %>
+    </div>
+  </div>
+</div>

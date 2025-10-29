@@ -1,0 +1,22 @@
+<h1>Edit Profile</h1>
+
+<%= render "accounts/shared/error_messages", resource: @person %>
+
+<%= form_with model: @person, url: profile_update_path, method: :patch, local: true do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date_of_birth %>
+    <%= f.date_field :date_of_birth, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Update Profile', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Profile', protected_profile_show_path, class: 'btn btn-secondary' %>
+<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>
