@@ -27,7 +27,25 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
     <%= render 'partials/raw/body/header' %>
     <!-- End of Header -->
     <!-- Content -->
-    <%= render 'partials/raw/contents/wrapper_content' %> 
+    <%#= render 'partials/raw/contents/wrapper_content' %> 
+    <main class="grow pt-5" id="content" role="content">
+    <!-- Container -->
+     <div class="kt-container-fixed" id="contentContainer">
+     <style>
+      .hero-bg {
+		background-image: url('/assets/media/images/2600x1200/bg-1.png');
+	}
+	.dark .hero-bg {
+		background-image: url('/assets/media/images/2600x1200/bg-1-dark.png');
+	}
+     </style>
+    <%= yield %>
+    </div>
+     <!-- End of Container -->
+    
+    </main>
+    <!-- End of Content -->
+
     <!-- End of Content -->
     <!-- Footer -->
     <%= render 'partials/raw/footer' %> 

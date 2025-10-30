@@ -1,33 +1,68 @@
-<h1>Profile</h1>
+<%= hero_profile(
+  user: {
+    name: "#{ @person.name || 'Not provided' }",
+    avatar: "/assets/media/avatars/300-1.png",
+    verified: true,
+    details: [
+      { icon: "ki-abstract-41", text: "KeenThemes" },
+      { icon: "ki-geolocation", text: "SF, Bay Area" },
+      { icon: "ki-sms", text: "#{ @person.person_email || 'Not provided' }", href: "mailto:#{ @person.person_email || 'Not provided' }" }
+    ]
+  }
+) %>
 
-<% if @person.incomplete? %>
-  <div class="alert alert-warning">
-    Your profile is incomplete. Please <%= link_to 'edit your profile', profile_edit_path %> to complete it.
-  </div>
+<%= profile_menu_container(
+  menu: [
+    { title: "Profiles", submenu: [
+        { title: "Default", href: "/profiles/default" },
+        { title: "Creator", href: "/profiles/creator" },
+        { title: "Company", href: "/profiles/company" },
+        { title: "NFT", href: "/profiles/nft" },
+        { title: "Blogger", href: "/profiles/blogger" },
+        { title: "CRM", href: "/profiles/crm" },
+        { title: "More", submenu: [
+            { title: "Gamer", href: "/profiles/gamer" },
+            { title: "Feeds", href: "/profiles/feeds" },
+            { title: "Plain", href: "/profiles/plain" },
+            { title: "Modal", href: "/profiles/modal" }
+          ]
+        }
+      ]
+    },
+    { title: "Projects", submenu: [
+        { title: "3 Columns", href: "/projects/3-columns" },
+        { title: "2 Columns", href: "/projects/2-columns" }
+      ]
+    },
+    { title: "Works", href: "/works" },
+    { title: "Teams", href: "/teams" },
+    { title: "Network", href: "/network" },
+    { title: "Activity", href: "/activity" },
+    { title: "More", submenu: [
+        { title: "Campaigns - Card", href: "/campaigns/card" },
+        { title: "Campaigns - List", href: "/campaigns/list" },
+        { title: "Empty", href: "/empty" }
+      ]
+    }
+  ],
+  actions: {
+    connect: { icon: "ki-users", label: "Connect" },
+    message: { icon: "ki-messages" },
+    more: {
+      icon: "ki-dots-vertical",
+      items: [
+        { icon: "ki-coffee", label: "Share Profile", data: { "kt-modal-toggle": "#share_profile_modal" } },
+        { icon: "ki-award", label: "Give Award", data: { "kt-modal-toggle": "#give_award_modal" } },
+        { icon: "ki-coffee", label: "Stay Updated", switch: true, checked: true },
+        { icon: "ki-information-2", label: "Report User", data: { "kt-modal-toggle": "#report_user_modal" } }
+      ]
+    }
+  }
+) %>
+
+     
+<%= container do %>
+  <%= column do %>
+    <%= community_badges_card %>
+  <% end %>
 <% end %>
-
-<div class="profile-info">
-  <p><strong>Name:</strong> <%= @person.name || 'Not provided' %></p>
-  <p><strong>Date of Birth:</strong> <%= @person.date_of_birth ? l(@person.date_of_birth) : 'Not provided' %></p>
-</div>
-<% if @customer %>
-<div class="customer-info">
-
-  <p><strong>Customer Code:</strong> <%= @customer.customer_code || 'Not registered' %></p>
-  <p><strong>Status:</strong> <%= @customer.status || 'Not registered' %></p>
-  <p><strong>Registered At:</strong> <%= @customer.created_at ? l(@customer.created_at) : 'Not registered' %></p>
-</div>
-
-<% end %>
-<% if @employee %>
-<div class="employee-info">
-
-  <p><strong>Employee Code:</strong> <%= @employee.employee_code || 'Not registered' %></p>
-  <p><strong>Status:</strong> <%= @employee.status || 'Not registered' %></p>
-  <p><strong>Registered At:</strong> <%= @employee.created_at ? l(@employee.created_at) : 'Not registered' %></p>
-</div>
-<% end %>
-
-
-<%= link_to 'Edit Profile', protected_profile_edit_path, class: 'btn btn-primary' %>
-<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>

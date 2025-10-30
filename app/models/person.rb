@@ -7,7 +7,11 @@ class Person < ApplicationRecord
   validates :date_of_birth, presence: true
 
   after_create_commit :assign_initial_customer_and_employee
-
+  
+  def person_email
+    account.email if account.present?
+  end
+  
   def incomplete?
     name.blank? || date_of_birth.blank?
   end

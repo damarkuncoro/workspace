@@ -2,7 +2,31 @@
     
     <div class="kt-container-fixed" id="contentContainer">
 
-    <%= yield %>
+    <%#= yield %>
     
+    <%= dashboard_title("Dashboard", "Central Hub for Personal Customization") %>
+
+<div class="grid grid-cols-2 gap-5">
+  <%= stats_card(icon: "/assets/media/brand-logos/linkedin-2.svg", title: "Amazing mates", value: "9.3k") %>
+  <%= stats_card(icon: "/assets/media/brand-logos/youtube-2.svg", title: "Lessons Views", value: "24k") %>
+</div>
+
+<div class="flex items-center gap-2 mt-5">
+  <%= team_avatar_group(
+    avatars: [
+        "/assets/media/avatars/300-4.png", 
+        "/assets/media/avatars/300-1.png"], 
+    count: 10) %>
+</div>
+
+<div class="mt-5">
+  <%= datatable_table(
+        headers: ["Team", "Rating", "Last Modified"],
+        rows: [
+          ["Marketing Team", rating_stars(4), "15 Oct, 2024"],
+          ["Development Team", rating_stars(5), "01 Oct, 2024"]
+        ]) %>
+</div>
+
     </div>
 </main>

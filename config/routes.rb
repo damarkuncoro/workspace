@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     end
 
     get 'profile', to: 'profile#show', as: :profile_show
+    get 'account/profile', to: 'profile#show', as: :account_profile_show
     get 'profile/edit', to: 'profile#edit', as: :profile_edit
     patch 'profile', to: 'profile#update', as: :profile_update
     get 'roles', to: 'roles#show', as: :roles_show

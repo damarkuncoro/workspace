@@ -1,4 +1,4 @@
-module KtSidebarsHelper
+module KT::SidebarsHelper
   # Main method to render the sidebar menu
   def render_sidebar_menu(menu_data)
     content_tag(:div, class: 'kt-menu flex flex-col grow gap-1', data: { 'kt-menu' => true, 'kt-menu-accordion-expand-all' => false }, id: 'sidebar_menu') do

@@ -1,0 +1,38 @@
+module KT::Profile::BadgesHelper
+  # Community Badges Card
+  def community_badges_card
+    content_tag(:div, class: "kt-card") do
+      concat(content_tag(:div, class: "kt-card-header") do
+        content_tag(:h3, "Community Badges", class: "kt-card-title")
+      end)
+      concat(content_tag(:div, class: "kt-card-content pb-7.5") do
+        content_tag(:div, class: "flex items-center flex-wrap gap-3 lg:gap-4") do
+          safe_join([
+            badge_svg("stroke-primary/10 fill-primary/5", "ki-abstract-39", "text-primary"),
+            badge_svg("stroke-yellow-200 dark:stroke-yellow-950 fill-yellow-100 dark:fill-yellow-950/30", "ki-abstract-44", "text-yellow-600"),
+            badge_svg("stroke-green-200 dark:stroke-green-950 fill-green-100 dark:fill-green-950/30", "ki-abstract-25", "text-green-600"),
+            badge_svg("stroke-violet-200 dark:stroke-violet-950 fill-violet-100 dark:fill-violet-950/30", "ki-delivery-24", "text-violet-600")
+          ])
+        end
+      end)
+    end
+  end
+
+  private
+
+  def badge_svg(stroke_fill_classes, icon, icon_color)
+    content_tag(:div, class: "relative size-[50px] shrink-0") do
+      concat(content_tag(:svg, class: "w-full h-full #{stroke_fill_classes}", fill: "none", height: "48", viewbox: "0 0 44 48", width: "44", xmlns: "http://www.w3.org/2000/svg") do
+        concat(content_tag(:path, "", d: "M16 2.4641C19.7128 0.320509 24.2872 0.320508 28 2.4641L37.6506 8.0359C41.3634 10.1795 43.6506 14.141 43.6506
+			18.4282V29.5718C43.6506 33.859 41.3634 37.8205 37.6506 39.9641L28 45.5359C24.2872 47.6795 19.7128 47.6795 16 45.5359L6.34937
+			39.9641C2.63655 37.8205 0.349365 33.859 0.349365 29.5718V18.4282C0.349365 14.141 2.63655 10.1795 6.34937 8.0359L16 2.4641Z", fill: ""))
+        concat(content_tag(:path, "", d: "M16.25 2.89711C19.8081 0.842838 24.1919 0.842837 27.75 2.89711L37.4006 8.46891C40.9587 10.5232 43.1506 14.3196 43.1506
+			18.4282V29.5718C43.1506 33.6804 40.9587 37.4768 37.4006 39.5311L27.75 45.1029C24.1919 47.1572 19.8081 47.1572 16.25 45.1029L6.59937
+			39.5311C3.04125 37.4768 0.849365 33.6803 0.849365 29.5718V18.4282C0.849365 14.3196 3.04125 10.5232 6.59937 8.46891L16.25 2.89711Z", stroke: ""))
+      end)
+      concat(content_tag(:div, class: "absolute leading-none start-2/4 top-2/4 -translate-y-2/4 -translate-x-2/4 rtl:translate-x-2/4") do
+        content_tag(:i, "", class: "ki-filled #{icon} text-xl ps-px #{icon_color}")
+      end)
+    end
+  end
+end
