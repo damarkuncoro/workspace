@@ -1,20 +1,15 @@
 module KT::Profile::BadgesHelper
-  # Community Badges Card
+  # Community Badges Card - menggunakan card helper
   def community_badges_card
-    content_tag(:div, class: "kt-card") do
-      concat(content_tag(:div, class: "kt-card-header") do
-        content_tag(:h3, "Community Badges", class: "kt-card-title")
-      end)
-      concat(content_tag(:div, class: "kt-card-content pb-7.5") do
-        content_tag(:div, class: "flex items-center flex-wrap gap-3 lg:gap-4") do
-          safe_join([
-            badge_svg("stroke-primary/10 fill-primary/5", "ki-abstract-39", "text-primary"),
-            badge_svg("stroke-yellow-200 dark:stroke-yellow-950 fill-yellow-100 dark:fill-yellow-950/30", "ki-abstract-44", "text-yellow-600"),
-            badge_svg("stroke-green-200 dark:stroke-green-950 fill-green-100 dark:fill-green-950/30", "ki-abstract-25", "text-green-600"),
-            badge_svg("stroke-violet-200 dark:stroke-violet-950 fill-violet-100 dark:fill-violet-950/30", "ki-delivery-24", "text-violet-600")
-          ])
-        end
-      end)
+    full_card(title: "Community Badges") do
+      card_body_flex(direction: "flex-row", justify: "start", items: "center", gap: "gap-3 lg:gap-4", padding: "pb-7.5") do
+        safe_join([
+          badge_svg("stroke-primary/10 fill-primary/5", "ki-abstract-39", "text-primary"),
+          badge_svg("stroke-yellow-200 dark:stroke-yellow-950 fill-yellow-100 dark:fill-yellow-950/30", "ki-abstract-44", "text-yellow-600"),
+          badge_svg("stroke-green-200 dark:stroke-green-950 fill-green-100 dark:fill-green-950/30", "ki-abstract-25", "text-green-600"),
+          badge_svg("stroke-violet-200 dark:stroke-violet-950 fill-violet-100 dark:fill-violet-950/30", "ki-delivery-24", "text-violet-600")
+        ])
+      end
     end
   end
 

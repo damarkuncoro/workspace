@@ -2,7 +2,7 @@
 module KT::Container::ContainerHelper
   # ✅ SRP: Container dinamis untuk layout
   def container(columns: 3, gap: "gap-5 lg:gap-7.5", container_class: "kt-container-fixed", grid_class: nil, &block)
-    grid_class ||= "grid grid-cols-1 xl:grid-cols-#{columns} #{gap}"
+    grid_class ||= "grid grid-cols-1 xl:grid-cols-#{columns} #{gap} py-5"
     content_tag(:div, class: container_class) do
       content_tag(:div, class: grid_class) do
         capture(&block)

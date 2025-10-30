@@ -61,8 +61,16 @@
 ) %>
 
      
-<%= container do %>
-  <%= column do %>
+<%= container(columns: 2) do %>
+  <%= column(span: 1) do %>
     <%= community_badges_card %>
+  <% end %>
+
+  <%= column(span: 1) do %>
+    <%= community_badges_card %>  
+  <% end %>
+
+  <%= column(span: 1) do %>
+    <%= community_badges_card %>  
   <% end %>
 <% end %>
