@@ -1,93 +1,89 @@
 # app/helpers/kt/apps_helper.rb
 module KT::AppsHelper
+  include KT::BaseDropdownHelper
+  include KT::BaseUiHelper
 
   # ===============================
   # 1️⃣ Dropdown Trigger
   # ===============================
   def apps_dropdown_button
-    button_tag(class: "kt-btn kt-btn-ghost kt-btn-icon size-9 rounded-full hover:bg-primary/10 hover:[&_i]:text-primary kt-dropdown-open:bg-primary/10 kt-dropdown-open:[&_i]:text-primary",
-               data: { "kt-dropdown-toggle": true }) do
-      content_tag(:i, "", class: "ki-filled ki-element-11 text-lg")
-    end
+    dropdown_trigger_button(icon: "ki-element-11")
   end
 
   # ===============================
   # 2️⃣ Dropdown Menu Wrapper
   # ===============================
   def apps_dropdown(apps:)
-    content_tag(:div,
-                class: "",
-                data: {
-                  "kt-dropdown": true,
-                  "kt-dropdown-offset": "10px, 10px",
-                  "kt-dropdown-placement": "bottom-end",
-                  "kt-dropdown-placement-rtl": "bottom-start"
-                }) do
+    dropdown_wrapper do
       concat apps_dropdown_button
-      concat(
-        content_tag(:div, class: "kt-dropdown-menu p-0 w-screen max-w-[320px]", data: { "kt-dropdown-menu": true }) do
-          concat apps_dropdown_header
-          concat apps_list(apps)
-          concat apps_dropdown_footer
-        end
-      )
+      concat apps_dropdown_menu(apps)
     end
   end
 
   # ===============================
-  # 3️⃣ Header
+  # 🔹 PRIVATE HELPERS
   # ===============================
-  def apps_dropdown_header
-    content_tag(:div, class: "flex items-center justify-between gap-2.5 text-xs text-secondary-foreground font-medium px-5 py-3 border-b border-b-border") do
-      concat content_tag(:span, "Apps")
-      concat content_tag(:span, "Enabled")
+  private
+
+  # Complete dropdown menu
+  def apps_dropdown_menu(apps)
+    dropdown_menu_container(menu_class: "kt-dropdown-menu p-0 w-screen max-w-[320px]") do
+      concat apps_header_section
+      concat apps_list_section(apps)
+      concat apps_footer_section
     end
   end
 
-  # ===============================
-  # 4️⃣ List Apps
-  # ===============================
-  def apps_list(apps)
-    content_tag(:div, class: "flex flex-col kt-scrollable-y-auto max-h-[400px] divide-y divide-border") do
-      safe_join(apps.map { |app| app_item(app) })
-    end
+  # Header section
+  def apps_header_section
+    dropdown_header_section(title: "Apps", subtitle: "Enabled")
   end
 
-  def app_item(app)
+  # Apps list section
+  def apps_list_section(apps)
+    dropdown_list_section(items: apps.map { |app| app_item_component(app) })
+  end
+
+  # Individual app item
+  def app_item_component(app)
     content_tag(:div, class: "flex items-center justify-between flex-wrap gap-2 px-5 py-3.5") do
-      concat app_info(app)
-      concat app_toggle(app)
+      concat app_info_component(app)
+      concat app_toggle_component(app)
     end
   end
 
-  def app_info(app)
+  # App info component
+  def app_info_component(app)
     content_tag(:div, class: "flex items-center flex-wrap gap-2") do
-      concat(
-        content_tag(:div, class: "flex items-center justify-center shrink-0 rounded-full bg-accent/60 border border-border size-10") do
-          image_tag(app[:logo], alt: "", class: "size-6")
-        end
-      )
-      concat(
-        content_tag(:div, class: "flex flex-col") do
-          concat(link_to(app[:name], app[:href] || "#", class: "text-sm font-semibold text-mono hover:text-primary"))
-          concat(content_tag(:span, app[:description], class: "text-xs font-medium text-secondary-foreground"))
-        end
-      )
+      concat app_logo_component(app[:logo])
+      concat app_details_component(app)
     end
   end
 
-  def app_toggle(app)
+  # App logo
+  def app_logo_component(logo)
+    content_tag(:div, class: "flex items-center justify-center shrink-0 rounded-full bg-accent/60 border border-border size-10") do
+      image_tag(logo, alt: "", class: "size-6")
+    end
+  end
+
+  # App details (name + description)
+  def app_details_component(app)
+    content_tag(:div, class: "flex flex-col") do
+      concat(link_to(app[:name], app[:href] || "#", class: "text-sm font-semibold text-mono hover:text-primary"))
+      concat(content_tag(:span, app[:description], class: "text-xs font-medium text-secondary-foreground"))
+    end
+  end
+
+  # App toggle switch
+  def app_toggle_component(app)
     content_tag(:div, class: "flex items-center gap-2 lg:gap-5") do
-      check_box_tag(app[:name].parameterize, "1", app[:enabled], class: "kt-switch")
+      ui_switch(name: app[:name].parameterize, checked: app[:enabled])
     end
   end
 
-  # ===============================
-  # 5️⃣ Footer
-  # ===============================
-  def apps_dropdown_footer
-    content_tag(:div, class: "grid p-5 border-t border-t-border") do
-      link_to "Go to Apps", "/demo1/account/integrations.html", class: "kt-btn kt-btn-outline justify-center"
-    end
+  # Footer section
+  def apps_footer_section
+    dropdown_footer_section(content: ui_link(text: "Go to Apps", href: "/demo1/account/integrations.html", link_class: "kt-btn kt-btn-outline justify-center"))
   end
 end

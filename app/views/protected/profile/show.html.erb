@@ -1,5 +1,5 @@
 <%= hero_profile(
-  user: {
+  account: {
     name: "#{ @person.name || 'Not provided' }",
     avatar: "/assets/media/avatars/300-1.png",
     verified: true,
@@ -60,6 +60,33 @@
   }
 ) %>
 
+<%= container(columns: 1) do %>
+ <%= profile_header_section(
+      title: "My Dashboard",
+      description: "Control center for your account",
+      actions: [
+        ["View Reports", "#", "kt-btn kt-btn-success"],
+        ["Logout", "#", "kt-btn kt-btn-danger"]
+      ]
+    ) %>
+<% end %>
+
+<%= container(columns: 3) do %>
+  <%= column(span: 2) do %>
+    <%= personal_info_card(person: @person) %>
+  <% end %>
+<% end %>
+<%= container(columns: 3) do %>
+  <%= column(span: 2) do %>
+    <%= basic_settings_card(person: @person) %>
+  <% end %>
+<% end %>
+
+
+
+
+
+
      
 <%= container(columns: 2) do %>
   <%= column(span: 1) do %>
@@ -71,6 +98,12 @@
   <% end %>
 
   <%= column(span: 1) do %>
-    <%= community_badges_card %>  
+    
+    <%= community_badges_card([
+      ["stroke-primary/10 fill-primary/5", "ki-heart", "text-primary"],
+      ["stroke-red-200 fill-red-50", "ki-heart", "text-red-500"],
+      ["stroke-blue-200 fill-blue-50", "ki-star", "text-blue-500"]
+    ]) %>
+
   <% end %>
 <% end %>
