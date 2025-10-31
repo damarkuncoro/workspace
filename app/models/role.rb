@@ -3,6 +3,4 @@ class Role < ApplicationRecord
   has_many :accounts, through: :account_roles
 
   validates :name, presence: true, uniqueness: true
-
-
 end

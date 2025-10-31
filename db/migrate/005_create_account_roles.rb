@@ -6,6 +6,6 @@ class CreateAccountRoles < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :account_roles, [:account_id, :role_id], unique: true
+    add_index :account_roles, [ :account_id, :role_id ], unique: true
   end
 end

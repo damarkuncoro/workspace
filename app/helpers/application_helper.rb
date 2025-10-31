@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def full_page_title(title = nil)
     base_title = "CAKRAMEDIA"
     title.blank? ? base_title : "#{title} | #{base_title}"
@@ -20,4 +19,3 @@ module ApplicationHelper
     end
   end
 end
-

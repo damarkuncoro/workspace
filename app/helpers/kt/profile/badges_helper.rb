@@ -36,10 +36,10 @@ module KT::Profile::BadgesHelper
   # Daftar default badges (kelas warna, ikon, warna ikon)
   def default_badges
     [
-      ["stroke-primary/10 fill-primary/5", "ki-abstract-39", "text-primary"],
-      ["stroke-yellow-200 dark:stroke-yellow-950 fill-yellow-100 dark:fill-yellow-950/30", "ki-abstract-44", "text-yellow-600"],
-      ["stroke-green-200 dark:stroke-green-950 fill-green-100 dark:fill-green-950/30", "ki-abstract-25", "text-green-600"],
-      ["stroke-violet-200 dark:stroke-violet-950 fill-violet-100 dark:fill-violet-950/30", "ki-delivery-24", "text-violet-600"]
+      [ "stroke-primary/10 fill-primary/5", "ki-abstract-39", "text-primary" ],
+      [ "stroke-yellow-200 dark:stroke-yellow-950 fill-yellow-100 dark:fill-yellow-950/30", "ki-abstract-44", "text-yellow-600" ],
+      [ "stroke-green-200 dark:stroke-green-950 fill-green-100 dark:fill-green-950/30", "ki-abstract-25", "text-green-600" ],
+      [ "stroke-violet-200 dark:stroke-violet-950 fill-violet-100 dark:fill-violet-950/30", "ki-delivery-24", "text-violet-600" ]
     ]
   end
 

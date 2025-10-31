@@ -2,9 +2,9 @@ class AccountRole < ApplicationRecord
   belongs_to :account
   belongs_to :role
 
-  after_commit :set_active_employee_status!,  on: [:create]
-  after_commit :set_active_customer_status!,  on: [:create]
-  
+  after_commit :set_active_employee_status!,  on: [ :create ]
+  after_commit :set_active_customer_status!,  on: [ :create ]
+
 
   private
 
@@ -14,5 +14,4 @@ class AccountRole < ApplicationRecord
   def set_active_customer_status!
     account.active_customer_status!
   end
-
 end

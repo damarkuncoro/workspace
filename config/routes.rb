@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :accounts, 
-    controllers: { 
-      confirmations: 'accounts/confirmations',
-      password: 'accounts/password',
-      registrations: 'accounts/registrations',
-      sessions: 'accounts/sessions',
-      unlocks: 'accounts/unlocks',
+  devise_for :accounts,
+    controllers: {
+      confirmations: "accounts/confirmations",
+      password: "accounts/password",
+      registrations: "accounts/registrations",
+      sessions: "accounts/sessions",
+      unlocks: "accounts/unlocks"
     }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -19,56 +19,53 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  scope module: 'protected', as: 'protected' do
-    get :dashboard, to: 'dashboard#index', as: :dashboard
+  scope module: "protected", as: "protected" do
+    get :dashboard, to: "dashboard#index", as: :dashboard
 
 
     resources :people
 
-     
+
 
     resources :customers do
-      resources :issues, controller: 'issues/customers' do
-        resources :comments, controller: 'issues/comments', only: [:create]
+      resources :issues, controller: "issues/customers" do
+        resources :comments, controller: "issues/comments", only: [ :create ]
       end
     end
 
     resources :employees do
-      resources :issues, controller: 'issues/employees' do
-        resources :comments, controller: 'issues/comments', only: [:create]
+      resources :issues, controller: "issues/employees" do
+        resources :comments, controller: "issues/comments", only: [ :create ]
       end
     end
 
-    get 'profile', to: 'profile#show', as: :profile_show
-    get 'account/profile', to: 'profile#show', as: :account_profile_show
-    get 'profile/edit', to: 'profile#edit', as: :profile_edit
-    patch 'profile', to: 'profile#update', as: :profile_update
-    get 'roles', to: 'roles#show', as: :roles_show
-    get 'roles/edit', to: 'roles#edit', as: :roles_edit
-    patch 'roles', to: 'roles#update', as: :roles_update
+    get "profile", to: "profile#show", as: :profile_show
+    get "account/profile", to: "profile#show", as: :account_profile_show
+    get "profile/edit", to: "profile#edit", as: :profile_edit
+    patch "profile", to: "profile#update", as: :profile_update
+    get "roles", to: "roles#show", as: :roles_show
+    get "roles/edit", to: "roles#edit", as: :roles_edit
+    patch "roles", to: "roles#update", as: :roles_update
 
     scope module: :issues do
-      get '/issues', to: 'issues#index', as: :issues
-      get '/issues/customers', to: 'issues#customers', as: :issues_customers
-      get '/issues/employees', to: 'issues#employees', as: :issues_employees
+      get "/issues", to: "issues#index", as: :issues
+      get "/issues/customers", to: "issues#customers", as: :issues_customers
+      get "/issues/employees", to: "issues#employees", as: :issues_employees
     end
-
   end
 
 
-    
+
 
   namespace :protected do
-    
     resources :accounts do
-      resources :customers, only: [:new]
-      resources :employees, only: [:new]
+      resources :customers, only: [ :new ]
+      resources :employees, only: [ :new ]
     end
   end
 
 
 
   get "demo1", to: "metronic/demo1#index"
-  root to: 'frontend/home#index'
-
+  root to: "frontend/home#index"
 end

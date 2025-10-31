@@ -9,6 +9,6 @@ class CreateIssueAssignments < ActiveRecord::Migration[8.1]
     end
 
     # Unique index untuk mencegah duplikasi
-    add_index :issue_assignments, [:issue_id, :account_id], unique: true unless index_exists?(:issue_assignments, [:issue_id, :account_id])
+    add_index :issue_assignments, [ :issue_id, :account_id ], unique: true unless index_exists?(:issue_assignments, [ :issue_id, :account_id ])
   end
 end

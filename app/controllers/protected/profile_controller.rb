@@ -8,7 +8,6 @@ class Protected::ProfileController < Protected::BaseController
   end
 
   def edit
-    
   end
   # PATCH/PUT /protected/profile
   def update
@@ -19,7 +18,7 @@ class Protected::ProfileController < Protected::BaseController
     end
   end
 
-  
+
 
   private
 

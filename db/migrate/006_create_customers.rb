@@ -12,6 +12,5 @@ class CreateCustomers < ActiveRecord::Migration[7.1]
     unless index_exists?(:customers, :customer_code)
       add_index :customers, :customer_code, unique: true
     end
-    
   end
 end

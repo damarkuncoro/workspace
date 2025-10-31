@@ -8,8 +8,8 @@ class CreateIssueComments < ActiveRecord::Migration[7.0]
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
-  add_index "issue_comments", ["issue_id"], name: "index_issue_comments_on_issue_id"
-  add_index "issue_comments", ["account_id"], name: "index_issue_comments_on_account_id"
+
+  add_index "issue_comments", [ "issue_id" ], name: "index_issue_comments_on_issue_id"
+  add_index "issue_comments", [ "account_id" ], name: "index_issue_comments_on_account_id"
   end
 end

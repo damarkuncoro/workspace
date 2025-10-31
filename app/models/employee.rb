@@ -10,8 +10,8 @@ class Employee < ApplicationRecord
   validates :status, inclusion: { in: %w[active inactive] }
 
   # Scope helper
-  scope :active,   -> { where(status: 'active') }
-  scope :inactive, -> { where(status: 'inactive') }
+  scope :active,   -> { where(status: "active") }
+  scope :inactive, -> { where(status: "inactive") }
 
   # Callback untuk data awal
   before_validation :assign_code,        on: :create
@@ -25,7 +25,7 @@ private
 
   # Default status = active
   def set_default_status
-    self.status ||= 'inactive'
+    self.status ||= "inactive"
   end
 
   # Generator kode unik employee
@@ -36,5 +36,4 @@ private
   def assign_code
     self.employee_code ||= generate_code
   end
-
 end

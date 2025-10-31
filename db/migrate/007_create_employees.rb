@@ -12,6 +12,5 @@ class CreateEmployees < ActiveRecord::Migration[7.1]
     unless index_exists?(:employees, :employee_code)
       add_index :employees, :employee_code, unique: true
     end
-    
   end
 end

@@ -1,7 +1,7 @@
 class Protected::AccountsController < Protected::AdministratorController
   before_action :set_account, only: %i[show edit update destroy]
 
-  
+
   def index
     @accounts = Account.all
   end
@@ -9,16 +9,16 @@ class Protected::AccountsController < Protected::AdministratorController
   def show
   end
 
-  
+
   def new
     @account = Account.new
   end
 
-  
+
   def edit
   end
 
-  
+
   def create
     @account = Account.new(account_params)
 
@@ -67,9 +67,7 @@ class Protected::AccountsController < Protected::AdministratorController
     def account_params
       params.require(:account).permit(
         :email, :password, :password_confirmation,
-        person_attributes: [:name, :date_of_birth, :id],
+        person_attributes: [ :name, :date_of_birth, :id ],
         role_ids: [])
     end
-
-    
 end

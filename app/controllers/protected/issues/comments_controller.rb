@@ -10,7 +10,7 @@ class Protected::Issues::CommentsController < Protected::BaseController
       redirect_to customer_issue_path(@customer, @issue), notice: "Comment was successfully added."
     else
       @issue_comment = IssueComment.new
-      render 'protected/issues/customers/show', status: :unprocessable_entity
+      render "protected/issues/customers/show", status: :unprocessable_entity
     end
   end
 

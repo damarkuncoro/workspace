@@ -8,8 +8,8 @@ class Account < ApplicationRecord
   has_one :person, dependent: :destroy
   has_many :account_roles, dependent: :destroy
   # has_many :roles, through: :account_roles
-  has_many :roles, through: :account_roles, after_remove: :inactive_employee_status!  
-  has_many :roles, through: :account_roles, after_remove: :inactive_customer_status!  
+  has_many :roles, through: :account_roles, after_remove: :inactive_employee_status!
+  has_many :roles, through: :account_roles, after_remove: :inactive_customer_status!
 
 
   # Polymorphic association for issues
@@ -92,7 +92,7 @@ end
     end
   end
 
-   # 🔹 Helper-role
+  # 🔹 Helper-role
   def has_role?(role_name)
     roles.exists?(name: role_name.to_s)
   end
@@ -106,7 +106,4 @@ end
     role = roles.find_by(name: role_name.to_s)
     roles.delete(role) if role.present?
   end
-
-  
-
 end

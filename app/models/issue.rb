@@ -1,6 +1,6 @@
 # app/models/issue.rb
 class Issue < ApplicationRecord
-  enum :status, { open: 0, in_progress: 1, completed: 2 , closed: 3}
+  enum :status, { open: 0, in_progress: 1, completed: 2, closed: 3 }
   enum :priority, { low: 0, medium: 1, high: 2 }
 
 
@@ -70,6 +70,4 @@ class Issue < ApplicationRecord
       new_value: assigned_to_id
     )
   end
-
-
 end

@@ -7,11 +7,11 @@ class Person < ApplicationRecord
   validates :date_of_birth, presence: true
 
   after_create_commit :assign_initial_customer_and_employee
-  
+
   def person_email
     account.email if account.present?
   end
-  
+
   def incomplete?
     name.blank? || date_of_birth.blank?
   end
@@ -28,7 +28,5 @@ def assign_initial_customer_and_employee
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error "Gagal membuat employee: #{e.message}"
   end
-
 end
-
 end

@@ -7,5 +7,4 @@ class Protected::AdministratorController < Protected::BaseController
         redirect_to dashboard_index_path, alert: "Access denied. Administrator role required."
       end
   end
-
 end

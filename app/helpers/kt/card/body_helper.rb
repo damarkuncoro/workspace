@@ -15,7 +15,7 @@ module KT::Card::BodyHelper
 
   # ✅ SRP: Body dengan custom styling
   def card_body_custom(body_class: "kt-card-content", custom_class: nil, &block)
-    classes = [body_class]
+    classes = [ body_class ]
     classes << custom_class if custom_class
     content_tag(:div, class: classes.join(" ")) do
       capture(&block)
@@ -24,7 +24,7 @@ module KT::Card::BodyHelper
 
   # ✅ SRP: Body dengan flex layout
   def card_body_flex(direction: "flex-col", justify: nil, items: nil, gap: "gap-5", body_class: "kt-card-content", padding: nil, &block)
-    classes = [body_class, "flex", direction]
+    classes = [ body_class, "flex", direction ]
     classes << "justify-#{justify}" if justify
     classes << "items-#{items}" if items
     classes << gap

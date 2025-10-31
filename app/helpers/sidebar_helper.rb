@@ -249,6 +249,4 @@ module SidebarHelper
       }
     ]
   end
-
-
 end

@@ -9,15 +9,12 @@ class Protected::CustomersController < Protected::BaseController
 
   # GET /protected/customers/new
   def new
-
     if @person.customer.present?
-      redirect_to customer_path(@person.customer), notice: 'Customer already exists for this person.'
+      redirect_to customer_path(@person.customer), notice: "Customer already exists for this person."
       return
     end
     # @customer di-set di set_person
     @customer ||= @person.build_customer
-
-    
   end
 
   # GET /protected/customers/1
@@ -32,17 +29,16 @@ class Protected::CustomersController < Protected::BaseController
   def create
     @customer ||= @person.customer || @person.build_customer
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer), notice: 'Customer was successfully created.'
+      redirect_to customer_path(@customer), notice: "Customer was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
-  
   end
 
   # PATCH/PUT /protected/customers/1
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: 'Customer was successfully updated.'
+      redirect_to @customer, notice: "Customer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,7 +47,7 @@ class Protected::CustomersController < Protected::BaseController
   # DELETE /protected/customers/1
   def destroy
     @customer.destroy
-    redirect_to customers_path, notice: 'Customer was successfully destroyed.'
+    redirect_to customers_path, notice: "Customer was successfully destroyed."
   end
 
   private
@@ -74,5 +70,4 @@ class Protected::CustomersController < Protected::BaseController
   def customer_params
     params.require(:customer).permit(:person_id, :status)
   end
-
 end

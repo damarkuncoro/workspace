@@ -14,10 +14,10 @@ module KT::Profile::ActionsHelper
   # ==========================================================
   # 🔹 UTAMA: Profile Header Section
   # ==========================================================
-  def profile_header_section(title: "User Profile", description: "Central Hub for Personal Customization", actions: default_header_actions)
+  def profile_header_section(title = "User Profile", description = "Central Hub for Personal Customization", actions = default_header_actions)
     card_header_flex(justify: "between", items: "center", gap: "gap-5 pb-7.5") do
       concat(profile_header_title_section(title: title, description: description))
-      concat(profile_header_actions_section(actions: actions))
+      concat(profile_header_actions(actions))
     end
   end
 
@@ -77,12 +77,33 @@ module KT::Profile::ActionsHelper
       end
     end
   end
-   # ==========================================================
-  # 🔹 PROFILE ACTIONS
+  # ==========================================================
+  # 🔹 PROFILE ACTIONS (Legacy method - kept for compatibility)
   # ==========================================================
   def profile_actions(actions = default_actions)
     content_tag(:div, class: "flex flex-wrap gap-2") do
       safe_join(actions.map { |label, path, style| link_to(label, path, class: "btn #{style}") })
+    end
+  end
+
+  # ==========================================================
+  # 🔹 PROFILE HEADER ACTIONS (Fixed method)
+  # ==========================================================
+  def profile_header_actions(actions)
+    content_tag(:div, class: "flex items-center gap-2.5 pt-4") do
+      safe_join(actions.map do |action|
+        if action.is_a?(Array) && action.size == 3
+          # Legacy format: [label, path, style]
+          label, path, style = action
+          link_to(label, path, class: "kt-btn #{style}")
+        elsif action.is_a?(Hash)
+          # New format: { text:, href:, variant: }
+          ui_button(text: action[:text] || action["text"], href: action[:href] || action["href"], variant: action[:variant] || action["variant"])
+        else
+          # Fallback
+          action
+        end
+      end)
     end
   end
 
@@ -96,16 +117,16 @@ module KT::Profile::ActionsHelper
   # ✅ Default tombol pada profile actions
   def default_actions
     [
-      ["Edit Profile", protected_profile_edit_path, "btn-primary"],
-      ["Back to Dashboard", protected_dashboard_path, "btn-secondary"]
+      [ "Edit Profile", protected_profile_edit_path, "btn-primary" ],
+      [ "Back to Dashboard", protected_dashboard_path, "btn-secondary" ]
     ]
   end
 
   # ✅ Default tombol pada header section
   def default_header_actions
     [
-      ["Public Profile", "#", "kt-btn kt-btn-outline"],
-      ["Account Settings", "#", "kt-btn kt-btn-primary"]
+      [ "Public Profile", "#", "kt-btn kt-btn-outline" ],
+      [ "Account Settings", "#", "kt-btn kt-btn-primary" ]
     ]
   end
 
@@ -125,9 +146,19 @@ module KT::Profile::ActionsHelper
  # ==========================================================
  def profile_header_actions_section(actions:)
    content_tag(:div, class: "flex items-center gap-2.5") do
-     safe_join(actions.map { |label, path, style| link_to(label, path, class: "kt-btn #{style}") })
+     safe_join(actions.map do |action|
+       if action.is_a?(Array) && action.size == 3
+         # Legacy format: [label, path, style]
+         label, path, style = action
+         link_to(label, path, class: "kt-btn #{style}")
+       elsif action.is_a?(Hash)
+         # New format: { text:, href:, variant: }
+         ui_button(text: action[:text] || action["text"], href: action[:href] || action["href"], variant: action[:variant] || action["variant"])
+       else
+         # Fallback
+         action
+       end
+     end)
    end
  end
-
-
 end

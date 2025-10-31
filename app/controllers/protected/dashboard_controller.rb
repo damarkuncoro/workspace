@@ -1,5 +1,4 @@
 class Protected::DashboardController < Protected::BaseController
-  
   before_action :ensure_person_data_complete, only: %i[index]
 
   def index
@@ -15,5 +14,4 @@ class Protected::DashboardController < Protected::BaseController
       redirect_to profile_edit_path, alert: "Lengkapi profil Anda terlebih dahulu."
     end
   end
-
 end

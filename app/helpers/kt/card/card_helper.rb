@@ -1,7 +1,7 @@
 module KT::Card::CardHelper
   # ✅ SRP: Base card wrapper
   def card(card_class: "kt-card", shadow: true, &block)
-    classes = [card_class]
+    classes = [ card_class ]
     classes << "shadow-sm" if shadow
     content_tag(:div, class: classes.join(" ")) do
       capture(&block)
@@ -20,11 +20,11 @@ module KT::Card::CardHelper
   # ✅ SRP: Card dengan variant styling
   def styled_card(variant: :default, title: nil, &block)
     card_class = case variant
-                 when :bordered then "kt-card border border-border"
-                 when :elevated then "kt-card shadow-lg"
-                 when :flat then "kt-card shadow-none"
-                 else "kt-card"
-                 end
+    when :bordered then "kt-card border border-border"
+    when :elevated then "kt-card shadow-lg"
+    when :flat then "kt-card shadow-none"
+    else "kt-card"
+    end
 
     full_card(title: title, card_class: card_class, &block)
   end

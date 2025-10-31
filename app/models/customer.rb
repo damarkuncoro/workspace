@@ -12,8 +12,8 @@ class Customer < ApplicationRecord
   validates :customer_code, presence: true, uniqueness: true
 
   # Scope helper
-  scope :active,   -> { where(status: 'active') }
-  scope :inactive, -> { where(status: 'inactive') }
+  scope :active,   -> { where(status: "active") }
+  scope :inactive, -> { where(status: "inactive") }
 
   # Callback untuk data awal
   before_validation :assign_code,        on: :create
@@ -26,7 +26,7 @@ class Customer < ApplicationRecord
 
   # Default status = active
   def set_default_status
-    self.status ||= 'active'
+    self.status ||= "active"
   end
 
   # Generator kode unik customer
