@@ -7,6 +7,10 @@ class Customer < ApplicationRecord
   # Polymorphic association for issues
   has_many :issues, as: :issueable
 
+  # Device rental associations
+  has_many :customer_devices, dependent: :restrict_with_error
+  has_many :devices, through: :customer_devices
+
   # Validasi dasar
   validates :status, presence: true, inclusion: { in: %w[active inactive] }
   validates :customer_code, presence: true, uniqueness: true
@@ -21,6 +25,23 @@ class Customer < ApplicationRecord
 
   delegate :email, to: :account, prefix: true, allow_nil: true
   delegate :name, to: :person, prefix: true, allow_nil: true
+
+  # Device rental methods
+  def current_device_rentals
+    customer_devices.active.includes(:device)
+  end
+
+  def overdue_device_rentals
+    customer_devices.overdue.includes(:device)
+  end
+
+  def device_rental_history
+    customer_devices.includes(:device).order(created_at: :desc)
+  end
+
+  def has_overdue_devices?
+    overdue_device_rentals.exists?
+  end
 
   private
 

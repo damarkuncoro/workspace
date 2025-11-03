@@ -1,0 +1,213 @@
+<div class="max-w-4xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Role Request Details</h1>
+          <p class="text-indigo-100 mt-1">Request for <%= @role_request.role.name.titleize %> role</p>
+        </div>
+        <div class="flex space-x-3">
+          <% if current_account.is_administrator? && @role_request.pending? %>
+            <%= button_to approve_protected_role_request_path(@role_request), method: :patch, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" do %>
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Approve
+            <% end %>
+
+            <%= button_to reject_protected_role_request_path(@role_request), method: :patch, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" do %>
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Reject
+            <% end %>
+          <% elsif @role_request.requested_by == current_account && @role_request.pending? %>
+            <%= button_to cancel_protected_role_request_path(@role_request), method: :patch, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" do %>
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Cancel Request
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Request Information Cards -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Request Details -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="bg-gray-50 px-6 py-4">
+        <h3 class="text-lg font-medium text-gray-900">Request Details</h3>
+      </div>
+      <div class="px-6 py-4 space-y-4">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-500">Requested Role</span>
+          <span class="text-sm text-gray-900 font-medium"><%= @role_request.role.name.titleize %></span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-500">Status</span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= status_badge_class(@role_request.status) %>">
+            <%= @role_request.status.titleize %>
+          </span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-500">Requested At</span>
+          <span class="text-sm text-gray-900"><%= @role_request.requested_at.strftime('%B %d, %Y %H:%M') %></span>
+        </div>
+        <% if @role_request.approved_at %>
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-medium text-gray-500">Processed At</span>
+            <span class="text-sm text-gray-900"><%= @role_request.approved_at.strftime('%B %d, %Y %H:%M') %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- People Involved -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="bg-gray-50 px-6 py-4">
+        <h3 class="text-lg font-medium text-gray-900">People Involved</h3>
+      </div>
+      <div class="px-6 py-4 space-y-4">
+        <div>
+          <span class="text-sm font-medium text-gray-500">Requested For</span>
+          <div class="mt-1">
+            <div class="text-sm text-gray-900"><%= @role_request.account.person_name %></div>
+            <div class="text-sm text-gray-500"><%= @role_request.account.email %></div>
+          </div>
+        </div>
+        <div>
+          <span class="text-sm font-medium text-gray-500">Requested By</span>
+          <div class="mt-1">
+            <div class="text-sm text-gray-900"><%= @role_request.requested_by.person_name %></div>
+            <div class="text-sm text-gray-500"><%= @role_request.requested_by.email %></div>
+          </div>
+        </div>
+        <% if @role_request.approved_by %>
+          <div>
+            <span class="text-sm font-medium text-gray-500">Processed By</span>
+            <div class="mt-1">
+              <div class="text-sm text-gray-900"><%= @role_request.approved_by.person_name %></div>
+              <div class="text-sm text-gray-500"><%= @role_request.approved_by.email %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Request Comment -->
+  <% if @role_request.comment.present? %>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+      <div class="bg-gray-50 px-6 py-4">
+        <h3 class="text-lg font-medium text-gray-900">Request Reason</h3>
+      </div>
+      <div class="px-6 py-4">
+        <p class="text-sm text-gray-700 leading-relaxed"><%= @role_request.comment %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Status Timeline -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gray-50 px-6 py-4">
+      <h3 class="text-lg font-medium text-gray-900">Request Timeline</h3>
+    </div>
+    <div class="px-6 py-4">
+      <div class="flow-root">
+        <ul role="list" class="-mb-8">
+          <li>
+            <div class="relative pb-8">
+              <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+              <div class="relative flex space-x-3">
+                <div>
+                  <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                  </span>
+                </div>
+                <div class="min-w-0 flex-1 pt-1.5">
+                  <p class="text-sm text-gray-500">
+                    Request submitted by <span class="font-medium text-gray-900"><%= @role_request.requested_by.person_name %></span>
+                    <time datetime="<%= @role_request.requested_at.iso8601 %>"><%= @role_request.requested_at.strftime('%B %d, %Y at %H:%M') %></time>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <% if @role_request.approved? || @role_request.rejected? %>
+            <li>
+              <div class="relative pb-8">
+                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                <div class="relative flex space-x-3">
+                  <div>
+                    <span class="h-8 w-8 rounded-full <%= @role_request.approved? ? 'bg-green-500' : 'bg-red-500' %> flex items-center justify-center ring-8 ring-white">
+                      <% if @role_request.approved? %>
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                      <% else %>
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                      <% end %>
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex-1 pt-1.5">
+                    <p class="text-sm text-gray-500">
+                      Request <%= @role_request.status %> by <span class="font-medium text-gray-900"><%= @role_request.approved_by.person_name %></span>
+                      <time datetime="<%= @role_request.approved_at.iso8601 %>"><%= @role_request.approved_at.strftime('%B %d, %Y at %H:%M') %></time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% elsif @role_request.cancelled? %>
+            <li>
+              <div class="relative pb-8">
+                <div class="relative flex space-x-3">
+                  <div>
+                    <span class="h-8 w-8 rounded-full bg-yellow-500 flex items-center justify-center ring-8 ring-white">
+                      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex-1 pt-1.5">
+                    <p class="text-sm text-gray-500">
+                      Request cancelled by <span class="font-medium text-gray-900"><%= @role_request.requested_by.person_name %></span>
+                      <time datetime="<%= @role_request.updated_at.iso8601 %>"><%= @role_request.updated_at.strftime('%B %d, %Y at %H:%M') %></time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-center space-x-4">
+    <%= link_to protected_role_requests_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Requests
+    <% end %>
+
+    <%= link_to protected_dashboard_path, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"></path>
+      </svg>
+      Dashboard
+    <% end %>
+  </div>
+</div>

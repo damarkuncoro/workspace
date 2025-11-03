@@ -1,6 +1,200 @@
-<h1>Edit Roles</h1>
+<div class="max-w-4xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Manage Roles</h1>
+          <p class="text-yellow-100 mt-1">Request or modify your role assignments</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>This feature is under development. Roles are managed automatically.</p>
+  <!-- Role Request Section -->
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3 flex-1">
+        <h3 class="text-sm font-medium text-blue-800">Self-Service Role Requests Available</h3>
+        <div class="mt-2 text-sm text-blue-700">
+          <p>You can now request additional roles through our self-service system. Administrators will review and approve your requests.</p>
+        </div>
+        <div class="mt-4">
+          <div class="-mx-2 -my-1.5 flex">
+            <%= link_to new_protected_role_request_path, class: "bg-blue-50 px-2 py-1.5 rounded-md text-sm font-medium text-blue-800 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-50 focus:ring-blue-600" do %>
+              <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Request New Role
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Your Role Requests -->
+  <% if current_account.role_requests.any? %>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+      <div class="bg-gray-50 px-6 py-4">
+        <h3 class="text-lg font-medium text-gray-900">Your Role Requests</h3>
+        <p class="mt-1 text-sm text-gray-500">Track the status of your role requests</p>
+      </div>
+      <div class="px-6 py-4">
+        <div class="space-y-3">
+          <% current_account.role_requests.order(created_at: :desc).limit(5).each do |request| %>
+            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= status_badge_class(request.status) %>">
+                    <%= request.status.titleize %>
+                  </span>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm font-medium text-gray-900">Request for <%= request.role.name.titleize %></p>
+                  <p class="text-sm text-gray-500">Submitted <%= request.requested_at.strftime('%B %d, %Y') %></p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <%= link_to protected_role_request_path(request), class: "text-indigo-600 hover:text-indigo-900 text-sm" do %>
+                  View Details
+                <% end %>
+                <% if request.pending? %>
+                  <%= button_to cancel_protected_role_request_path(request), method: :patch, class: "text-yellow-600 hover:text-yellow-900 text-sm", form_class: "inline" do %>
+                    Cancel
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% if current_account.role_requests.count > 5 %>
+          <div class="mt-4 text-center">
+            <%= link_to protected_role_requests_path, class: "text-sm text-indigo-600 hover:text-indigo-900" do %>
+              View all requests →
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'btn btn-secondary' %>
+  <!-- Current Roles Display -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gray-50 px-6 py-4">
+      <h3 class="text-lg font-medium text-gray-900">Your Current Roles</h3>
+      <p class="mt-1 text-sm text-gray-500">These are the roles currently assigned to your account</p>
+    </div>
+    <div class="px-6 py-4">
+      <% if current_account.roles.any? %>
+        <div class="space-y-3">
+          <% current_account.roles.each do |role| %>
+            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm font-medium text-gray-900"><%= role.name.titleize %></p>
+                  <p class="text-sm text-gray-500"><%= role.description.presence || 'No description available' %></p>
+                </div>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Active
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-8">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">No roles assigned</h3>
+          <p class="mt-1 text-sm text-gray-500">Contact your administrator to request role assignments.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Future Features Preview -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gray-50 px-6 py-4">
+      <h3 class="text-lg font-medium text-gray-900">Coming Soon</h3>
+      <p class="mt-1 text-sm text-gray-500">Features that will be available in the role management system</p>
+    </div>
+    <div class="px-6 py-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium text-gray-900">Self-Service Role Requests</p>
+            <p class="text-sm text-gray-500">Request additional roles through a simple form</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium text-gray-900">Role Assignment History</p>
+            <p class="text-sm text-gray-500">Track when roles were assigned or revoked</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium text-gray-900">Bulk Role Operations</p>
+            <p class="text-sm text-gray-500">Assign or revoke roles for multiple users</p>
+          </div>
+        </div>
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium text-gray-900">Role Analytics</p>
+            <p class="text-sm text-gray-500">View usage statistics and role distribution</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-center space-x-4">
+    <%= link_to protected_roles_show_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Back to Roles
+    <% end %>
+
+    <%= link_to protected_dashboard_path, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"></path>
+      </svg>
+      Dashboard
+    <% end %>
+  </div>
+</div>

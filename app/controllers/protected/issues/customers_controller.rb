@@ -26,7 +26,7 @@ class Protected::Issues::CustomersController < Protected::BaseController
           @issue.issue_assignments.create(account_id: account_id) unless account_id.blank?
         end
       end
-      redirect_to customer_path(@customer), notice: "Issue for customer was successfully created."
+      redirect_to protected_customer_path(@customer), notice: "Issue for customer was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,7 +47,7 @@ class Protected::Issues::CustomersController < Protected::BaseController
           @issue.issue_assignments.create(account_id: account_id) unless account_id.blank?
         end
       end
-      redirect_to customer_issue_path(@customer, @issue), notice: "Issue was successfully updated."
+      redirect_to protected_customer_issue_path(@customer, @issue), notice: "Issue was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -59,7 +59,7 @@ class Protected::Issues::CustomersController < Protected::BaseController
     @issue_comment.account = current_account
 
     if @issue_comment.save
-      redirect_to customer_issue_path(@customer, @issue), notice: "Comment was successfully added."
+      redirect_to protected_customer_issue_path(@customer, @issue), notice: "Comment was successfully added."
     else
       render :show, status: :unprocessable_entity
     end
@@ -69,7 +69,7 @@ class Protected::Issues::CustomersController < Protected::BaseController
     @issue = @customer.issues.find(params[:id])
     @issue.destroy
 
-    redirect_to customer_issues_path(@customer), notice: "Issue was successfully destroyed."
+    redirect_to protected_customer_issues_path(@customer), notice: "Issue was successfully destroyed."
   end
 
   private
@@ -84,5 +84,33 @@ class Protected::Issues::CustomersController < Protected::BaseController
 
   def issue_params
     params.require(:issue).permit(:title, :description, :status, :priority, :assigned_to_id, assigned_account_ids: [])
+  end
+
+  def status_badge_class(status)
+    case status
+    when 'open'
+      'bg-red-100 text-red-800'
+    when 'in_progress'
+      'bg-yellow-100 text-yellow-800'
+    when 'completed'
+      'bg-green-100 text-green-800'
+    when 'closed'
+      'bg-gray-100 text-gray-800'
+    else
+      'bg-gray-100 text-gray-800'
+    end
+  end
+
+  def priority_badge_class(priority)
+    case priority
+    when 'high'
+      'bg-red-100 text-red-800'
+    when 'medium'
+      'bg-yellow-100 text-yellow-800'
+    when 'low'
+      'bg-green-100 text-green-800'
+    else
+      'bg-blue-100 text-blue-800'
+    end
   end
 end

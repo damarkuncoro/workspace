@@ -1,0 +1,2 @@
+module Protected::DevicesHelper
+end

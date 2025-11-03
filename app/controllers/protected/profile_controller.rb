@@ -3,8 +3,8 @@ class Protected::ProfileController < Protected::BaseController
 
   # GET /protected/profile
   def show
-    @customer = @person.customer
-    @employee = @person.employee
+    @customer = @person.customer if @person.customer.present?
+    @employee = @person.employee if @person.employee.present?
   end
 
   def edit
@@ -12,9 +12,9 @@ class Protected::ProfileController < Protected::BaseController
   # PATCH/PUT /protected/profile
   def update
     if @person.update(person_params)
-      redirect_to dashboard_index_path, notice: "Profil berhasil diperbarui."
+      redirect_to protected_dashboard_path, notice: "Profil berhasil diperbarui."
     else
-      redirect_to profile_edit_path, alert: "Gagal memperbarui profil."
+      redirect_to protected_profile_edit_path, alert: "Gagal memperbarui profil."
     end
   end
 

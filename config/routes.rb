@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :issues, controller: "issues/customers" do
         resources :comments, controller: "issues/comments", only: [ :create ]
       end
+      resources :devices, controller: 'customer_devices'
     end
 
     resources :employees do
@@ -58,10 +59,32 @@ Rails.application.routes.draw do
 
 
   namespace :protected do
+    resources :customer_devices do
+      member do
+        patch :return
+      end
+    end
     resources :accounts do
       resources :customers, only: [ :new ]
       resources :employees, only: [ :new ]
     end
+
+    resources :customers do
+      resources :devices, controller: 'customer_devices', only: [:index, :new, :create]
+      resources :issues, controller: "issues/customers" do
+        resources :comments, controller: "issues/comments", only: [ :create ]
+      end
+    end
+    resources :roles
+    resources :role_requests do
+      member do
+        patch :approve
+        patch :reject
+        patch :cancel
+      end
+    end
+    resources :devices
+    resources :device_types
   end
 
 

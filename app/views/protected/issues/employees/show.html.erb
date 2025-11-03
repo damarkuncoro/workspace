@@ -35,5 +35,5 @@
 <div class="mt-3">
   <%= link_to 'Edit Issue', edit_employee_issue_path(@employee, @issue), class: 'btn btn-warning' %>
   <%= link_to 'Back to Issues', employee_issues_path(@employee), class: 'btn btn-secondary' %>
-  <%= link_to 'Back to Employee', employee_path(@employee), class: 'btn btn-secondary' %>
+  <%= link_to 'Back to Employee', protected_employee_path(@employee), class: 'btn btn-secondary' %>
 </div>

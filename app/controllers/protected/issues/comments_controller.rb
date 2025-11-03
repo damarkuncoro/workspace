@@ -7,7 +7,7 @@ class Protected::Issues::CommentsController < Protected::BaseController
     @issue_comment.account = current_account
 
     if @issue_comment.save
-      redirect_to customer_issue_path(@customer, @issue), notice: "Comment was successfully added."
+      redirect_to protected_customer_issue_path(@customer, @issue), notice: "Comment was successfully added."
     else
       @issue_comment = IssueComment.new
       render "protected/issues/customers/show", status: :unprocessable_entity

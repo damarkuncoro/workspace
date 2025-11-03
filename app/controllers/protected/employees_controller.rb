@@ -29,7 +29,7 @@ class Protected::EmployeesController < Protected::BaseController
   def create
     @employee ||= @person.employee || @person.build_employee
     if @employee.update(employee_params)
-      redirect_to employee_path(@employee), notice: "Employee was successfully created."
+      redirect_to protected_employee_path(@employee), notice: "Employee was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class Protected::EmployeesController < Protected::BaseController
   # PATCH/PUT /protected/employees/1
   def update
     if @employee.update(employee_params)
-      redirect_to employee_path(@employee), notice: "Employee was successfully updated."
+      redirect_to protected_employee_path(@employee), notice: "Employee was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

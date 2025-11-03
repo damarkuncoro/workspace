@@ -3,10 +3,10 @@ class Person < ApplicationRecord
   has_one :customer, dependent: :destroy
   has_one :employee, dependent: :destroy
 
-  validates :name, presence: true
-  validates :date_of_birth, presence: true
+  validates :name, presence: true,          on: :update
+  validates :date_of_birth, presence: true, on: :update
 
-  after_create_commit :assign_initial_customer_and_employee
+  after_create_commit :assign_initial_customer
 
   def person_email
     account.email if account.present?
@@ -18,15 +18,9 @@ class Person < ApplicationRecord
 
   private
 
-def assign_initial_customer_and_employee
+  def assign_initial_customer
   # Pastikan customer dibuat
-  create_customer! unless customer.present?
-
-  # Pastikan employee dibuat
-  begin
-    create_employee! unless employee.present?
-  rescue ActiveRecord::RecordInvalid => e
-    Rails.logger.error "Gagal membuat employee: #{e.message}"
+    create_customer! unless customer.present?
   end
-end
+
 end

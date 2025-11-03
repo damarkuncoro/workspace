@@ -1,47 +1,143 @@
-<%= form_with(model: [@customer, issue], local: true) do |form| %>
+<%= form_with(model: [:protected, @customer, issue], local: true) do |form| %>
   <% if issue.errors.any? %>
-    <div class="alert alert-danger">
-      <h4><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h4>
-      <ul>
-        <% issue.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            <%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:
+          </h3>
+          <div class="mt-2 text-sm text-red-700">
+            <ul role="list" class="list-disc pl-5 space-y-1">
+              <% issue.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div class="mb-3">
-    <%= form.label :title, class: 'form-label' %>
-    <%= form.text_field :title, class: 'form-control' %>
+  <!-- Issue Information Section -->
+  <div class="bg-gray-50 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-medium text-gray-900 mb-4">Issue Information</h3>
+    <div class="space-y-4">
+      <div>
+        <%= form.label :title, class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <%= form.text_field :title,
+              class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              placeholder: 'Enter issue title',
+              required: true %>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">A clear, descriptive title for the support issue</p>
+      </div>
+
+      <div>
+        <%= form.label :description, class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <%= form.text_area :description,
+              rows: 4,
+              class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              placeholder: 'Describe the issue in detail...' %>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Provide detailed information about the customer's issue</p>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :description, class: 'form-label' %>
-    <%= form.text_area :description, class: 'form-control', rows: 4 %>
+  <!-- Status & Priority Section -->
+  <div class="bg-gray-50 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-medium text-gray-900 mb-4">Status & Priority</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <%= form.label :status, class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <%= form.select :status,
+              Issue.statuses.keys.map { |k| [k.humanize, k] },
+              { include_blank: false },
+              class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Current status of the issue</p>
+      </div>
+
+      <div>
+        <%= form.label :priority, class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <%= form.select :priority,
+              Issue.priorities.keys.map { |k| [k.humanize, k] },
+              { include_blank: false },
+              class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Urgency level of the issue</p>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :status, class: 'form-label' %>
-    <%= form.select :status, Issue.statuses.keys.map { |k| [k.humanize, k] }, {}, class: 'form-select' %>
+  <!-- Assignment Section -->
+  <div class="bg-gray-50 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-medium text-gray-900 mb-4">Assignment</h3>
+    <div class="space-y-4">
+      <div>
+        <%= form.label :assigned_to_id, 'Primary Assignee', class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <div class="relative">
+            <%= form.collection_select :assigned_to_id,
+                Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person),
+                :id,
+                :person_name,
+                { include_blank: 'Unassigned' },
+                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                data: { controller: 'autocomplete' } %>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Main person responsible for this issue</p>
+      </div>
+
+      <div>
+        <%= form.label :assigned_account_ids, 'Additional Assignees', class: 'block text-sm font-medium text-gray-700' %>
+        <div class="mt-1">
+          <div class="relative">
+            <%= form.collection_select :assigned_account_ids,
+                Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person),
+                :id,
+                :person_name,
+                { selected: issue&.assigned_accounts&.pluck(:id) },
+                { multiple: true, class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  data: { controller: 'autocomplete' } } %>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">Additional team members who can work on this issue (hold Ctrl/Cmd to select multiple)</p>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :priority, class: 'form-label' %>
-    <%= form.select :priority, Issue.priorities.keys.map { |k| [k.humanize, k] }, {}, class: 'form-select' %>
-  </div>
+  <!-- Form Actions -->
+  <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+    <%= link_to protected_customer_issues_path(@customer), class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      Cancel
+    <% end %>
 
-
-  <div class="mb-3">
-    <%= form.label :assigned_to_id, 'Primary Assigned To', class: 'form-label' %>
-    <%= form.collection_select :assigned_to_id, Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person), :id, :person_name, { include_blank: 'Unassigned' }, class: 'form-select' %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :assigned_account_ids, 'Additional Assignees', class: 'form-label' %>
-    <%= form.collection_select :assigned_account_ids, Account.joins(person: :employee).where(employees: { status: 'active' }).includes(:person), :id, :person_name, { selected: @issue&.assigned_accounts&.pluck(:id) }, { multiple: true, class: 'form-select' } %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit (issue.new_record? ? 'Create Issue' : 'Update Issue'),
+        class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+        data: { disable_with: issue.new_record? ? "Creating..." : "Updating..." } %>
   </div>
 <% end %>

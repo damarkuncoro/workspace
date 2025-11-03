@@ -204,6 +204,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
+    pagy (6.5.0)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
@@ -391,9 +392,11 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  pagy (~> 6.0)
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
+  rack (~> 3.0)
   rails (~> 8.1.0)
   rubocop-rails-omakase
   solid_cable

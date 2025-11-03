@@ -1,0 +1,2 @@
+module Protected::DeviceTypesHelper
+end

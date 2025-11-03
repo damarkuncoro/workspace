@@ -26,7 +26,7 @@ class Protected::Issues::EmployeesController < Protected::BaseController
           @issue.issue_assignments.create(account_id: account_id) unless account_id.blank?
         end
       end
-      redirect_to employee_path(@employee), notice: "Issue for employee was successfully created."
+      redirect_to protected_employee_path(@employee), notice: "Issue for employee was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

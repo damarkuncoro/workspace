@@ -10,18 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 11) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_02_135915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
 
   create_table "account_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "account_id", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "assigned_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
+    t.datetime "revoked_at"
+    t.uuid "revoked_by_id"
     t.uuid "role_id", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id", "role_id"], name: "index_account_roles_on_account_id_and_role_id", unique: true
     t.index ["account_id"], name: "index_account_roles_on_account_id"
+    t.index ["active"], name: "index_account_roles_on_active"
+    t.index ["created_by_id"], name: "index_account_roles_on_created_by_id"
+    t.index ["revoked_by_id"], name: "index_account_roles_on_revoked_by_id"
     t.index ["role_id"], name: "index_account_roles_on_role_id"
   end
 
@@ -37,6 +45,18 @@ ActiveRecord::Schema[8.1].define(version: 11) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "customer_devices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "config", default: {}
+    t.datetime "created_at", null: false
+    t.uuid "customer_id", null: false
+    t.uuid "device_id", null: false
+    t.date "rented_from", null: false
+    t.date "rented_until"
+    t.string "status", default: "active", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "device_id"], name: "index_customer_devices_on_customer_id_and_device_id", unique: true
+  end
+
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "customer_code", null: false
@@ -45,6 +65,38 @@ ActiveRecord::Schema[8.1].define(version: 11) do
     t.datetime "updated_at", null: false
     t.index ["customer_code"], name: "index_customers_on_customer_code", unique: true
     t.index ["person_id"], name: "index_customers_on_person_id", unique: true
+  end
+
+  create_table "device_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "customer_device_id", null: false
+    t.jsonb "data", default: {}
+    t.string "event_type", null: false
+    t.datetime "recorded_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_device_id"], name: "index_device_activities_on_customer_device_id"
+  end
+
+  create_table "device_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "manufacturer"
+    t.string "name", null: false
+    t.jsonb "schema", default: {}
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_device_types_on_name", unique: true
+  end
+
+  create_table "devices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.jsonb "default_config", default: {}
+    t.uuid "device_type_id", null: false
+    t.string "name", null: false
+    t.string "serial_number", null: false
+    t.string "status", default: "available", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_type_id"], name: "index_devices_on_device_type_id"
+    t.index ["serial_number"], name: "index_devices_on_serial_number", unique: true
   end
 
   create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -113,13 +165,44 @@ ActiveRecord::Schema[8.1].define(version: 11) do
     t.index ["account_id"], name: "index_people_on_account_id", unique: true
   end
 
+  create_table "protected_customer_devices", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "protected_devices", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "role_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.datetime "approved_at"
+    t.uuid "approved_by_id"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "requested_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.uuid "requested_by_id", null: false
+    t.uuid "role_id", null: false
+    t.string "status", default: "pending"
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "role_id", "status"], name: "index_role_requests_on_account_id_and_role_id_and_status"
+    t.index ["account_id"], name: "index_role_requests_on_account_id"
+    t.index ["approved_by_id"], name: "index_role_requests_on_approved_by_id"
+    t.index ["requested_by_id"], name: "index_role_requests_on_requested_by_id"
+    t.index ["role_id"], name: "index_role_requests_on_role_id"
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "description"
     t.string "name", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "account_roles", "accounts"
+  add_foreign_key "account_roles", "accounts", column: "created_by_id"
+  add_foreign_key "account_roles", "accounts", column: "revoked_by_id"
   add_foreign_key "account_roles", "roles"
   add_foreign_key "customers", "people"
   add_foreign_key "employees", "people"
@@ -127,4 +210,8 @@ ActiveRecord::Schema[8.1].define(version: 11) do
   add_foreign_key "issue_assignments", "issues"
   add_foreign_key "issues", "accounts", column: "assigned_to_id", on_delete: :nullify
   add_foreign_key "people", "accounts"
+  add_foreign_key "role_requests", "accounts"
+  add_foreign_key "role_requests", "accounts", column: "approved_by_id"
+  add_foreign_key "role_requests", "accounts", column: "requested_by_id"
+  add_foreign_key "role_requests", "roles"
 end

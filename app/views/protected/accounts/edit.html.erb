@@ -1,18 +1,32 @@
-<div class="min-h-screen bg-gray-50 py-8">
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-6 py-4 bg-gray-800 text-white">
-        <h1 class="text-2xl font-bold">Edit Account</h1>
-      </div>
+<div class="max-w-4xl mx-auto p-6">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-4">
+      <h1 class="text-2xl font-bold text-white">Edit Account</h1>
+      <p class="text-yellow-100 mt-1">Update account information and permissions</p>
+    </div>
 
-      <div class="px-6 py-6">
-        <%= render 'form_edit', account: @account %>
-      </div>
+    <div class="p-6">
+      <%= render 'form', account: @account %>
+    </div>
+  </div>
 
-      <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-wrap gap-3">
-        <%= link_to 'Show', protected_account_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
-        <%= link_to 'Back to Accounts', protected_accounts_path, class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
-      </div>
+  <!-- Navigation Links -->
+  <div class="mt-6 text-center">
+    <div class="flex justify-center space-x-4">
+      <%= link_to protected_account_path(@account), class: "text-sm text-gray-600 hover:text-gray-900" do %>
+        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        View Account
+      <% end %>
+
+      <%= link_to protected_accounts_path, class: "text-sm text-gray-600 hover:text-gray-900" do %>
+        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to Accounts
+      <% end %>
     </div>
   </div>
 </div>

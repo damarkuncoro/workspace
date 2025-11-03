@@ -93,8 +93,8 @@
                 </div>
               </div>
               <div class="mt-4 flex space-x-3">
-                <%= link_to 'View Customer Details', customer_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
-                <%= link_to 'View Customer Issues', customer_issues_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
+                <%= link_to 'View Customer Details', protected_customer_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+                <%= link_to 'View Customer Issues', protected_customer_issues_path(@account.person.customer), class: 'inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="px-6 py-4">
               <p class="text-sm text-gray-600 mb-4">This account doesn't have a customer profile yet. Create one to manage customer-specific information and issues.</p>
-              <%= link_to 'Create Customer Profile', new_protected_account_customer_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' %>
+              <%= link_to 'Create Customer Profile', new_protected_account_protected_customer_path(@account), class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' %>
             </div>
           </div>
         <% end %>

@@ -1,0 +1,113 @@
+<%= form_with(model: [:protected, device], local: true, class: "space-y-6") do |form| %>
+  <% if device.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            <%= pluralize(device.errors.count, "error") %> prohibited this device from being saved:
+          </h3>
+          <div class="mt-2 text-sm text-red-700">
+            <ul role="list" class="list-disc pl-5 space-y-1">
+              <% device.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Device Information -->
+  <div class="bg-blue-50 p-4 rounded-lg">
+    <h3 class="text-sm font-medium text-blue-900 mb-4">Device Information</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label for="device_name" class="block text-sm font-medium text-blue-700">
+          Device Name <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          <%= form.text_field :name,
+              class: "block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm placeholder-blue-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+              placeholder: "e.g., MacBook Pro 16-inch",
+              required: true %>
+        </div>
+        <p class="mt-1 text-sm text-blue-600">Enter a descriptive name for the device.</p>
+      </div>
+      <div>
+        <label for="device_device_type_id" class="block text-sm font-medium text-blue-700">
+          Device Type <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          <%= form.select :device_type_id,
+              options_for_select(@device_types.map { |dt| [dt.name, dt.id] }, device.device_type_id),
+              { include_blank: "Select device type..." },
+              class: "block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+              required: true %>
+        </div>
+        <p class="mt-1 text-sm text-blue-600">Choose the category this device belongs to.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Details -->
+  <div>
+    <label for="device_serial_number" class="block text-sm font-medium text-gray-700">
+      Serial Number <span class="text-red-500">*</span>
+    </label>
+    <div class="mt-1">
+      <%= form.text_field :serial_number,
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+          placeholder: "Enter device serial number",
+          required: true %>
+    </div>
+    <p class="mt-1 text-sm text-gray-500">Unique identifier for tracking and warranty purposes.</p>
+  </div>
+
+  <!-- Status -->
+  <div>
+    <label for="device_status" class="block text-sm font-medium text-gray-700">
+      Initial Status <span class="text-red-500">*</span>
+    </label>
+    <div class="mt-1">
+      <%= form.select :status,
+          [['Available', 'available'], ['Maintenance', 'maintenance'], ['Out of Service', 'out_of_service']],
+          { selected: device.status || 'available' },
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    </div>
+    <p class="mt-1 text-sm text-gray-500">Set the initial availability status of the device.</p>
+  </div>
+
+  <!-- Default Configuration (Optional) -->
+  <div>
+    <label for="device_default_config" class="block text-sm font-medium text-gray-700">
+      Default Configuration
+    </label>
+    <div class="mt-1">
+      <%= form.text_area :default_config,
+          rows: 4,
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+          placeholder: "Enter default configuration settings (JSON format)" %>
+    </div>
+    <p class="mt-1 text-sm text-gray-500">Optional: Default settings or specifications for this device type.</p>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+    <%= link_to protected_devices_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      Cancel
+    <% end %>
+
+    <%= form.submit "Save Device",
+        class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+        data: { disable_with: "Saving..." } %>
+  </div>
+<% end %>

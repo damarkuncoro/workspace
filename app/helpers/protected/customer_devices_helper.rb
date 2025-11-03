@@ -1,0 +1,2 @@
+module Protected::CustomerDevicesHelper
+end

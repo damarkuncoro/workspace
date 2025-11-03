@@ -1,6 +1,22 @@
-<h1>New Employee</h1>
+<div class="max-w-2xl mx-auto p-6">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+      <h1 class="text-2xl font-bold text-white">New Employee</h1>
+      <p class="text-blue-100 mt-1">Create a new employee account</p>
+    </div>
 
-<%= params %>
-<%= render 'form', employee: @employee %>
+    <div class="p-6">
+      <%= render 'form', employee: @employee %>
+    </div>
+  </div>
 
-<%= link_to 'Back to Employees', employees_path, class: 'btn btn-secondary' %>
+  <!-- Navigation Links -->
+  <div class="mt-6 text-center">
+    <%= link_to protected_employees_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Employees
+    <% end %>
+  </div>
+</div>
