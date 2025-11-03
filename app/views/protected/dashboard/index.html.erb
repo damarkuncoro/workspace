@@ -268,7 +268,7 @@
           <% @current_rentals.first(3).each do |rental| %>
             <div class="flex items-center text-sm text-gray-600">
               <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-              <span>Device <strong><%= rental.device.name %></strong> rented to <%= rental.customer.person_name %></span>
+              <span>Device <strong><%= rental.device.label %></strong> rented to <%= rental.customer.person_name %></span>
               <span class="ml-auto text-xs text-gray-400"><%= rental.created_at.strftime('%b %d') %></span>
             </div>
           <% end %>

@@ -1,0 +1,91 @@
+<div class="max-w-2xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Add New Network</h1>
+          <p class="text-blue-100 mt-1">Create a new network configuration</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <%= form_with model: @network, url: protected_networks_path, class: "divide-y divide-gray-200" do |f| %>
+      <div class="px-6 py-6">
+        <div class="space-y-6">
+          <!-- Network Name -->
+          <div>
+            <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_field :name, required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., Office LAN" %>
+            </div>
+            <% if @network.errors[:name].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network.errors[:name].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Network Type -->
+          <div>
+            <%= f.label :kind, "Network Type", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :kind, options_for_select([["LAN", "lan"], ["WiFi", "wifi"], ["VPN", "vpn"], ["WAN", "wan"]]), { include_blank: "Select network type" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <% if @network.errors[:kind].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network.errors[:kind].first %></p>
+            <% end %>
+          </div>
+
+          <!-- CIDR -->
+          <div>
+            <%= f.label :cidr, class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_field :cidr, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., 192.168.1.0/24" %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional CIDR notation for the network range</p>
+            <% if @network.errors[:cidr].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network.errors[:cidr].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Location -->
+          <div>
+            <%= f.label :location, class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_field :location, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., Main Office, Floor 1" %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional location description</p>
+            <% if @network.errors[:location].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network.errors[:location].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Metadata -->
+          <div>
+            <%= f.label :metadata, class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_area :metadata, rows: 4, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: '{"key": "value"}' %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional JSON metadata for additional configuration</p>
+            <% if @network.errors[:metadata].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network.errors[:metadata].first %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+        <%= link_to protected_networks_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Cancel
+        <% end %>
+        <%= f.submit "Create Network", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>

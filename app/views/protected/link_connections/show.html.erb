@@ -1,0 +1,178 @@
+<div class="max-w-6xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Link Connection Details</h1>
+          <p class="text-purple-100 mt-1"><%= @link_connection.connection_name %></p>
+        </div>
+        <div class="flex space-x-3">
+          <%= link_to edit_protected_link_connection_path(@link_connection), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" do %>
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Edit Connection
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection Overview -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Connection Information -->
+    <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100">
+      <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+          </svg>
+          Connection Information
+        </h3>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Link Type</span>
+          <span class="text-sm font-semibold text-gray-900 bg-purple-50 px-3 py-1 rounded-lg"><%= @link_connection.link_type.titleize %></span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Status</span>
+          <% status_color = @link_connection.status_color %>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= status_color %>-100 text-<%= status_color %>-800">
+            <%= @link_connection.status.titleize %>
+          </span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Bandwidth</span>
+          <span class="text-sm text-gray-900 font-mono bg-gray-100 px-3 py-1 rounded-lg border"><%= @link_connection.bandwidth_display %></span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Latency</span>
+          <span class="text-sm text-gray-900 font-mono bg-gray-100 px-3 py-1 rounded-lg border"><%= @link_connection.latency_display %></span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Network</span>
+          <span class="text-sm text-gray-900"><%= @link_connection.network&.name || 'N/A' %></span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Created</span>
+          <span class="text-sm text-gray-900"><%= @link_connection.created_at.strftime('%B %d, %Y') %></span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-600">Last Updated</span>
+          <span class="text-sm text-gray-900"><%= @link_connection.updated_at.strftime('%B %d, %Y') %></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connection Diagram -->
+    <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100">
+      <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Connection Diagram
+        </h3>
+      </div>
+      <div class="px-6 py-8">
+        <div class="flex items-center justify-center">
+          <!-- Device A -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-gray-900"><%= @device_a.label %></div>
+            <div class="text-xs text-gray-500 mt-1"><%= @interface_a.name %></div>
+            <div class="text-xs text-gray-400 font-mono"><%= @interface_a.mac %></div>
+          </div>
+
+          <!-- Connection Line -->
+          <div class="flex-1 mx-8 relative">
+            <div class="border-t-2 border-dashed border-gray-300 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="bg-white px-3 py-1 rounded-full border border-gray-300">
+                  <div class="flex items-center space-x-2">
+                    <% case @link_connection.link_type %>
+                    <% when 'ethernet' %>
+                      <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                      </svg>
+                    <% when 'fiber' %>
+                      <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                    <% when 'wireless' %>
+                      <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01M8.5 9.5a3.5 3.5 0 117 0"></path>
+                      </svg>
+                    <% else %>
+                      <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                      </svg>
+                    <% end %>
+                    <span class="text-xs font-medium text-gray-600"><%= @link_connection.link_type.titleize %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 text-center">
+              <div class="text-xs text-gray-500">
+                <%= @link_connection.bandwidth_display %> • <%= @link_connection.latency_display %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Device B -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+              </svg>
+            </div>
+            <div class="text-sm font-medium text-gray-900"><%= @device_b.label %></div>
+            <div class="text-xs text-gray-500 mt-1"><%= @interface_b.name %></div>
+            <div class="text-xs text-gray-400 font-mono"><%= @interface_b.mac %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metadata Section -->
+  <% if @link_connection.metadata.present? %>
+    <div class="bg-white shadow-xl rounded-xl overflow-hidden mb-6 border border-gray-100">
+      <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Connection Metadata
+        </h3>
+      </div>
+      <div class="px-6 py-5">
+        <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800 overflow-x-auto"><code><%= JSON.pretty_generate(@link_connection.metadata) %></code></pre>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-center space-x-4">
+    <%= link_to protected_link_connections_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Connections
+    <% end %>
+
+    <%= button_to protected_link_connection_path(@link_connection), method: :delete, data: { confirm: 'Are you sure you want to delete this link connection?' }, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+      </svg>
+      Delete Connection
+    <% end %>
+  </div>
+</div>

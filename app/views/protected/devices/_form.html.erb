@@ -28,16 +28,16 @@
     <h3 class="text-sm font-medium text-blue-900 mb-4">Device Information</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label for="device_name" class="block text-sm font-medium text-blue-700">
-          Device Name <span class="text-red-500">*</span>
+        <label for="device_label" class="block text-sm font-medium text-blue-700">
+          Device Label <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          <%= form.text_field :name,
+          <%= form.text_field :label,
               class: "block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm placeholder-blue-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
               placeholder: "e.g., MacBook Pro 16-inch",
               required: true %>
         </div>
-        <p class="mt-1 text-sm text-blue-600">Enter a descriptive name for the device.</p>
+        <p class="mt-1 text-sm text-blue-600">Enter a descriptive label for the device.</p>
       </div>
       <div>
         <label for="device_device_type_id" class="block text-sm font-medium text-blue-700">
@@ -56,46 +56,62 @@
   </div>
 
   <!-- Technical Details -->
-  <div>
-    <label for="device_serial_number" class="block text-sm font-medium text-gray-700">
-      Serial Number <span class="text-red-500">*</span>
-    </label>
-    <div class="mt-1">
-      <%= form.text_field :serial_number,
-          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-          placeholder: "Enter device serial number",
-          required: true %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label for="device_serial_number" class="block text-sm font-medium text-gray-700">
+        Serial Number <span class="text-red-500">*</span>
+      </label>
+      <div class="mt-1">
+        <%= form.text_field :serial_number,
+            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+            placeholder: "Enter device serial number",
+            required: true %>
+      </div>
+      <p class="mt-1 text-sm text-gray-500">Unique identifier for tracking.</p>
     </div>
-    <p class="mt-1 text-sm text-gray-500">Unique identifier for tracking and warranty purposes.</p>
+
+    <div>
+      <label for="device_model" class="block text-sm font-medium text-gray-700">
+        Model
+      </label>
+      <div class="mt-1">
+        <%= form.text_field :model,
+            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+            placeholder: "e.g., MacBook Pro 16-inch" %>
+      </div>
+      <p class="mt-1 text-sm text-gray-500">Device model specification.</p>
+    </div>
   </div>
 
-  <!-- Status -->
-  <div>
-    <label for="device_status" class="block text-sm font-medium text-gray-700">
-      Initial Status <span class="text-red-500">*</span>
-    </label>
-    <div class="mt-1">
-      <%= form.select :status,
-          [['Available', 'available'], ['Maintenance', 'maintenance'], ['Out of Service', 'out_of_service']],
-          { selected: device.status || 'available' },
-          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  <!-- Additional Details -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label for="device_firmware_version" class="block text-sm font-medium text-gray-700">
+        Firmware Version
+      </label>
+      <div class="mt-1">
+        <%= form.text_field :firmware_version,
+            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+            placeholder: "e.g., 1.2.3" %>
+      </div>
+      <p class="mt-1 text-sm text-gray-500">Current firmware version.</p>
     </div>
-    <p class="mt-1 text-sm text-gray-500">Set the initial availability status of the device.</p>
+
+    <div>
+      <label for="device_status" class="block text-sm font-medium text-gray-700">
+        Initial Status <span class="text-red-500">*</span>
+      </label>
+      <div class="mt-1">
+        <%= form.select :status,
+            [['Available', 'available'], ['Rented', 'rented'], ['Maintenance', 'maintenance'], ['Retired', 'retired']],
+            { selected: device.status || 'available' },
+            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+      <p class="mt-1 text-sm text-gray-500">Set the initial availability status.</p>
+    </div>
   </div>
 
-  <!-- Default Configuration (Optional) -->
-  <div>
-    <label for="device_default_config" class="block text-sm font-medium text-gray-700">
-      Default Configuration
-    </label>
-    <div class="mt-1">
-      <%= form.text_area :default_config,
-          rows: 4,
-          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-          placeholder: "Enter default configuration settings (JSON format)" %>
-    </div>
-    <p class="mt-1 text-sm text-gray-500">Optional: Default settings or specifications for this device type.</p>
-  </div>
+
 
   <!-- Form Actions -->
   <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">

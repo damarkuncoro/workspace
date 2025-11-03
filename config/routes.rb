@@ -83,8 +83,27 @@ Rails.application.routes.draw do
         patch :cancel
       end
     end
-    resources :devices
-    resources :device_types
+    resources :devices do
+      member do
+        get :schema
+      end
+    end
+    resources :device_types do
+      member do
+        get :schema
+      end
+    end
+
+    # Network monitoring resources
+    resources :networks
+    resources :device_interfaces
+    resources :network_devices
+    resources :network_activities
+    resources :link_connections do
+      collection do
+        get :find_path
+      end
+    end
   end
 
 

@@ -5,6 +5,9 @@ class Employee < ApplicationRecord
   # Polymorphic association for issues
   has_many :issues, as: :issueable
 
+  # Phone associations (through person)
+  has_many :phones, through: :person
+
   validates :employee_code, presence: true, allow_nil: true
   validates :status, presence: true, allow_nil: true
   validates :status, inclusion: { in: %w[active inactive] }

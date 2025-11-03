@@ -4,43 +4,26 @@ class Device < ApplicationRecord
   has_many :customers, through: :customer_devices
 
   # Add has_one association for current customer
-  has_one :current_customer_device, -> { where(status: 'active') }, class_name: 'CustomerDevice'
+  has_one :current_customer_device, -> { where(status: 'active') },
+          class_name: 'CustomerDevice'
   has_one :current_customer, through: :current_customer_device, source: :customer
 
-  validates :name, presence: true
+  # Network monitoring associations
+  has_many :device_interfaces, dependent: :destroy
+  has_many :network_devices, dependent: :destroy
+  has_many :network_activities, dependent: :destroy
+  has_many :networks, through: :network_devices
+
+  validates :label, presence: true
   validates :serial_number, presence: true, uniqueness: true
-  validates :status, presence: true, inclusion: { in: %w[available rented maintenance retired] }
+  validates :status, presence: true
   validates :device_type, presence: true
 
-  # Scopes
-  scope :available, -> { where(status: 'available') }
-  scope :rented, -> { where(status: 'rented') }
-  scope :in_maintenance, -> { where(status: 'maintenance') }
-  scope :retired, -> { where(status: 'retired') }
-
-
-  # Check if device is currently rented
-  def rented?
-    status == 'rented'
-  end
-
-  # Check if device is available for rent
-  def available?
-    status == 'available'
-  end
-
-  # Get current customer device (if rented)
-  def current_customer_device
-    customer_devices.where(status: 'active').first
-  end
-
-  # Get current customer (if rented)
-  def current_customer
-    current_customer_device&.customer
-  end
-  def maintenance
-    []
-  end
+  # Define enum - try with _prefix or _suffix option
+  enum :status, {
+    available: 0,
+    rented: 1,
+    maintenance: 2,
+    retired: 3
+  }
 end
-
-

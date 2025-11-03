@@ -1,0 +1,173 @@
+<div class="max-w-6xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Find Connection Path</h1>
+          <p class="text-purple-100 mt-1">Discover the network path between two devices</p>
+        </div>
+        <div class="flex space-x-3">
+          <%= link_to protected_link_connections_path, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" do %>
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Connections
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Path Finder Form -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h3 class="text-lg font-medium text-gray-900">Select Devices</h3>
+    </div>
+    <div class="px-6 py-4">
+      <%= form_with url: find_path_protected_link_connections_path, method: :get, class: "grid grid-cols-1 md:grid-cols-3 gap-4" do |f| %>
+        <div>
+          <%= f.label :start_device_id, "Start Device", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.select :start_device_id, options_for_select(@devices.map { |d| [d.label, d.id] }, params[:start_device_id]), { include_blank: "Select start device" }, { class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+        </div>
+        <div>
+          <%= f.label :end_device_id, "End Device", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.select :end_device_id, options_for_select(@devices.map { |d| [d.label, d.id] }, params[:end_device_id]), { include_blank: "Select end device" }, { class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+        </div>
+        <div class="flex items-end">
+          <%= f.submit "Find Path", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <% if @connection_path %>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">
+          Connection Path: <%= @start_device&.label || 'Unknown' %> → <%= @end_device&.label || 'Unknown' %>
+        </h3>
+      </div>
+      <div class="px-6 py-4">
+        <% if @connection_path.any? %>
+          <div class="space-y-6">
+            <!-- Path Visualization -->
+            <div class="flex items-center justify-center space-x-4">
+              <!-- Start Device -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                  <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-medium text-gray-900 text-center"><%= @start_device.label %></span>
+                <span class="text-xs text-gray-500"><%= @start_device.serial_number %></span>
+              </div>
+
+              <!-- Connection Path -->
+              <% @connection_path.each_with_index do |connection, index| %>
+                <!-- Arrow -->
+                <div class="flex items-center">
+                  <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </div>
+
+                <!-- Connection Info -->
+                <div class="flex flex-col items-center bg-gray-50 rounded-lg p-4 min-w-32">
+                  <div class="text-xs font-medium text-gray-600 mb-1">Connection <%= index + 1 %></div>
+                  <div class="text-xs text-gray-500 mb-2">
+                    <%= connection.link_type.titleize %>
+                  </div>
+                  <div class="flex items-center space-x-1">
+                    <% case connection.status %>
+                    <% when 'up' %>
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-xs text-green-600">Up</span>
+                    <% when 'down' %>
+                      <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                      <span class="text-xs text-red-600">Down</span>
+                    <% else %>
+                      <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <span class="text-xs text-yellow-600"><%= connection.status.titleize %></span>
+                    <% end %>
+                  </div>
+                  <% if connection.bandwidth_mbps.present? %>
+                    <div class="text-xs text-gray-500 mt-1">
+                      <%= connection.bandwidth_mbps %> Mbps
+                    </div>
+                  <% end %>
+                </div>
+
+                <!-- Next Device -->
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-900 text-center">
+                    <%= index == @connection_path.length - 1 ? @end_device.label : connection.device_b.label %>
+                  </span>
+                  <span class="text-xs text-gray-500">
+                    <%= index == @connection_path.length - 1 ? @end_device.serial_number : connection.device_b.serial_number %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Detailed Connection Information -->
+            <div class="mt-8">
+              <h4 class="text-lg font-medium text-gray-900 mb-4">Connection Details</h4>
+              <div class="space-y-4">
+                <% @connection_path.each_with_index do |connection, index| %>
+                  <div class="bg-gray-50 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                      <h5 class="text-sm font-medium text-gray-900">
+                        Connection <%= index + 1 %>: <%= connection.connection_name %>
+                      </h5>
+                      <%= link_to protected_link_connection_path(connection), class: "text-indigo-600 hover:text-indigo-900 text-sm" do %>
+                        View Details →
+                      <% end %>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div>
+                        <span class="text-gray-600">Type:</span>
+                        <span class="font-medium"><%= connection.link_type.titleize %></span>
+                      </div>
+                      <div>
+                        <span class="text-gray-600">Status:</span>
+                        <span class="font-medium <%= connection.status == 'up' ? 'text-green-600' : 'text-red-600' %>">
+                          <%= connection.status.titleize %>
+                        </span>
+                      </div>
+                      <div>
+                        <span class="text-gray-600">Bandwidth:</span>
+                        <span class="font-medium"><%= connection.bandwidth_display %></span>
+                      </div>
+                      <div>
+                        <span class="text-gray-600">Latency:</span>
+                        <span class="font-medium"><%= connection.latency_display %></span>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="text-center py-8">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-.966-5.5-2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No connection path found</h3>
+            <p class="mt-1 text-sm text-gray-500">
+              There is no active connection path between <%= @start_device&.label || 'the selected device' %> and <%= @end_device&.label || 'the target device' %>.
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

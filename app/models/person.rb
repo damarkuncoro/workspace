@@ -3,6 +3,10 @@ class Person < ApplicationRecord
   has_one :customer, dependent: :destroy
   has_one :employee, dependent: :destroy
 
+  # Phone associations
+  has_many :person_phones, dependent: :destroy
+  has_many :phones, through: :person_phones
+
   validates :name, presence: true,          on: :update
   validates :date_of_birth, presence: true, on: :update
 

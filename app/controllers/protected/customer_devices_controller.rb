@@ -80,10 +80,7 @@ class Protected::CustomerDevicesController < Protected::BaseController
   end
 
   def return
-    if @customer_device.update(returned_at: Time.current)
-      # Update device status back to available
-      @customer_device.device.update!(status: 'available')
-
+    if @customer_device.return_device!(Time.current)
       redirect_to protected_customer_device_path(@customer_device.customer, @customer_device), notice: "Device was successfully returned."
     else
       redirect_to protected_customer_device_path(@customer_device.customer, @customer_device), alert: "Could not return device."
@@ -101,6 +98,14 @@ class Protected::CustomerDevicesController < Protected::BaseController
   end
 
   def customer_device_params
-    params.require(:customer_device).permit(:device_id, :rented_from, :rented_until, :notes)
+    params.require(:customer_device).permit(:device_id, :rented_from, :rented_until, :config, :notes).tap do |whitelisted|
+      if whitelisted[:config].is_a?(String) && whitelisted[:config].present?
+        begin
+          whitelisted[:config] = JSON.parse(whitelisted[:config])
+        rescue JSON::ParserError
+          whitelisted[:config] = nil
+        end
+      end
+    end
   end
 end

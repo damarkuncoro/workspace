@@ -11,6 +11,9 @@ class Customer < ApplicationRecord
   has_many :customer_devices, dependent: :restrict_with_error
   has_many :devices, through: :customer_devices
 
+  # Phone associations (through person)
+  has_many :phones, through: :person
+
   # Validasi dasar
   validates :status, presence: true, inclusion: { in: %w[active inactive] }
   validates :customer_code, presence: true, uniqueness: true

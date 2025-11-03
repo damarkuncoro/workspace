@@ -1,0 +1,91 @@
+<div class="max-w-2xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-green-600 to-teal-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Edit Device Interface</h1>
+          <p class="text-green-100 mt-1"><%= @device_interface.name %> on <%= @device_interface.device.label %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <%= form_with model: @device_interface, url: protected_device_interface_path(@device_interface), method: :patch, class: "divide-y divide-gray-200" do |f| %>
+      <div class="px-6 py-6">
+        <div class="space-y-6">
+          <!-- Device Selection -->
+          <div>
+            <%= f.label :device_id, "Device", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :device_id, options_for_select(@devices.map { |d| [d.label, d.id] }, @device_interface.device_id), { include_blank: "Select a device" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <% if @device_interface.errors[:device_id].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @device_interface.errors[:device_id].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Interface Name -->
+          <div>
+            <%= f.label :name, "Interface Name", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_field :name, required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., eth0, wlan0" %>
+            </div>
+            <% if @device_interface.errors[:name].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @device_interface.errors[:name].first %></p>
+            <% end %>
+          </div>
+
+          <!-- MAC Address -->
+          <div>
+            <%= f.label :mac, "MAC Address", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_field :mac, required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., AA:BB:CC:DD:EE:FF" %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Media Access Control address in colon-separated format</p>
+            <% if @device_interface.errors[:mac].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @device_interface.errors[:mac].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Link Type -->
+          <div>
+            <%= f.label :link_type, "Link Type", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :link_type, options_for_select([["Ethernet", "ethernet"], ["WiFi", "wifi"], ["Virtual", "virtual"]], @device_interface.link_type), { include_blank: "Select link type" }, { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional physical connection type</p>
+            <% if @device_interface.errors[:link_type].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @device_interface.errors[:link_type].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Metadata -->
+          <div>
+            <%= f.label :metadata, class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_area :metadata, rows: 4, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: '{"speed": "1Gbps", "duplex": "full"}' %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional JSON metadata for additional configuration</p>
+            <% if @device_interface.errors[:metadata].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @device_interface.errors[:metadata].first %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+        <%= link_to protected_device_interface_path(@device_interface), class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Cancel
+        <% end %>
+        <%= f.submit "Update Interface", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>

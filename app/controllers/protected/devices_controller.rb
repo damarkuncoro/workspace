@@ -1,5 +1,5 @@
 class Protected::DevicesController < Protected::BaseController
-  before_action :set_device, only: %i[show edit update destroy]
+  before_action :set_device, only: %i[show edit update destroy schema]
 
   def index
     @devices = Device.includes(:device_type, :current_customer).order(created_at: :desc)
@@ -23,6 +23,10 @@ class Protected::DevicesController < Protected::BaseController
   def show
     @customer_devices = @device.customer_devices.includes(:customer).order(created_at: :desc)
     @device_activities = @device.customer_devices.flat_map(&:device_activities).sort_by(&:recorded_at).reverse
+  end
+
+  def schema
+    render json: { schema: @device.configuration_schema }
   end
 
   def new
@@ -70,6 +74,24 @@ class Protected::DevicesController < Protected::BaseController
   end
 
   def device_params
-    params.require(:device).permit(:name, :serial_number, :device_type_id, :status, default_config: {})
+    params.require(:device).permit(:name, :serial_number, :device_type_id, :status, default_config: {}, config: {}).tap do |whitelisted|
+      # Handle JSON textarea input
+      if whitelisted[:default_config].is_a?(String) && whitelisted[:default_config].present?
+        begin
+          whitelisted[:default_config] = JSON.parse(whitelisted[:default_config])
+        rescue JSON::ParserError
+          whitelisted[:default_config] = {}
+        end
+      end
+
+      # Handle form-based config input and merge with default_config
+      if whitelisted[:config].present?
+        whitelisted[:default_config] ||= {}
+        whitelisted[:default_config].merge!(whitelisted[:config])
+      end
+
+      # Remove the temporary config param
+      whitelisted.delete(:config)
+    end
   end
 end

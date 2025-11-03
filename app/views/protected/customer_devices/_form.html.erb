@@ -85,19 +85,65 @@
     </div>
   </div>
 
-  <!-- Configuration (Optional) -->
-  <div>
+  <!-- Configuration (Based on Device Type Schema) -->
+  <div id="configuration-section" class="hidden">
     <label for="customer_device_config" class="block text-sm font-medium text-gray-700">
-      Configuration Notes
+      Device Configuration <span class="text-red-500">*</span>
     </label>
     <div class="mt-1">
       <%= form.text_area :config,
-          rows: 3,
-          placeholder: "Any special configuration or notes for this rental...",
-          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          rows: 6,
+          placeholder: "Enter device configuration in JSON format according to the device type schema...",
+          class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-mono",
+          value: customer_device.config.present? ? JSON.pretty_generate(customer_device.config) : '' %>
     </div>
-    <p class="mt-1 text-sm text-gray-500">Optional notes about device configuration or special requirements.</p>
+    <div class="mt-2 p-3 bg-gray-50 rounded-md">
+      <p class="text-sm text-gray-600 mb-2"><strong>Schema Requirements:</strong></p>
+      <div id="schema-requirements" class="text-sm text-gray-700 font-mono bg-white p-2 rounded border">
+        Select a device to see configuration requirements.
+      </div>
+    </div>
+    <p class="mt-2 text-sm text-gray-500">Configuration must match the JSON schema defined for the selected device type.</p>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const deviceSelect = document.getElementById('customer_device_device_id');
+      const configSection = document.getElementById('configuration-section');
+      const schemaRequirements = document.getElementById('schema-requirements');
+
+      if (deviceSelect) {
+        deviceSelect.addEventListener('change', function() {
+          const deviceId = this.value;
+          if (deviceId) {
+            // Show configuration section
+            configSection.classList.remove('hidden');
+
+            // Fetch device schema (you would need to implement this endpoint)
+            fetch(`/protected/devices/${deviceId}/schema`)
+              .then(response => response.json())
+              .then(data => {
+                if (data.schema) {
+                  schemaRequirements.innerHTML = `<pre>${JSON.stringify(data.schema, null, 2)}</pre>`;
+                } else {
+                  schemaRequirements.innerHTML = 'No schema defined for this device type.';
+                }
+              })
+              .catch(error => {
+                schemaRequirements.innerHTML = 'Error loading schema.';
+              });
+          } else {
+            configSection.classList.add('hidden');
+          }
+        });
+
+        // Trigger change on page load if device is already selected
+        if (deviceSelect.value) {
+          deviceSelect.dispatchEvent(new Event('change'));
+        }
+      }
+    });
+  </script>
 
   <!-- Form Actions -->
   <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">

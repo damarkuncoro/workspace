@@ -6,10 +6,10 @@ class CreateCustomerDevices < ActiveRecord::Migration[8.1]
       t.date "rented_from", null: false
       t.date "rented_until"
       t.string "status", default: "active", null: false
-      t.jsonb "config", default: {}
+
       t.timestamps
     end
 
-    add_index :customer_devices, [:customer_id, :device_id], unique: true
+    add_index :customer_devices, [:customer_id, :device_id]
   end
 end

@@ -1,5 +1,5 @@
 class Protected::DeviceTypesController < Protected::BaseController
-  before_action :set_device_type, only: %i[show edit update destroy]
+  before_action :set_device_type, only: %i[show edit update destroy schema]
 
   def index
     @device_types = DeviceType.includes(:devices).order(created_at: :desc)
@@ -15,6 +15,10 @@ class Protected::DeviceTypesController < Protected::BaseController
 
   def show
     @devices = @device_type.devices.includes(:current_customer).order(created_at: :desc)
+  end
+
+  def schema
+    render json: { schema: @device_type.schema }
   end
 
   def new
@@ -58,6 +62,6 @@ class Protected::DeviceTypesController < Protected::BaseController
   end
 
   def device_type_params
-    params.require(:device_type).permit(:name, :description)
+    params.require(:device_type).permit(:name, :description, :schema)
   end
 end

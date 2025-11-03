@@ -7,9 +7,10 @@ class CustomerDevice < ApplicationRecord
   validates :device_id, presence: true
   validates :rented_from, presence: true
   validates :status, presence: true, inclusion: { in: %w[active returned overdue cancelled] }
+  validate :config_must_match_device_schema, if: -> { config.present? && device }
 
-  # Ensure unique customer-device combination
-  validates :device_id, uniqueness: { scope: :customer_id, message: "is already rented by this customer" }
+  # Ensure unique active customer-device combination
+  validate :unique_active_rental_per_customer_device, on: :create
 
   # Ensure device is available when creating rental
   validate :device_must_be_available, on: :create
@@ -73,6 +74,23 @@ class CustomerDevice < ApplicationRecord
   def update_device_status_on_return
     if saved_change_to_status? && status == 'returned'
       device.update!(status: 'available')
+    end
+  end
+
+  private
+
+  def unique_active_rental_per_customer_device
+    if customer_id && device_id
+      existing_active = CustomerDevice.where(customer_id: customer_id, device_id: device_id, status: 'active').exists?
+      if existing_active
+        errors.add(:device_id, 'is already rented by this customer')
+      end
+    end
+  end
+
+  def config_must_match_device_schema
+    unless device.valid_configuration?(config)
+      errors.add(:config, 'does not match the required schema for this device type')
     end
   end
 end

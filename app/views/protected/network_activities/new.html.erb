@@ -1,0 +1,132 @@
+<div class="max-w-2xl mx-auto p-6">
+  <!-- Header -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+    <div class="bg-gradient-to-r from-orange-600 to-red-600 px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white">Add New Network Activity</h1>
+          <p class="text-orange-100 mt-1">Record a new network event</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <%= form_with model: @network_activity, url: protected_network_activities_path, class: "divide-y divide-gray-200" do |f| %>
+      <div class="px-6 py-6">
+        <div class="space-y-6">
+          <!-- Network Selection -->
+          <div>
+            <%= f.label :network_id, "Network (Optional)", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :network_id, options_for_select(@networks.map { |n| ["#{n.name} (#{n.kind.titleize})", n.id] }), { include_blank: "Select network (optional)" }, { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <% if @network_activity.errors[:network_id].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:network_id].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Device Selection -->
+          <div>
+            <%= f.label :device_id, "Device (Optional)", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :device_id, options_for_select(@devices.map { |d| ["#{d.label} (#{d.serial_number})", d.id] }), { include_blank: "Select device (optional)" }, { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <% if @network_activity.errors[:device_id].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:device_id].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Device Interface Selection -->
+          <div>
+            <%= f.label :device_interface_id, "Device Interface (Optional)", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :device_interface_id, options_for_select([]), { include_blank: "Select interface (optional)" }, { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", id: "activity_interface_select" } %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Leave blank if not applicable</p>
+            <% if @network_activity.errors[:device_interface_id].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:device_interface_id].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Event Type -->
+          <div>
+            <%= f.label :event_type, "Event Type", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.select :event_type, options_for_select([["DHCP Assigned", "dhcp_assigned"], ["Link Up", "link_up"], ["Link Down", "link_down"], ["IP Change", "ip_change"], ["Auth Fail", "auth_fail"], ["RSSI", "rssi"]]), { include_blank: "Select event type" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
+            </div>
+            <% if @network_activity.errors[:event_type].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:event_type].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Recorded At -->
+          <div>
+            <%= f.label :recorded_at, "Recorded At", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.datetime_local_field :recorded_at, required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">When did this event occur?</p>
+            <% if @network_activity.errors[:recorded_at].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:recorded_at].first %></p>
+            <% end %>
+          </div>
+
+          <!-- Data -->
+          <div>
+            <%= f.label :data, "Additional Data (Optional)", class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1">
+              <%= f.text_area :data, rows: 4, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: '{"ip_address": "192.168.1.100", "signal_strength": "-45dBm"}' %>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Optional JSON data for additional event information</p>
+            <% if @network_activity.errors[:data].any? %>
+              <p class="mt-2 text-sm text-red-600"><%= @network_activity.errors[:data].first %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+        <%= link_to protected_network_activities_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          Cancel
+        <% end %>
+        <%= f.submit "Create Activity", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const deviceSelect = document.querySelector('#network_activity_device_id');
+  const interfaceSelect = document.querySelector('#activity_interface_select');
+
+  if (deviceSelect && interfaceSelect) {
+    deviceSelect.addEventListener('change', function() {
+      const deviceId = this.value;
+      if (deviceId) {
+        // Fetch interfaces for the selected device
+        fetch(`/protected/devices/${deviceId}/interfaces.json`)
+          .then(response => response.json())
+          .then(interfaces => {
+            interfaceSelect.innerHTML = '<option value="">Select interface (optional)</option>';
+            interfaces.forEach(interface => {
+              const option = document.createElement('option');
+              option.value = interface.id;
+              option.textContent = `${interface.name} (${interface.mac})`;
+              interfaceSelect.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error fetching interfaces:', error));
+      } else {
+        interfaceSelect.innerHTML = '<option value="">Select interface (optional)</option>';
+      }
+    });
+  }
+});
+</script>
