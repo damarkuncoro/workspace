@@ -66,4 +66,4 @@ gem "pagy", "~> 6.0"
 # gem 'kaminari'
 
 # Use Rack 3.x for better compatibility
-gem "rack", "~> 3.0"
+gem "rack", "~> 3.2"
