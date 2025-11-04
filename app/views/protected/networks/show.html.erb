@@ -1,179 +1,166 @@
-<div class="max-w-6xl mx-auto p-6">
-  <!-- Header -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-2xl font-bold text-white">Network Details</h1>
-          <p class="text-blue-100 mt-1"><%= @network.name %></p>
-        </div>
-        <div class="flex space-x-3">
-          <%= link_to edit_protected_network_path(@network), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" do %>
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-            </svg>
-            Edit Network
-          <% end %>
-        </div>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+    <div class="flex flex-col justify-center gap-2">
+      <h1 class="text-xl font-medium leading-none text-mono">
+        Network Details
+      </h1>
+      <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
+        <%= @network.name %>
       </div>
     </div>
+    <div class="flex items-center gap-2.5">
+      <%= link_to edit_protected_network_path(@network), class: "kt-btn kt-btn-outline" do %>
+        <i class="ki-filled ki-pencil"></i>
+        Edit Network
+      <% end %>
+    </div>
   </div>
+</div>
+<!-- End of Container -->
 
-  <!-- Network Information -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-    <!-- Basic Information -->
-    <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100">
-      <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="grid gap-5 lg:gap-7.5">
+    <!-- Network Information -->
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title flex items-center gap-2">
+          <i class="ki-filled ki-information text-lg"></i>
           Network Information
         </h3>
       </div>
-      <div class="px-6 py-5 space-y-4">
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">Network Name</span>
-          <span class="text-sm font-semibold text-gray-900 bg-blue-50 px-3 py-1 rounded-lg"><%= @network.name %></span>
-        </div>
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">Type</span>
-          <span class="text-sm font-semibold text-gray-900 bg-blue-50 px-3 py-1 rounded-lg"><%= @network.kind.titleize %></span>
-        </div>
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">CIDR</span>
-          <span class="text-sm text-gray-900 font-mono bg-gray-100 px-3 py-1 rounded-lg border"><%= @network.cidr || 'N/A' %></span>
-        </div>
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">Location</span>
-          <span class="text-sm text-gray-900"><%= @network.location || 'N/A' %></span>
-        </div>
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">Created</span>
-          <span class="text-sm text-gray-900"><%= @network.created_at.strftime('%B %d, %Y') %></span>
-        </div>
-        <div class="flex justify-between items-center py-2">
-          <span class="text-sm font-medium text-gray-600">Last Updated</span>
-          <span class="text-sm text-gray-900"><%= @network.updated_at.strftime('%B %d, %Y') %></span>
+      <div class="kt-card-content">
+        <div class="grid gap-4">
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">Network Name</span>
+            <span class="kt-badge kt-badge-primary"><%= @network.name %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">Type</span>
+            <span class="kt-badge kt-badge-primary"><%= @network.kind.titleize %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">CIDR</span>
+            <span class="text-sm text-mono bg-muted px-3 py-1 rounded"><%= @network.cidr || 'N/A' %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">Location</span>
+            <span class="text-sm text-foreground"><%= @network.location || 'N/A' %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">Created</span>
+            <span class="text-sm text-foreground"><%= @network.created_at.strftime('%B %d, %Y') %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground">Last Updated</span>
+            <span class="text-sm text-foreground"><%= @network.updated_at.strftime('%B %d, %Y') %></span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Statistics -->
-    <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-100">
-      <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title flex items-center gap-2">
+          <i class="ki-filled ki-chart-line text-lg"></i>
           Network Statistics
         </h3>
       </div>
-      <div class="px-6 py-5 space-y-4">
-        <div class="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg">
-          <span class="text-sm font-medium text-gray-600 flex items-center">
-            <div class="w-3 h-3 bg-gray-400 rounded-full mr-2"></div>
-            Total Devices
-          </span>
-          <span class="text-lg font-bold text-gray-900"><%= @network.devices.count %></span>
-        </div>
-        <div class="flex justify-between items-center py-3 px-4 bg-green-50 rounded-lg">
-          <span class="text-sm font-medium text-gray-600 flex items-center">
-            <div class="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-            Connected Devices
-          </span>
-          <span class="text-lg font-bold text-green-700"><%= @network_devices.select { |nd| nd.connected? }.count %></span>
-        </div>
-        <div class="flex justify-between items-center py-3 px-4 bg-red-50 rounded-lg">
-          <span class="text-sm font-medium text-gray-600 flex items-center">
-            <div class="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
-            Disconnected Devices
-          </span>
-          <span class="text-lg font-bold text-red-700"><%= @network_devices.select { |nd| nd.disconnected? }.count %></span>
+      <div class="kt-card-content">
+        <div class="grid gap-4">
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground flex items-center gap-2">
+              <div class="w-3 h-3 bg-muted-foreground rounded-full"></div>
+              Total Devices
+            </span>
+            <span class="text-lg font-bold text-foreground"><%= @network.devices.count %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground flex items-center gap-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              Connected Devices
+            </span>
+            <span class="text-lg font-bold text-green-600"><%= @network_devices.select { |nd| nd.connected? }.count %></span>
+          </div>
+          <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+            <span class="text-sm font-medium text-secondary-foreground flex items-center gap-2">
+              <div class="w-3 h-3 bg-destructive rounded-full"></div>
+              Disconnected Devices
+            </span>
+            <span class="text-lg font-bold text-destructive"><%= @network_devices.select { |nd| nd.disconnected? }.count %></span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<!-- End of Container -->
 
+<!-- Container -->
+<div class="kt-container-fixed">
   <!-- Connected Devices -->
-  <div class="bg-white shadow-xl rounded-xl overflow-hidden mb-6 border border-gray-100">
-    <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
-      <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-        <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-        </svg>
+  <div class="kt-card">
+    <div class="kt-card-header">
+      <h3 class="kt-card-title flex items-center gap-2">
+        <i class="ki-filled ki-devices text-lg"></i>
         Connected Devices
       </h3>
     </div>
-    <div class="px-6 py-4">
+    <div class="kt-card-content">
       <% if @network_devices.any? %>
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <div class="kt-scrollable-x-auto">
+          <table class="kt-table kt-table-border">
+            <thead>
               <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Device
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Interface
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  IP Address
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Connected At
-                </th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Actions</span>
-                </th>
+                <th>Device</th>
+                <th>Interface</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Connected At</th>
+                <th class="w-[100px]">Actions</th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody>
               <% @network_devices.each do |network_device| %>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">
+                <tr>
+                  <td>
+                    <div class="text-sm font-medium text-mono">
                       <%= network_device.device.label %>
                     </div>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-sm text-secondary-foreground">
                       <%= network_device.device.serial_number %>
                     </div>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">
+                  <td>
+                    <div class="text-sm text-foreground">
                       <%= network_device.device_interface&.name || 'N/A' %>
                     </div>
-                    <div class="text-sm text-gray-500">
+                    <div class="text-sm text-secondary-foreground">
                       <%= network_device.device_interface&.mac || '' %>
                     </div>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900 font-mono">
+                  <td>
+                    <div class="text-sm text-mono">
                       <%= network_device.ip_address || 'N/A' %>
                     </div>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
+                  <td>
                     <% if network_device.connected? %>
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Connected
-                      </span>
+                      <span class="kt-badge kt-badge-success">Connected</span>
                     <% else %>
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                        Disconnected
-                      </span>
+                      <span class="kt-badge kt-badge-destructive">Disconnected</span>
                     <% end %>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">
+                  <td>
+                    <div class="text-sm text-foreground">
                       <%= network_device.connected_at&.strftime('%B %d, %Y %H:%M') || 'N/A' %>
                     </div>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <%= link_to protected_network_device_path(network_device), class: "text-indigo-600 hover:text-indigo-900" do %>
-                      View Details
+                  <td>
+                    <%= link_to protected_network_device_path(network_device), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                      <i class="ki-filled ki-eye"></i>
                     <% end %>
                   </td>
                 </tr>
@@ -183,66 +170,62 @@
         </div>
       <% else %>
         <div class="text-center py-8">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-          </svg>
-          <h3 class="mt-2 text-sm font-medium text-gray-900">No devices connected</h3>
-          <p class="mt-1 text-sm text-gray-500">No devices are currently connected to this network.</p>
+          <div class="flex flex-col items-center gap-4">
+            <i class="ki-filled ki-devices text-4xl text-muted-foreground"></i>
+            <h3 class="text-lg font-medium text-foreground">No devices connected</h3>
+            <p class="text-sm text-secondary-foreground">No devices are currently connected to this network.</p>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
+</div>
+<!-- End of Container -->
 
+<!-- Container -->
+<div class="kt-container-fixed">
   <!-- Recent Activities -->
-  <div class="bg-white shadow-xl rounded-xl overflow-hidden mb-6 border border-gray-100">
-    <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5 border-b border-gray-200">
-      <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-        <svg class="w-5 h-5 mr-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
+  <div class="kt-card">
+    <div class="kt-card-header">
+      <h3 class="kt-card-title flex items-center gap-2">
+        <i class="ki-filled ki-time-past text-lg"></i>
         Recent Activities
       </h3>
     </div>
-    <div class="px-6 py-4">
+    <div class="kt-card-content">
       <% if @network_activities.any? %>
-        <div class="space-y-4">
+        <div class="grid gap-4">
           <% @network_activities.each do |activity| %>
-            <div class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
-              <div class="flex items-center">
+            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
+              <div class="flex items-center gap-4">
                 <div class="flex-shrink-0">
                   <% case activity.event_type %>
                   <% when 'link_up' %>
                     <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
+                      <i class="ki-filled ki-check text-green-600"></i>
                     </div>
                   <% when 'link_down' %>
-                    <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                      <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                      </svg>
+                    <div class="w-8 h-8 bg-destructive/10 rounded-full flex items-center justify-center">
+                      <i class="ki-filled ki-cross text-destructive"></i>
                     </div>
                   <% else %>
                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                      </svg>
+                      <i class="ki-filled ki-information text-blue-600"></i>
                     </div>
                   <% end %>
                 </div>
-                <div class="ml-4">
-                  <div class="text-sm font-medium text-gray-900">
+                <div>
+                  <div class="text-sm font-medium text-foreground">
                     <%= activity.event_type.titleize %>
                   </div>
-                  <div class="text-sm text-gray-500">
+                  <div class="text-sm text-secondary-foreground">
                     <%= activity.device&.label || 'Unknown Device' %> • <%= activity.recorded_at.strftime('%B %d, %Y %H:%M') %>
                   </div>
                 </div>
               </div>
-              <div class="text-sm text-gray-500">
-                <%= link_to protected_network_activity_path(activity), class: "text-indigo-600 hover:text-indigo-900" do %>
-                  View Details
+              <div>
+                <%= link_to protected_network_activity_path(activity), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                  <i class="ki-filled ki-eye"></i>
                 <% end %>
               </div>
             </div>
@@ -250,32 +233,32 @@
         </div>
       <% else %>
         <div class="text-center py-8">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h3 class="mt-2 text-sm font-medium text-gray-900">No recent activities</h3>
-          <p class="mt-1 text-sm text-gray-500">No network activities have been recorded yet.</p>
+          <div class="flex flex-col items-center gap-4">
+            <i class="ki-filled ki-time-past text-4xl text-muted-foreground"></i>
+            <h3 class="text-lg font-medium text-foreground">No recent activities</h3>
+            <p class="text-sm text-secondary-foreground">No network activities have been recorded yet.</p>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
+</div>
+<!-- End of Container -->
 
-  <!-- Action Buttons -->
-  <div class="flex justify-center space-x-4">
-    <%= link_to protected_networks_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="flex justify-center gap-4">
+    <%= link_to protected_networks_path, class: "kt-btn kt-btn-outline" do %>
+      <i class="ki-filled ki-arrow-left"></i>
       Back to Networks
     <% end %>
 
     <% if @network.network_devices.empty? %>
-      <%= button_to protected_network_path(@network), method: :delete, data: { confirm: 'Are you sure you want to delete this network?' }, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" do %>
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-        </svg>
+      <%= button_to protected_network_path(@network), method: :delete, data: { confirm: 'Are you sure you want to delete this network?' }, class: "kt-btn kt-btn-destructive" do %>
+        <i class="ki-filled ki-trash"></i>
         Delete Network
       <% end %>
     <% end %>
   </div>
 </div>
+<!-- End of Container -->

@@ -1,8 +1,4 @@
- <div class="kt-sidebar bg-background border-e border-e-border fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
-    
-    <%= render 'partials/raw/sidebar/sidebar_header' %>
-    
-    
-    <%= render 'partials/raw/sidebar/sidebar_contents' %>
-   
+<div class="kt-sidebar bg-background border-e border-e-border fixed top-0 bottom-0 z-20 flex flex-col items-stretch shrink-0 lg:relative lg:translate-x-0 transform -translate-x-full transition-transform duration-300 ease-in-out lg:transition-none w-64 max-w-64" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+ <%= render 'partials/raw/sidebar/sidebar_header' %>
+ <%#= render 'partials/raw/sidebar/sidebar_contents' %>
 </div>

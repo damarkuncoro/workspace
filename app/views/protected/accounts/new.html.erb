@@ -1,22 +1,35 @@
-<div class="max-w-4xl mx-auto p-6">
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <div class="bg-gradient-to-r from-green-600 to-teal-600 px-6 py-4">
-      <h1 class="text-2xl font-bold text-white">Create New Account</h1>
-      <p class="text-green-100 mt-1">Add a new user account to the system</p>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+    <div class="flex flex-col justify-center gap-2">
+      <h1 class="text-xl font-medium leading-none text-mono">
+        Create New Account
+      </h1>
+      <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
+        Add a new user account to the system
+      </div>
     </div>
+  </div>
+</div>
+<!-- End of Container -->
 
-    <div class="p-6">
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="kt-card">
+    <div class="kt-card-content">
       <%= render 'form', account: @account %>
     </div>
   </div>
+</div>
+<!-- End of Container -->
 
-  <!-- Navigation Links -->
-  <div class="mt-6 text-center">
-    <%= link_to protected_accounts_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="flex justify-center">
+    <%= link_to protected_accounts_path, class: "kt-btn kt-btn-outline" do %>
+      <i class="ki-filled ki-arrow-left"></i>
       Back to Accounts
     <% end %>
   </div>
 </div>
+<!-- End of Container -->

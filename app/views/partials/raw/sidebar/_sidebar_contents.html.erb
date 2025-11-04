@@ -1,1 +1,166 @@
-<%#= render_sidebar(mock_sidebar_menu) %>
+<div class="kt-sidebar-content flex flex-col gap-0 py-4 grow scroll-py-3" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#sidebar" id="sidebar_content">
+  <!-- Navigation Menu -->
+  <nav class="kt-menu px-3 lg:px-4" data-kt-menu="true">
+    <!-- Dashboard -->
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if current_page?(protected_dashboard_path) %>" href="<%= protected_dashboard_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-home"></i>
+        </span>
+        <span class="kt-menu-title">Dashboard</span>
+      </a>
+    </div>
+
+    <!-- People Management -->
+    <div class="kt-menu-section">
+      <h4 class="kt-menu-section-text px-3 lg:px-4 py-2 text-xs font-semibold text-secondary-foreground uppercase tracking-wider">
+        People Management
+      </h4>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'people' %>" href="<%= protected_people_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-users"></i>
+        </span>
+        <span class="kt-menu-title">People</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'customers' %>" href="<%= protected_customers_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-user"></i>
+        </span>
+        <span class="kt-menu-title">Customers</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'employees' %>" href="<%= protected_employees_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-user-tick"></i>
+        </span>
+        <span class="kt-menu-title">Employees</span>
+      </a>
+    </div>
+
+    <!-- Account Management -->
+    <div class="kt-menu-section">
+      <h4 class="kt-menu-section-text px-3 lg:px-4 py-2 text-xs font-semibold text-secondary-foreground uppercase tracking-wider">
+        Account Management
+      </h4>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'accounts' %>" href="<%= protected_accounts_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-shield-tick"></i>
+        </span>
+        <span class="kt-menu-title">Accounts</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'roles' %>" href="<%= protected_roles_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-setting-2"></i>
+        </span>
+        <span class="kt-menu-title">Roles</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'role_requests' %>" href="<%= protected_role_requests_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-document"></i>
+        </span>
+        <span class="kt-menu-title">Role Requests</span>
+      </a>
+    </div>
+
+    <!-- Device Management -->
+    <div class="kt-menu-section">
+      <h4 class="kt-menu-section-text px-3 lg:px-4 py-2 text-xs font-semibold text-secondary-foreground uppercase tracking-wider">
+        Device Management
+      </h4>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'devices' %>" href="<%= protected_devices_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-devices"></i>
+        </span>
+        <span class="kt-menu-title">Devices</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'device_types' %>" href="<%= protected_device_types_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-category"></i>
+        </span>
+        <span class="kt-menu-title">Device Types</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'device_interfaces' %>" href="<%= protected_device_interfaces_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-route"></i>
+        </span>
+        <span class="kt-menu-title">Device Interfaces</span>
+      </a>
+    </div>
+
+    <!-- Network Management -->
+    <div class="kt-menu-section">
+      <h4 class="kt-menu-section-text px-3 lg:px-4 py-2 text-xs font-semibold text-secondary-foreground uppercase tracking-wider">
+        Network Management
+      </h4>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'networks' %>" href="<%= protected_networks_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-network"></i>
+        </span>
+        <span class="kt-menu-title">Networks</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'network_devices' %>" href="<%= protected_network_devices_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-router"></i>
+        </span>
+        <span class="kt-menu-title">Network Devices</span>
+      </a>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'network_activities' %>" href="<%= protected_network_activities_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-time-past"></i>
+        </span>
+        <span class="kt-menu-title">Network Activities</span>
+      </a>
+    </div>
+
+    <!-- Issues & Support -->
+    <div class="kt-menu-section">
+      <h4 class="kt-menu-section-text px-3 lg:px-4 py-2 text-xs font-semibold text-secondary-foreground uppercase tracking-wider">
+        Issues & Support
+      </h4>
+    </div>
+
+    <div class="kt-menu-item">
+      <a class="kt-menu-link <%= 'active' if controller_name == 'issues' %>" href="<%= protected_issues_path %>">
+        <span class="kt-menu-icon">
+          <i class="ki-filled ki-information"></i>
+        </span>
+        <span class="kt-menu-title">Issues</span>
+      </a>
+    </div>
+  </nav>
+</div>

@@ -1,105 +1,95 @@
-<div class="max-w-2xl mx-auto p-6">
-  <!-- Header -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-2xl font-bold text-white">Add New Network Device Connection</h1>
-          <p class="text-purple-100 mt-1">Connect a device to a network</p>
-        </div>
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+    <div class="flex flex-col justify-center gap-2">
+      <h1 class="text-xl font-medium leading-none text-mono">
+        Add New Network Device Connection
+      </h1>
+      <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
+        Connect a device to a network
       </div>
     </div>
   </div>
+</div>
+<!-- End of Container -->
 
-  <!-- Form -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <%= form_with model: @network_device, url: protected_network_devices_path, class: "divide-y divide-gray-200" do |f| %>
-      <div class="px-6 py-6">
-        <div class="space-y-6">
+<!-- Container -->
+<div class="kt-container-fixed">
+  <div class="kt-card">
+    <%= form_with model: @network_device, url: protected_network_devices_path do |f| %>
+      <div class="kt-card-content">
+        <div class="grid gap-6">
           <!-- Network Selection -->
           <div>
-            <%= f.label :network_id, "Network", class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.select :network_id, options_for_select(@networks.map { |n| ["#{n.name} (#{n.kind.titleize})", n.id] }), { include_blank: "Select a network" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
-            </div>
+            <%= f.label :network_id, "Network", class: "form-label" %>
+            <%= f.select :network_id, options_for_select(@networks.map { |n| ["#{n.name} (#{n.kind.titleize})", n.id] }), { include_blank: "Select a network" }, { required: true, class: "kt-select" } %>
             <% if @network_device.errors[:network_id].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:network_id].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:network_id].first %></p>
             <% end %>
           </div>
 
           <!-- Device Selection -->
           <div>
-            <%= f.label :device_id, "Device", class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.select :device_id, options_for_select(@devices.map { |d| ["#{d.label} (#{d.serial_number})", d.id] }), { include_blank: "Select a device" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
-            </div>
+            <%= f.label :device_id, "Device", class: "form-label" %>
+            <%= f.select :device_id, options_for_select(@devices.map { |d| ["#{d.label} (#{d.serial_number})", d.id] }), { include_blank: "Select a device" }, { required: true, class: "kt-select" } %>
             <% if @network_device.errors[:device_id].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:device_id].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:device_id].first %></p>
             <% end %>
           </div>
 
           <!-- Device Interface Selection -->
           <div>
-            <%= f.label :device_interface_id, "Device Interface (Optional)", class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.select :device_interface_id, options_for_select([]), { include_blank: "Select interface (optional)" }, { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", id: "device_interface_select" } %>
-            </div>
-            <p class="mt-2 text-sm text-gray-500">Leave blank if no specific interface is needed</p>
+            <%= f.label :device_interface_id, "Device Interface (Optional)", class: "form-label" %>
+            <%= f.select :device_interface_id, options_for_select([]), { include_blank: "Select interface (optional)" }, { class: "kt-select", id: "device_interface_select" } %>
+            <p class="mt-2 text-sm text-secondary-foreground">Leave blank if no specific interface is needed</p>
             <% if @network_device.errors[:device_interface_id].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:device_interface_id].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:device_interface_id].first %></p>
             <% end %>
           </div>
 
           <!-- IP Address -->
           <div>
-            <%= f.label :ip_address, "IP Address", class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.text_field :ip_address, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: "e.g., 192.168.1.100" %>
-            </div>
-            <p class="mt-2 text-sm text-gray-500">Optional IP address assignment</p>
+            <%= f.label :ip_address, "IP Address", class: "form-label" %>
+            <%= f.text_field :ip_address, class: "kt-input", placeholder: "e.g., 192.168.1.100" %>
+            <p class="mt-2 text-sm text-secondary-foreground">Optional IP address assignment</p>
             <% if @network_device.errors[:ip_address].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:ip_address].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:ip_address].first %></p>
             <% end %>
           </div>
 
           <!-- Status -->
           <div>
-            <%= f.label :status, "Connection Status", class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.select :status, options_for_select([["Connected", "connected"], ["Disconnected", "disconnected"]]), { include_blank: "Select status" }, { required: true, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" } %>
-            </div>
+            <%= f.label :status, "Connection Status", class: "form-label" %>
+            <%= f.select :status, options_for_select([["Connected", "connected"], ["Disconnected", "disconnected"]]), { include_blank: "Select status" }, { required: true, class: "kt-select" } %>
             <% if @network_device.errors[:status].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:status].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:status].first %></p>
             <% end %>
           </div>
 
           <!-- Metadata -->
           <div>
-            <%= f.label :metadata, class: "block text-sm font-medium text-gray-700" %>
-            <div class="mt-1">
-              <%= f.text_area :metadata, rows: 4, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", placeholder: '{"bandwidth": "100Mbps", "priority": "high"}' %>
-            </div>
-            <p class="mt-2 text-sm text-gray-500">Optional JSON metadata for additional configuration</p>
+            <%= f.label :metadata, class: "form-label" %>
+            <%= f.text_area :metadata, rows: 4, class: "kt-input", placeholder: '{"bandwidth": "100Mbps", "priority": "high"}' %>
+            <p class="mt-2 text-sm text-secondary-foreground">Optional JSON metadata for additional configuration</p>
             <% if @network_device.errors[:metadata].any? %>
-              <p class="mt-2 text-sm text-red-600"><%= @network_device.errors[:metadata].first %></p>
+              <p class="mt-2 text-sm text-destructive"><%= @network_device.errors[:metadata].first %></p>
             <% end %>
           </div>
         </div>
       </div>
 
       <!-- Form Actions -->
-      <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
-        <%= link_to protected_network_devices_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+      <div class="kt-card-footer justify-end gap-3">
+        <%= link_to protected_network_devices_path, class: "kt-btn kt-btn-outline" do %>
+          <i class="ki-filled ki-cross"></i>
           Cancel
         <% end %>
-        <%= f.submit "Create Connection", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <%= f.submit "Create Connection", class: "kt-btn kt-btn-primary" %>
       </div>
     <% end %>
   </div>
 </div>
+<!-- End of Container -->
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

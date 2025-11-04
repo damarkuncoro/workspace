@@ -1,17 +1,15 @@
 <%= form_with(model: [:protected, account], local: true) do |form| %>
   <% if account.errors.any? %>
-    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-      <div class="flex">
+    <div class="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded-lg">
+      <div class="flex gap-3">
         <div class="flex-shrink-0">
-          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-          </svg>
+          <i class="ki-filled ki-information text-destructive text-lg"></i>
         </div>
-        <div class="ml-3">
-          <h3 class="text-sm font-medium text-red-800">
+        <div>
+          <h3 class="text-sm font-medium text-destructive">
             <%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:
           </h3>
-          <div class="mt-2 text-sm text-red-700">
+          <div class="mt-2 text-sm text-destructive">
             <ul role="list" class="list-disc pl-5 space-y-1">
               <% account.errors.each do |error| %>
                 <li><%= error.full_message %></li>
@@ -24,129 +22,126 @@
   <% end %>
 
   <!-- Account Information Section -->
-  <div class="bg-gray-50 p-6 rounded-lg mb-6">
-    <h3 class="text-lg font-medium text-gray-900 mb-4">Account Information</h3>
-    <div class="space-y-4">
-      <div>
-        <%= form.label :email, class: 'block text-sm font-medium text-gray-700' %>
-        <div class="mt-1">
-          <%= form.email_field :email,
-              class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-              placeholder: 'Enter email address',
-              required: true %>
-        </div>
-        <p class="mt-1 text-sm text-gray-500">This will be used for login and notifications</p>
+  <div class="grid gap-6">
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Account Information</h3>
       </div>
-
-      <% if account.new_record? %>
-        <div>
-          <%= form.label :password, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= form.password_field :password,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                placeholder: 'Enter password',
+      <div class="kt-card-content">
+        <div class="grid gap-4">
+          <div>
+            <%= form.label :email, class: 'form-label' %>
+            <%= form.email_field :email,
+                class: 'kt-input',
+                placeholder: 'Enter email address',
                 required: true %>
+            <p class="mt-1 text-sm text-secondary-foreground">This will be used for login and notifications</p>
           </div>
-          <p class="mt-1 text-sm text-gray-500">Minimum 6 characters required</p>
-        </div>
 
-        <div>
-          <%= form.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= form.password_field :password_confirmation,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                placeholder: 'Confirm password',
-                required: true %>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">Must match the password above</p>
-        </div>
-      <% else %>
-        <div>
-          <%= form.label :password, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= form.password_field :password,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                placeholder: 'Leave blank to keep current password' %>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">Only fill if you want to change the password</p>
-        </div>
-
-        <div>
-          <%= form.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= form.password_field :password_confirmation,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                placeholder: 'Confirm new password' %>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">Required only if changing password</p>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Personal Information Section -->
-  <div class="bg-gray-50 p-6 rounded-lg mb-6">
-    <h3 class="text-lg font-medium text-gray-900 mb-4">Personal Information</h3>
-    <%= form.fields_for :person do |person_form| %>
-      <div class="space-y-4">
-        <div>
-          <%= person_form.label :name, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= person_form.text_field :name,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                placeholder: 'Enter full name' %>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">Your display name in the system</p>
-        </div>
-
-        <div>
-          <%= person_form.label :date_of_birth, class: 'block text-sm font-medium text-gray-700' %>
-          <div class="mt-1">
-            <%= person_form.date_field :date_of_birth,
-                class: 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">Format: YYYY-MM-DD</p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <!-- Roles & Permissions Section -->
-  <div class="bg-gray-50 p-6 rounded-lg mb-6">
-    <h3 class="text-lg font-medium text-gray-900 mb-4">Roles & Permissions</h3>
-    <div>
-      <%= form.label :role_ids, 'Assign Roles', class: 'block text-sm font-medium text-gray-700 mb-3' %>
-      <div class="space-y-3">
-        <% Role.all.each do |role| %>
-          <div class="flex items-start">
-            <div class="flex items-center h-5">
-              <%= check_box_tag "account[role_ids][]",
-                  role.id,
-                  account.roles.include?(role),
-                  class: 'h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded' %>
+          <% if account.new_record? %>
+            <div>
+              <%= form.label :password, class: 'form-label' %>
+              <%= form.password_field :password,
+                  class: 'kt-input',
+                  placeholder: 'Enter password',
+                  required: true %>
+              <p class="mt-1 text-sm text-secondary-foreground">Minimum 6 characters required</p>
             </div>
-            <div class="ml-3 text-sm">
-              <label class="font-medium text-gray-700"><%= role.name.titleize %></label>
-              <p class="text-gray-500"><%= role.description.presence || 'No description available' %></p>
+
+            <div>
+              <%= form.label :password_confirmation, class: 'form-label' %>
+              <%= form.password_field :password_confirmation,
+                  class: 'kt-input',
+                  placeholder: 'Confirm password',
+                  required: true %>
+              <p class="mt-1 text-sm text-secondary-foreground">Must match the password above</p>
+            </div>
+          <% else %>
+            <div>
+              <%= form.label :password, class: 'form-label' %>
+              <%= form.password_field :password,
+                  class: 'kt-input',
+                  placeholder: 'Leave blank to keep current password' %>
+              <p class="mt-1 text-sm text-secondary-foreground">Only fill if you want to change the password</p>
+            </div>
+
+            <div>
+              <%= form.label :password_confirmation, class: 'form-label' %>
+              <%= form.password_field :password_confirmation,
+                  class: 'kt-input',
+                  placeholder: 'Confirm new password' %>
+              <p class="mt-1 text-sm text-secondary-foreground">Required only if changing password</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information Section -->
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Personal Information</h3>
+      </div>
+      <div class="kt-card-content">
+        <%= form.fields_for :person do |person_form| %>
+          <div class="grid gap-4">
+            <div>
+              <%= person_form.label :name, class: 'form-label' %>
+              <%= person_form.text_field :name,
+                  class: 'kt-input',
+                  placeholder: 'Enter full name' %>
+              <p class="mt-1 text-sm text-secondary-foreground">Your display name in the system</p>
+            </div>
+
+            <div>
+              <%= person_form.label :date_of_birth, class: 'form-label' %>
+              <%= person_form.date_field :date_of_birth,
+                  class: 'kt-input' %>
+              <p class="mt-1 text-sm text-secondary-foreground">Format: YYYY-MM-DD</p>
             </div>
           </div>
         <% end %>
       </div>
-      <p class="mt-3 text-sm text-gray-500">Select the roles this account should have. Changes take effect immediately.</p>
     </div>
-  </div>
+
+    <!-- Roles & Permissions Section -->
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Roles & Permissions</h3>
+      </div>
+      <div class="kt-card-content">
+        <div>
+          <%= form.label :role_ids, 'Assign Roles', class: 'form-label mb-3' %>
+          <div class="grid gap-3">
+            <% Role.all.each do |role| %>
+              <div class="flex items-start gap-3">
+                <div class="flex items-center h-5">
+                  <%= check_box_tag "account[role_ids][]",
+                      role.id,
+                      account.roles.include?(role),
+                      class: 'kt-checkbox' %>
+                </div>
+                <div class="text-sm">
+                  <label class="font-medium text-foreground"><%= role.name.titleize %></label>
+                  <p class="text-secondary-foreground"><%= role.description.presence || 'No description available' %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <p class="mt-3 text-sm text-secondary-foreground">Select the roles this account should have. Changes take effect immediately.</p>
+        </div>
+      </div>
+    </div>
 
   <!-- Form Actions -->
-  <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
-    <%= link_to protected_accounts_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
+  <div class="flex justify-end gap-3">
+    <%= link_to protected_accounts_path, class: "kt-btn kt-btn-outline" do %>
+      <i class="ki-filled ki-cross"></i>
       Cancel
     <% end %>
 
     <%= form.submit (account.new_record? ? 'Create Account' : 'Update Account'),
-        class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+        class: "kt-btn kt-btn-primary",
         data: { disable_with: account.new_record? ? "Creating..." : "Updating..." } %>
   </div>
 <% end %>
