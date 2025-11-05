@@ -4,7 +4,9 @@
    <!-- Wrapper -->
    <div class="kt-wrapper flex grow flex-col">
     <%#= render 'metronic/layouts/partials/page/main/header' %>
-    <%= kt_header %>
+    <%= kt_header do  %>
+    <%= render 'metronic/layouts/partials/page/main/kt-header/topbar'%>
+    <% end %>
 
     <!-- Content -->
     <main class="grow pt-5" id="content" role="content">
