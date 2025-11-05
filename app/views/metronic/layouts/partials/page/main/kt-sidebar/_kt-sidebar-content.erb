@@ -1,0 +1,9 @@
+<%= kt_sidebar_content do %>
+ 
+               <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
+                    <%= kt_menu_link("Employees", href: protected_employees_path ) %>
+                    <%= kt_menu_link("Customers", href: protected_customers_path ) %>
+               <% end %>
+               <%= kt_menu_heading("User") %>
+       
+<% end %>

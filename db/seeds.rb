@@ -1116,8 +1116,547 @@ link_connections_data.each do |connection_data|
   puts "✅ Link connection: #{device_a.label} (#{interface_a.name}) ↔ #{device_b.label} (#{interface_b.name}) [#{connection_data[:link_type]}, #{connection_data[:status]}]"
 end
 
+# Create sample customers and employees
+puts "👥 Creating sample customers and employees..."
+
+# Sample customer data
+customers_data = [
+  {
+    person_attributes: {
+      first_name: "Ahmad",
+      last_name: "Susanto",
+      email: "ahmad.susanto@email.com",
+      phone: "+6281234567890",
+      date_of_birth: Date.new(1985, 3, 15),
+      address: "Jl. Sudirman No. 123, Jakarta Pusat",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    company: "PT. Teknologi Maju",
+    department: "IT Department",
+    job_title: "IT Manager"
+  },
+  {
+    person_attributes: {
+      first_name: "Siti",
+      last_name: "Nurhaliza",
+      email: "siti.nurhaliza@email.com",
+      phone: "+6282234567891",
+      date_of_birth: Date.new(1990, 7, 22),
+      address: "Jl. Thamrin No. 456, Jakarta Selatan",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    company: "CV. Digital Solutions",
+    department: "Operations",
+    job_title: "Operations Manager"
+  },
+  {
+    person_attributes: {
+      first_name: "Budi",
+      last_name: "Santoso",
+      email: "budi.santoso@email.com",
+      phone: "+6283234567892",
+      date_of_birth: Date.new(1982, 11, 8),
+      address: "Jl. Gatot Subroto No. 789, Jakarta Utara",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    company: "PT. Inovasi Teknologi",
+    department: "Engineering",
+    job_title: "Senior Engineer"
+  },
+  {
+    person_attributes: {
+      first_name: "Maya",
+      last_name: "Dewi",
+      email: "maya.dewi@email.com",
+      phone: "+6284234567893",
+      date_of_birth: Date.new(1995, 1, 30),
+      address: "Jl. MH Thamrin No. 101, Jakarta Pusat",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    company: "PT. Kreatif Media",
+    department: "Creative",
+    job_title: "Graphic Designer"
+  },
+  {
+    person_attributes: {
+      first_name: "Rizki",
+      last_name: "Pratama",
+      email: "rizki.pratama@email.com",
+      phone: "+6285234567894",
+      date_of_birth: Date.new(1988, 9, 12),
+      address: "Jl. Sudirman No. 234, Jakarta Pusat",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    company: "PT. Finansial Indonesia",
+    department: "Finance",
+    job_title: "Financial Analyst"
+  },
+  {
+    person_attributes: {
+      first_name: "Nina",
+      last_name: "Kusuma",
+      email: "nina.kusuma@email.com",
+      phone: "+6286234567895",
+      date_of_birth: Date.new(1992, 5, 18),
+      address: "Jl. Rasuna Said No. 567, Jakarta Selatan",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    company: "PT. Retail Nusantara",
+    department: "Sales",
+    job_title: "Sales Representative"
+  },
+  {
+    person_attributes: {
+      first_name: "Dedi",
+      last_name: "Setiawan",
+      email: "dedi.setiawan@email.com",
+      phone: "+6287234567896",
+      date_of_birth: Date.new(1980, 12, 5),
+      address: "Jl. Jendral Sudirman No. 890, Bandung",
+      city: "Bandung",
+      country: "Indonesia",
+      gender: "male"
+    },
+    company: "PT. Manufaktur Indonesia",
+    department: "Production",
+    job_title: "Production Manager"
+  },
+  {
+    person_attributes: {
+      first_name: "Lina",
+      last_name: "Hartati",
+      email: "lina.hartati@email.com",
+      phone: "+6288234567897",
+      date_of_birth: Date.new(1987, 6, 25),
+      address: "Jl. Asia Afrika No. 345, Bandung",
+      city: "Bandung",
+      country: "Indonesia",
+      gender: "female"
+    },
+    company: "PT. Pendidikan Indonesia",
+    department: "Education",
+    job_title: "Teacher"
+  }
+]
+
+customers_data.each do |customer_data|
+  # Create account first
+  account = Account.find_or_create_by!(email: customer_data[:person_attributes][:email]) do |a|
+    a.password = "password123"
+    a.password_confirmation = "password123"
+  end
+
+  # Create person associated with account
+  person = Person.find_or_create_by!(account: account) do |p|
+    p.name = "#{customer_data[:person_attributes][:first_name]} #{customer_data[:person_attributes][:last_name]}"
+    p.date_of_birth = customer_data[:person_attributes][:date_of_birth]
+  end
+
+  # Create customer
+  customer = Customer.find_or_create_by!(person: person) do |c|
+    c.company = customer_data[:company]
+    c.department = customer_data[:department]
+    c.job_title = customer_data[:job_title]
+  end
+
+  # Assign customer role
+  customer_role = Role.find_by(name: "customer")
+  AccountRole.find_or_create_by!(account: account, role: customer_role)
+
+  puts "✅ Customer '#{customer.person_name}' created/updated"
+end
+
+# Sample employee data
+employees_data = [
+  {
+    person_attributes: {
+      first_name: "Andi",
+      last_name: "Wijaya",
+      email: "andi.wijaya@supportcakra.com",
+      phone: "+6281234567800",
+      date_of_birth: Date.new(1985, 4, 10),
+      address: "Jl. Teknologi No. 1, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    employee_id: "EMP001",
+    department: "IT Support",
+    job_title: "Senior IT Support Specialist",
+    hire_date: Date.new(2020, 1, 15),
+    salary: 12000000
+  },
+  {
+    person_attributes: {
+      first_name: "Sari",
+      last_name: "Indah",
+      email: "sari.indah@supportcakra.com",
+      phone: "+6281234567801",
+      date_of_birth: Date.new(1990, 8, 20),
+      address: "Jl. Support No. 2, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    employee_id: "EMP002",
+    department: "Network Operations",
+    job_title: "Network Administrator",
+    hire_date: Date.new(2021, 3, 10),
+    salary: 15000000
+  },
+  {
+    person_attributes: {
+      first_name: "Rudi",
+      last_name: "Hartono",
+      email: "rudi.hartono@supportcakra.com",
+      phone: "+6281234567802",
+      date_of_birth: Date.new(1988, 12, 5),
+      address: "Jl. Sistem No. 3, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    employee_id: "EMP003",
+    department: "Device Management",
+    job_title: "Device Inventory Manager",
+    hire_date: Date.new(2019, 7, 22),
+    salary: 13000000
+  },
+  {
+    person_attributes: {
+      first_name: "Maya",
+      last_name: "Sari",
+      email: "maya.sari@supportcakra.com",
+      phone: "+6281234567803",
+      date_of_birth: Date.new(1992, 2, 14),
+      address: "Jl. Customer No. 4, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    employee_id: "EMP004",
+    department: "Customer Service",
+    job_title: "Customer Service Representative",
+    hire_date: Date.new(2022, 1, 8),
+    salary: 10000000
+  },
+  {
+    person_attributes: {
+      first_name: "Bambang",
+      last_name: "Susilo",
+      email: "bambang.susilo@supportcakra.com",
+      phone: "+6281234567804",
+      date_of_birth: Date.new(1983, 11, 30),
+      address: "Jl. Teknik No. 5, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "male"
+    },
+    employee_id: "EMP005",
+    department: "Technical Support",
+    job_title: "Technical Support Engineer",
+    hire_date: Date.new(2018, 9, 15),
+    salary: 14000000
+  },
+  {
+    person_attributes: {
+      first_name: "Dewi",
+      last_name: "Lestari",
+      email: "dewi.lestari@supportcakra.com",
+      phone: "+6281234567805",
+      date_of_birth: Date.new(1995, 6, 18),
+      address: "Jl. Admin No. 6, Jakarta",
+      city: "Jakarta",
+      country: "Indonesia",
+      gender: "female"
+    },
+    employee_id: "EMP006",
+    department: "Administration",
+    job_title: "Administrative Assistant",
+    hire_date: Date.new(2023, 2, 20),
+    salary: 9000000
+  }
+]
+
+employees_data.each do |employee_data|
+  # Create account first
+  account = Account.find_or_create_by!(email: employee_data[:person_attributes][:email]) do |a|
+    a.password = "password123"
+    a.password_confirmation = "password123"
+  end
+
+  # Create person associated with account
+  person = Person.find_or_create_by!(account: account) do |p|
+    p.name = "#{employee_data[:person_attributes][:first_name]} #{employee_data[:person_attributes][:last_name]}"
+    p.date_of_birth = employee_data[:person_attributes][:date_of_birth]
+  end
+
+  # Create employee
+  employee = Employee.find_or_create_by!(person: person) do |e|
+    e.employee_code = employee_data[:employee_id]
+  end
+
+  # Assign employee role
+  employee_role = Role.find_by(name: "employee")
+  AccountRole.find_or_create_by!(account: account, role: employee_role)
+
+  puts "✅ Employee '#{employee.person_name}' (#{employee.employee_code}) created/updated"
+end
+
+# Create sample accounts for customers and employees
+puts "🔐 Creating sample accounts..."
+
+customers = Customer.all
+employees = Employee.all
+
+# Create accounts for customers
+customers.each do |customer|
+  account = Account.find_or_create_by!(email: customer.person.account.email) do |a|
+    a.password = "password123"
+    a.password_confirmation = "password123"
+    a.person = customer.person
+  end
+
+  # Assign customer role
+  customer_role = Role.find_by(name: "customer")
+  AccountRole.find_or_create_by!(account: account, role: customer_role)
+
+  puts "✅ Account created for customer '#{customer.person_name}' with email '#{account.email}'"
+end
+
+# Create accounts for employees
+employees.each do |employee|
+  account = Account.find_or_create_by!(email: employee.person.account.email) do |a|
+    a.password = "password123"
+    a.password_confirmation = "password123"
+    a.person = employee.person
+  end
+
+  # Assign employee role
+  employee_role = Role.find_by(name: "employee")
+  AccountRole.find_or_create_by!(account: account, role: employee_role)
+
+  puts "✅ Account created for employee '#{employee.person_name}' (#{employee.employee_code}) with email '#{account.email}'"
+end
+
+# Create admin account
+admin_account = Account.find_or_create_by!(email: "admin@supportcakra.com") do |a|
+  a.password = "admin123"
+  a.password_confirmation = "admin123"
+end
+
+# Create person for admin
+admin_person = Person.find_or_create_by!(account: admin_account) do |p|
+  p.name = "System Administrator"
+  p.date_of_birth = Date.new(1980, 1, 1)
+end
+
+# Assign administrator role
+admin_role = Role.find_by(name: "administrator")
+AccountRole.find_or_create_by!(account: admin_account, role: admin_role)
+
+puts "✅ Admin account created with email 'admin@supportcakra.com' and password 'admin123'"
+
+# Create sample device rentals for customers
+puts "📱 Creating sample device rentals..."
+
+available_devices = Device.available.limit(10)
+customers = Customer.all
+
+available_devices.each_with_index do |device, index|
+  customer = customers[index % customers.size]
+
+  rental = CustomerDevice.find_or_create_by!(customer: customer, device: device) do |cd|
+    cd.rented_from = Time.current - rand(1..30).days
+    cd.rented_until = cd.rented_from + rand(7..90).days
+    cd.status = ["active", "active", "active", "overdue"].sample # Mostly active, some overdue
+  end
+
+  puts "✅ Device rental: #{device.label} rented to #{customer.person_name} (#{rental.status})"
+end
+
+# Create sample issues
+puts "🎫 Creating sample issues..."
+
+customers = Customer.all
+employees = Employee.all
+issue_titles = [
+  "Laptop not connecting to WiFi",
+  "Printer not responding",
+  "Software installation failed",
+  "Email client not syncing",
+  "Network connectivity issues",
+  "Device overheating",
+  "Screen display problems",
+  "Keyboard malfunction",
+  "Mouse not working",
+  "System running slow",
+  "Cannot access shared drives",
+  "VPN connection failed",
+  "Mobile app crashing",
+  "File backup not working",
+  "Security software alerts"
+]
+
+issue_descriptions = [
+  "The device is unable to connect to the corporate WiFi network despite correct credentials.",
+  "Printer shows offline status and won't accept print jobs from the workstation.",
+  "Attempting to install required software results in installation failure with error code 0x80070005.",
+  "Email client is not synchronizing with the mail server and shows connection errors.",
+  "Intermittent network connectivity causing frequent disconnections and slow performance.",
+  "Device temperature exceeds normal operating range during normal usage.",
+  "Display shows distorted colors and flickering on the primary monitor.",
+  "Several keys on the keyboard are not responding to input.",
+  "Wireless mouse cursor movement is erratic and connection drops frequently.",
+  "System performance has degraded significantly with long load times.",
+  "Unable to access network shared drives despite proper permissions.",
+  "VPN client fails to establish secure connection to corporate network.",
+  "Mobile application crashes immediately after launching on company device.",
+  "Automated backup process is failing with insufficient storage errors.",
+  "Security software is generating false positive alerts for legitimate applications."
+]
+
+customers.each do |customer|
+  # Create 1-3 issues per customer
+  num_issues = rand(1..3)
+  num_issues.times do
+    issue = Issue.find_or_create_by!(
+      issueable: customer,
+      title: issue_titles.sample,
+      description: issue_descriptions.sample
+    ) do |i|
+      i.status = ["open", "pending", "resolved"].sample
+      i.priority = ["low", "medium", "high", "urgent"].sample
+      i.created_at = rand(30.days.ago..Time.current)
+    end
+
+    # Assign to random employee if issue is not resolved
+    if issue.status != "resolved" && employees.any?
+      assignment = IssueAssignment.find_or_create_by!(issue: issue) do |ia|
+        ia.employee = employees.sample
+        ia.assigned_at = issue.created_at + rand(1..24).hours
+      end
+    end
+
+    puts "✅ Issue '#{issue.title}' created for #{customer.person_name} (#{issue.status})"
+  end
+end
+
+# Create some employee-specific issues
+employees.each do |employee|
+  # Create 0-2 issues per employee
+  num_issues = rand(0..2)
+  num_issues.times do
+    issue = Issue.find_or_create_by!(
+      issueable: employee,
+      title: issue_titles.sample,
+      description: issue_descriptions.sample
+    ) do |i|
+      i.status = ["open", "pending", "resolved"].sample
+      i.priority = ["low", "medium", "high"].sample
+      i.created_at = rand(30.days.ago..Time.current)
+    end
+
+    puts "✅ Employee issue '#{issue.title}' created for #{employee.person_name} (#{issue.status})"
+  end
+end
+
+# Create sample issue comments
+puts "💬 Creating sample issue comments..."
+
+issues = Issue.all
+employees = Employee.all
+
+issues.each do |issue|
+  # Create 0-3 comments per issue
+  num_comments = rand(0..3)
+  num_comments.times do |i|
+    comment = IssueComment.find_or_create_by!(
+      issue: issue,
+      employee: employees.sample,
+      content: [
+        "I've started investigating this issue. Will update you shortly with findings.",
+        "This appears to be a network configuration problem. Checking router settings.",
+        "Device diagnostics completed. Found potential hardware issue with the network card.",
+        "Applied software update that should resolve the connectivity problem.",
+        "Issue has been escalated to the network team for further investigation.",
+        "Temporary workaround implemented while permanent fix is being developed.",
+        "Customer reports issue is resolved after applying the suggested fix.",
+        "Additional information needed from customer to proceed with troubleshooting.",
+        "Similar issues reported by other users. Investigating for pattern.",
+        "Hardware replacement scheduled for next maintenance window."
+      ].sample
+    ) do |c|
+      c.created_at = issue.created_at + rand(1..72).hours + (i * rand(1..24)).hours
+    end
+
+    puts "✅ Comment added to issue '#{issue.title}' by #{comment.employee.person_name}"
+  end
+end
+
+# Create sample device activities
+puts "⚙️ Creating sample device activities..."
+
+devices = Device.all
+activity_types = ["maintenance", "repair", "upgrade", "inspection", "calibration"]
+activity_descriptions = [
+  "Regular maintenance check completed successfully",
+  "Hardware repair performed on faulty component",
+  "Software upgrade installed and tested",
+  "Annual inspection passed all requirements",
+  "Device calibration completed within specifications",
+  "Firmware update applied successfully",
+  "Hardware diagnostics completed - all systems normal",
+  "Preventive maintenance performed on critical components",
+  "Security patch applied and verified",
+  "Performance optimization completed"
+]
+
+devices.each do |device|
+  # Create 1-3 activities per device
+  num_activities = rand(1..3)
+  num_activities.times do
+    activity = DeviceActivity.find_or_create_by!(
+      device: device,
+      activity_type: activity_types.sample,
+      description: activity_descriptions.sample
+    ) do |da|
+      da.performed_at = rand(90.days.ago..Time.current)
+      da.performed_by = employees.sample.person_name
+      da.notes = [
+        "All systems functioning normally",
+        "Minor adjustments made during maintenance",
+        "Component replaced under warranty",
+        "Performance metrics within acceptable range",
+        "No issues found during inspection",
+        "Calibration completed successfully",
+        "Device returned to service",
+        "Documentation updated accordingly"
+      ].sample
+    end
+
+    puts "✅ Device activity '#{activity.activity_type}' recorded for #{device.label}"
+  end
+end
+
 puts "🎉 Database seeding completed successfully!"
 puts "📊 Summary:"
+puts "   • #{Role.count} roles"
+puts "   • #{Account.count} accounts"
+puts "   • #{Customer.count} customers"
+puts "   • #{Employee.count} employees"
 puts "   • #{DeviceType.count} device types"
 puts "   • #{Device.count} devices"
 puts "   • #{Network.count} networks"
@@ -1125,3 +1664,8 @@ puts "   • #{DeviceInterface.count} device interfaces"
 puts "   • #{NetworkDevice.count} network device connections"
 puts "   • #{NetworkActivity.count} network activities"
 puts "   • #{LinkConnection.count} link connections"
+puts "   • #{CustomerDevice.count} device rentals"
+puts "   • #{Issue.count} issues"
+puts "   • #{IssueAssignment.count} issue assignments"
+puts "   • #{IssueComment.count} issue comments"
+puts "   • #{DeviceActivity.count} device activities"

@@ -1,0 +1,34 @@
+<!-- Main -->
+  <div class="flex grow">
+   <%= render 'metronic/layouts/partials/page/main/sidebar' %>
+   <!-- Wrapper -->
+   <div class="kt-wrapper flex grow flex-col">
+    <%= render 'metronic/layouts/partials/page/main/header' %>
+    <!-- Content -->
+    <main class="grow pt-5" id="content" role="content">
+     <!-- Container -->
+     <div 
+      class="kt-container-fixed" 
+      id="contentContainer">
+     </div>
+     <!-- End of Container -->
+     
+     <!-- Container -->
+     <div class="kt-container-fixed">
+      <div class="grid gap-5 lg:gap-7.5">
+
+        <%#= yield %>
+      <%= render 'metronic/layouts/partials/page/main/content/grid/123' %>
+      <%#= render 'metronic/layouts/partials/page/main/content/grid/highlights' %>
+      <%#= render 'metronic/layouts/partials/page/main/content/grid/team_meeting' %>
+   
+      </div>
+     </div>
+     <!-- End of Container -->
+    </main>
+    <!-- End of Content -->
+    <%= render 'metronic/layouts/partials/page/main/footer' %>
+   </div>
+   <!-- End of Wrapper -->
+  </div>
+  <!-- End of Main -->

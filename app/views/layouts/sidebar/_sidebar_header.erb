@@ -1,0 +1,14 @@
+<!-- Sidebar Header -->
+  <div class="kt-sidebar-header hidden lg:flex items-center relative justify-between px-3 lg:px-6 shrink-0" id="sidebar_header">
+    <%= link_to root_path, class: "dark:hidden" do %>
+      <%= image_tag "app/default-logo.svg", class: "default-logo min-h-[22px] max-w-none" %>
+      <%= image_tag "app/mini-logo.svg", class: "small-logo min-h-[22px] max-w-none" %>
+    <% end %>
+    
+    <%= link_to root_path, class: "hidden dark:block" do %>
+      <%= image_tag "app/default-logo-dark.svg", class: "default-logo min-h-[22px] max-w-none" %>
+      <%= image_tag "app/mini-logo.svg", class: "small-logo min-h-[22px] max-w-none" %>
+    <% end %>
+    
+    <%= sidebar_toggle_button %>
+  </div>
