@@ -1,38 +1,43 @@
 <!-- Main -->
-  <div class="flex grow">
-   <%= render 'metronic/layouts/partials/page/main/sidebar' %>
+<div class="flex grow">
+
+
+<!-- Sidebar -->
+    <%= kt_sidebar do %>
+      <%= kt_sidebar_header %>
+      <%= kt_sidebar_content do %>
+               <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
+                    <%= kt_menu_link("Employees", href: protected_employees_path ) %>
+                    <%= kt_menu_link("Customers", href: protected_customers_path ) %>
+               <% end %>
+              <%= kt_menu_heading("User") %>
+      <% end %>
+    <% end %>
+<!-- End of Sidebar -->
+
    <!-- Wrapper -->
    <div class="kt-wrapper flex grow flex-col">
-    <%#= render 'metronic/layouts/partials/page/main/header' %>
-    <%= kt_header do  %>
-    <%= render 'metronic/layouts/partials/page/main/kt-header/topbar'%>
-    <% end %>
-
-    <!-- Content -->
-    <main class="grow pt-5" id="content" role="content">
-     <!-- Container -->
-     <div 
-      class="kt-container-fixed" 
-      id="contentContainer">
-     </div>
-     <!-- End of Container -->
-     
-     <!-- Container -->
-     <div class="kt-container-fixed">
-      <div class="grid gap-5 lg:gap-7.5">
-
-        <%#= yield %>
-      <%= render 'metronic/layouts/partials/page/main/content/grid/123' %>
-      <%#= render 'metronic/layouts/partials/page/main/content/grid/highlights' %>
-      <%#= render 'metronic/layouts/partials/page/main/content/grid/team_meeting' %>
-   
-      </div>
-     </div>
-     <!-- End of Container -->
-    </main>
-    <!-- End of Content -->
-    <%#= render 'metronic/layouts/partials/page/main/footer' %>
-    <%#= kt_footer(year: 2025, company: {name: "PT. Cakramedia Indocyber", url: "/"}) %>
+    
+    <%= kt_header(
+      logo_src: "/assets/media/app/custom-logo.svg",
+      logo_link: "/",
+      drawer_buttons: [
+        { target: "#sidebar", icon_class: "ki-filled ki-menu" },
+        { target: "#custom_drawer", icon_class: "ki-filled ki-settings" }
+      ],
+      mega_menu_partial: "metronic/layouts/partials/page/main/kt-header/megamenu",
+      topbar_partial: "metronic/layouts/partials/page/main/kt-header/topbar"
+    ) %>
+        
+    <%= kt_main_content do %>
+      <%= kt_content_container %>
+      <%= kt_content_container do %>
+        <%= kt_content_grid do %>
+          <%= render 'metronic/layouts/partials/page/main/content/grid/123' %>
+        <% end %>
+      <% end %>
+    <%end%>
+    
     <%= kt_footer(
           year: 2025, 
           company: { name: "PT. Cakramedia Indocyber", url: "/" },
@@ -42,6 +47,7 @@
             { title: "Contact", url: "/contact" }
           ]
         ) %>  
+
    </div>
    <!-- End of Wrapper -->
   </div>

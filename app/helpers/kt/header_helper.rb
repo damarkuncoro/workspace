@@ -10,7 +10,7 @@ module KT
     #   :topbar_partial => partial path untuk topbar
     def kt_header(
       logo_src: "/assets/media/app/mini-logo.svg",
-      logo_link: "/demo1.html",
+      logo_link: "/",
       drawer_buttons: default_drawer_buttons,
       mega_menu_partial: "metronic/layouts/partials/page/main/kt-header/megamenu",
       topbar_partial: "metronic/layouts/partials/page/main/kt-header/topbar"
