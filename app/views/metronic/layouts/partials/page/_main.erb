@@ -3,7 +3,9 @@
    <%= render 'metronic/layouts/partials/page/main/sidebar' %>
    <!-- Wrapper -->
    <div class="kt-wrapper flex grow flex-col">
-    <%= render 'metronic/layouts/partials/page/main/header' %>
+    <%#= render 'metronic/layouts/partials/page/main/header' %>
+    <%= kt_header %>
+
     <!-- Content -->
     <main class="grow pt-5" id="content" role="content">
      <!-- Container -->
@@ -27,7 +29,17 @@
      <!-- End of Container -->
     </main>
     <!-- End of Content -->
-    <%= render 'metronic/layouts/partials/page/main/footer' %>
+    <%#= render 'metronic/layouts/partials/page/main/footer' %>
+    <%#= kt_footer(year: 2025, company: {name: "PT. Cakramedia Indocyber", url: "/"}) %>
+    <%= kt_footer(
+          year: 2025, 
+          company: { name: "PT. Cakramedia Indocyber", url: "/" },
+          links: [
+            { title: "Home", url: "/" },
+            { title: "About", url: "/about" },
+            { title: "Contact", url: "/contact" }
+          ]
+        ) %>  
    </div>
    <!-- End of Wrapper -->
   </div>

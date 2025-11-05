@@ -1,6 +1,19 @@
 <!-- Sidebar -->
-   <div class="kt-sidebar bg-background border-e border-e-border fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
-    <%= render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-header' %>
-    <%= render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-content' %>
-   </div>
-   <!-- End of Sidebar -->
+<%= kt_sidebar do %>
+    <%#= render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-header' %>
+    <%= kt_sidebar_header %>
+
+    <%#= render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-content' %>
+    <%= kt_sidebar_content do %>
+ 
+               <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
+                    <%= kt_menu_link("Employees", href: protected_employees_path ) %>
+                    <%= kt_menu_link("Customers", href: protected_customers_path ) %>
+               <% end %>
+
+               <%= kt_menu_heading("User") %>
+       
+   <% end %>
+
+<% end %>
+<!-- End of Sidebar -->
