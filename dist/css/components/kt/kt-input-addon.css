@@ -1,0 +1,9 @@
+/*! Component: kt-input-addon | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-input-addon {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+}

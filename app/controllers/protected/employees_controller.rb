@@ -10,7 +10,7 @@ class Protected::EmployeesController < Protected::BaseController
   # GET /protected/employees/new
   def new
     if @person.employee.present?
-      redirect_to employee_path(@person.employee), notice: "Employee already exists for this person."
+      redirect_to protected_employee_path(@person.employee), notice: "Employee already exists for this person."
       return
     end
     # @employee di-set di set_person

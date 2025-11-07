@@ -1,0 +1,19 @@
+/*! Component: kt-alert-sm | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-alert-sm {
+    gap: calc(var(--spacing) * 1.5);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 2.5);
+    padding-block: calc(var(--spacing) * 2);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    .kt-alert-close {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+      > svg {
+        width: calc(var(--spacing) * 3.5);
+        height: calc(var(--spacing) * 3.5);
+      }
+}
+}
+}

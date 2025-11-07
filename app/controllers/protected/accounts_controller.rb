@@ -11,7 +11,9 @@ class Protected::AccountsController < Protected::AdministratorController
 
 
   def new
+    # Inisialisasi akun baru dan bangun nested person agar fields_for :person muncul di form
     @account = Account.new
+    @account.build_person unless @account.person
   end
 
 

@@ -1,0 +1,8 @@
+/*! Component: kt-datatable-info | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-datatable-info {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
+}

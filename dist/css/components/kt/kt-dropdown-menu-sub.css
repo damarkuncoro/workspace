@@ -1,0 +1,10 @@
+/*! Component: kt-dropdown-menu-sub | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-dropdown-menu-sub {
+    width: 100%;
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
+    }
+}

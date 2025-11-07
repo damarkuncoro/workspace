@@ -1,0 +1,38 @@
+/*! Component: kt-progress-indicator | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-progress-indicator {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    transform: translateX(calc(100 - var(--progress-value)));
+    border-radius: calc(infinity * 1px);
+    background-color: var(--primary);
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+.kt-progress-indicator {
+      background-color: var(--primary);
+    }
+
+.kt-progress-indicator {
+      background-color: var(--color-green-500);
+    }
+
+.kt-progress-indicator {
+      background-color: var(--color-yellow-500);
+    }
+
+.kt-progress-indicator {
+      background-color: var(--color-violet-500);
+    }
+
+.kt-progress-indicator {
+      background-color: var(--destructive);
+    }
+
+.kt-progress-indicator {
+      background-color: var(--mono);
+    }
+}

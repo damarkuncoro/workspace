@@ -1,0 +1,33 @@
+<%= kt_card(height: "h-full") do %>
+      <%= kt_card_header(class_name: "bg-gradient-to-r from-violet-50 to-purple-50", border: true) do %>
+        <h3 class="text-lg font-bold text-gray-900 p-4 lg:p-6 pb-0">Today's Summary</h3>
+      <% end %>
+      <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+        <div class="space-y-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900"><%= Time.current.strftime('%B %d') %></div>
+            <div class="text-sm text-gray-600"><%= Time.current.strftime('%A') %></div>
+          </div>
+          <%= kt_grid(cols: 2, gap: 4, class_name: "pt-4") do %>
+            <div class="text-center">
+              <div class="text-lg font-bold text-blue-600"><%= @customers_today %></div>
+              <div class="text-xs text-gray-600">New Customers</div>
+            </div>
+            <div class="text-center">
+              <div class="text-lg font-bold text-green-600"><%= @rentals_today %></div>
+              <div class="text-xs text-gray-600">Device Rentals</div>
+            </div>
+          <% end %>
+          <%= kt_grid(cols: 2, gap: 4) do %>
+            <div class="text-center">
+              <div class="text-lg font-bold text-yellow-600"><%= @issues_today %></div>
+              <div class="text-xs text-gray-600">New Issues</div>
+            </div>
+            <div class="text-center">
+              <div class="text-lg font-bold text-orange-600"><%= @returned_today %></div>
+              <div class="text-xs text-gray-600">Returns</div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>

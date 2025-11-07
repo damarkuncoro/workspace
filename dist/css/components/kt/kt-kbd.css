@@ -1,0 +1,29 @@
+/*! Component: kt-kbd | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) - 2px);
+    font-family: var(--font-mono);
+  }
+
+.kt-kbd {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+.kt-kbd {
+    height: calc(var(--spacing) * 7);
+    min-width: calc(var(--spacing) * 7);
+    padding-inline: calc(var(--spacing) * 1.5);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    & svg {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+    }
+}

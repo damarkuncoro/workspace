@@ -1,0 +1,15 @@
+<%# Shared Partial: Page Actions (KT) %>
+<%# Tujuan: Menyediakan kontainer aksi halaman yang konsisten (SRP/DRY/KISS)
+    - Input: locals :actions => Array elemen HTML (link_to / tombol) yang sudah memiliki kelas styling
+    - Output: Deretan aksi dengan spacing dan wrapping yang rapi menggunakan kelas KT
+    - Catatan: Partial ini tidak mengubah isi elemen aksi, hanya mengatur layout
+%>
+
+<% actions = Array(actions).compact %>
+<% if actions.any? %>
+  <div class="kt-page-actions d-flex gap-2 flex-wrap">
+    <% actions.each do |action| %>
+      <span class="kt-page-actions__item"><%= action %></span>
+    <% end %>
+  </div>
+<% end %>

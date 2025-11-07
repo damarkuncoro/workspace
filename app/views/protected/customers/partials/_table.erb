@@ -1,0 +1,94 @@
+<%#
+  Partial: Customers Table
+  Tujuan: Menampilkan daftar customers dalam kt_card + kt_table.
+  Prinsip: SRP, DRY — table terpisah dari index untuk reuse dan konsistensi.
+  Pemakaian:
+    <%= render 'protected/customers/partials/table' %>
+%>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_content do %>
+        <% if @customers.any? %>
+          <div class="kt-scrollable-x-auto">
+            <%= kt_table(class: "kt-table-border") do %>
+              <thead>
+                <tr>
+                  <th><%= kt_table_col_label { "Customer Code" } %></th>
+                  <th><%= kt_table_col_label { "Name" } %></th>
+                  <th><%= kt_table_col_label { "Email" } %></th>
+                  <th><%= kt_table_col_label { "Status" } %></th>
+                  <th><%= kt_table_col_label { "Created At" } %></th>
+                  <th class="w-[200px]"><%= kt_table_col_label { "Actions" } %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @customers.each do |customer| %>
+                  <tr>
+                    <td>
+                      <div class="text-sm font-medium text-mono">
+                        <%= customer.customer_code %>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-sm text-foreground">
+                        <%= customer.person_name %>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-sm text-secondary-foreground">
+                        <%= customer.account_email %>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="<%= customer.status == 'active' ? 'kt-badge kt-badge-success' : 'kt-badge kt-badge-secondary' %>">
+                        <%= customer.status.titleize %>
+                      </span>
+                    </td>
+                    <td>
+                      <div class="text-sm text-secondary-foreground">
+                        <%= l(customer.created_at) %>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex gap-2">
+                        <%= link_to protected_customer_path(customer), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                          <i class="ki-filled ki-eye"></i>
+                        <% end %>
+                        <%= link_to edit_protected_customer_path(customer), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                          <i class="ki-filled ki-pencil"></i>
+                        <% end %>
+                        <%= link_to protected_customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' }, class: "kt-btn kt-btn-sm kt-btn-destructive" do %>
+                          <i class="ki-filled ki-trash"></i>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-8">
+            <div class="flex flex-col items-center gap-4">
+              <i class="ki-filled ki-user text-4xl text-muted-foreground"></i>
+              <h3 class="text-lg font-medium text-foreground">No customers found</h3>
+              <p class="text-sm text-secondary-foreground">Get started by creating your first customer.</p>
+              <%= link_to new_protected_customer_path, class: "kt-btn kt-btn-primary" do %>
+                <i class="ki-filled ki-plus"></i>
+                New Customer
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= kt_card_footer(justify: "justify-start") do %>
+        <%= link_to protected_dashboard_path, class: "kt-btn kt-btn-outline" do %>
+          <i class="ki-filled ki-arrow-left"></i>
+          Back to Dashboard
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

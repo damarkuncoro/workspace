@@ -1,5 +1,14 @@
-<h1>New Issue for Employee: <%= @employee.person_name %></h1>
-
-<%= render 'form', issue: @issue, employee: @employee %>
-
-<%= link_to 'Back to Issues', employee_issues_path(@employee), class: 'btn btn-secondary' %>
+<%# View: Issues Employees New %>
+<%# Tujuan: Bungkus form dalam partial card generik untuk DRY/KISS %>
+<%= render 'protected/issues/employees/partials/form_card',
+  title: "New Issue untuk: #{@employee.person_name}",
+  actions: [
+    link_to(protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline') do
+      content_tag(:i, '', class: 'ki-duotone ki-list') + ' Back to Issues'
+    end,
+    link_to(protected_employee_path(@employee), class: 'kt-btn kt-btn-outline') do
+      content_tag(:i, '', class: 'ki-duotone ki-user') + ' Back to Employee'
+    end
+  ],
+  issue: @issue,
+  employee: @employee %>

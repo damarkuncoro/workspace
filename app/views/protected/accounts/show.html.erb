@@ -1,189 +1,38 @@
-<!-- Container -->
-<div class="kt-container-fixed">
-  <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
-    <div class="flex flex-col justify-center gap-2">
-      <h1 class="text-xl font-medium leading-none text-mono">
-        Account Details
-      </h1>
-      <div class="flex items-center gap-2 text-sm font-normal text-secondary-foreground">
-        <%= @account.email %>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End of Container -->
 
-<!-- Container -->
-<div class="kt-container-fixed">
-  <!-- Account Information Card -->
-  <div class="kt-card">
-    <div class="kt-card-header">
-      <h3 class="kt-card-title">Account Information</h3>
-    </div>
-    <div class="kt-card-content">
-      <div class="grid gap-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="grid gap-4">
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Email</span>
-              <span class="text-sm text-foreground"><%= @account.email %></span>
-            </div>
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Name</span>
-              <span class="text-sm text-foreground"><%= @account.person&.name || 'Not provided' %></span>
-            </div>
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Date of Birth</span>
-              <span class="text-sm text-foreground"><%= @account.person&.date_of_birth ? l(@account.person.date_of_birth) : 'Not provided' %></span>
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Roles</span>
-              <div class="flex flex-wrap gap-1">
-                <% @account.roles.each do |role| %>
-                  <span class="kt-badge kt-badge-secondary"><%= role.name %></span>
-                <% end %>
-              </div>
-            </div>
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Created At</span>
-              <span class="text-sm text-foreground"><%= l(@account.created_at) %></span>
-            </div>
-            <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-              <span class="text-sm font-medium text-secondary-foreground">Updated At</span>
-              <span class="text-sm text-foreground"><%= l(@account.updated_at) %></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End of Container -->
 
-  <!-- Customer Information Card -->
-  <% if @account.person&.customer.present? %>
-    <div class="kt-card">
-      <div class="kt-card-header">
-        <h3 class="kt-card-title flex items-center gap-2">
-          <i class="ki-filled ki-user text-lg"></i>
-          Customer Information
-        </h3>
-      </div>
-      <div class="kt-card-content">
-        <div class="grid gap-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="grid gap-4">
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Customer Code</span>
-                <span class="text-sm text-foreground"><%= @account.person.customer.customer_code %></span>
-              </div>
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Status</span>
-                <span class="<%= @account.person.customer.status == 'active' ? 'kt-badge kt-badge-success' : 'kt-badge kt-badge-secondary' %>">
-                  <%= @account.person.customer.status %>
-                </span>
-              </div>
-            </div>
-            <div class="grid gap-4">
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Customer Created At</span>
-                <span class="text-sm text-foreground"><%= l(@account.person.customer.created_at) %></span>
-              </div>
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Customer Updated At</span>
-                <span class="text-sm text-foreground"><%= l(@account.person.customer.updated_at) %></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="kt-card-footer justify-start gap-3">
-          <%= link_to 'View Customer Details', protected_customer_path(@account.person.customer), class: 'kt-btn kt-btn-primary' %>
-          <%= link_to 'View Customer Issues', protected_customer_issues_path(@account.person.customer), class: 'kt-btn kt-btn-warning' %>
-        </div>
-      </div>
-    </div>
-  <% elsif @account.person.present? %>
-    <div class="kt-card">
-      <div class="kt-card-header">
-        <h3 class="kt-card-title flex items-center gap-2">
-          <i class="ki-filled ki-plus text-lg"></i>
-          Create Customer Profile
-        </h3>
-      </div>
-      <div class="kt-card-content">
-        <p class="text-sm text-secondary-foreground mb-4">This account doesn't have a customer profile yet. Create one to manage customer-specific information and issues.</p>
-        <%= link_to 'Create Customer Profile', new_protected_account_customer_path(@account), class: 'kt-btn kt-btn-success' %>
-      </div>
-    </div>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Account Details',
+  subtitle: @account.email %>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/accounts/partials/account_info' %>
   <% end %>
 
-  <!-- Employee Information Card -->
-  <% if @account.person&.employee.present? %>
-    <div class="kt-card">
-      <div class="kt-card-header">
-        <h3 class="kt-card-title flex items-center gap-2">
-          <i class="ki-filled ki-user text-lg"></i>
-          Employee Information
-        </h3>
-      </div>
-      <div class="kt-card-content">
-        <div class="grid gap-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="grid gap-4">
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Employee Code</span>
-                <span class="text-sm text-foreground"><%= @account.person.employee.employee_code %></span>
-              </div>
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Status</span>
-                <span class="<%= @account.person.employee.status == 'active' ? 'kt-badge kt-badge-success' : 'kt-badge kt-badge-secondary' %>">
-                  <%= @account.person.employee.status %>
-                </span>
-              </div>
-            </div>
-            <div class="grid gap-4">
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Employee Created At</span>
-                <span class="text-sm text-foreground"><%= l(@account.person.employee.created_at) %></span>
-              </div>
-              <div class="flex items-center justify-between py-3 px-4 bg-accent/50 rounded-lg">
-                <span class="text-sm font-medium text-secondary-foreground">Employee Updated At</span>
-                <span class="text-sm text-foreground"><%= l(@account.person.employee.updated_at) %></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="kt-card-footer justify-start gap-3">
-          <%= link_to 'View Employee Details', protected_employee_path(@account.person.employee), class: 'kt-btn kt-btn-primary' %>
-          <%= link_to 'View Employee Issues', protected_employee_issues_path(@account.person.employee), class: 'kt-btn kt-btn-warning' %>
-        </div>
-      </div>
-    </div>
-  <% elsif @account.person.present? %>
-    <div class="kt-card">
-      <div class="kt-card-header">
-        <h3 class="kt-card-title flex items-center gap-2">
-          <i class="ki-filled ki-plus text-lg"></i>
-          Create Employee Profile
-        </h3>
-      </div>
-      <div class="kt-card-content">
-        <p class="text-sm text-secondary-foreground mb-4">This account doesn't have an employee profile yet. Create one to manage employee-specific information and issues.</p>
-        <%= link_to 'Create Employee Profile', new_protected_account_employee_path(@account), class: 'kt-btn kt-btn-success' %>
-      </div>
-    </div>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/shared/partials/page_actions',
+      card: true,
+      title: 'Quick Actions',
+      justify: 'justify-start',
+      gap_class: 'gap-3',
+      links: [
+        link_to('Edit', edit_protected_account_path(@account), class: 'kt-btn kt-btn-warning'),
+        link_to('Back to Accounts', protected_accounts_path, class: 'kt-btn kt-btn-outline'),
+        link_to('Back to Dashboard', protected_dashboard_path, class: 'kt-btn kt-btn-outline')
+      ] %>
   <% end %>
-</div>
-<!-- End of Container -->
+<% end %>
 
-<!-- Container -->
-<div class="kt-container-fixed">
-  <div class="flex flex-wrap gap-3">
-    <%= link_to 'Edit', edit_protected_account_path(@account), class: 'kt-btn kt-btn-warning' %>
-    <%= link_to 'Back to Accounts', protected_accounts_path, class: 'kt-btn kt-btn-outline' %>
-    <%= link_to 'Back to Dashboard', protected_dashboard_path, class: 'kt-btn kt-btn-outline' %>
-  </div>
-</div>
-<!-- End of Container -->
+<%# Baris 2: Customer Information (full width) %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/accounts/partials/customer_section' %>
+  <% end %>
+<% end %>
+
+<%# Baris 3: Employee Information (full width) %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/accounts/partials/employee_section' %>
+  <% end %>
+<% end %>

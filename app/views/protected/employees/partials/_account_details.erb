@@ -1,0 +1,14 @@
+<%#
+  Partial: employees/partials/_account_details
+  Tujuan: Menampilkan detail akun terkait Employee.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Account Details') %>
+  <%= kt_card_content do %>
+    <div class="grid gap-6 md:grid-cols-2">
+      <%= kt_info_row(label: 'Account ID', value: @employee.person.account_id) %>
+      <%= kt_info_row(label: 'Date of Birth', value: (@employee.person.date_of_birth ? l(@employee.person.date_of_birth) : 'Not provided')) %>
+    </div>
+  <% end %>
+<% end %>

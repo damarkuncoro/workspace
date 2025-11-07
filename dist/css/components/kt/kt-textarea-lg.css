@@ -1,0 +1,9 @@
+/*! Component: kt-textarea-lg | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-textarea-lg {
+    border-radius: calc(var(--radius) - 2px);
+    padding: calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+}

@@ -1,0 +1,13 @@
+/*! Component: kt-alert-light | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-alert-light {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--muted);
+    color: var(--foreground);
+    .kt-alert-icon > svg {
+      color: var(--muted-foreground);
+    }
+}
+}

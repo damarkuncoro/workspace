@@ -1,0 +1,9 @@
+/*! Component: kt-menu-arrow | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-menu-arrow {
+      margin-inline-start: calc(var(--spacing) * 2);
+      & i {
+        font-size: var(--text-xs);
+        line-height: var(--tw-leading, var(--text-xs--line-height));
+      }
+}

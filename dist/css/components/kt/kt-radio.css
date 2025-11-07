@@ -1,0 +1,7 @@
+/*! Component: kt-radio | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-radio {
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+    }
+}

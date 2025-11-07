@@ -1,6 +1,69 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  # Include KT helpers agar tersedia di semua view
+  # - Konten & layout: menyediakan `kt_content_container`, dll.
+  include KT::ContentHelper
+  # - Topbar user: menyediakan `kt_topbar_user` dan pendukungnya
+  include KT::TopbarHelper
+
+  # Render flash messages menggunakan Tailwind utility classes.
+  # Tujuan: menggantikan penggunaan <%= notice %> dan <%= alert %> di view
+  # dengan komponen notifikasi konsisten yang mendukung berbagai tipe flash.
+  # Simple, DRY, dan mudah dipakai di seluruh aplikasi.
+  #
+  # Contoh pemakaian di view/layout:
+  #   <%= render_flash_messages %>
+  #
+  # Mendukung key: :notice, :alert, :error, :warning, :info.
+  def render_flash_messages
+    return "" if flash.empty?
+
+    safe_join(
+      flash.map do |key, message|
+        next if message.blank?
+
+        base_classes = [
+          "mb-3",
+          "rounded-md",
+          "border",
+          "p-3",
+          "text-sm",
+          "flex",
+          "items-start",
+          "gap-2"
+        ]
+
+        color_classes = case key.to_sym
+                        when :notice
+                          ["bg-green-50", "text-green-800", "border-green-200"]
+                        when :alert, :error
+                          ["bg-red-50", "text-red-800", "border-red-200"]
+                        when :warning
+                          ["bg-yellow-50", "text-yellow-800", "border-yellow-200"]
+                        else # :info atau lainnya
+                          ["bg-blue-50", "text-blue-800", "border-blue-200"]
+                        end
+
+        icon_name = case key.to_sym
+                    when :notice then "ki-check-circle"
+                    when :alert, :error then "ki-information-2"
+                    when :warning then "ki-information-2"
+                    else "ki-information-2"
+                    end
+
+        content_tag(:div, class: (base_classes + color_classes).join(" ")) do
+          safe_join([
+            content_tag(:span, class: "mt-0.5") { content_tag(:i, "", class: "ki-filled #{icon_name}") },
+            content_tag(:div) do
+              Array(message).map { |m| content_tag(:p, m) }.reduce(&:+)
+            end
+          ])
+        end
+      end.compact
+    )
+  end
+
   # Fungsi: Merender tombol toggle sidebar secara reusable/DRY.
   # - Menggunakan default kelas/atribut yang selaras dengan KTUI/Metronic.
   # - Opsi dapat diberikan untuk override kelas tambahan atau target toggle.

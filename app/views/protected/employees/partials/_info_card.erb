@@ -1,0 +1,27 @@
+<%#
+  Partial: employees/partials/_info_card
+  Tujuan: Menampilkan informasi utama Employee dalam bentuk kartu.
+  Catatan: Dipanggil dari layout grid di halaman show.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Employee Info') %>
+  <%= kt_card_content do %>
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="grid gap-4">
+        <%= kt_info_row(label: 'Employee Code', value: @employee.employee_code) %>
+        <%= kt_info_row(label: 'Full Name', value: @employee.person_name) %>
+        <%= kt_info_row(label: 'Email Address', value: @employee.account_email) %>
+      </div>
+      <div class="grid gap-4">
+        <%= kt_info_row(label: 'Status') do %>
+          <span class="<%= @employee.status == 'active' ? 'kt-badge kt-badge-success' : 'kt-badge kt-badge-secondary' %>">
+            <%= @employee.status.titleize %>
+          </span>
+        <% end %>
+        <%= kt_info_row(label: 'Created At', value: l(@employee.created_at)) %>
+        <%= kt_info_row(label: 'Updated At', value: l(@employee.updated_at)) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

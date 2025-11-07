@@ -1,0 +1,7 @@
+/*! Component: kt-progress-success | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-progress-success {
+    .kt-progress-indicator {
+      background-color: var(--color-green-500);
+    }
+}

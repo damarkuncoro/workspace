@@ -1,0 +1,30 @@
+<%= kt_card(height: "h-full") do %>
+  <%# Bagian Header Kartu: konsisten via kt_card_header dengan title %>
+  <%= kt_card_header(title: "Quick Actions", class_name: "bg-gradient-to-r from-gray-50 to-gray-100") %>
+
+  <%# Bagian Konten: daftar action menggunakan iterasi untuk DRY %>
+  <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+    <% actions = [
+      { url: protected_accounts_path, icon: "ki-profile-circle", icon_bg: "bg-blue-100 text-blue-600", title: "Accounts", subtitle: "Manage users" },
+      { url: protected_customers_path, icon: "ki-user", icon_bg: "bg-green-100 text-green-600", title: "Customers", subtitle: "Client management" },
+      { url: protected_devices_path, icon: "ki-devices", icon_bg: "bg-teal-100 text-teal-600", title: "Devices", subtitle: "Inventory control" },
+      { url: protected_issues_customers_path, icon: "ki-message-text", icon_bg: "bg-yellow-100 text-yellow-600", title: "Issues", subtitle: "Support tickets" },
+      { url: protected_networks_path, icon: "ki-route", icon_bg: "bg-purple-100 text-purple-600", title: "Network", subtitle: "System monitoring" },
+      { url: protected_profile_edit_path, icon: "ki-profile-square", icon_bg: "bg-indigo-100 text-indigo-600", title: "Profile", subtitle: "Account settings" }
+    ] %>
+
+    <div class="space-y-3">
+      <% actions.each do |a| %>
+        <%= kt_link(url: a[:url], class_name: "flex items-center p-3 bg-gray-50 hover:bg-accent/50 rounded-lg transition-colors group") do %>
+          <div class="w-8 h-8 <%= a[:icon_bg] %> rounded-full flex items-center justify-center transition-colors">
+            <i class="ki-filled <%= a[:icon] %> text-base"></i>
+          </div>
+          <div class="ms-3">
+            <div class="font-medium text-foreground"><%= a[:title] %></div>
+            <div class="text-xs text-secondary-foreground"><%= a[:subtitle] %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

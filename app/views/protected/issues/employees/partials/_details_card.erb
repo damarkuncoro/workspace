@@ -1,0 +1,54 @@
+<%# Card: Detail Issue (Tailwind + Helpers) %>
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <div class="flex items-center justify-between">
+      <h2 class="text-base font-semibold text-gray-900">Detail Issue: <%= @issue.title %></h2>
+      <div class="flex items-center gap-2">
+        <%= link_to edit_protected_employee_issue_path(@employee, @issue), class: 'inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700' do %>
+          <i class="ki-duotone ki-pencil mr-2"></i> Edit Issue
+        <% end %>
+        <%= link_to protected_employee_issues_path(@employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+          <i class="ki-duotone ki-list mr-2"></i> Back to Issues
+        <% end %>
+        <%= link_to protected_employee_path(@employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+          <i class="ki-duotone ki-user mr-2"></i> Back to Employee
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= kt_card_content(padding: 'p-4') do %>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div>
+        <p class="text-sm text-gray-700"><span class="font-medium">Status:</span>
+          <% status_class = case @issue.status
+            when 'open' then 'bg-red-100 text-red-800'
+            when 'in_progress' then 'bg-yellow-100 text-yellow-800'
+            when 'completed' then 'bg-green-100 text-green-800'
+            else 'bg-gray-100 text-gray-800'
+          end %>
+          <span class="ml-2 inline-flex items-center rounded-full px-2 py-1 text-xs font-medium <%= status_class %>">
+            <%= @issue.status&.humanize || 'Unknown' %>
+          </span>
+        </p>
+        <p class="mt-2 text-sm text-gray-700"><span class="font-medium">Priority:</span>
+          <% priority_class = case @issue.priority
+            when 'high' then 'bg-red-100 text-red-800'
+            when 'medium' then 'bg-yellow-100 text-yellow-800'
+            else 'bg-green-100 text-green-800'
+          end %>
+          <span class="ml-2 inline-flex items-center rounded-full px-2 py-1 text-xs font-medium <%= priority_class %>">
+            <%= @issue.priority&.humanize || 'Unknown' %>
+          </span>
+        </p>
+        <p class="mt-2 text-sm text-gray-700"><span class="font-medium">Primary Assigned To:</span> <%= @issue.assigned_to&.person&.name || 'Unassigned' %></p>
+        <% if @issue.assigned_accounts.any? %>
+          <p class="mt-2 text-sm text-gray-700"><span class="font-medium">Additional Assignees:</span> <%= @issue.assigned_accounts.map { |account| account.person&.name }.compact.join(', ') %></p>
+        <% end %>
+      </div>
+      <div>
+        <p class="text-sm text-gray-700"><span class="font-medium">Created At:</span> <%= l(@issue.created_at) %></p>
+        <p class="mt-2 text-sm text-gray-700"><span class="font-medium">Updated At:</span> <%= l(@issue.updated_at) %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

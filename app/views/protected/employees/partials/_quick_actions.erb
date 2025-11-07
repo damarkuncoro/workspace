@@ -1,0 +1,47 @@
+<%#
+  Partial: employees/partials/_quick_actions
+  Tujuan: Menampilkan tombol aksi cepat sesuai fitur Employees (edit, issues, delete, navigasi).
+  Desain: DRY/KISS — gunakan shared page_actions; compact untuk menghapus link opsional nil.
+%>
+
+<%= render 'protected/shared/partials/page_actions',
+  card: true,
+  title: 'Quick Actions',
+  justify: 'justify-start',
+  gap_class: 'gap-3',
+  links: [
+    # Edit employee
+    link_to(edit_protected_employee_path(@employee), class: 'kt-btn kt-btn-warning') do
+      raw('<i class="ki-filled ki-pencil"></i> Edit Employee')
+    end,
+
+    # Create new issue for this employee
+    link_to(new_protected_employee_issue_path(@employee), class: 'kt-btn kt-btn-primary') do
+      raw('<i class="ki-filled ki-information"></i> New Issue')
+    end,
+
+    # View issues list for this employee
+    link_to(protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline') do
+      raw('<i class="ki-filled ki-list"></i> View Issues')
+    end,
+
+    # Optional: View related account (if present)
+    (@employee.person&.account.present? ? (
+      link_to(protected_account_path(@employee.person.account), class: 'kt-btn kt-btn-outline') do
+        raw('<i class="ki-filled ki-shield-tick"></i> View Account')
+      end
+    ) : nil),
+
+    # Delete employee (with confirmation)
+    link_to(protected_employee_path(@employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'kt-btn kt-btn-danger') do
+      raw('<i class="ki-filled ki-trash"></i> Delete Employee')
+    end,
+
+    # Navigation
+    link_to(protected_employees_path, class: 'kt-btn kt-btn-outline') do
+      raw('<i class="ki-filled ki-arrow-left"></i> Back to Employees')
+    end,
+    link_to(protected_dashboard_path, class: 'kt-btn kt-btn-outline') do
+      raw('<i class="ki-filled ki-home"></i> Back to Dashboard')
+    end
+  ].compact %>

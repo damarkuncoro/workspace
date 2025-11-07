@@ -1,0 +1,84 @@
+
+<!-- Key Metrics Dashboard -->
+<%= kt_grid(cols: 1, cols_sm: 2, cols_lg: 4, gap: 4, gap_lg: 6, margin_bottom: "mb-6 lg:mb-8") do %>
+  <!-- Total Accounts -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-blue-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Total Accounts</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @total_accounts %></p>
+            <p class="text-xs text-green-600 font-medium mt-1">↗️ +12% from last month</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Active Customers -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-green-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Active Customers</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @total_customers %></p>
+            <p class="text-xs text-green-600 font-medium mt-1">↗️ +8% from last month</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Network Status -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-purple-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Active Networks</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @active_networks || @total_networks %></p>
+            <p class="text-xs text-blue-600 font-medium mt-1">🌐 <%= @total_network_activities %> activities</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Open Issues -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-yellow-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Open Issues</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @open_issues %></p>
+            <p class="text-xs text-orange-600 font-medium mt-1">⚠️ <%= @pending_issues %> pending</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+

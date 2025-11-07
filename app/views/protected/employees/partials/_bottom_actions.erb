@@ -1,0 +1,20 @@
+<%#
+  Partial: employees/partials/_bottom_actions
+  Tujuan: Menampilkan tombol aksi bawah halaman show (non-card).
+  Catatan: Menggunakan shared page_actions untuk konsistensi.
+%>
+
+<%= render 'protected/shared/partials/page_actions',
+  card: false,
+  justify: 'justify-center',
+  links: [
+    link_to(protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-primary') do
+      raw('<i class="ki-filled ki-information"></i> View Issues')
+    end,
+    link_to(protected_employees_path, class: 'kt-btn kt-btn-outline') do
+      raw('<i class="ki-filled ki-arrow-left"></i> Back to Employees')
+    end,
+    link_to(protected_dashboard_path, class: 'kt-btn kt-btn-outline') do
+      raw('<i class="ki-filled ki-home"></i> Back to Dashboard')
+    end
+  ] %>

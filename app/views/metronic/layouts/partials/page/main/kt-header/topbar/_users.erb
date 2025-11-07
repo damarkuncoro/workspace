@@ -1,0 +1,54 @@
+<!-- User -->
+<%= kt_topbar_user(
+      avatar_src: "/assets/media/avatars/300-2.png",
+      name: "#{current_account.person_name}",
+      email: "#{current_account.email}",
+      badge_text: "Pro",
+      dropdown_width: "w-[250px]"
+    ) do %>
+  <%= kt_topbar_separator_li %>
+
+  <%= kt_topbar_link_li title: "Public Profile", href: "/demo1/public-profile/profiles/default.html", icon: "ki-badge" %>
+  <%= kt_topbar_link_li title: "My Profile", href: "#{protected_profile_show_path}", icon: "ki-profile-circle" %>
+
+  <%= kt_topbar_submenu_li title: "My Account", icon: "ki-setting-2" do %>
+    <%= content_tag(:ul, class: "kt-dropdown-menu-sub") do %>
+      <%= safe_join([
+        kt_topbar_link_li(title: "Get Started", href: "/demo1/account/home/get-started.html", icon: "ki-coffee"),
+        kt_topbar_link_li(title: "My Profile", href: "/demo1/account/home/user-profile.html", icon: "ki-some-files"),
+        kt_topbar_link_li(title: "Billing", href: "#", icon: "ki-icon") do
+          content_tag(:span, class: "ms-auto inline-flex items-center", data: { "kt-tooltip" => true, "kt-tooltip-placement" => "top" }) do
+            safe_join([
+              content_tag(:i, "", class: "ki-filled ki-information-2 text-base text-muted-foreground"),
+              content_tag(:span, "Payment and subscription info", class: "kt-tooltip", data: { "kt-tooltip-content" => true })
+            ])
+          end
+        end,
+        kt_topbar_link_li(title: "Security", href: "/demo1/account/security/overview.html", icon: "ki-medal-star"),
+        kt_topbar_link_li(title: "Members & Roles", href: "/demo1/account/members/teams.html", icon: "ki-setting"),
+        kt_topbar_link_li(title: "Integrations", href: "/demo1/account/integrations.html", icon: "ki-switch"),
+        kt_topbar_separator_li,
+        kt_topbar_link_li(title: "Notifications", href: "/demo1/account/security/overview.html", icon: "ki-shield-tick") do
+          tag.input(class: "ms-auto kt-switch", type: "checkbox", name: "check", value: "1", checked: true)
+        end
+      ]) %>
+    <% end %>
+  <% end %>
+
+  <%= kt_topbar_link_li title: "Dev Forum", href: "https://devs.keenthemes.com", icon: "ki-message-programming" %>
+
+  <%= kt_topbar_submenu_li title: "Language", icon: "ki-icon", toggle_class: "py-1" do %>
+    <%= content_tag(:ul, class: "kt-dropdown-menu-sub") do %>
+      <%= safe_join([
+        kt_topbar_language_li(title: "English", flag_src: "/assets/media/flags/united-states.svg", active: true, href: "?dir=ltr"),
+        kt_topbar_language_li(title: "Arabic(Saudi)", flag_src: "/assets/media/flags/saudi-arabia.svg", href: "?dir=rtl"),
+        kt_topbar_language_li(title: "Spanish", flag_src: "/assets/media/flags/spain.svg", href: "?dir=ltr"),
+        kt_topbar_language_li(title: "German", flag_src: "/assets/media/flags/germany.svg", href: "?dir=ltr"),
+        kt_topbar_language_li(title: "Japanese", flag_src: "/assets/media/flags/japan.svg", href: "?dir=ltr")
+      ]) %>
+    <% end %>
+  <% end %>
+
+  <%= kt_topbar_separator_li %>
+<% end %>
+<!-- End of User -->

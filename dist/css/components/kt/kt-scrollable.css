@@ -1,0 +1,7 @@
+/*! Component: kt-scrollable | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-scrollable {
+      scrollbar-width: thin;
+      scrollbar-color: var(--kt-scrollable-thumb-color) transparent;
+    }
+}

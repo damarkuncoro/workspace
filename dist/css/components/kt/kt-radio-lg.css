@@ -1,0 +1,7 @@
+/*! Component: kt-radio-lg | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-radio-lg {
+    width: calc(var(--spacing) * 5.5);
+    height: calc(var(--spacing) * 5.5);
+  }
+}

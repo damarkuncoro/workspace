@@ -1,0 +1,54 @@
+/*! Component: kt-badge-outline | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-badge-outline {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--muted);
+    color: var(--secondary-foreground);
+    &.kt-badge-primary {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--color-blue-100);
+      background-color: var(--color-blue-50);
+      color: var(--color-blue-700);
+      &:is(.dark *) {
+        border-color: var(--color-blue-950);
+      }
+
+.kt-badge-outline {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--color-yellow-100);
+      background-color: var(--color-yellow-50);
+      color: var(--color-yellow-700);
+      &:is(.dark *) {
+        border-color: var(--color-yellow-950);
+      }
+
+.kt-badge-outline {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--color-violet-100);
+      background-color: var(--color-violet-50);
+      color: var(--color-violet-700);
+      &:is(.dark *) {
+        border-color: var(--color-violet-950);
+      }
+
+.kt-badge-outline {
+      border-color: var(--mono);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--mono) 10%, transparent);
+      }
+
+.kt-badge-outline {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--color-red-100);
+      background-color: var(--color-red-50);
+      color: var(--color-red-700);
+      &:is(.dark *) {
+        border-color: var(--color-red-950);
+      }
+}

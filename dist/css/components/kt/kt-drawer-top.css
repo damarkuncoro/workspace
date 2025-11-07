@@ -1,0 +1,20 @@
+/*! Component: kt-drawer-top | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-drawer-top {
+    inset-inline-start: calc(var(--spacing) * 0);
+    inset-inline-end: calc(var(--spacing) * 0);
+    top: auto;
+    bottom: calc(var(--spacing) * 0);
+    max-height: 90%;
+    --tw-translate-y: 100%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    &[data-kt-drawer-initialized].open {
+      --tw-translate-y: calc(var(--spacing) * 0);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+
+.kt-drawer-top {
+    --tw-translate-y: calc(var(--spacing) * 0);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+}

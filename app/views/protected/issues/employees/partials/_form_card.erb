@@ -1,0 +1,31 @@
+<%# Card: Form Issue (Tailwind + Helpers) untuk Employee %>
+<%# Lokals: title:, issue:, employee:, actions_html (opsional) %>
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <div class="flex items-center justify-between">
+      <h2 class="text-base font-semibold text-gray-900"><%= title %></h2>
+      <div class="flex items-center gap-2">
+      <%# Jika actions_html disediakan oleh view pemanggil, render apa adanya %>
+      <% if defined?(actions_html) && actions_html.present? %>
+        <%= actions_html %>
+      <% else %>
+        <%# Fallback actions Tailwind %>
+        <% if defined?(issue) && issue.respond_to?(:persisted?) && issue.persisted? %>
+          <%= link_to protected_employee_issue_path(employee, issue), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+            <i class="ki-duotone ki-eye mr-2"></i> Show Issue
+          <% end %>
+        <% end %>
+        <%= link_to protected_employee_issues_path(employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+          <i class="ki-duotone ki-list mr-2"></i> Back to Issues
+        <% end %>
+        <%= link_to protected_employee_path(employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+          <i class="ki-duotone ki-user mr-2"></i> Back to Employee
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= kt_card_content(padding: 'p-4') do %>
+    <%= render 'form', issue: issue, employee: employee %>
+  <% end %>
+<% end %>

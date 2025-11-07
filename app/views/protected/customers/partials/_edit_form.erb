@@ -1,0 +1,10 @@
+<!--
+  Partial: Customers Edit Form Wrapper
+  Tujuan: Membungkus form customers dengan container konsisten (kt_content_container).
+  Prinsip: SRP, DRY — wrapper layout terpisah dari isi form.
+  Pemakaian: Dipanggil dari edit.html.erb.
+-->
+
+<%= kt_content_container do %>
+  <%= render 'protected/customers/form', customer: @customer %>
+<% end %>

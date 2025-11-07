@@ -1,0 +1,6 @@
+/*! Component: kt-menu-bullet | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-menu-bullet {
+      margin-inline-end: calc(var(--spacing) * 2.5);
+    }
+}

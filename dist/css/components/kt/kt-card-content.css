@@ -1,0 +1,27 @@
+/*! Component: kt-card-content | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-card-content {
+    flex-grow: 1;
+    padding-inline: calc(var(--spacing) * 5);
+    padding-block: calc(var(--spacing) * 5);
+  }
+
+.kt-card-content {
+      padding: 0;
+      .kt-table {
+        border: 0;
+        th:first-child,	td:first-child {
+          padding-inline-start: calc(var(--spacing) * 5);
+          &.kt-table-cell-center {
+            padding-inline-end: calc(var(--spacing) * 5);
+          }
+
+.kt-card-content {
+      border-top-left-radius: calc(var(--radius) + 4px);
+      border-top-right-radius: calc(var(--radius) + 4px);
+      background-color: var(--card);
+      &:last-child {
+        border-bottom-right-radius: calc(var(--radius) + 4px);
+        border-bottom-left-radius: calc(var(--radius) + 4px);
+      }
+}

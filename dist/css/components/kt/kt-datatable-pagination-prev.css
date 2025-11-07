@@ -1,0 +1,6 @@
+/*! Component: kt-datatable-pagination-prev | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-datatable-pagination-prev {
+        color: var(--foreground);
+      }
+}

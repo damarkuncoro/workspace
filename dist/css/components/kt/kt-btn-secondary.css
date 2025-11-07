@@ -1,0 +1,10 @@
+/*! Component: kt-btn-secondary | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--secondary);
+      }
+}

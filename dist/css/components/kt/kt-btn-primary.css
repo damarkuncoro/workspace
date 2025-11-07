@@ -1,0 +1,15 @@
+/*! Component: kt-btn-primary | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-btn-primary {
+      border-color: var(--primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--primary) 10%, transparent);
+      }
+
+.kt-btn-primary {
+      color: var(--primary);
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--primary);
+        }
+}

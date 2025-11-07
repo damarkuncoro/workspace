@@ -1,0 +1,8 @@
+/*! Component: kt-select-lg | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-select-lg {
+      background-position: left 0.75rem center;
+      &[data-multiple='true'] {
+        background-position: left 0.75rem top 0.85rem;
+      }
+}

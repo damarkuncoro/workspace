@@ -1,0 +1,31 @@
+<%#
+  Main Dashboard
+  Struktur:
+  - Grid responsif (1 kolom, xl: 3 kolom) dengan gap konsisten.
+  - Kolom kiri (span_xl: 1): aksi utama (Quick Actions), feed aktivitas.
+  - Kolom kanan (span_xl: 2): statistik ringkas dan info cepat.
+  Catatan: Gunakan KT helpers (kt_grid, kt_column, kt_card_*) untuk konsistensi.
+%>
+
+<%#= kt_grid(cols: 1, cols_xl: 3, gap: 6, gap_lg: 8, margin_bottom: "mb-6 lg:mb-8") do %>
+  <%# Kolom kiri: aksi utama %>
+  <%= kt_column(span_xl: 2, class_name: "space-y-6") do %>
+    <%# Quick Actions (menggunakan kt_card_* agar konsisten dengan Metronic) %>
+    <%= render "protected/dashboard/partials/main_dashboard/quick_actions_card" %>
+
+    <%# Recent Activity (opsional, aktifkan bila diperlukan) %>
+    <%#= render "protected/dashboard/partials/main_dashboard/recent_activity_card" %>
+  <% end %>
+
+  <%# Kolom kanan: statistik & info cepat %>
+  <%= kt_column(span_xl: 1, class_name: "space-y-6") do %>
+    <%# System Health (opsional) %>
+    <%#= render "protected/dashboard/partials/main_dashboard/system_health_card" %>
+
+    <%# Ringkasan hari ini (opsional) %>
+    <%#= render "protected/dashboard/partials/main_dashboard/todays_summary_card" %>
+
+    <%# Aksi profil cepat (opsional) %>
+    <%#= render "protected/dashboard/partials/main_dashboard/account_actions_card" %>
+  <% end %>
+<%# end %>

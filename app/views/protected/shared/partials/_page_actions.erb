@@ -1,0 +1,40 @@
+<%#
+  Partial: Accounts Page Actions (Unified)
+  Tujuan: Satu partial aksi untuk semua halaman Accounts (show, edit, new).
+  Prinsip: DRY, SRP — menerima locals agar fleksibel tanpa duplikasi.
+  Locals:
+    - links: Array of HTML link elements (wajib)
+    - card: Boolean, jika true dibungkus dalam kt_card (default: false)
+    - title: String judul untuk header card (opsional, dipakai jika card == true)
+    - justify: String kelas justify flex (default: 'justify-center')
+    - gap_class: String kelas gap (default: 'gap-4')
+  Pemakaian:
+    <%= render 'protected/accounts/partials/page_actions', card: true, title: 'Quick Actions', links: [link_to(...), ...] %>
+
+
+<% links = Array(local_assigns[:links]) %>
+<% card = local_assigns.fetch(:card, false) %>
+<% title = local_assigns[:title] %>
+<% justify = local_assigns[:justify] || 'justify-center' %>
+<% gap_class = local_assigns[:gap_class] || 'gap-4' %>
+
+<% if card %>
+  <%= kt_card do %>
+    <%= kt_card_header(title: (title || 'Actions')) %>
+    <%= kt_card_content do %>
+      <div class="flex flex-wrap <%= justify %> <%= gap_class %>">
+        <% links.each do |link| %>
+          <%= link %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= kt_content_container do %>
+    <div class="flex <%= justify %> <%= gap_class %>">
+      <% links.each do |link| %>
+        <%= link %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

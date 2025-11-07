@@ -1,0 +1,12 @@
+/*! Component: kt-drawer-footer | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-drawer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+    border-color: var(--border);
+    padding: calc(var(--spacing) * 5);
+  }
+}

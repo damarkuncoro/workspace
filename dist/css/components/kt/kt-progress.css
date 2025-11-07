@@ -1,0 +1,11 @@
+/*! Component: kt-progress | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-progress {
+    position: relative;
+    height: calc(var(--spacing) * 1);
+    width: 100%;
+    overflow: hidden;
+    border-radius: calc(infinity * 1px);
+    background-color: var(--secondary);
+  }
+}

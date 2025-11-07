@@ -1,0 +1,13 @@
+/*! Component: kt-alert-title | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-alert-title {
+    flex-grow: 1;
+    --tw-tracking: var(--tracking-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+.kt-alert-title {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+}

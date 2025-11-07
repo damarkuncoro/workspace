@@ -1,0 +1,10 @@
+/*! Component: kt-accordion-menu-content | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-accordion-menu-content {
+    overflow: hidden;
+    padding-inline-start: calc(var(--spacing) * 6);
+    transition-property: height;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+}

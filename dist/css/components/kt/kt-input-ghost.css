@@ -1,0 +1,14 @@
+/*! Component: kt-input-ghost | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-input-ghost {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+    background-color: var(--background);
+    padding: calc(var(--spacing) * 0);
+    --tw-shadow: 0 0 #0000;
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    &:focus-visible {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+    }
+}

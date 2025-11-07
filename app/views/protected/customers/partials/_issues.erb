@@ -1,0 +1,75 @@
+<%#
+  Partial: Customers Support Issues
+  Tujuan: Menampilkan daftar isu/keluhan pelanggan terbaru.
+  Prinsip: SRP — menerima `customer` lewat locals dan memakai kt_card.
+  Locals:
+    - customer: instance Customer (wajib)
+  Pemakaian:
+    <%= render 'protected/customers/partials/issues', customer: @customer %>
+
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Support Issues') do %>
+    <%= link_to new_protected_customer_issue_path(customer), class: "kt-btn kt-btn-primary" do %>
+      <i class="ki-filled ki-plus"></i> New Issue
+    <% end %>
+  <% end %>
+  <%= kt_card_content do %>
+    <% issues = customer.issues.limit(5) %>
+    <% if issues.any? %>
+      <div class="space-y-3">
+        <% issues.each do |issue| %>
+          <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-150">
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center <%= issue.status == 'open' ? 'bg-red-100' : issue.status == 'in_progress' ? 'bg-yellow-100' : 'bg-green-100' %>">
+                  <svg class="w-4 h-4 <%= issue.status == 'open' ? 'text-red-600' : issue.status == 'in_progress' ? 'text-yellow-600' : 'text-green-600' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900"><%= issue.title %></p>
+                <p class="text-xs text-gray-500">
+                  <%= issue.status.titleize %> • <%= issue.created_at.strftime('%b %d, %Y') %>
+                  <% if issue.assigned_to %>
+                    • Assigned to <%= issue.assigned_to.person_name %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium <%= status_badge_class(issue.status) %>">
+                <%= issue.status.titleize %>
+              </span>
+              <%= link_to protected_customer_issue_path(customer, issue), class: "text-indigo-600 hover:text-indigo-900" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="mt-4 text-center">
+        <%= link_to protected_customer_issues_path(customer), class: "kt-link kt-link-primary" do %>
+          View all issues (<%= customer.issues.count %>) →
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-8">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No support issues</h3>
+        <p class="mt-1 text-sm text-gray-500">This customer hasn't reported any issues yet.</p>
+        <div class="mt-4">
+          <%= link_to new_protected_customer_issue_path(customer), class: "kt-btn kt-btn-primary kt-btn-light" do %>
+            <i class="ki-filled ki-plus"></i> Create First Issue
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

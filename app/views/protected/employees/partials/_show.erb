@@ -1,0 +1,40 @@
+<%#
+  Partial: employees/partials/_show
+  Tujuan: Menampilkan halaman detail Employee menggunakan komponen KT (grid, card, info rows, actions).
+  Prinsip: SRP/DRY/KISS — konten halaman show dipisahkan agar mudah dirawat, diuji, dan digunakan ulang.
+%>
+
+<%#= render 'protected/shared/partials/page_header',
+  title: 'Employee Details',
+  subtitle: @employee.person_name %>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 2) do %>
+    <%= render 'partials/info_card' %>
+  <% end %>
+
+  <%= kt_column(span: 1) do %>
+    <%= render 'partials/quick_actions' %>
+  <% end %>
+<% end %>
+
+<%# Account Details %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'partials/account_details' %>
+  <% end %>
+<% end %>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'partials/roles_permissions' %>
+  <% end %>
+<% end %>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'partials/recent_activity' %>
+  <% end %>
+<% end %>
+
+<%= render 'partials/bottom_actions' %>

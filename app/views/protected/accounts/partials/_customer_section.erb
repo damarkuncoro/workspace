@@ -1,0 +1,46 @@
+
+<% if @account.person&.customer.present? %>
+  <%= kt_card do %>
+    <%= kt_card_header do %>
+      <h3 class="kt-card-title flex items-center gap-2">
+        <i class="ki-filled ki-user text-lg"></i>
+        Customer Information
+      </h3>
+    <% end %>
+    <%= kt_card_content do %>
+      <div class="grid gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid gap-4">
+             <%= kt_info_row(label: "Customer Code", value: @account.person.customer.customer_code) %>
+             <%= kt_info_row(label: "Status") do %>
+               <span class="<%= @account.person.customer.status == 'active' ? 'kt-badge kt-badge-success' : 'kt-badge kt-badge-secondary' %>">
+                 <%= @account.person.customer.status %>
+               </span>
+             <% end %>
+          </div>
+          <div class="grid gap-4">
+             <%= kt_info_row(label: "Customer Created At", value: l(@account.person.customer.created_at)) %>
+             <%= kt_info_row(label: "Customer Updated At", value: l(@account.person.customer.updated_at)) %>
+          </div>
+        </div>
+      </div>
+      <%= kt_card_footer(justify: "justify-start", class_name: "gap-3") do %>
+        <%= link_to 'View Customer Details', protected_customer_path(@account.person.customer), class: 'kt-btn kt-btn-primary' %>
+        <%= link_to 'View Customer Issues', protected_customer_issues_path(@account.person.customer), class: 'kt-btn kt-btn-warning' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% elsif @account.person.present? %>
+  <%= kt_card do %>
+    <%= kt_card_header do %>
+      <h3 class="kt-card-title flex items-center gap-2">
+        <i class="ki-filled ki-plus text-lg"></i>
+        Create Customer Profile
+      </h3>
+    <% end %>
+    <%= kt_card_content do %>
+      <p class="text-sm text-secondary-foreground mb-4">This account doesn't have a customer profile yet. Create one to manage customer-specific information and issues.</p>
+      <%= link_to 'Create Customer Profile', new_protected_account_customer_path(@account), class: 'kt-btn kt-btn-success' %>
+    <% end %>
+  <% end %>
+<% end %>

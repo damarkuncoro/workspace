@@ -1,0 +1,10 @@
+<%#
+  Partial: Employees New Form Wrapper
+  Tujuan: Membungkus form employees dengan container konsisten (kt_content_container).
+  Prinsip: SRP, DRY — wrapper layout terpisah dari isi form.
+  Pemakaian: Dipanggil dari new.html.erb.
+%>
+
+<%= kt_content_container do %>
+  <%= render 'protected/employees/form', employee: @employee %>
+<% end %>

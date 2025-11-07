@@ -1,0 +1,10 @@
+/*! Component: kt-tooltip-light | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-tooltip-light {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+  }
+}

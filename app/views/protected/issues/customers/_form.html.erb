@@ -1,3 +1,4 @@
+<%# Form Customers Issues: gunakan Tailwind untuk input, helpers untuk layout %>
 <%= form_with(model: [:protected, @customer, issue], local: true) do |form| %>
   <% if issue.errors.any? %>
     <div class="bg-red-50 border border-red-200 rounded-md p-4">
@@ -54,7 +55,7 @@
   <!-- Status & Priority Section -->
   <div class="bg-gray-50 p-6 rounded-lg mb-6">
     <h3 class="text-lg font-medium text-gray-900 mb-4">Status & Priority</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= kt_content_grid(cols: 1, gap: 'gap-4', class_name: 'md:grid-cols-2') do %>
       <div>
         <%= form.label :status, class: 'block text-sm font-medium text-gray-700' %>
         <div class="mt-1">
@@ -76,7 +77,7 @@
         </div>
         <p class="mt-1 text-sm text-gray-500">Urgency level of the issue</p>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <!-- Assignment Section -->

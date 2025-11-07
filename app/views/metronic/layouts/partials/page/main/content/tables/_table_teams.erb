@@ -1,47 +1,36 @@
- <table class="kt-table kt-table-border table-fixed" data-kt-datatable-table="true" id="kt_datatable_1">
-               <thead>
-                <tr>
-                 <th class="w-[50px]">
-                  <input class="kt-checkbox kt-checkbox-sm" data-kt-datatable-check="true" type="checkbox"/>
-                 </th>
-                 <th class="w-[280px]">
-                  <span class="kt-table-col">
-                   <span class="kt-table-col-label">
-                    Team
-                   </span>
-                   <span class="kt-table-col-sort">
-                   </span>
-                  </span>
-                 </th>
-                 <th class="w-[125px]">
-                  <span class="kt-table-col">
-                   <span class="kt-table-col-label">
-                    Rating
-                   </span>
-                   <span class="kt-table-col-sort">
-                   </span>
-                  </span>
-                 </th>
-                 <th class="w-[135px]">
-                  <span class="kt-table-col">
-                   <span class="kt-table-col-label">
-                    Last Modified
-                   </span>
-                   <span class="kt-table-col-sort">
-                   </span>
-                  </span>
-                 </th>
-                 <th class="w-[125px]">
-                  <span class="kt-table-col">
-                   <span class="kt-table-col-label">
-                    Members
-                   </span>
-                   <span class="kt-table-col-sort">
-                   </span>
-                  </span>
-                 </th>
-                </tr>
-               </thead>
+<table class="kt-table kt-table-border table-fixed" data-kt-datatable-table="true" id="kt_datatable_1">
+               <%# Thead tabel: gunakan helper kt_* untuk konsistensi dan DRY %>
+               <%= content_tag(:thead) do %>
+                 <%= content_tag(:tr) do %>
+                   <%= content_tag(:th, class: "w-[50px]") do %>
+                     <%= tag.input(type: "checkbox", class: "kt-checkbox kt-checkbox-sm", data: { "kt-datatable-check": true }) %>
+                   <% end %>
+                   <%= content_tag(:th, class: "w-[280px]") do %>
+                     <%= kt_table_col do %>
+                       <%= kt_table_col_label { "Team" } %>
+                       <%= kt_table_col_sort {} %>
+                     <% end %>
+                   <% end %>
+                   <%= content_tag(:th, class: "w-[125px]") do %>
+                     <%= kt_table_col do %>
+                       <%= kt_table_col_label { "Rating" } %>
+                       <%= kt_table_col_sort {} %>
+                     <% end %>
+                   <% end %>
+                   <%= content_tag(:th, class: "w-[135px]") do %>
+                     <%= kt_table_col do %>
+                       <%= kt_table_col_label { "Last Modified" } %>
+                       <%= kt_table_col_sort {} %>
+                     <% end %>
+                   <% end %>
+                   <%= content_tag(:th, class: "w-[125px]") do %>
+                     <%= kt_table_col do %>
+                       <%= kt_table_col_label { "Members" } %>
+                       <%= kt_table_col_sort {} %>
+                     <% end %>
+                   <% end %>
+                 <% end %>
+               <% end %>
                <tbody>
                 <tr>
                  <td>
@@ -58,38 +47,7 @@
                   </div>
                  </td>
                  <td>
-                  <div class="kt-rating">
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                  </div>
+                  <%= build_rating(5) %>
                  </td>
                  <td>
                   21 Oct, 2024
@@ -128,38 +86,7 @@
                   </div>
                  </td>
                  <td>
-                  <div class="kt-rating">
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label checked">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label indeterminate">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none" style="width: 50.0%">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                   <div class="kt-rating-label">
-                    <i class="kt-rating-on ki-solid ki-star text-base leading-none">
-                    </i>
-                    <i class="kt-rating-off ki-outline ki-star text-base leading-none">
-                    </i>
-                   </div>
-                  </div>
+                  <%= build_rating(3.5) %>
                  </td>
                  <td>
                   15 Oct, 2024

@@ -1,0 +1,14 @@
+/*! Component: kt-menu-title | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-menu-title {
+        color: var(--foreground);
+      }
+
+.kt-menu-title {
+          color: var(--mono);
+        }
+
+.kt-menu-title {
+            color: var(--mono);
+          }
+}

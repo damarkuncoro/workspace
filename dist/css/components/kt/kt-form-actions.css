@@ -1,0 +1,9 @@
+/*! Component: kt-form-actions | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2.5);
+  }
+}

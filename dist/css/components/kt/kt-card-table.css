@@ -1,0 +1,18 @@
+/*! Component: kt-card-table | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-card-table {
+    display: grid;
+    flex-grow: 1;
+    .kt-table-border {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+    }
+
+.kt-card-table {
+      border-radius: calc(var(--radius) + 4px);
+      background-color: var(--card);
+      &:last-child {
+        border-bottom-right-radius: calc(var(--radius) + 4px);
+        border-bottom-left-radius: calc(var(--radius) + 4px);
+      }
+}

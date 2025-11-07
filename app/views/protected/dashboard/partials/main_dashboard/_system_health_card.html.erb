@@ -1,0 +1,63 @@
+<%= kt_card(height: "h-full") do %>
+      <%= kt_card_header(class_name: "bg-gradient-to-r from-emerald-50 to-green-50", border: true) do %>
+        <h3 class="text-lg font-bold text-gray-900 p-4 lg:p-6 pb-0">System Health</h3>
+      <% end %>
+      <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+        <div class="space-y-4">
+          <%= kt_flex(justify: :between) do %>
+            <span class="text-sm font-medium text-gray-600">Database</span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Healthy
+            </span>
+          <% end %>
+          <%= kt_flex(justify: :between) do %>
+            <span class="text-sm font-medium text-gray-600">API Services</span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Operational
+            </span>
+          <% end %>
+          <%= kt_flex(justify: :between) do %>
+            <span class="text-sm font-medium text-gray-600">Device Sync</span>
+            <% if @system_health[:device_sync] %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Synced
+              </span>
+            <% else %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                <svg class="w-3 h-3 mr-1 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                Syncing
+              </span>
+            <% end %>
+          <% end %>
+          <%= kt_flex(justify: :between) do %>
+            <span class="text-sm font-medium text-gray-600">Network Monitoring</span>
+            <% if @system_health[:network_monitoring] %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Active
+            </span>
+            <% else %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Inactive
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>

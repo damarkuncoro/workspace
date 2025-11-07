@@ -1,0 +1,82 @@
+<!-- Secondary Metrics -->
+<%= kt_grid(cols: 1, cols_sm: 2, cols_lg: 4, gap: 4, gap_lg: 6, margin_bottom: "mb-6 lg:mb-8") do %>
+  <!-- Available Devices -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-teal-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Available Devices</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @available_devices %></p>
+            <p class="text-xs text-blue-600 font-medium mt-1">📈 Ready for deployment</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Rented Devices -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-orange-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Rented Devices</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @rented_devices %></p>
+            <p class="text-xs text-orange-600 font-medium mt-1">⏰ Active rentals</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Device Types -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-indigo-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Device Types</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @total_device_types %></p>
+            <p class="text-xs text-purple-600 font-medium mt-1">🏷️ Categories</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Resolved Issues -->
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <%= kt_flex(justify: :between) do %>
+        <%= kt_flex(gap: 3, gap_lg: 4) do %>
+          <div class="p-2 lg:p-3 bg-emerald-100 rounded-xl">
+            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs lg:text-sm font-medium text-gray-500 uppercase tracking-wide">Resolved Issues</p>
+            <p class="text-2xl lg:text-3xl font-bold text-gray-900"><%= @resolved_issues %></p>
+            <p class="text-xs text-green-600 font-medium mt-1">✅ This month</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

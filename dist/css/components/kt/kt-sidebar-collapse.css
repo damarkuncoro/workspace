@@ -1,0 +1,6 @@
+/*! Component: kt-sidebar-collapse | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-sidebar-collapse {
+      --sidebar-width: var(--sidebar-width-collapse);
+    }
+}

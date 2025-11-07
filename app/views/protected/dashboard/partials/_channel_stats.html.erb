@@ -1,0 +1,40 @@
+
+  
+    <%= grid(cols: 2, gap_y: 5, gap_x: 7.5, items: "stretch") do %>
+  
+    <%= kt_card(height: "h-full", class_name: "flex-col justify-between gap-6 bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg") do %>
+        <img alt="" class="w-7 mt-4 ms-5" src="assets/media/brand-logos/linkedin-2.svg"/>
+        <%= kt_flex(direction: :col, gap: 1, class_name: "pb-4 px-5") do %>
+        <span class="text-3xl font-semibold text-mono"><%= @total_accounts %></span>
+        <span class="text-sm font-normal text-secondary-foreground">Total Accounts</span>
+        <% end %>
+    <% end %>
+
+    <%= kt_card(height: "h-full", class_name: "flex-col justify-between gap-6 bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg") do %>
+        <img alt="" class="w-7 mt-4 ms-5" src="assets/media/brand-logos/youtube-2.svg"/>
+        <%= kt_flex(direction: :col, gap: 1, class_name: "pb-4 px-5") do %>
+        <span class="text-3xl font-semibold text-mono"><%= @total_customers %></span>
+        <span class="text-sm font-normal text-secondary-foreground">Active Customers</span>
+        <% end %>
+    <% end %>
+
+    <%= kt_card(height: "h-full", class_name: "flex-col justify-between gap-6 bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg") do %>
+        <img alt="" class="w-7 mt-4 ms-5" src="assets/media/brand-logos/instagram-03.svg"/>
+        <%= kt_flex(direction: :col, gap: 1, class_name: "pb-4 px-5") do %>
+        <span class="text-3xl font-semibold text-mono"><%= @total_networks %></span>
+        <span class="text-sm font-normal text-secondary-foreground">Active Networks</span>
+        <% end %>
+    <% end %>
+
+    <%= kt_card(height: "h-full", class_name: "flex-col justify-between gap-6 bg-cover rtl:bg-[left_top_-1.7rem] bg-[right_top_-1.7rem] bg-no-repeat channel-stats-bg") do %>
+        <img alt="" class="dark:hidden w-7 mt-4 ms-5" src="assets/media/brand-logos/tiktok.svg"/>
+        <img alt="" class="hidden dark:block w-7 mt-4 ms-5" src="assets/media/brand-logos/tiktok-dark.svg"/>
+        <%= kt_flex(direction: :col, gap: 1, class_name: "pb-4 px-5") do %>
+        <span class="text-3xl font-semibold text-mono"><%= @open_issues %></span>
+        <span class="text-sm font-normal text-secondary-foreground">Open Issues</span>
+        <% end %>
+    <% end %>
+
+    <% end %> 
+  
+

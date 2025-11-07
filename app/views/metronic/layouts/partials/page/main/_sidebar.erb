@@ -1,19 +1,14 @@
+
 <!-- Sidebar -->
-<%= kt_sidebar do %>
-    <%#= render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-header' %>
-    <%= kt_sidebar_header %>
-
-    <%# = render 'metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-content' %>
-    <%= kt_sidebar_content do %>
- 
-               <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
-                    <%= kt_menu_link("Employees", href: protected_employees_path ) %>
-                    <%= kt_menu_link("Customers", href: protected_customers_path ) %>
+    <%= kt_sidebar do %>
+      <%= kt_sidebar_header %>
+      <%= kt_sidebar_content do %>
+               
+              <%= kt_menu_heading("Dashboard") %>
+              <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
+                    <%= kt_menu_link(title: "Employees", href: protected_employees_path ) %>
+                    <%= kt_menu_link(title: "Customers", href: protected_customers_path ) %>
                <% end %>
-
-               <%= kt_menu_heading("User") %>
-       
-   <% end %>
-
-<% end %>
+      <% end %>
+    <% end %>
 <!-- End of Sidebar -->

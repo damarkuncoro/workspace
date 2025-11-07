@@ -1,0 +1,7 @@
+/*! Component: kt-card-rounded-b | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-card-rounded-b {
+    border-bottom-right-radius: calc(var(--radius) + 4px);
+    border-bottom-left-radius: calc(var(--radius) + 4px);
+  }
+}

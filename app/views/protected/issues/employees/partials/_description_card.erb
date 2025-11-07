@@ -1,0 +1,9 @@
+<%# Card: Deskripsi Issue (Tailwind + Helpers) %>
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <h2 class="text-base font-semibold text-gray-900">Deskripsi</h2>
+  <% end %>
+  <%= kt_card_content(padding: 'p-4') do %>
+    <p class="text-sm text-gray-700"><%= @issue.description.presence || 'No description provided.' %></p>
+  <% end %>
+<% end %>

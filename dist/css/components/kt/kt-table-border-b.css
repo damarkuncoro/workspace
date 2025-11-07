@@ -1,0 +1,8 @@
+/*! Component: kt-table-border-b | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-table-border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: var(--border);
+  }
+}

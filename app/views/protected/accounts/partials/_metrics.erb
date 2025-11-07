@@ -1,0 +1,55 @@
+
+<%= kt_grid(cols: 3) do %>
+  
+  
+  <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_content do %>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex size-10 items-center justify-center rounded-md bg-blue-50 text-blue-600">
+            <i class="ki-filled ki-users"></i>
+          </span>
+          <div>
+            <div class="text-xs text-secondary-foreground">Total Accounts</div>
+            <div class="text-2xl font-semibold text-foreground"><%= Account.count %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+   <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_content do %>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex size-10 items-center justify-center rounded-md bg-green-50 text-green-600">
+            <i class="ki-filled ki-user"></i>
+          </span>
+          <div>
+            <div class="text-xs text-secondary-foreground">Accounts with Customer Profile</div>
+            <div class="text-2xl font-semibold text-foreground"><%= Account.joins(person: :customer).distinct.count %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+  <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_content do %>
+        <div class="flex items-center gap-4">
+          <span class="inline-flex size-10 items-center justify-center rounded-md bg-amber-50 text-amber-600">
+            <i class="ki-filled ki-user"></i>
+          </span>
+          <div>
+            <div class="text-xs text-secondary-foreground">Accounts with Employee Profile</div>
+            <div class="text-2xl font-semibold text-foreground"><%= Account.joins(person: :employee).distinct.count %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% end %>
+

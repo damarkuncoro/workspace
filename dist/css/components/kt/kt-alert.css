@@ -1,0 +1,26 @@
+/*! Component: kt-alert | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-alert {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+  }
+
+.kt-alert {
+    gap: calc(var(--spacing) * 2.5);
+    border-radius: var(--radius);
+    padding: calc(var(--spacing) * 3.5);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    
+    .kt-alert-icon svg {
+      width: calc(var(--spacing) * 5);
+      height: calc(var(--spacing) * 5);
+    }
+  }
+
+.kt-alert {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+}

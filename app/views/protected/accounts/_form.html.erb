@@ -1,3 +1,10 @@
+<%#
+  Partial: Accounts Form (Unified)
+  Tujuan: Satu partial form untuk halaman New/Edit Account.
+  Prinsip: DRY, SRP, KISS — menerima local `account` dan membuat `form_with` secara internal.
+  Pemakaian:
+    <%= render 'protected/accounts/form', account: @account %>
+
 <%= form_with(model: [:protected, account], local: true) do |form| %>
   <% if account.errors.any? %>
     <div class="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded-lg">
@@ -28,7 +35,7 @@
         <h3 class="kt-card-title">Account Information</h3>
       </div>
       <div class="kt-card-content">
-        <div class="grid gap-4">
+        <%= kt_grid(cols: 1, gap: 4) do %>
           <div>
             <%= form.label :email, class: 'form-label' %>
             <%= form.email_field :email,
@@ -39,41 +46,45 @@
           </div>
 
           <% if account.new_record? %>
-            <div>
-              <%= form.label :password, class: 'form-label' %>
-              <%= form.password_field :password,
-                  class: 'kt-input',
-                  placeholder: 'Enter password',
-                  required: true %>
-              <p class="mt-1 text-sm text-secondary-foreground">Minimum 6 characters required</p>
-            </div>
+            <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+              <div>
+                <%= form.label :password, class: 'form-label' %>
+                <%= form.password_field :password,
+                    class: 'kt-input',
+                    placeholder: 'Enter password',
+                    required: true %>
+                <p class="mt-1 text-sm text-secondary-foreground">Minimum 6 characters required</p>
+              </div>
 
-            <div>
-              <%= form.label :password_confirmation, class: 'form-label' %>
-              <%= form.password_field :password_confirmation,
-                  class: 'kt-input',
-                  placeholder: 'Confirm password',
-                  required: true %>
-              <p class="mt-1 text-sm text-secondary-foreground">Must match the password above</p>
-            </div>
+              <div>
+                <%= form.label :password_confirmation, class: 'form-label' %>
+                <%= form.password_field :password_confirmation,
+                    class: 'kt-input',
+                    placeholder: 'Confirm password',
+                    required: true %>
+                <p class="mt-1 text-sm text-secondary-foreground">Must match the password above</p>
+              </div>
+            <% end %>
           <% else %>
-            <div>
-              <%= form.label :password, class: 'form-label' %>
-              <%= form.password_field :password,
-                  class: 'kt-input',
-                  placeholder: 'Leave blank to keep current password' %>
-              <p class="mt-1 text-sm text-secondary-foreground">Only fill if you want to change the password</p>
-            </div>
+            <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+              <div>
+                <%= form.label :password, class: 'form-label' %>
+                <%= form.password_field :password,
+                    class: 'kt-input',
+                    placeholder: 'Leave blank to keep current password' %>
+                <p class="mt-1 text-sm text-secondary-foreground">Only fill if you want to change the password</p>
+              </div>
 
-            <div>
-              <%= form.label :password_confirmation, class: 'form-label' %>
-              <%= form.password_field :password_confirmation,
-                  class: 'kt-input',
-                  placeholder: 'Confirm new password' %>
-              <p class="mt-1 text-sm text-secondary-foreground">Required only if changing password</p>
-            </div>
+              <div>
+                <%= form.label :password_confirmation, class: 'form-label' %>
+                <%= form.password_field :password_confirmation,
+                    class: 'kt-input',
+                    placeholder: 'Confirm new password' %>
+                <p class="mt-1 text-sm text-secondary-foreground">Required only if changing password</p>
+              </div>
+            <% end %>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
 
@@ -84,7 +95,7 @@
       </div>
       <div class="kt-card-content">
         <%= form.fields_for :person do |person_form| %>
-          <div class="grid gap-4">
+          <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
             <div>
               <%= person_form.label :name, class: 'form-label' %>
               <%= person_form.text_field :name,
@@ -99,7 +110,7 @@
                   class: 'kt-input' %>
               <p class="mt-1 text-sm text-secondary-foreground">Format: YYYY-MM-DD</p>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -112,7 +123,7 @@
       <div class="kt-card-content">
         <div>
           <%= form.label :role_ids, 'Assign Roles', class: 'form-label mb-3' %>
-          <div class="grid gap-3">
+          <%= kt_grid(cols: 1, gap: 3) do %>
             <% Role.all.each do |role| %>
               <div class="flex items-start gap-3">
                 <div class="flex items-center h-5">
@@ -127,14 +138,14 @@
                 </div>
               </div>
             <% end %>
-          </div>
+          <% end %>
           <p class="mt-3 text-sm text-secondary-foreground">Select the roles this account should have. Changes take effect immediately.</p>
         </div>
       </div>
     </div>
 
   <!-- Form Actions -->
-  <div class="flex justify-end gap-3">
+  <%= kt_card_footer(justify: "justify-end", class_name: "gap-3") do %>
     <%= link_to protected_accounts_path, class: "kt-btn kt-btn-outline" do %>
       <i class="ki-filled ki-cross"></i>
       Cancel
@@ -143,5 +154,5 @@
     <%= form.submit (account.new_record? ? 'Create Account' : 'Update Account'),
         class: "kt-btn kt-btn-primary",
         data: { disable_with: account.new_record? ? "Creating..." : "Updating..." } %>
-  </div>
+  <% end %>
 <% end %>

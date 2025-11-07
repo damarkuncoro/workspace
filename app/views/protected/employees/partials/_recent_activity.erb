@@ -1,0 +1,15 @@
+<%#
+  Partial: employees/partials/_recent_activity
+  Tujuan: Menampilkan placeholder aktivitas terbaru.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Recent Activity') %>
+  <%= kt_card_content do %>
+    <div class="text-center py-8">
+      <i class="ki-filled ki-time text-2xl text-muted-foreground"></i>
+      <h3 class="mt-2 text-sm font-medium text-foreground">No recent activity</h3>
+      <p class="mt-1 text-sm text-secondary-foreground">Activity tracking will be available soon.</p>
+    </div>
+  <% end %>
+<% end %>

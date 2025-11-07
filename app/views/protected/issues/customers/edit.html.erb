@@ -1,32 +1,21 @@
+<%# Customers Issues Edit: gunakan kt_card + kt_card_header + kt_card_content %>
 <div class="max-w-4xl mx-auto p-6">
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <div class="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-4">
-      <h1 class="text-2xl font-bold text-white">Edit Issue</h1>
-      <p class="text-yellow-100 mt-1">For customer: <%= @customer.person_name %> • Issue ID: <%= @issue.id %></p>
-    </div>
-
-    <div class="p-6">
+  <%= kt_card do %>
+    <%= kt_card_header title: 'Edit Issue', subtitle: "For customer: #{h(@customer.person_name)} • Issue ID: #{@issue.id}" %>
+    <%= kt_card_content(padding: 'p-6') do %>
       <%= render 'form', issue: @issue, customer: @customer %>
-    </div>
-  </div>
-
-  <!-- Navigation Links -->
-  <div class="mt-6 text-center">
-    <div class="flex justify-center space-x-4">
-      <%= link_to protected_customer_issue_path(@customer, @issue), class: "text-sm text-gray-600 hover:text-gray-900" do %>
-        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-        </svg>
-        View Issue
-      <% end %>
-
-      <%= link_to protected_customer_issues_path(@customer), class: "text-sm text-gray-600 hover:text-gray-900" do %>
-        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Back to Issues
-      <% end %>
-    </div>
-  </div>
+      <div class="mt-6 text-center">
+        <div class="flex justify-center space-x-4">
+          <%= link_to protected_customer_issue_path(@customer, @issue), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+            <i class="ki-duotone ki-eye mr-2"></i>
+            View Issue
+          <% end %>
+          <%= link_to protected_customer_issues_path(@customer), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+            <i class="ki-duotone ki-list mr-2"></i>
+            Back to Issues
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

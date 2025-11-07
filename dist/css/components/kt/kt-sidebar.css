@@ -1,0 +1,15 @@
+/*! Component: kt-sidebar | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-sidebar {
+    width: var(--sidebar-width);
+  }
+
+.kt-sidebar {
+      width: var(--sidebar-width);
+      transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    }
+
+.kt-sidebar {
+      transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    }
+}

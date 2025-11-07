@@ -1,0 +1,18 @@
+<%#
+  Partial: employees/partials/_roles_permissions
+  Tujuan: Menampilkan peran dan permission pada akun Employee.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Roles & Permissions') %>
+  <%= kt_card_content do %>
+    <div class="flex flex-wrap gap-2">
+      <% @employee.person.account.roles.each do |role| %>
+        <span class="kt-badge kt-badge-secondary"><%= role.name.titleize %></span>
+      <% end %>
+    </div>
+    <% if @employee.person.account.roles.empty? %>
+      <p class="text-sm text-secondary-foreground mt-2">No roles assigned</p>
+    <% end %>
+  <% end %>
+<% end %>

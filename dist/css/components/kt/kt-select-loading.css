@@ -1,0 +1,10 @@
+/*! Component: kt-select-loading | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-select-loading {
+    padding-inline: calc(var(--spacing) * 3.5);
+    padding-block: calc(var(--spacing) * 1);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    color: var(--muted-foreground);
+  }
+}

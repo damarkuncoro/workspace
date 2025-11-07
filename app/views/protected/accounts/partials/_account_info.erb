@@ -1,0 +1,27 @@
+
+
+<%= kt_card do %>
+  <%= kt_card_header(title: "Account Information") %>
+  <%= kt_card_content do %>
+    <div class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid gap-4">
+           <%= kt_info_row(label: "Email", value: @account.email) %>
+           <%= kt_info_row(label: "Name", value: (@account.person&.name || 'Not provided')) %>
+           <%= kt_info_row(label: "Date of Birth", value: (@account.person&.date_of_birth ? l(@account.person.date_of_birth) : 'Not provided')) %>
+        </div>
+        <div class="grid gap-4">
+           <%= kt_info_row(label: "Roles") do %>
+             <div class="flex flex-wrap gap-1">
+               <% @account.roles.each do |role| %>
+                 <span class="kt-badge kt-badge-secondary"><%= role.name %></span>
+               <% end %>
+             </div>
+           <% end %>
+           <%= kt_info_row(label: "Created At", value: l(@account.created_at)) %>
+           <%= kt_info_row(label: "Updated At", value: l(@account.updated_at)) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

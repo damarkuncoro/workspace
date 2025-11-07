@@ -1,0 +1,31 @@
+<%#
+  Partial: Customers Basic Information
+  Tujuan: Menampilkan informasi dasar pelanggan TANPA wrapper card.
+  Catatan: Dibungkus kt_card di parent view (Customers Show).
+  Prinsip: SRP, DRY, KISS — menerima `customer` lewat locals.
+  Locals:
+    - customer: instance Customer (wajib)
+  Pemakaian:
+    <%= render 'protected/customers/partials/basic_info', customer: @customer %>
+
+
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <span class="text-sm font-medium text-gray-500">Customer Code</span>
+    <span class="text-sm text-gray-900 font-mono bg-gray-100 px-2 py-1 rounded"><%= customer.customer_code %></span>
+  </div>
+  <div class="flex justify-between items-center">
+    <span class="text-sm font-medium text-gray-500">Full Name</span>
+    <span class="text-sm text-gray-900"><%= customer.person_name %></span>
+  </div>
+  <div class="flex justify-between items-center">
+    <span class="text-sm font-medium text-gray-500">Email Address</span>
+    <span class="text-sm text-gray-900"><%= customer.account_email %></span>
+  </div>
+  <div class="flex justify-between items-center">
+    <span class="text-sm font-medium text-gray-500">Status</span>
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= customer.status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+      <%= customer.status.titleize %>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+/*! Component: kt-rating | Layer: components | Generated 2025-11-07 03:03:26 +0000 */
+@layer components {
+.kt-rating {
+    display: inline-flex;
+    align-items: stretch;
+    & input {
+      appearance: none;
+      position: absolute;
+      inset-inline-start: 9999px;
+      &[disabled] {
+        display: none;
+      }
+}

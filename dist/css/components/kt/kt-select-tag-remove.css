@@ -1,0 +1,15 @@
+/*! Component: kt-select-tag-remove | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-select-tag-remove {
+    display: flex;
+    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 5);
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(infinity * 1px);
+    color: var(--color-gray-500);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-200);
+      }
+}

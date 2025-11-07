@@ -1,0 +1,15 @@
+/*! Component: kt-avatar-status | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-avatar-status {
+    display: flex;
+    width: calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 2);
+    align-items: center;
+    border-radius: calc(infinity * 1px);
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: var(--background);
+    &.kt-avatar-status-online {
+      background-color: var(--color-green-600);
+    }
+}

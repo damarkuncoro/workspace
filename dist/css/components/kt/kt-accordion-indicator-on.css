@@ -1,0 +1,12 @@
+/*! Component: kt-accordion-indicator-on | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
+@layer components {
+.kt-accordion-indicator-on {
+    display: block;
+    width: calc(var(--spacing) * 3.5);
+    height: calc(var(--spacing) * 3.5);
+    flex-shrink: 0;
+    &[data-kt-accordion-item].active {
+      display: none;
+    }
+  }
+}
