@@ -1,8 +1,0 @@
-/*! Component: kt-skeleton | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-skeleton {
-    animation: var(--animate-pulse);
-    border-radius: calc(var(--radius) - 2px);
-    background-color: var(--accent);
-  }
-}

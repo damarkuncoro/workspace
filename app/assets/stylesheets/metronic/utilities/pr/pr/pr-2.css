@@ -1,0 +1,10 @@
+/*! Utility: pr-2 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.pr-2 {
+    padding-right: calc(var(--spacing) * 2);
+  }
+
+.pr-2\.5 {
+    padding-right: calc(var(--spacing) * 2.5);
+  }
+}

@@ -1,0 +1,51 @@
+/*! Utility: border-b | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+
+.border-b-0 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
+
+.border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
+  }
+
+.border-black\/10\! {
+    border-color: color-mix(in srgb, #000 10%, transparent) !important;
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-black) 10%, transparent) !important;
+    }
+  }
+
+.border-blue-500 {
+    border-color: var(--color-blue-500);
+  }
+
+.border-border {
+    border-color: var(--border);
+  }
+
+.border-b-border {
+    border-bottom-color: var(--border);
+  }
+
+.border-b-input {
+    border-bottom-color: var(--input);
+  }
+
+.border-b-primary\/10 {
+    border-bottom-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-bottom-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+
+.border-b-transparent {
+    border-bottom-color: transparent;
+  }
+}

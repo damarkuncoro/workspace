@@ -1,0 +1,7 @@
+/*! Utility: leading-3 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.leading-3 {
+    --tw-leading: calc(var(--spacing) * 3);
+    line-height: calc(var(--spacing) * 3);
+  }
+}

@@ -1,9 +1,0 @@
-/*! Component: kt-input-sm | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-input-sm {
-      gap: calc(var(--spacing) * 1.25);
-      i {
-        font-size: var(--text-sm);
-        line-height: var(--tw-leading, var(--text-sm--line-height));
-      }
-}

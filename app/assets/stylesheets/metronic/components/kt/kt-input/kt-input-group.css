@@ -1,0 +1,44 @@
+/*! Component: kt-input-group | Layer: components | Generated 2025-11-08 03:31:19 +0000 */
+@layer components {
+.kt-input-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    .kt-input {
+      z-index: 1;
+      flex-grow: 1;
+    }
+    .kt-input-addon:has(+ .kt-input) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+      border-inline-end-style: var(--tw-border-style) !important;
+      border-inline-end-width: 0px !important;
+    }
+    .kt-input + .kt-input-addon {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+    .kt-input-addon:has(+ .kt-btn) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+    .kt-input + .kt-btn {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+    .kt-input + .kt-btn.kt-btn-outline {
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+    .kt-btn + .kt-input,	.kt-input-addon + .kt-input {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+    .kt-input:has(+ .kt-btn),	.kt-input:has(+ .kt-input-addon) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+  }
+}

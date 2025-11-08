@@ -1,0 +1,23 @@
+/*! Component: kt-radio-mono | Layer: components | Generated 2025-11-08 03:31:19 +0000 */
+@layer components {
+.kt-radio-mono {
+    &:checked {
+      border-color: var(--mono);
+    }
+    &:checked {
+      background-color: var(--mono);
+    }
+    &:checked {
+      color: var(--mono-foreground);
+    }
+    &:indeterminate {
+      border-color: var(--mono);
+    }
+    &:indeterminate {
+      background-color: var(--mono);
+    }
+    &:indeterminate {
+      color: var(--mono-foreground);
+    }
+  }
+}

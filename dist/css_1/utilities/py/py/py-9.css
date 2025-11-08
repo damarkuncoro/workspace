@@ -1,6 +1,0 @@
-/*! Utility: py-9 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
-@layer utilities {
-.py-9 {
-    padding-block: calc(var(--spacing) * 9);
-  }
-}

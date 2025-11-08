@@ -1,0 +1,11 @@
+/*! Utility: border-r | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+
+.border-r-input {
+    border-right-color: var(--input);
+  }
+}

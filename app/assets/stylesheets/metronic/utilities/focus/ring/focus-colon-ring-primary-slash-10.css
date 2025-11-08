@@ -1,0 +1,11 @@
+/*! Utility: focus\:ring-primary\/10 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.focus\:ring-primary\/10 {
+    &:focus {
+      --tw-ring-color: var(--primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--primary) 10%, transparent);
+      }
+    }
+  }
+}

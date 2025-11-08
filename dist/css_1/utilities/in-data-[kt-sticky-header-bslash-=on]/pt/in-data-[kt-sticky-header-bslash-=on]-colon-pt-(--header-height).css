@@ -1,8 +1,0 @@
-/*! Utility: in-data-\[kt-sticky-header\=on\]\:pt-\(--header-height\) | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.in-data-\[kt-sticky-header\=on\]\:pt-\(--header-height\) {
-    :where(*[data-kt-sticky-header="on"]) & {
-      padding-top: var(--header-height);
-    }
-  }
-}

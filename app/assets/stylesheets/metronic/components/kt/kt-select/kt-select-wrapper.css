@@ -1,0 +1,10 @@
+/*! Component: kt-select-wrapper | Layer: components | Generated 2025-11-08 03:31:20 +0000 */
+@layer components {
+.kt-select-wrapper {
+    width: 100%;
+    &.disabled {
+      pointer-events: none;
+      opacity: 60%;
+    }
+  }
+}

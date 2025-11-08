@@ -1,0 +1,6 @@
+/*! Utility: h-9 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+}

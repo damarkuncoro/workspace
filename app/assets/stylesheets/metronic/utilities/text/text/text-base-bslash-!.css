@@ -1,0 +1,7 @@
+/*! Utility: text-base\! | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.text-base\! {
+    font-size: var(--text-base) !important;
+    line-height: var(--tw-leading, var(--text-base--line-height)) !important;
+  }
+}

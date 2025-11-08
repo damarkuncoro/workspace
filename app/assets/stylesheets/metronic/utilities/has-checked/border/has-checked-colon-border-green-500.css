@@ -1,0 +1,8 @@
+/*! Utility: has-checked\:border-green-500 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.has-checked\:border-green-500 {
+    &:has(*:checked) {
+      border-color: var(--color-green-500);
+    }
+  }
+}

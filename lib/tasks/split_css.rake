@@ -6,7 +6,7 @@ namespace :css do
   desc "Pisahkan TailwindCSS build menjadi folder per layer dan per .kt-*"
   task :split, [:source, :output] do |_, args|
     source_file = args[:source] || 'public/assets/css/styles.css'
-    output_dir  = args[:output] || 'dist/css_1'
+    output_dir  = args[:output] || 'dist/metronic'
 
     abort("❌ File tidak ditemukan: #{source_file}") unless File.exist?(source_file)
     FileUtils.mkdir_p(output_dir)
@@ -31,23 +31,27 @@ namespace :css do
         kt_selectors = extract_kt_selectors(css)
         kt_selectors.each do |selector|
           name = selector.delete('.')
-          component_dir = File.join(layer_dir, "kt")
+          # Tentukan root komponen (mis. kt-accordion dari kt-accordion-content)
+          root = component_root_for(name)
+          component_dir = File.join(layer_dir, "kt", root)
           FileUtils.mkdir_p(component_dir)
-          component_file = File.join(component_dir, "#{name}.css")
+          # Untuk file root (mis. kt-accordion), tulis aturan ke file "kt-accordion-root.css".
+          # File "kt-accordion.css" akan menjadi indeks @import yang dibuat setelah seluruh file ditulis.
+          file_basename = (name == root ? "#{name}-root" : name)
+          component_file = File.join(component_dir, "#{file_basename}.css")
 
           blocks = extract_blocks(css, selector)
           next if blocks.empty?
 
           header = header_comment("Component: #{name}", layer)
           File.open(component_file, 'a') { |f| f.write("#{header}@layer #{layer} {\n#{blocks}\n}\n") }
-          puts "✅ components/kt/#{name}.css"
+          puts "✅ components/kt/#{root}/#{file_basename}.css"
         end
-
-        # Tulis juga file agregat untuk layer components agar bisa di-merge/import
-        file_path = File.join(layer_dir, "#{layer}.css")
-        header = header_comment("Layer: #{layer}", layer)
-        File.open(file_path, 'a') { |f| f.write("#{header}@layer #{layer} {\n#{css.strip}\n}\n") }
-        puts "✅ #{layer}/#{layer}.css"
+        # Tulis index root per komponen (kt-<root>/<root>.css) berisi @import ke subfile
+        write_component_root_indexes(layer_dir)
+        # Tulis index komponen tingkat atas berbasis @import agar modular dan portabel
+        write_components_index(layer_dir)
+        puts "✅ components/components.css (index @import)"
       else
         # Khusus utilities: split dan group per selector
         if layer == "utilities"
@@ -55,11 +59,19 @@ namespace :css do
           write_utilities_index(layer_dir)
           puts "✅ utilities/utilities.css (index @import)"
         else
-          # Tulis file agregat untuk layer lain
-          file_path = File.join(layer_dir, "#{layer}.css")
-          header = header_comment("Layer: #{layer}", layer)
-          File.open(file_path, 'a') { |f| f.write("#{header}@layer #{layer} {\n#{css.strip}\n}\n") }
-          puts "✅ #{layer}/#{layer}.css"
+          # Dukungan opsi indeks @import untuk layer lain via ENV `CSS_INDEX_LAYERS`
+          # Contoh: CSS_INDEX_LAYERS="base,properties,theme" akan membuat ketiganya menjadi indeks
+          index_layers = (ENV['CSS_INDEX_LAYERS'] || '').split(',').map(&:strip)
+          if index_layers.include?(layer)
+            write_layer_index(layer_dir, layer)
+            puts "✅ #{layer}/#{layer}.css (index @import)"
+          else
+            # Tulis file agregat untuk layer lain (default)
+            file_path = File.join(layer_dir, "#{layer}.css")
+            header = header_comment("Layer: #{layer}", layer)
+            File.open(file_path, 'a') { |f| f.write("#{header}@layer #{layer} {\n#{css.strip}\n}\n") }
+            puts "✅ #{layer}/#{layer}.css"
+          end
         end
       end
     end
@@ -99,7 +111,7 @@ namespace :css do
   # Catatan: hanya mengimpor file agregat masing-masing layer (base/utilities/properties/theme)
   desc "Buat file indeks CSS menggunakan @import untuk setiap layer"
   task :import, [:input, :output] do |_, args|
-    input_dir   = args[:input]  || 'dist/css_1'
+    input_dir   = args[:input]  || 'dist/metronic'
     output_file = args[:output] || 'dist/css/merged-import.css'
 
     abort("❌ Folder tidak ditemukan: #{input_dir}") unless Dir.exist?(input_dir)
@@ -126,6 +138,21 @@ namespace :css do
     header = "/*! Index CSS via @import | Generated #{Time.now} */\n"
     File.write(output_file, header + imports.join("\n") + "\n")
     puts "✅ Import CSS ditulis ke #{output_file}"
+  end
+
+  # Task: Buat style.css di dist/metronic yang mengimpor seluruh layer melalui proxy
+  # - Membuat proxy per-layer di `dist/metronic/<layer>/<layer>.css` yang mengarah ke `../css_1/<layer>/<layer>.css`
+  # - Membuat `dist/metronic/style.css` yang mengimpor semua proxy dengan urutan konsisten
+  desc "Buat style.css Metronic yang mengimpor semua layer via proxy"
+  task :metronic_import, [:input_dir, :output_dir] do |_, args|
+    input_dir  = args[:input_dir] || 'dist/css_1'
+    output_dir = args[:output_dir] || 'dist/metronic'
+
+    abort("❌ Folder tidak ditemukan: #{input_dir}") unless Dir.exist?(input_dir)
+    FileUtils.mkdir_p(output_dir)
+
+    write_metronic_index_direct(input_dir, output_dir)
+    puts "✅ Metronic style.css (impor langsung) ditulis ke #{File.join(output_dir, 'style.css')}"
   end
 
   # Fungsi: Ekstraksi blok-blok @layer dari konten CSS
@@ -319,5 +346,101 @@ namespace :css do
     end
     header = header_comment("Utilities Index via @import", 'utilities')
     File.write(index_path, header + imports.join("\n") + "\n")
+  end
+
+  # Fungsi: Tulis index components.css berisi @import ke semua file komponen
+  # - Mengimpor setiap file .css di bawah layer_dir (kecuali components.css itu sendiri)
+  # - Memastikan jalur relatif benar dari components.css ke berkas komponen
+  def write_components_index(layer_dir)
+    index_path = File.join(layer_dir, 'components.css')
+    kt_dir = File.join(layer_dir, 'kt')
+    imports = []
+    if Dir.exist?(kt_dir)
+      root_dirs = Dir.children(kt_dir).select { |d| File.directory?(File.join(kt_dir, d)) }.sort
+      root_dirs.each do |root|
+        root_index = File.join('kt', root, "#{root}.css")
+        if File.exist?(File.join(layer_dir, root_index))
+          imports << "@import url(\"./#{root_index}\");"
+        else
+          # Fallback: jika index root belum ada, impor semua file di dalam folder
+          Dir.glob(File.join(layer_dir, 'kt', root, '*.css')).sort.each do |path|
+            url = Pathname.new(path).relative_path_from(Pathname.new(layer_dir)).to_s
+            imports << "@import url(\"./#{url}\");"
+          end
+        end
+      end
+    end
+    header = header_comment("Components Index via @import", 'components')
+    File.write(index_path, header + imports.join("\n") + "\n")
+  end
+
+  # Fungsi: Tulis index per root komponen di dalam `components/kt/<root>/<root>.css`
+  # Tujuan: Menjadikan file root sebagai indeks @import yang mengimpor semua subfile dalam folder tersebut
+  # Catatan: Menghindari impor diri sendiri, hanya mengimpor berkas selain `<root>.css`
+  def write_component_root_indexes(layer_dir)
+    kt_dir = File.join(layer_dir, 'kt')
+    return unless Dir.exist?(kt_dir)
+    Dir.children(kt_dir).select { |d| File.directory?(File.join(kt_dir, d)) }.each do |root|
+      root_dir = File.join(kt_dir, root)
+      index_path = File.join(root_dir, "#{root}.css")
+      css_files = Dir.glob(File.join(root_dir, '*.css')).sort
+      imports = []
+      css_files.each do |path|
+        next if File.expand_path(path) == File.expand_path(index_path)
+        url = Pathname.new(path).relative_path_from(Pathname.new(root_dir)).to_s
+        imports << "@import url(\"./#{url}\");"
+      end
+      header = header_comment("Component Root Index via @import", root)
+      File.write(index_path, header + imports.join("\n") + "\n")
+    end
+  end
+
+  # Fungsi: Tentukan root komponen dari nama `.kt-*`
+  # Contoh: 'kt-accordion-content' -> 'kt-accordion'; 'kt-menu-link' -> 'kt-menu'; 'kt-btn' -> 'kt-btn'
+  # Tujuan: pengelompokan file komponen menjadi subfolder konsisten: components/kt/<root>/<name>.css
+  def component_root_for(name)
+    parts = name.split('-')
+    return name if parts.empty? || parts.first != 'kt'
+    return name if parts.length < 2
+    [parts[0], parts[1]].join('-')
+  end
+
+  # Fungsi: Tulis index <layer>.css berisi @import ke semua file layer
+  # - Generik untuk layer selain utilities/components
+  # - Mengimpor setiap file .css di bawah layer_dir (kecuali index itu sendiri)
+  # - Jalur relatif dari file index ke berkas yang diimpor
+  def write_layer_index(layer_dir, layer)
+    index_path = File.join(layer_dir, "#{layer}.css")
+    css_files = Dir.glob(File.join(layer_dir, '**', '*.css')).sort
+    imports = []
+    css_files.each do |path|
+      next if File.expand_path(path) == File.expand_path(index_path)
+      url = Pathname.new(path).relative_path_from(Pathname.new(layer_dir)).to_s
+      imports << "@import url(\"./#{url}\");"
+    end
+    header = header_comment("#{layer.capitalize} Index via @import", layer)
+    File.write(index_path, header + imports.join("\n") + "\n")
+  end
+
+  # Fungsi: Tulis indeks style.css Metronic dengan impor langsung ke dist/css_1
+  # - Tanpa proxy; langsung mengimpor `../css_1/<layer>/<layer>.css` dari `dist/metronic/style.css`
+  def write_metronic_index_direct(input_dir, output_dir)
+    preferred_order = %w[base components utilities properties theme]
+    layers = Dir.children(input_dir).select { |d| File.directory?(File.join(input_dir, d)) }
+    ordered_layers = (preferred_order & layers) + (layers - preferred_order)
+
+    # Hitung path relatif dari style.css ke folder input_dir
+    rel_prefix = Pathname.new(File.expand_path(input_dir)).relative_path_from(Pathname.new(File.expand_path(output_dir))).to_s
+
+    imports = []
+    ordered_layers.each do |layer|
+      source = File.join(input_dir, layer, "#{layer}.css")
+      next unless File.exist?(source)
+      url = File.join(rel_prefix, layer, "#{layer}.css")
+      imports << "@import url(\"#{url}\");"
+    end
+
+    index_header = header_comment("Metronic Style Index via @import (direct)", 'metronic')
+    File.write(File.join(output_dir, 'style.css'), index_header + imports.join("\n") + "\n")
   end
 end

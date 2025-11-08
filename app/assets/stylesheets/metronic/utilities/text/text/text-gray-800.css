@@ -1,0 +1,6 @@
+/*! Utility: text-gray-800 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.text-gray-800 {
+    color: var(--color-gray-800);
+  }
+}

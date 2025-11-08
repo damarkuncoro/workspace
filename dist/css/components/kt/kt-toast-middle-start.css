@@ -1,9 +1,0 @@
-/*! Component: kt-toast-middle-start | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-toast-middle-start {
-      inset-inline-start: calc(var(--spacing) * 0);
-      top: calc(1/2 * 100%);
-      --tw-translate-y: calc(calc(1/2 * 100%) * -1);
-      translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
-}

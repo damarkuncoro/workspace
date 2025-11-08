@@ -30,13 +30,26 @@
   <link href="assets/media/app/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
   <link href="assets/media/app/favicon.ico" rel="shortcut icon"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  -->
   <link href="assets/vendors/apexcharts/apexcharts.css" rel="stylesheet"/>
   <link href="assets/vendors/keenicons/styles.bundle.css" rel="stylesheet"/>
+  <!-- 
+
   <link href="assets/css/styles.css" rel="stylesheet"/>
+  
+  
+   -->
+   <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+   <%= stylesheet_link_tag "metronic/base/base", "data-turbo-track": "reload" %>
+
+
  </head>
 
- <body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+ <body class="
+      antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed"
+      >
   <!-- Theme Mode Script -->
   <%= render 'metronic/layouts/partials/theme_mode' %>
   <%= render 'metronic/layouts/partials/page/main' %>

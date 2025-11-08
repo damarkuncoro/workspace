@@ -1,9 +1,0 @@
-/*! Utility: border-b-primary\/10 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
-@layer utilities {
-.border-b-primary\/10 {
-    border-bottom-color: var(--primary);
-    @supports (color: color-mix(in lab, red, red)) {
-      border-bottom-color: color-mix(in oklab, var(--primary) 10%, transparent);
-    }
-  }
-}

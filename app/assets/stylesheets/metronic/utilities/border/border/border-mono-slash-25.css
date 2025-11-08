@@ -1,0 +1,9 @@
+/*! Utility: border-mono\/25 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-mono\/25 {
+    border-color: var(--mono);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--mono) 25%, transparent);
+    }
+  }
+}

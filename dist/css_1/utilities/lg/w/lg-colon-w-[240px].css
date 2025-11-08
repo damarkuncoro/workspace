@@ -1,8 +1,0 @@
-/*! Utility: lg\:w-\[240px\] | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.lg\:w-\[240px\] {
-    @media (width >= 64rem) {
-      width: 240px;
-    }
-  }
-}

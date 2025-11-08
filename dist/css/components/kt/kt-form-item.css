@@ -1,8 +1,0 @@
-/*! Component: kt-form-item | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-form-item {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing) * 2.5);
-  }
-}

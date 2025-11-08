@@ -1,0 +1,10 @@
+/*! Component: kt-badge-stroke | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-badge-stroke {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--background);
+    color: var(--secondary-foreground);
+  }
+}

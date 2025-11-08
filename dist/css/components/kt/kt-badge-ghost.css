@@ -1,9 +1,0 @@
-/*! Component: kt-badge-ghost | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-badge-ghost {
-    background-color: transparent;
-    padding-inline: calc(var(--spacing) * 0);
-    &.kt-badge-primary {
-      color: var(--primary);
-    }
-}

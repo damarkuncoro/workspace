@@ -1,0 +1,9 @@
+/*! Component: kt-link-underlined | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-link-underlined {
+    margin-top: calc(var(--spacing) * -0.5);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 4px;
+  }
+}

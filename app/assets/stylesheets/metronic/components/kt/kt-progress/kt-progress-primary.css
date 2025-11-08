@@ -1,0 +1,8 @@
+/*! Component: kt-progress-primary | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
+@layer components {
+.kt-progress-primary {
+    .kt-progress-indicator {
+      background-color: var(--primary);
+    }
+  }
+}

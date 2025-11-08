@@ -1,8 +1,0 @@
-/*! Utility: rtl\:\[background-position\:-4rem_-4rem\] | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
-@layer utilities {
-.rtl\:\[background-position\:-4rem_-4rem\] {
-    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-      background-position: -4rem -4rem;
-    }
-  }
-}

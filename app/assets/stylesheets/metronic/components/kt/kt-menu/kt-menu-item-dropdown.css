@@ -1,0 +1,7 @@
+/*! Component: kt-menu-item-dropdown | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
+@layer components {
+.kt-menu-item-dropdown > &, .base-popper-root > .kt-menu-container > &, &.kt-menu.show, &.show[data-popper-placement] {
+      display: flex;
+      will-change: transform;
+    }
+}

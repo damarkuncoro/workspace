@@ -1,8 +1,0 @@
-/*! Component: kt-table-border-s | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
-@layer components {
-.kt-table-border-s {
-    border-inline-start-style: var(--tw-border-style);
-    border-inline-start-width: 1px;
-    border-color: var(--border);
-  }
-}

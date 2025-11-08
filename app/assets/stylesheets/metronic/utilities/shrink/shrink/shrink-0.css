@@ -1,0 +1,6 @@
+/*! Utility: shrink-0 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.shrink-0 {
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,8 @@
+/*! Utility: dark\:border-zinc-600 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.dark\:border-zinc-600 {
+    &:is(.dark *) {
+      border-color: var(--color-zinc-600);
+    }
+  }
+}

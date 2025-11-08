@@ -1,0 +1,9 @@
+/*! Utility: shadow-black\/5 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.shadow-black\/5 {
+    --tw-shadow-color: color-mix(in srgb, #000 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-black) 5%, transparent) var(--tw-shadow-alpha), transparent);
+    }
+  }
+}

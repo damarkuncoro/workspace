@@ -1,9 +1,0 @@
-/*! Component: kt-separator | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-separator {
-    height: 1px;
-    width: 100%;
-    flex-shrink: 0;
-    background-color: var(--border);
-  }
-}

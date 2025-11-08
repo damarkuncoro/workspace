@@ -1,6 +1,0 @@
-/*! Utility: h-40 | Layer: utilities | Generated 2025-11-08 02:53:05 +0000 */
-@layer utilities {
-.h-40 {
-    height: calc(var(--spacing) * 40);
-  }
-}

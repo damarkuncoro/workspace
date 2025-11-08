@@ -1,0 +1,13 @@
+/*! Component: kt-select-group-header | Layer: components | Generated 2025-11-08 03:31:20 +0000 */
+@layer components {
+.kt-select-group-header {
+    padding-inline: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing) * 1);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+  }
+}

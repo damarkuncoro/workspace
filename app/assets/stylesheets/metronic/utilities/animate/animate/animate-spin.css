@@ -1,0 +1,6 @@
+/*! Utility: animate-spin | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.animate-spin {
+    animation: var(--animate-spin);
+  }
+}

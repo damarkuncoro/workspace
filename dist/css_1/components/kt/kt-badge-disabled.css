@@ -1,7 +1,0 @@
-/*! Component: kt-badge-disabled | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
-@layer components {
-.kt-badge-disabled {
-    pointer-events: none;
-    opacity: 50%;
-  }
-}

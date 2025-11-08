@@ -1,0 +1,10 @@
+/*! Utility: gap-0 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.gap-0 {
+    gap: calc(var(--spacing) * 0);
+  }
+
+.gap-0\.5 {
+    gap: calc(var(--spacing) * 0.5);
+  }
+}

@@ -1,0 +1,8 @@
+/*! Utility: lg\:pb-0 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.lg\:pb-0 {
+    @media (width >= 64rem) {
+      padding-bottom: calc(var(--spacing) * 0);
+    }
+  }
+}

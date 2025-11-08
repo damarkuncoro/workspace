@@ -1,0 +1,6 @@
+/*! Utility: top-\[calc\(var\(--header-height\)\+var\(--navbar-height\)\+1rem\)\] | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.top-\[calc\(var\(--header-height\)\+var\(--navbar-height\)\+1rem\)\] {
+    top: calc(var(--header-height) + var(--navbar-height) + 1rem);
+  }
+}

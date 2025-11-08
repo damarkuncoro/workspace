@@ -1,8 +1,0 @@
-/*! Utility: lg\:col-span-2 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.lg\:col-span-2 {
-    @media (width >= 64rem) {
-      grid-column: span 2 / span 2;
-    }
-  }
-}

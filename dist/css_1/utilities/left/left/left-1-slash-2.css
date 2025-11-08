@@ -1,6 +1,0 @@
-/*! Utility: left-1\/2 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.left-1\/2 {
-    left: calc(1/2 * 100%);
-  }
-}

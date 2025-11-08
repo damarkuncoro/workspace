@@ -1,0 +1,37 @@
+/*! Component: kt-badge-btn | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-badge-btn {
+    margin-inline-end: calc(var(--spacing) * -0.5);
+    display: inline-flex;
+    width: calc(var(--spacing) * 3.5);
+    height: calc(var(--spacing) * 3.5);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) - 2px);
+    padding: calc(var(--spacing) * 0);
+    --tw-leading: 1;
+    line-height: 1;
+    i {
+      font-size: var(--text-xs);
+      line-height: var(--tw-leading, var(--text-xs--line-height));
+      opacity: 70%;
+      transition-property: opacity;
+      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+      transition-duration: var(--tw-duration, var(--default-transition-duration));
+    }
+    > svg {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+      opacity: 70%;
+      transition-property: opacity;
+      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+      transition-duration: var(--tw-duration, var(--default-transition-duration));
+    }
+    &:focus,	&:hover {
+      i,	> svg {
+        opacity: 100%;
+      }
+    }
+  }
+}

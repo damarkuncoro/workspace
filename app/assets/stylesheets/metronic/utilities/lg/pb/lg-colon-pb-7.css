@@ -1,0 +1,14 @@
+/*! Utility: lg\:pb-7 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.lg\:pb-7 {
+    @media (width >= 64rem) {
+      padding-bottom: calc(var(--spacing) * 7);
+    }
+  }
+
+.lg\:pb-7\.5 {
+    @media (width >= 64rem) {
+      padding-bottom: calc(var(--spacing) * 7.5);
+    }
+  }
+}

@@ -1,0 +1,74 @@
+/*! Utility: lg\:border | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.lg\:border {
+    @media (width >= 64rem) {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+    }
+  }
+
+.lg\:border-0 {
+    @media (width >= 64rem) {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+    }
+  }
+
+.lg\:border-s {
+    @media (width >= 64rem) {
+      border-inline-start-style: var(--tw-border-style);
+      border-inline-start-width: 1px;
+    }
+  }
+
+.lg\:border-e {
+    @media (width >= 64rem) {
+      border-inline-end-style: var(--tw-border-style);
+      border-inline-end-width: 1px;
+    }
+  }
+
+.lg\:border-t {
+    @media (width >= 64rem) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 1px;
+    }
+  }
+
+.lg\:border-r {
+    @media (width >= 64rem) {
+      border-right-style: var(--tw-border-style);
+      border-right-width: 1px;
+    }
+  }
+
+.lg\:border-border {
+    @media (width >= 64rem) {
+      border-color: var(--border);
+    }
+  }
+
+.lg\:border-s-border {
+    @media (width >= 64rem) {
+      border-inline-start-color: var(--border);
+    }
+  }
+
+.lg\:border-e-border {
+    @media (width >= 64rem) {
+      border-inline-end-color: var(--border);
+    }
+  }
+
+.lg\:border-t-border {
+    @media (width >= 64rem) {
+      border-top-color: var(--border);
+    }
+  }
+
+.lg\:border-r-border {
+    @media (width >= 64rem) {
+      border-right-color: var(--border);
+    }
+  }
+}

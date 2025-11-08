@@ -1,8 +1,0 @@
-/*! Utility: \[\active\&\]\:bg-background | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
-@layer utilities {
-.\[\.active\&\]\:bg-background {
-    .active& {
-      background-color: var(--background);
-    }
-  }
-}

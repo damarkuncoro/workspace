@@ -1,7 +1,0 @@
-/*! Utility: ease-out | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
-@layer utilities {
-.ease-out {
-    --tw-ease: var(--ease-out);
-    transition-timing-function: var(--ease-out);
-  }
-}

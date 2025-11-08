@@ -1,0 +1,13 @@
+/*! Utility: bg-white | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.bg-white {
+    background-color: var(--color-white);
+  }
+
+.bg-white\/70 {
+    background-color: color-mix(in srgb, #fff 70%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 70%, transparent);
+    }
+  }
+}

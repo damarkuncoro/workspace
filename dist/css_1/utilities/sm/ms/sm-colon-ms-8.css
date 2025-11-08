@@ -1,8 +1,0 @@
-/*! Utility: sm\:ms-8 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.sm\:ms-8 {
-    @media (width >= 40rem) {
-      margin-inline-start: calc(var(--spacing) * 8);
-    }
-  }
-}

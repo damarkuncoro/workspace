@@ -1,0 +1,352 @@
+/*! Utility: here | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.here {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-link & {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-link.& {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-label & {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-label.& {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-toggle & {
+      border-color: var(--border);
+    }
+
+.here > .kt-menu-toggle.& {
+      border-color: var(--border);
+    }
+
+.here {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-link & {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-link.& {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-label & {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-label.& {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-toggle & {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here > .kt-menu-toggle.& {
+      border-bottom-color: var(--color-gray-400);
+    }
+
+.here {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-link & {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-link.& {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-label & {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-label.& {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-toggle & {
+      border-bottom-color: var(--mono);
+    }
+
+.here > .kt-menu-toggle.& {
+      border-bottom-color: var(--mono);
+    }
+
+.here {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-link & {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-link.& {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-label & {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-label.& {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-toggle & {
+      border-bottom-color: var(--primary);
+    }
+
+.here > .kt-menu-toggle.& {
+      border-bottom-color: var(--primary);
+    }
+
+.here {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-link & {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-link.& {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-label & {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-label.& {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-toggle & {
+      background-color: var(--background);
+    }
+
+.here > .kt-menu-toggle.& {
+      background-color: var(--background);
+    }
+
+.here {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-link & {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-link.& {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-label & {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-label.& {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-toggle & {
+      background-color: transparent;
+    }
+
+.here > .kt-menu-toggle.& {
+      background-color: transparent;
+    }
+
+.here {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-link & {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-link.& {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-label & {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-label.& {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-toggle & {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here > .kt-menu-toggle.& {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+
+.here {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-link & {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-link.& {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-label & {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-label.& {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-toggle & {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here > .kt-menu-toggle.& {
+      --tw-font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-semibold);
+    }
+
+.here {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-link & {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-link.& {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-label & {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-label.& {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-toggle & {
+      color: var(--foreground);
+    }
+
+.here > .kt-menu-toggle.& {
+      color: var(--foreground);
+    }
+
+.here {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-link & {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-link.& {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-label & {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-label.& {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-toggle & {
+      color: var(--mono);
+    }
+
+.here > .kt-menu-toggle.& {
+      color: var(--mono);
+    }
+
+.here {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-link & {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-link.& {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-label & {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-label.& {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-toggle & {
+      color: var(--muted-foreground);
+    }
+
+.here > .kt-menu-toggle.& {
+      color: var(--muted-foreground);
+    }
+
+.here {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-link & {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-link.& {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-label & {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-label.& {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-toggle & {
+      color: var(--primary);
+    }
+
+.here > .kt-menu-toggle.& {
+      color: var(--primary);
+    }
+}

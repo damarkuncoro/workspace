@@ -1,0 +1,22 @@
+/*! Component: kt-header | Layer: components | Generated 2025-11-08 03:31:24 +0000 */
+@layer components {
+.kt-header {
+    height: var(--header-height);
+  }
+
+.kt-header-fixed .kt-wrapper {
+    padding-top: var(--header-height);
+  }
+
+.kt-header-fixed .kt-header {
+      inset-inline-start: var(--sidebar-width) !important;
+    }
+
+.kt-header-fixed .kt-wrapper {
+      padding-top: var(--header-height);
+    }
+
+.kt-header {
+    transition: inset-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  }
+}

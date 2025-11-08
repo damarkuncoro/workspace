@@ -1,0 +1,8 @@
+/*! Utility: dark\:stroke-violet-950 | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.dark\:stroke-violet-950 {
+    &:is(.dark *) {
+      stroke: var(--color-violet-950);
+    }
+  }
+}

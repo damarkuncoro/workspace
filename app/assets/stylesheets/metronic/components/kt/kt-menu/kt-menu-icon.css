@@ -1,0 +1,32 @@
+/*! Component: kt-menu-icon | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
+@layer components {
+.kt-menu-icon, .kt-menu-bullet, .kt-menu-badge, .kt-menu-arrow {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}
+/*! Component: kt-menu-icon | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
+@layer components {
+.kt-menu-icon {
+      margin-inline-end: calc(var(--spacing) * 2.5);
+      & i {
+        font-size: var(--text-lg);
+        line-height: var(--tw-leading, var(--text-lg--line-height));
+      }
+    }
+}
+/*! Component: kt-menu-icon | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
+@layer components {
+.kt-menu-icon i {
+        color: var(--muted-foreground);
+      }
+
+.kt-menu-icon i {
+          color: var(--primary);
+        }
+
+.kt-menu-icon i {
+            color: var(--primary);
+          }
+}

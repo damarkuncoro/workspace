@@ -1,6 +1,0 @@
-/*! Utility: me-1\25 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.me-1\.25 {
-    margin-inline-end: calc(var(--spacing) * 1.25);
-  }
-}

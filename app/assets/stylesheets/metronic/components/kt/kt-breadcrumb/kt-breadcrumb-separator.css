@@ -1,0 +1,9 @@
+/*! Component: kt-breadcrumb-separator | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
+@layer components {
+.kt-breadcrumb-separator {
+    svg {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+    }
+  }
+}

@@ -1,8 +1,0 @@
-/*! Utility: xl\:bg-cover | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.xl\:bg-cover {
-    @media (width >= 80rem) {
-      background-size: cover;
-    }
-  }
-}

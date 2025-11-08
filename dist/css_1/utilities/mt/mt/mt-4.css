@@ -1,6 +1,0 @@
-/*! Utility: mt-4 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.mt-4 {
-    margin-top: calc(var(--spacing) * 4);
-  }
-}

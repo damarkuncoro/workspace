@@ -1,0 +1,10 @@
+/*! Component: kt-toast-bottom-center | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
+@layer components {
+.kt-toast-bottom-center {
+      top: auto;
+      bottom: calc(var(--spacing) * 0);
+      left: calc(1/2 * 100%);
+      --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+}

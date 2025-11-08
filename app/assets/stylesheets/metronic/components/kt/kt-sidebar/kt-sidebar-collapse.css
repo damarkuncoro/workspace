@@ -1,0 +1,57 @@
+/*! Component: kt-sidebar-collapse | Layer: components | Generated 2025-11-08 03:31:24 +0000 */
+@layer components {
+.kt-sidebar-collapse {
+      --sidebar-width: var(--sidebar-width-collapse);
+    }
+
+.kt-sidebar-collapse .kt-sidebar {
+      transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    }
+
+.kt-sidebar-collapse .kt-sidebar.animating {
+      pointer-events: none;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:hover:not(.animating) {
+      width: var(--sidebar-default-width);
+      transition: width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .default-logo {
+      display: none;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .small-logo {
+      display: flex;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-link .kt-menu-title,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-link .kt-menu-arrow,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-link .kt-menu-badge,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-title,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-arrow,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-badge {
+      display: none;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-accordion {
+      display: none;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-heading {
+      visibility: hidden;
+      position: relative;
+    }
+
+.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-heading::before {
+      content: "...";
+      color: currentColor;
+      font-size: inherit;
+      position: absolute;
+      visibility: visible;
+      display: inline-block;
+      bottom: 50%;
+      inset-inline-start: 0;
+      margin-inline-start: 0.225rem;
+      transform: translateX(100%);
+    }
+
+.kt-sidebar-collapse .kt-sidebar .kt-sidebar-content {
+      overflow: hidden;
+    }
+}

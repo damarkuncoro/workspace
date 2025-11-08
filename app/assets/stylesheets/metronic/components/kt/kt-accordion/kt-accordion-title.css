@@ -1,0 +1,10 @@
+/*! Component: kt-accordion-title | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-accordion-title {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    color: var(--mono);
+  }
+}

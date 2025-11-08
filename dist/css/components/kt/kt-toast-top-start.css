@@ -1,8 +1,0 @@
-/*! Component: kt-toast-top-start | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-toast-top-start {
-      inset-inline-start: calc(var(--spacing) * 0);
-      top: calc(var(--spacing) * 0);
-      bottom: auto;
-    }
-}

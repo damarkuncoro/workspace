@@ -1,0 +1,9 @@
+/*! Component: kt-menu-toggle | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
+@layer components {
+.kt-menu-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+}

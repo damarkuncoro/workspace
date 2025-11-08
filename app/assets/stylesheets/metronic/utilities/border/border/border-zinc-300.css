@@ -1,0 +1,6 @@
+/*! Utility: border-zinc-300 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-zinc-300 {
+    border-color: var(--color-zinc-300);
+  }
+}

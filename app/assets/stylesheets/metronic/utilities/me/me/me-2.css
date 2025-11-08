@@ -1,0 +1,10 @@
+/*! Utility: me-2 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.me-2 {
+    margin-inline-end: calc(var(--spacing) * 2);
+  }
+
+.me-2\.5 {
+    margin-inline-end: calc(var(--spacing) * 2.5);
+  }
+}

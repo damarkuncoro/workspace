@@ -1,0 +1,7 @@
+/*! Utility: size-12 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.size-12 {
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
+  }
+}

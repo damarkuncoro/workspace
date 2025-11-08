@@ -1,8 +1,0 @@
-/*! Component: kt-table-wrapper | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
-@layer components {
-.kt-table-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: auto;
-  }
-}

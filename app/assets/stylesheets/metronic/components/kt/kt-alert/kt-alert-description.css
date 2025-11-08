@@ -1,0 +1,14 @@
+/*! Component: kt-alert-description | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-alert-description {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    & p {
+      margin-bottom: calc(var(--spacing) * 2);
+    }
+    & p {
+      --tw-leading: var(--leading-relaxed);
+      line-height: var(--leading-relaxed);
+    }
+  }
+}

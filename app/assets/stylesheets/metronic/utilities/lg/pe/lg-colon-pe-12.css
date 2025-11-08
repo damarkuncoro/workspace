@@ -1,0 +1,14 @@
+/*! Utility: lg\:pe-12 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.lg\:pe-12 {
+    @media (width >= 64rem) {
+      padding-inline-end: calc(var(--spacing) * 12);
+    }
+  }
+
+.lg\:pe-12\.5 {
+    @media (width >= 64rem) {
+      padding-inline-end: calc(var(--spacing) * 12.5);
+    }
+  }
+}

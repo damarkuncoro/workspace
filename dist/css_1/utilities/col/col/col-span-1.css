@@ -1,6 +1,0 @@
-/*! Utility: col-span-1 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.col-span-1 {
-    grid-column: span 1 / span 1;
-  }
-}

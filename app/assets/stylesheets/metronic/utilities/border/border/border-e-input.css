@@ -1,0 +1,6 @@
+/*! Utility: border-e-input | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-e-input {
+    border-inline-end-color: var(--input);
+  }
+}

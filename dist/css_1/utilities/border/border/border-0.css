@@ -1,7 +1,0 @@
-/*! Utility: border-0 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
-@layer utilities {
-.border-0 {
-    border-style: var(--tw-border-style);
-    border-width: 0px;
-  }
-}

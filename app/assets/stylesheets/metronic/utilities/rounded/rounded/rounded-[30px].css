@@ -1,0 +1,6 @@
+/*! Utility: rounded-\[30px\] | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.rounded-\[30px\] {
+    border-radius: 30px;
+  }
+}

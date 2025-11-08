@@ -1,0 +1,15 @@
+/*! Component: kt-dropdown-menu-separator | Layer: components | Generated 2025-11-08 03:31:19 +0000 */
+@layer components {
+.kt-dropdown-menu-separator {
+    margin-inline: calc(var(--spacing) * -2);
+    margin-block: calc(var(--spacing) * 2.5);
+    height: 1px;
+    background-color: var(--border);
+    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+      rotate: 180deg;
+    }
+    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+      transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+    }
+  }
+}

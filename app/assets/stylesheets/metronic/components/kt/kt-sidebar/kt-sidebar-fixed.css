@@ -1,0 +1,14 @@
+/*! Component: kt-sidebar-fixed | Layer: components | Generated 2025-11-08 03:31:24 +0000 */
+@layer components {
+.kt-sidebar-fixed .kt-wrapper {
+      padding-inline-start: var(--sidebar-width) !important;
+    }
+
+.kt-sidebar-fixed.kt-header-fixed .kt-header {
+      inset-inline-start: var(--sidebar-width) !important;
+    }
+
+.kt-sidebar-fixed.kt-header-fixed .kt-wrapper {
+      padding-top: var(--header-height);
+    }
+}

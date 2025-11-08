@@ -1,0 +1,7 @@
+/*! Component: kt-link-disabled | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-link-disabled {
+    pointer-events: none;
+    opacity: 50%;
+  }
+}

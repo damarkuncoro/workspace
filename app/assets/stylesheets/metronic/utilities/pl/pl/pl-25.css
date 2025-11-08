@@ -1,0 +1,6 @@
+/*! Utility: pl-2\5 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.pl-2\.5 {
+    padding-left: calc(var(--spacing) * 2.5);
+  }
+}

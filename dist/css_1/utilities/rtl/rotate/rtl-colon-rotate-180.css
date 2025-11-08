@@ -1,8 +1,0 @@
-/*! Utility: rtl\:rotate-180 | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
-@layer utilities {
-.rtl\:rotate-180 {
-    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
-      rotate: 180deg;
-    }
-  }
-}

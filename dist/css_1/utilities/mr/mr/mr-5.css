@@ -1,6 +1,0 @@
-/*! Utility: mr-5 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.mr-5 {
-    margin-right: calc(var(--spacing) * 5);
-  }
-}

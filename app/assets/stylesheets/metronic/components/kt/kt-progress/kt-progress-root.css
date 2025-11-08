@@ -1,0 +1,59 @@
+/*! Component: kt-progress | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
+@layer components {
+.kt-progress {
+    position: relative;
+    height: calc(var(--spacing) * 1);
+    width: 100%;
+    overflow: hidden;
+    border-radius: calc(infinity * 1px);
+    background-color: var(--secondary);
+  }
+
+.kt-progress-indicator {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    transform: translateX(calc(100 - var(--progress-value)));
+    border-radius: calc(infinity * 1px);
+    background-color: var(--primary);
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+.kt-progress-primary {
+    .kt-progress-indicator {
+      background-color: var(--primary);
+    }
+  }
+
+.kt-progress-success {
+    .kt-progress-indicator {
+      background-color: var(--color-green-500);
+    }
+  }
+
+.kt-progress-warning {
+    .kt-progress-indicator {
+      background-color: var(--color-yellow-500);
+    }
+  }
+
+.kt-progress-info {
+    .kt-progress-indicator {
+      background-color: var(--color-violet-500);
+    }
+  }
+
+.kt-progress-destructive {
+    .kt-progress-indicator {
+      background-color: var(--destructive);
+    }
+  }
+
+.kt-progress-mono {
+    .kt-progress-indicator {
+      background-color: var(--mono);
+    }
+  }
+}

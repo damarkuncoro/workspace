@@ -1,9 +1,0 @@
-/*! Component: kt-avatar-status-offline | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
-@layer components {
-.kt-avatar-status-offline {
-      background-color: var(--mono);
-      @supports (color: color-mix(in lab, red, red)) {
-        background-color: color-mix(in oklab, var(--mono) 50%, transparent);
-      }
-    }
-}

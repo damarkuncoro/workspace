@@ -1,0 +1,10 @@
+/*! Utility: bg-yellow-50 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.bg-yellow-50 {
+    background-color: var(--color-yellow-50);
+  }
+
+.bg-yellow-500 {
+    background-color: var(--color-yellow-500);
+  }
+}

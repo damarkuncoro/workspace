@@ -1,8 +1,0 @@
-/*! Component: kt-drawer-content | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
-@layer components {
-.kt-drawer-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: calc(var(--spacing) * 5);
-  }
-}

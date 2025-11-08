@@ -1,0 +1,7 @@
+/*! Utility: text-sm | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+}

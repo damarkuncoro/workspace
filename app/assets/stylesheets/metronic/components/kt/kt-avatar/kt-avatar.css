@@ -1,0 +1,10 @@
+/*! Component Root Index via @import | Layer: kt-avatar | Generated 2025-11-08 03:31:24 +0000 */
+@import url("./kt-avatar-fallback.css");
+@import url("./kt-avatar-image.css");
+@import url("./kt-avatar-indicator.css");
+@import url("./kt-avatar-root.css");
+@import url("./kt-avatar-status-away.css");
+@import url("./kt-avatar-status-busy.css");
+@import url("./kt-avatar-status-offline.css");
+@import url("./kt-avatar-status-online.css");
+@import url("./kt-avatar-status.css");

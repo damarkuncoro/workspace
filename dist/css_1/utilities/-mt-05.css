@@ -1,6 +1,0 @@
-/*! Utility: -mt-0\5 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.-mt-0\.5 {
-    margin-top: calc(var(--spacing) * -0.5);
-  }
-}

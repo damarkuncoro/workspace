@@ -1,0 +1,10 @@
+/*! Utility: has-checked\:\[\&_\checked\]\:flex | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.has-checked\:\[\&_\.checked\]\:flex {
+    &:has(*:checked) {
+      & .checked {
+        display: flex;
+      }
+    }
+  }
+}

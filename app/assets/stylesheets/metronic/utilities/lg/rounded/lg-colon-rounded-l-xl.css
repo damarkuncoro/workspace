@@ -1,0 +1,9 @@
+/*! Utility: lg\:rounded-l-xl | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.lg\:rounded-l-xl {
+    @media (width >= 64rem) {
+      border-top-left-radius: calc(var(--radius) + 4px);
+      border-bottom-left-radius: calc(var(--radius) + 4px);
+    }
+  }
+}

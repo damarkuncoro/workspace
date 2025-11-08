@@ -1,7 +1,0 @@
-/*! Utility: size-48 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.size-48 {
-    width: calc(var(--spacing) * 48);
-    height: calc(var(--spacing) * 48);
-  }
-}

@@ -1,0 +1,7 @@
+/*! Utility: -translate-x-1\/2 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+}

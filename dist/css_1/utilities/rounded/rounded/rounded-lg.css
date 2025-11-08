@@ -1,6 +1,0 @@
-/*! Utility: rounded-lg | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
-@layer utilities {
-.rounded-lg {
-    border-radius: var(--radius);
-  }
-}

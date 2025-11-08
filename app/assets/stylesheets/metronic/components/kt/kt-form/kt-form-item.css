@@ -1,0 +1,17 @@
+/*! Component: kt-form-item | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
+@layer components {
+.kt-form-item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2.5);
+  }
+
+.kt-form-item:has([aria-invalid='true']) {
+    .kt-form-message {
+      display: block;
+    }
+    .kt-form-description {
+      display: none;
+    }
+  }
+}

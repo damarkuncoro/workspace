@@ -1,0 +1,7 @@
+/*! Utility: translate-x-full | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.translate-x-full {
+    --tw-translate-x: 100%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+}

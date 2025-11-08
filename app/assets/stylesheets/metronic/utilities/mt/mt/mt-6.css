@@ -1,0 +1,6 @@
+/*! Utility: mt-6 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.mt-6 {
+    margin-top: calc(var(--spacing) * 6);
+  }
+}

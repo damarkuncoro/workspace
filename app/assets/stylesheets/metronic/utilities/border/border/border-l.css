@@ -1,0 +1,7 @@
+/*! Utility: border-l | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+}

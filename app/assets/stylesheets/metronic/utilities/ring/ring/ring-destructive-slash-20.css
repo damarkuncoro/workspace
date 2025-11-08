@@ -1,0 +1,9 @@
+/*! Utility: ring-destructive\/20 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.ring-destructive\/20 {
+    --tw-ring-color: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+    }
+  }
+}

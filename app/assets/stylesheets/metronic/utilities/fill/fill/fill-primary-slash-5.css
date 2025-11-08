@@ -1,0 +1,9 @@
+/*! Utility: fill-primary\/5 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.fill-primary\/5 {
+    fill: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      fill: color-mix(in oklab, var(--primary) 5%, transparent);
+    }
+  }
+}

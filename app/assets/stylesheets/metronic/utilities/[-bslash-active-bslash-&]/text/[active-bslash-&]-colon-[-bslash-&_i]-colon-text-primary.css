@@ -1,0 +1,10 @@
+/*! Utility: \[\active\&\]\:\[\&_i\]\:text-primary | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.\[\.active\&\]\:\[\&_i\]\:text-primary {
+    .active& {
+      & i {
+        color: var(--primary);
+      }
+    }
+  }
+}

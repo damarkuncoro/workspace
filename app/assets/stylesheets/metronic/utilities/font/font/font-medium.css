@@ -1,0 +1,7 @@
+/*! Utility: font-medium | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+}

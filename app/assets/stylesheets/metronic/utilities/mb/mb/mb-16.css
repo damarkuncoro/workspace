@@ -1,0 +1,6 @@
+/*! Utility: mb-16 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.mb-16 {
+    margin-bottom: calc(var(--spacing) * 16);
+  }
+}

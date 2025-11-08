@@ -1,9 +1,0 @@
-/*! Utility: before\:bottom-0 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
-@layer utilities {
-.before\:bottom-0 {
-    &::before {
-      content: var(--tw-content);
-      bottom: calc(var(--spacing) * 0);
-    }
-  }
-}

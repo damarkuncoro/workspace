@@ -1,8 +1,0 @@
-/*! Utility: data-\[kt-sticky-header\=on\]\:\[--header-height\:60px\] | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.data-\[kt-sticky-header\=on\]\:\[--header-height\:60px\] {
-    &[data-kt-sticky-header="on"] {
-      --header-height: 60px;
-    }
-  }
-}

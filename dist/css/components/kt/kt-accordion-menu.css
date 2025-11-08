@@ -1,9 +1,0 @@
-/*! Component: kt-accordion-menu | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-accordion-menu {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    row-gap: calc(var(--spacing) * 1);
-  }
-}

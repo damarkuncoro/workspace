@@ -1,0 +1,9 @@
+/*! Utility: text-muted-foreground\/60 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.text-muted-foreground\/60 {
+    color: var(--muted-foreground);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
+    }
+  }
+}

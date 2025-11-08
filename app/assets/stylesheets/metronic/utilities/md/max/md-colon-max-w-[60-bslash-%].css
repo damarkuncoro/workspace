@@ -1,0 +1,8 @@
+/*! Utility: md\:max-w-\[60\%\] | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.md\:max-w-\[60\%\] {
+    @media (width >= 48rem) {
+      max-width: 60%;
+    }
+  }
+}

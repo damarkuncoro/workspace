@@ -1,0 +1,8 @@
+/*! Utility: \[\&_\kt-step-icon\]\:text-primary | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.\[\&_\.kt-step-icon\]\:text-primary {
+    & .kt-step-icon {
+      color: var(--primary);
+    }
+  }
+}

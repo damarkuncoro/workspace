@@ -1,0 +1,14 @@
+/*! Utility: px-1 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
+
+.px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+
+.px-10 {
+    padding-inline: calc(var(--spacing) * 10);
+  }
+}

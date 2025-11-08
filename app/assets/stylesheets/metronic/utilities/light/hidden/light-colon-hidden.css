@@ -1,0 +1,8 @@
+/*! Utility: light\:hidden | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.light\:hidden {
+    &:not(.dark *) {
+      display: none;
+    }
+  }
+}

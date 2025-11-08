@@ -1,0 +1,12 @@
+/*! Component: kt-avatar-image | Layer: components | Generated 2025-11-08 03:31:17 +0000 */
+@layer components {
+.kt-avatar-image {
+    overflow: hidden;
+    border-radius: calc(infinity * 1px);
+    img {
+      aspect-ratio: 1 / 1;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+/*! Utility: grow | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.grow {
+    flex-grow: 1;
+  }
+
+.grow-0 {
+    flex-grow: 0;
+  }
+}

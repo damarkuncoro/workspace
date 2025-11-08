@@ -1,9 +1,0 @@
-/*! Component: kt-table-col | Layer: components | Generated 2025-11-07 03:03:25 +0000 */
-@layer components {
-.kt-table-col {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    cursor: pointer;
-  }
-}

@@ -1,8 +1,0 @@
-/*! Utility: lg\:text-right | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.lg\:text-right {
-    @media (width >= 64rem) {
-      text-align: right;
-    }
-  }
-}

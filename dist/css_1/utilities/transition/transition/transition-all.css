@@ -1,8 +1,0 @@
-/*! Utility: transition-all | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
-@layer utilities {
-.transition-all {
-    transition-property: all;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-}

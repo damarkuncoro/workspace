@@ -1,0 +1,6 @@
+/*! Utility: max-h-\[calc\(100dvh-10px\)\)\] | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.max-h-\[calc\(100dvh-10px\)\)\] {
+    max-height: calc(100dvh - 10px);
+  }
+}

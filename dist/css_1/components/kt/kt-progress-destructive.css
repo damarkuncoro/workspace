@@ -1,8 +1,0 @@
-/*! Component: kt-progress-destructive | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
-@layer components {
-.kt-progress-destructive {
-    .kt-progress-indicator {
-      background-color: var(--destructive);
-    }
-  }
-}

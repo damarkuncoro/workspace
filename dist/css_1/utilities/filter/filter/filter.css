@@ -1,6 +1,0 @@
-/*! Utility: filter | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
-@layer utilities {
-.filter {
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
-}

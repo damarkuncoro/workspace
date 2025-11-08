@@ -1,0 +1,10 @@
+/*! Utility: text-primary | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.text-primary {
+    color: var(--primary);
+  }
+
+.text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+}

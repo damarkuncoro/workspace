@@ -1,6 +1,0 @@
-/*! Utility: max-h-36 | Layer: utilities | Generated 2025-11-08 02:53:05 +0000 */
-@layer utilities {
-.max-h-36 {
-    max-height: calc(var(--spacing) * 36);
-  }
-}

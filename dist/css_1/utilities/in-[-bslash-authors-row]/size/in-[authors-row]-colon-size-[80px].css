@@ -1,9 +1,0 @@
-/*! Utility: in-\[\authors-row\]\:size-\[80px\] | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.in-\[\.authors-row\]\:size-\[80px\] {
-    :where(*:is(.authors-row)) & {
-      width: 80px;
-      height: 80px;
-    }
-  }
-}

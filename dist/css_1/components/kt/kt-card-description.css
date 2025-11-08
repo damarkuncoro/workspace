@@ -1,8 +1,0 @@
-/*! Component: kt-card-description | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
-@layer components {
-.kt-card-description {
-    font-size: var(--text-sm);
-    line-height: var(--tw-leading, var(--text-sm--line-height));
-    color: var(--muted-foreground);
-  }
-}

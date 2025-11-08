@@ -1,0 +1,11 @@
+/*! Component: kt-rating-input | Layer: components | Generated 2025-11-08 03:31:24 +0000 */
+@layer components {
+.kt-rating-input:checked ~ .kt-rating-label {
+    & .kt-rating-on {
+      display: none !important;
+    }
+    & .kt-rating-off {
+      display: inline-flex !important;
+    }
+  }
+}

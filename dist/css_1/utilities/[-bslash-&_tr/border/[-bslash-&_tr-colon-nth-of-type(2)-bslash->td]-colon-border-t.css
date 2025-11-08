@@ -1,9 +1,0 @@
-/*! Utility: \[\&_tr\:nth-of-type\(2\)\>td\]\:border-t | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
-@layer utilities {
-.\[\&_tr\:nth-of-type\(2\)\>td\]\:border-t {
-    & tr:nth-of-type(2)>td {
-      border-top-style: var(--tw-border-style);
-      border-top-width: 1px;
-    }
-  }
-}

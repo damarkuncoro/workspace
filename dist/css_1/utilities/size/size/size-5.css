@@ -1,7 +1,0 @@
-/*! Utility: size-5 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
-@layer utilities {
-.size-5 {
-    width: calc(var(--spacing) * 5);
-    height: calc(var(--spacing) * 5);
-  }
-}

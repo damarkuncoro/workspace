@@ -1,0 +1,170 @@
+/*! Utility: show | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.show {
+      display: flex !important;
+    }
+
+.show > .kt-menu-link & {
+      display: flex !important;
+    }
+
+.show > .kt-menu-link.& {
+      display: flex !important;
+    }
+
+.show > .kt-menu-label & {
+      display: flex !important;
+    }
+
+.show > .kt-menu-label.& {
+      display: flex !important;
+    }
+
+.show > .kt-menu-toggle & {
+      display: flex !important;
+    }
+
+.show > .kt-menu-toggle.& {
+      display: flex !important;
+    }
+
+.show {
+      display: none;
+    }
+
+.show > .kt-menu-link & {
+      display: none;
+    }
+
+.show > .kt-menu-link.& {
+      display: none;
+    }
+
+.show > .kt-menu-label & {
+      display: none;
+    }
+
+.show > .kt-menu-label.& {
+      display: none;
+    }
+
+.show > .kt-menu-toggle & {
+      display: none;
+    }
+
+.show > .kt-menu-toggle.& {
+      display: none;
+    }
+
+.show {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-link & {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-link.& {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-label & {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-label.& {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-toggle & {
+      display: inline-flex;
+    }
+
+.show > .kt-menu-toggle.& {
+      display: inline-flex;
+    }
+
+.show {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-link & {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-link.& {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-label & {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-label.& {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-toggle & {
+      color: var(--foreground);
+    }
+
+.show > .kt-menu-toggle.& {
+      color: var(--foreground);
+    }
+
+.show {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-link & {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-link.& {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-label & {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-label.& {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-toggle & {
+      color: var(--mono);
+    }
+
+.show > .kt-menu-toggle.& {
+      color: var(--mono);
+    }
+
+.show {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-link & {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-link.& {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-label & {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-label.& {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-toggle & {
+      color: var(--primary);
+    }
+
+.show > .kt-menu-toggle.& {
+      color: var(--primary);
+    }
+}

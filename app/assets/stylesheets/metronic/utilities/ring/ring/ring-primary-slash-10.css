@@ -1,0 +1,9 @@
+/*! Utility: ring-primary\/10 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.ring-primary\/10 {
+    --tw-ring-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+}

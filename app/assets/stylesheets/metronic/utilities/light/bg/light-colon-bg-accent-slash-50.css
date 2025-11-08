@@ -1,0 +1,11 @@
+/*! Utility: light\:bg-accent\/50 | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
+@layer utilities {
+.light\:bg-accent\/50 {
+    &:not(.dark *) {
+      background-color: var(--accent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+/*! Utility: ltr\:border-l | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
+@layer utilities {
+.ltr\:border-l {
+    &:where(:dir(ltr), [dir="ltr"], [dir="ltr"] *) {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 1px;
+    }
+  }
+}

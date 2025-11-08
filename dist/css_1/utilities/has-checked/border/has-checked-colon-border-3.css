@@ -1,9 +1,0 @@
-/*! Utility: has-checked\:border-3 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.has-checked\:border-3 {
-    &:has(*:checked) {
-      border-style: var(--tw-border-style);
-      border-width: 3px;
-    }
-  }
-}

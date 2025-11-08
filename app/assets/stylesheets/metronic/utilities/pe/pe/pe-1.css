@@ -1,0 +1,10 @@
+/*! Utility: pe-1 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.pe-1 {
+    padding-inline-end: calc(var(--spacing) * 1);
+  }
+
+.pe-10 {
+    padding-inline-end: calc(var(--spacing) * 10);
+  }
+}

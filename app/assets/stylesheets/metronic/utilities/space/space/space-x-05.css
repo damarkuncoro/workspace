@@ -1,0 +1,10 @@
+/*! Utility: space-x-0\5 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
+@layer utilities {
+.space-x-0\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 0.5) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 0.5) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
+}

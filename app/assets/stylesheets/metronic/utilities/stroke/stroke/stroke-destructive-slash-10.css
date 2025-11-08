@@ -1,0 +1,9 @@
+/*! Utility: stroke-destructive\/10 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.stroke-destructive\/10 {
+    stroke: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      stroke: color-mix(in oklab, var(--destructive) 10%, transparent);
+    }
+  }
+}

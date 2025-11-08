@@ -1,0 +1,7 @@
+/*! Utility: outline-2 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.outline-2 {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+}

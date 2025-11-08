@@ -1,0 +1,10 @@
+/*! Utility: bg-linear-to-t | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.bg-linear-to-t {
+    --tw-gradient-position: to top;
+    @supports (background-image: linear-gradient(in lab, red, red)) {
+      --tw-gradient-position: to top in oklab;
+    }
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+}

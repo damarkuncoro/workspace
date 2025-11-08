@@ -1,9 +1,0 @@
-/*! Component: kt-menu-separator | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
-@layer components {
-.kt-menu-separator {
-      margin-block: calc(var(--spacing) * 2);
-      border-bottom-style: var(--tw-border-style);
-      border-bottom-width: 1px;
-      border-color: var(--border);
-    }
-}

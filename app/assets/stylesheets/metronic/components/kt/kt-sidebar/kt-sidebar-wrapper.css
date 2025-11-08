@@ -1,0 +1,6 @@
+/*! Component: kt-sidebar-wrapper | Layer: components | Generated 2025-11-08 03:31:24 +0000 */
+@layer components {
+.kt-sidebar-wrapper {
+      width: var(--sidebar-default-width);
+    }
+}

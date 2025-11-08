@@ -1,0 +1,10 @@
+/*! Utility: pt-3 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+
+.pt-3\.5 {
+    padding-top: calc(var(--spacing) * 3.5);
+  }
+}

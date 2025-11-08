@@ -1,8 +1,0 @@
-/*! Utility: sm\:flex-row | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
-@layer utilities {
-.sm\:flex-row {
-    @media (width >= 40rem) {
-      flex-direction: row;
-    }
-  }
-}

@@ -1,0 +1,14 @@
+/*! Utility: py-3 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
+@layer utilities {
+.py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+
+.py-3\.5 {
+    padding-block: calc(var(--spacing) * 3.5);
+  }
+
+.py-3\.5\! {
+    padding-block: calc(var(--spacing) * 3.5) !important;
+  }
+}

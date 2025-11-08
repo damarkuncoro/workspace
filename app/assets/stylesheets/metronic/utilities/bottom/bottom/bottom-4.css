@@ -1,0 +1,6 @@
+/*! Utility: bottom-4 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
+@layer utilities {
+.bottom-4 {
+    bottom: calc(var(--spacing) * 4);
+  }
+}
