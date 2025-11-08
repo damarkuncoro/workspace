@@ -1,6 +1,6 @@
 <%#
-  Partial: Issues Table
-  Tujuan: Menampilkan daftar Issues menggunakan kt_card + kt_table.
+  Partial: Customers Table
+  Tujuan: Menampilkan daftar Customers menggunakan kt_card + kt_table.
   Prinsip: SRP & KISS — partial independen, menerima locals agar tidak bergantung instance variables.
   Locals yang diharapkan:
     - records: koleksi record (Array/ActiveRecord::Relation)
@@ -33,30 +33,15 @@
                   <div class="text-sm text-secondary-foreground"><%= record.try(:created_at) ? l(record.created_at) : '-' %></div>
                 </td>
                 <td>
-                  <%#
-                    Actions untuk Issues:
-                    - Karena Issues nested di bawah Customers/Employees, path Show/Edit perlu parent yang benar.
-                    - Gunakan association polymorphic `issueable` untuk menentukan parent.
-                  %>
+                  <%# Actions untuk Issues nested di Customer: gunakan parent customer untuk path %>
                   <% if (record.respond_to?(:persisted?) && record.persisted?) || record.try(:id).present? %>
-                    <% parent = record.try(:issueable) %>
-                    <% show_path = case parent&.class&.name
-                      when 'Customer' then protected_customer_issue_path(parent, record)
-                      when 'Employee' then protected_employee_issue_path(parent, record)
-                      else nil
-                    end %>
-                    <% edit_path = case parent&.class&.name
-                      when 'Customer' then edit_protected_customer_issue_path(parent, record)
-                      when 'Employee' then edit_protected_employee_issue_path(parent, record)
-                      else nil
-                    end %>
-
-                    <% if show_path && edit_path %>
+                    <% parent = record.try(:issueable) || local_assigns[:customer] %>
+                    <% if parent.present? %>
                       <div class="flex gap-2">
-                        <%= link_to show_path, class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <%= link_to protected_customer_issue_path(parent, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
                           <i class="ki-filled ki-eye"></i>
                         <% end %>
-                        <%= link_to edit_path, class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <%= link_to edit_protected_customer_issue_path(parent, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
                           <i class="ki-filled ki-pencil"></i>
                         <% end %>
                       </div>
@@ -76,26 +61,22 @@
       <div class="text-center py-8">
         <div class="flex flex-col items-center gap-4">
           <i class="ki-filled ki-question text-4xl text-muted-foreground"></i>
-          <h3 class="text-lg font-medium text-foreground">No issues found</h3>
-          <p class="text-sm text-secondary-foreground">Create your first issue to get started.</p>
-          <div class="flex gap-2 justify-center">
-            <%= link_to protected_issues_customers_path, class: 'kt-btn kt-btn-outline' do %>
-              <i class="ki-filled ki-user"></i>
-              Customer Issues
-            <% end %>
-            <%= link_to protected_issues_employees_path, class: 'kt-btn kt-btn-outline' do %>
-              <i class="ki-filled ki-people"></i>
-              Employee Issues
-            <% end %>
-          </div>
+          <h3 class="text-lg font-medium text-foreground">No customers found</h3>
+          <p class="text-sm text-secondary-foreground">Create your first customers to get started.</p>
+          <%# CTA untuk membuat Issue baru pada customer aktif %>
+          <%= link_to new_protected_customer_issue_path(local_assigns[:customer]), class: 'kt-btn kt-btn-primary' do %>
+            <i class="ki-filled ki-plus"></i>
+            New Issue
+          <% end %>
         </div>
       </div>
     <% end %>
   <% end %>
 
   <%= kt_card_footer(justify: 'justify-start') do %>
-    <%= link_to polymorphic_path([namespace, resource_plural]), class: 'kt-btn kt-btn-outline' do %>
-      <%= raw('<i class="ki-filled ki-arrow-left"></i> Back to Issues') %>
+    <%# Back ke halaman Customer %>
+    <%= link_to protected_customer_path(local_assigns[:customer]), class: 'kt-btn kt-btn-outline' do %>
+      <%= raw('<i class="ki-filled ki-arrow-left"></i> Back to Customer') %>
     <% end %>
   <% end %>
 <% end %>

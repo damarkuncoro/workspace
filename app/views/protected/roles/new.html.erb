@@ -1,11 +1,11 @@
 <%#
-  View: Edit Role
-  Tujuan: Form edit record dengan KT helpers.
+  View: New Role
+  Tujuan: Form pembuatan record baru dengan KT helpers.
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Edit Role',
-  subtitle: (defined?(@role) && @role.respond_to?(:name) ? @role.name : @role.try(:title) || @role.try(:id)) %>
+  title: 'New Role',
+  subtitle: 'Create a new Role' %>
 
 <%= render 'protected/roles/form' %>
 

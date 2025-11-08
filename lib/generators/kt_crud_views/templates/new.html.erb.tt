@@ -1,7 +1,7 @@
-<%#
+<%%#
   View: New <%= singular_name.titleize %>
   Tujuan: Form pembuatan record baru dengan KT helpers.
-%>
+<%% end %>
 
 <%%= render 'protected/shared/partials/page_header',
   title: 'New <%= singular_name.titleize %>',

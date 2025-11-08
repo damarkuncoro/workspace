@@ -1,8 +1,8 @@
-<%#
+<%%#
   View: <%= plural_name.titleize %> Index
   Tujuan: Header halaman dan tabel daftar menggunakan KT helpers.
   Prinsip: DRY — gunakan shared page_header dan partials/_table.
-%>
+<%% end %>
 
 <%%= render 'protected/shared/partials/page_header',
   title: '<%= plural_name.titleize %>',
@@ -11,4 +11,10 @@
     raw('<i class="ki-filled ki-plus"></i> New <%= singular_name.titleize %>')
   end) %>
 
-<%%= render '<%= File.join(options[:namespace], file_path.pluralize, 'partials', 'table') %>' %>
+<%%= render partial: '<%= File.join(options[:namespace], file_path.pluralize, 'partials', 'table') %>',
+  locals: {
+    records: @<%= plural_table_name %>,
+    namespace: :<%= options[:namespace] %>,
+    resource_singular: :<%= singular_table_name %>,
+    resource_plural: :<%= plural_table_name %>
+  } %>

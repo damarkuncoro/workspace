@@ -1,19 +1,19 @@
 <%#
-  Partial: Customers Form
+  Partial: Role Form
   Tujuan: Menyediakan form minimal yang bisa diadaptasi untuk model apapun.
   Catatan: Field dasar: name/title (jika ada), plus timestamps info hanya tampil.
 <% end %>
 
 <%= kt_card do %>
-  <%= kt_card_header(title: 'Customers Form') %>
+  <%= kt_card_header(title: 'Role Form') %>
   <%= kt_card_content do %>
-    <%# Gunakan form_with(model: (@resource || Resource.new)) agar aman saat instance nil %>
-    <%= form_with(model: (@issues_customer || Issues::Customers.new), class: 'grid gap-6') do |f| %>
+    <%# Gunakan form_with(model: (@role || Role.new)) agar aman saat instance nil %>
+    <%= form_with(model: (@role || Role.new), class: 'grid gap-6') do |f| %>
       <div class="grid gap-2">
         <label class="text-sm text-muted-foreground">Name/Title</label>
-        <% if @issues_customer.respond_to?(:name) %>
+        <% if @role.respond_to?(:name) %>
           <%= f.text_field :name, class: 'kt-input', placeholder: 'Enter name' %>
-        <% elsif @issues_customer.respond_to?(:title) %>
+        <% elsif @role.respond_to?(:title) %>
           <%= f.text_field :title, class: 'kt-input', placeholder: 'Enter title' %>
         <% else %>
           <%= f.text_field :id, class: 'kt-input', disabled: true %>
@@ -21,8 +21,8 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <%= f.submit((@issues_customer&.persisted?) ? 'Update' : 'Create', class: 'kt-btn kt-btn-primary') %>
-        <%= link_to 'Cancel', send(:protected_issues_customers_path), class: 'kt-btn kt-btn-secondary' %>
+        <%= f.submit((@role&.persisted?) ? 'Update' : 'Create', class: 'kt-btn kt-btn-primary') %>
+        <%= link_to 'Cancel', send(:protected_roles_path), class: 'kt-btn kt-btn-secondary' %>
       </div>
     <% end %>
   <% end %>

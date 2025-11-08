@@ -7,6 +7,9 @@ yang konsisten dengan komponen KT (Metronic) dan pola layout proyek.
 Cara Pakai:
 - Generate untuk resource sederhana:
   bin/rails g kt_crud_views Account --namespace=protected
+  bin/rails g kt_crud_views Role --namespace=protected
+  rails g kt_crud_views Issues/Issue --namespace=protected
+
 
 - Generate untuk plural/lowercase:
   bin/rails g kt_crud_views customers --namespace=protected

@@ -1,21 +1,17 @@
-<%# Customers Issues Edit: gunakan kt_card + kt_card_header + kt_card_content %>
-<div class="max-w-4xl mx-auto p-6">
-  <%= kt_card do %>
-    <%= kt_card_header title: 'Edit Issue', subtitle: "For customer: #{h(@customer.person_name)} • Issue ID: #{@issue.id}" %>
-    <%= kt_card_content(padding: 'p-6') do %>
-      <%= render 'form', issue: @issue, customer: @customer %>
-      <div class="mt-6 text-center">
-        <div class="flex justify-center space-x-4">
-          <%= link_to protected_customer_issue_path(@customer, @issue), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
-            <i class="ki-duotone ki-eye mr-2"></i>
-            View Issue
-          <% end %>
-          <%= link_to protected_customer_issues_path(@customer), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
-            <i class="ki-duotone ki-list mr-2"></i>
-            Back to Issues
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+<%#
+  View: Edit Customers
+  Tujuan: Form edit record dengan KT helpers.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Edit Customers',
+  subtitle: (defined?(@issues_customer) && @issues_customer.respond_to?(:name) ? @issues_customer.name : @issues_customer.try(:title) || @issues_customer.try(:id)) %>
+
+<%= render 'protected/issues/customers/form' %>
+
+<div class="flex justify-center mt-6">
+  <%= link_to send(:protected_issues_customers_path), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to Customers
   <% end %>
 </div>

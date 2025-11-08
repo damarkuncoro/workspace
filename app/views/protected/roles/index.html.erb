@@ -1,0 +1,20 @@
+<%#
+  View: Roles Index
+  Tujuan: Header halaman dan tabel daftar menggunakan KT helpers.
+  Prinsip: DRY — gunakan shared page_header dan partials/_table.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Roles',
+  subtitle: 'Manage Roles',
+  actions_html: (link_to(send(:new_protected_role_path), class: 'kt-btn kt-btn-primary') do
+    raw('<i class="ki-filled ki-plus"></i> New Role')
+  end) %>
+
+<%= render partial: 'protected/roles/partials/table',
+  locals: {
+    records: @roles,
+    namespace: :protected,
+    resource_singular: :role,
+    resource_plural: :roles
+  } %>

@@ -1,13 +1,16 @@
 class Protected::RolesController < Protected::BaseController
   before_action :set_roles, only: %i[show edit update]
 
+  def index
+    @roles = current_account.roles
+  end
   # GET /protected/roles
   def show
-    @roles = current_account.roles
+    @roles = current_account.roles.find(params[:id])
   end
 
   def edit
-    @roles = current_account.roles
+    @roles = current_account.roles.find(params[:id])
   end
 
   # PATCH/PUT /protected/roles

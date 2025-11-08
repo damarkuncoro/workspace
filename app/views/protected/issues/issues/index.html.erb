@@ -1,19 +1,30 @@
 <%#
-  View: Issues Index (Protected)
-  Tujuan: Selaraskan dengan pola Accounts Index menggunakan KT helpers dan partial table.
-  Prinsip: DRY, SRP, KISS — header menggunakan shared partial, table dipisah ke partial.
-%>
+  View: Issues Index
+  Tujuan: Header halaman dan tabel daftar menggunakan KT helpers.
+  Prinsip: DRY — gunakan shared page_header dan partials/_table.
+<% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Support Issues',
-  subtitle: 'Track and manage customer and employee support tickets',
-  actions_html: safe_join([
-    link_to(protected_issues_customers_path, class: 'kt-btn kt-btn-outline') do
-      raw('<i class="ki-filled ki-user"></i> Customer Issues')
-    end,
-    link_to(protected_issues_employees_path, class: 'kt-btn kt-btn-outline') do
-      raw('<i class="ki-filled ki-people"></i> Employee Issues')
-    end
-  ]) %>
+  title: 'Issues',
+  subtitle: 'Manage Issues',
+  actions_html: (content_tag(:div, class: 'flex gap-2') do
+    # Actions: tautan menuju halaman Issues untuk Customers dan Employees
+    concat(
+      link_to(protected_issues_customers_path, class: 'kt-btn kt-btn-outline') do
+        raw('<i class="ki-filled ki-user"></i> Customer Issues')
+      end
+    )
+    concat(
+      link_to(protected_issues_employees_path, class: 'kt-btn kt-btn-outline') do
+        raw('<i class="ki-filled ki-people"></i> Employee Issues')
+      end
+    )
+  end) %>
 
-<%= render 'protected/issues/issues/partials/table' %>
+<%= render partial: 'protected/issues/issues/partials/table',
+  locals: {
+    records: @issues,
+    namespace: :protected,
+    resource_singular: :issue,
+    resource_plural: :issues
+  } %>

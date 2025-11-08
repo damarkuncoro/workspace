@@ -1,11 +1,11 @@
-<%#
+<%%#
   View: Edit <%= singular_name.titleize %>
   Tujuan: Form edit record dengan KT helpers.
-%>
+<%% end %>
 
 <%%= render 'protected/shared/partials/page_header',
   title: 'Edit <%= singular_name.titleize %>',
-  subtitle: (defined?(@<%= singular_table_name %>) && @<%= singular_table_name %>.respond_to?(:name) ? @<%= singular_table_name %>.name : @<%= singular_table_name %>.try(:title) || @<%= singular_table_name %>.id) %>
+  subtitle: (defined?(@<%= singular_table_name %>) && @<%= singular_table_name %>.respond_to?(:name) ? @<%= singular_table_name %>.name : @<%= singular_table_name %>.try(:title) || @<%= singular_table_name %>.try(:id)) %>
 
 <%%= render '<%= File.join(options[:namespace], file_path.pluralize, 'form') %>' %>
 

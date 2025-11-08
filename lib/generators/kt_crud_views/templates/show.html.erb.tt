@@ -1,11 +1,11 @@
-<%#
+<%%#
   View: <%= singular_name.titleize %> Show
   Tujuan: Menampilkan detail <%= singular_name %> menggunakan KT card + info rows.
-%>
+<%% end %>
 
 <%%= render 'protected/shared/partials/page_header',
   title: '<%= singular_name.titleize %> Details',
-  subtitle: (defined?(@<%= singular_table_name %>) && @<%= singular_table_name %>.respond_to?(:name) ? @<%= singular_table_name %>.name : @<%= singular_table_name %>.try(:title) || @<%= singular_table_name %>.id) %>
+  subtitle: (defined?(@<%= singular_table_name %>) && @<%= singular_table_name %>.respond_to?(:name) ? @<%= singular_table_name %>.name : @<%= singular_table_name %>.try(:title) || @<%= singular_table_name %>.try(:id)) %>
 
 <%%= kt_grid(cols: 1) do %>
   <%%= kt_column(span: 1) do %>
@@ -16,17 +16,17 @@
           <div class="grid gap-3">
             <div>
               <label class="text-sm text-muted-foreground">ID</label>
-              <div class="text-sm text-foreground"><%%= @<%= singular_table_name %>.id %></div>
+              <div class="text-sm text-foreground"><%%= @<%= singular_table_name %>.try(:id) %></div>
             </div>
             <div>
               <label class="text-sm text-muted-foreground">Created At</label>
-              <div class="text-sm text-foreground"><%%= l(@<%= singular_table_name %>.created_at) %></div>
+              <div class="text-sm text-foreground"><%%= (@<%= singular_table_name %>.respond_to?(:created_at) && @<%= singular_table_name %>.created_at) ? l(@<%= singular_table_name %>.created_at) : '-' %></div>
             </div>
           </div>
           <div class="grid gap-3">
             <div>
               <label class="text-sm text-muted-foreground">Updated At</label>
-              <div class="text-sm text-foreground"><%%= l(@<%= singular_table_name %>.updated_at) %></div>
+              <div class="text-sm text-foreground"><%%= (@<%= singular_table_name %>.respond_to?(:updated_at) && @<%= singular_table_name %>.updated_at) ? l(@<%= singular_table_name %>.updated_at) : '-' %></div>
             </div>
           </div>
         </div>
@@ -36,9 +36,11 @@
 <%% end %>
 
 <div class="flex gap-2 mt-6">
-  <%%= link_to send(:<%= edit_path_helper %>, @<%= singular_table_name %>), class: 'kt-btn kt-btn-warning' do %>
-    <i class="ki-filled ki-pencil"></i>
-    Edit
+  <%% if @<%= singular_table_name %>.respond_to?(:persisted?) && @<%= singular_table_name %>.persisted? %>
+    <%%= link_to send(:<%= edit_path_helper %>, @<%= singular_table_name %>), class: 'kt-btn kt-btn-warning' do %>
+      <i class="ki-filled ki-pencil"></i>
+      Edit
+    <%% end %>
   <%% end %>
   <%%= link_to send(:<%= index_path_helper %>), class: 'kt-btn kt-btn-outline' do %>
     <i class="ki-filled ki-arrow-left"></i>

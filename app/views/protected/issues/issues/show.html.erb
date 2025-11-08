@@ -1,0 +1,49 @@
+<%#
+  View: Issue Show
+  Tujuan: Menampilkan detail issue menggunakan KT card + info rows.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Issue Details',
+  subtitle: (defined?(@issues_issue) && @issues_issue.respond_to?(:name) ? @issues_issue.name : @issues_issue.try(:title) || @issues_issue.try(:id)) %>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_header(title: 'Issue Info') %>
+      <%= kt_card_content do %>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="grid gap-3">
+            <div>
+              <label class="text-sm text-muted-foreground">ID</label>
+              <div class="text-sm text-foreground"><%= @issues_issue.try(:id) %></div>
+            </div>
+            <div>
+              <label class="text-sm text-muted-foreground">Created At</label>
+              <div class="text-sm text-foreground"><%= (@issues_issue.respond_to?(:created_at) && @issues_issue.created_at) ? l(@issues_issue.created_at) : '-' %></div>
+            </div>
+          </div>
+          <div class="grid gap-3">
+            <div>
+              <label class="text-sm text-muted-foreground">Updated At</label>
+              <div class="text-sm text-foreground"><%= (@issues_issue.respond_to?(:updated_at) && @issues_issue.updated_at) ? l(@issues_issue.updated_at) : '-' %></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<div class="flex gap-2 mt-6">
+  <% if @issues_issue.respond_to?(:persisted?) && @issues_issue.persisted? %>
+    <%= link_to send(:edit_protected_issues_issue_path, @issues_issue), class: 'kt-btn kt-btn-warning' do %>
+      <i class="ki-filled ki-pencil"></i>
+      Edit
+    <% end %>
+  <% end %>
+  <%= link_to send(:protected_issues_issues_path), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to Issues
+  <% end %>
+</div>

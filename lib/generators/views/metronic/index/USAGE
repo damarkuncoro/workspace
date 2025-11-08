@@ -1,0 +1,8 @@
+Description:
+  Generate Metronic index view and table partial for nested Issues under Customers.
+
+Example:
+  bin/rails g views:metronic:index issues/customers --namespace=protected
+
+Options:
+  --namespace=protected    # Place generated views under the given namespace directory

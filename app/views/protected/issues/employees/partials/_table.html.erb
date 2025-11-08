@@ -1,0 +1,70 @@
+<!--
+  Template: _table.html.erb (partials/table)
+  Tujuan: Menampilkan tabel daftar Issues untuk Employee dengan aksi Show/Edit.
+  Catatan: Menggunakan parent employee sebagai konteks rute nested.
+-->
+
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <h3 class="kt-card-title">Issues</h3>
+  <% end %>
+
+  <%= kt_card_content do %>
+    <div class="overflow-x-auto">
+      <table class="kt-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (records || []).each do |record| %>
+            <tr>
+              <td><%= record.try(:id) %></td>
+              <td><%= record.try(:title) %></td>
+              <td><%= record.try(:status) %></td>
+              <td>
+                <%# Actions untuk Issues nested: gunakan parent sebagai konteks rute %>
+                <% if (record.respond_to?(:persisted?) && record.persisted?) || record.try(:id).present? %>
+                  <% parent = record.try(:issueable) || local_assigns[:employee] %>
+                  <% if parent.present? %>
+                    <div class="flex gap-2">
+                      <%= link_to protected_employee_issue_path(parent, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <% end %>
+                      <%= link_to edit_protected_employee_issue_path(parent, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-sm text-muted-foreground">-</span>
+                  <% end %>
+                <% else %>
+                  <span class="text-sm text-muted-foreground">-</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+
+  <%= kt_card_footer(justify: 'justify-between') do %>
+    <div class="flex gap-2">
+      <%# CTA untuk membuat Issue baru pada parent aktif %>
+      <%= link_to new_protected_employee_issue_path(local_assigns[:employee]), class: 'kt-btn kt-btn-primary' do %>
+        <i class="ki-filled ki-plus"></i>
+        New Issue
+      <% end %>
+    </div>
+
+    <%# Back ke halaman parent %>
+    <%= link_to protected_employee_path(local_assigns[:employee]), class: 'kt-btn kt-btn-outline' do %>
+      <i class="ki-filled ki-arrow-left"></i> Back to Employee
+    <% end %>
+  <% end %>
+<% end %>

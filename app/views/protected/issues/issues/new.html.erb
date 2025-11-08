@@ -1,0 +1,17 @@
+<%#
+  View: New Issue
+  Tujuan: Form pembuatan record baru dengan KT helpers.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'New Issue',
+  subtitle: 'Create a new Issue' %>
+
+<%= render 'protected/issues/issues/form' %>
+
+<div class="flex justify-center mt-6">
+  <%= link_to send(:protected_issues_issues_path), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to Issues
+  <% end %>
+</div>

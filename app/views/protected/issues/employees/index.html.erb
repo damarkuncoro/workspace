@@ -1,16 +1,28 @@
-<%# View: Issues Employees Index (Tailwind + Helpers) %>
-<%# Tujuan: Gunakan helper layout (kt_page, kt_content_grid) agar DRY/KISS %>
+<!--
+  Template: index.html.erb
+  Tujuan: Halaman index untuk daftar Issues nested pada Employee.
+  Catatan: Mengasumsikan controller menyediakan @employee dan @issues.
+-->
+
+<%# Bangun actions_html terlebih dahulu menggunakan capture untuk menghindari nested ERB %>
+<% actions_html = capture do %>
+  <%= link_to new_protected_employee_issue_path(@employee), class: 'kt-btn kt-btn-primary' do %>
+    <i class="ki-filled ki-plus"></i> New Issue
+  <% end %>
+<% end %>
+
 <%= render 'protected/shared/partials/page_header',
   title: 'Employee Issues',
-  subtitle: @employee.person_name,
-  actions_html: (link_to new_protected_employee_issue_path(@employee), class: 'kt-btn kt-btn-primary' do
-    raw('<i class="ki-filled ki-plus mr-2"></i> New Issue')
-  end) %>
+  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Employee'),
+  actions_html: actions_html %>
 
-  <%= kt_content_grid(cols: 1, gap: 'gap-6') do %>
-  
-    <%= render 'protected/issues/employees/partials/filters_toolbar' %>
-    <%= render 'protected/issues/employees/partials/list_card' %>
-    <%= render 'protected/issues/employees/partials/index_bottom_actions' %>
-  
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <%= render partial: 'protected/issues/employees/partials/table',
+      locals: {
+        records: (@issues || @issues_employees || []),
+        namespace: :protected,
+        employee: @employee
+      } %>
+  <% end %>
 <% end %>

@@ -1,16 +1,17 @@
-<%# Customers Issues New: gunakan kt_card + kt_card_header + kt_card_content untuk keseragaman %>
-<div class="max-w-4xl mx-auto p-6">
-  <%= kt_card do %>
-    <%# Header: pindahkan tombol Back ke actions untuk konsistensi dengan show/edit %>
-    <%= kt_card_header title: 'Create New Issue',
-      subtitle: "For customer: #{h(@customer.person_name)} (ID: #{@customer.customer_code})",
-      actions: link_to(protected_customer_issues_path(@customer), class: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500') do
-        raw('<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>') +
-        'Back to Issues'
-      end %>
-    <%= kt_card_content(padding: 'p-6') do %>
-      <%= render 'form', issue: @issue, customer: @customer %>
-      <%# Aksi Back dipindahkan ke header; konten tetap fokus pada form %>
-    <% end %>
+<%#
+  View: New Customers
+  Tujuan: Form pembuatan record baru dengan KT helpers.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'New Customers',
+  subtitle: 'Create a new Customers' %>
+
+<%= render 'protected/issues/customers/form' %>
+
+<div class="flex justify-center mt-6">
+  <%= link_to send(:protected_issues_customers_path), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to Customers
   <% end %>
 </div>

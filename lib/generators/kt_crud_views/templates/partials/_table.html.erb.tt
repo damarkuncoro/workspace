@@ -1,13 +1,19 @@
-<%#
+<%%#
   Partial: <%= plural_name.titleize %> Table
   Tujuan: Menampilkan daftar <%= plural_name.humanize %> menggunakan kt_card + kt_table.
-  Prinsip: SRP — table terpisah dari index untuk reuse.
-  Pemakaian: <%%= render '<%= File.join(options[:namespace], file_path.pluralize, 'partials', 'table') %>' %>
-%>
+  Prinsip: SRP & KISS — partial independen, menerima locals agar tidak bergantung instance variables.
+  Locals yang diharapkan:
+    - records: koleksi record (Array/ActiveRecord::Relation)
+    - namespace: simbol namespace routes, contoh: :protected
+    - resource_singular: simbol singular resource, contoh: :role
+    - resource_plural: simbol plural resource, contoh: :roles
+<%% end %>
+
 
 <%%= kt_card do %>
   <%%= kt_card_content do %>
-    <%% if @<%= plural_table_name %>.any? %>
+    <%%# Guard: gunakan present? agar aman saat koleksi nil %>
+    <%% if (records || []).present? %>
       <div class="kt-scrollable-x-auto">
         <%%= kt_table(class: 'kt-table-border') do %>
           <thead>
@@ -18,23 +24,27 @@
             </tr>
           </thead>
           <tbody>
-            <%% @<%= plural_table_name %>.each do |record| %>
+            <%% (records || []).each do |record| %>
               <tr>
                 <td>
                   <div class="text-sm font-medium text-foreground"><%%= record.respond_to?(:name) ? record.name : record.try(:title) || record.id %></div>
                 </td>
                 <td>
-                  <div class="text-sm text-secondary-foreground"><%%= l(record.created_at) %></div>
+                  <div class="text-sm text-secondary-foreground"><%%= record.try(:created_at) ? l(record.created_at) : '-' %></div>
                 </td>
                 <td>
-                  <div class="flex gap-2">
-                    <%%= link_to send(:<%= show_path_helper %>, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
-                      <i class="ki-filled ki-eye"></i>
-                    <%% end %>
-                    <%%= link_to send(:<%= edit_path_helper %>, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
-                      <i class="ki-filled ki-pencil"></i>
-                    <%% end %>
-                  </div>
+                  <%% if (record.respond_to?(:persisted?) && record.persisted?) || record.try(:id).present? %>
+                    <div class="flex gap-2">
+                      <%%= link_to polymorphic_path([namespace, record]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <%% end %>
+                      <%%= link_to edit_polymorphic_path([namespace, record]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <%% end %>
+                    </div>
+                  <%% else %>
+                    <span class="text-sm text-muted-foreground">-</span>
+                  <%% end %>
                 </td>
               </tr>
             <%% end %>
@@ -47,7 +57,10 @@
           <i class="ki-filled ki-question text-4xl text-muted-foreground"></i>
           <h3 class="text-lg font-medium text-foreground">No <%= plural_name.humanize.downcase %> found</h3>
           <p class="text-sm text-secondary-foreground">Create your first <%= singular_name %> to get started.</p>
-          <%%= link_to send(:<%= new_path_helper %>), class: 'kt-btn kt-btn-primary' do %>
+          <%%# Dukung sub-namespace satu tingkat: jika file_path mengandung '/', sisipkan sub-namespace sebelum class %>
+          <%%= link_to new_polymorphic_path([
+            namespace<% if file_path.include?('/') %>, :<%= file_path.split('/').first %><% end %>, <%= class_name %>
+          ]), class: 'kt-btn kt-btn-primary' do %>
             <i class="ki-filled ki-plus"></i>
             New <%= singular_name.titleize %>
           <%% end %>
@@ -57,7 +70,7 @@
   <%% end %>
 
   <%%= kt_card_footer(justify: 'justify-start') do %>
-    <%%= link_to send(:<%= index_path_helper %>), class: 'kt-btn kt-btn-outline' do %>
+    <%%= link_to polymorphic_path([namespace, resource_plural]), class: 'kt-btn kt-btn-outline' do %>
       <%%= raw('<i class="ki-filled ki-arrow-left"></i> Back to <%= plural_name.titleize %>') %>
     <%% end %>
   <%% end %>

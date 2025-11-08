@@ -1,0 +1,17 @@
+<%#
+  View: Edit Issue
+  Tujuan: Form edit record dengan KT helpers.
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Edit Issue',
+  subtitle: (defined?(@issues_issue) && @issues_issue.respond_to?(:name) ? @issues_issue.name : @issues_issue.try(:title) || @issues_issue.try(:id)) %>
+
+<%= render 'protected/issues/issues/form' %>
+
+<div class="flex justify-center mt-6">
+  <%= link_to send(:protected_issues_issues_path), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to Issues
+  <% end %>
+</div>
