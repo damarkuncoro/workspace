@@ -1,0 +1,34 @@
+<!--
+  Template: _form.html.erb (partials/form)
+  Tujuan: Form untuk membuat Issue baru pada <%= @parent_singular.capitalize %>.
+  Catatan: Menggunakan parent <%= @parent_singular %> sebagai konteks rute nested.
+-->
+
+<%% parent = local_assigns[:<%= @parent_singular %>] %>
+<%% record = local_assigns[:record] || Issue.new %>
+
+<%%= form_with model: record, url: <%= @namespace %>_<%= @parent_singular %>_issues_path(parent), method: :post, local: true do |f| %>
+  <div class="space-y-4">
+    <div>
+      <label class="kt-label">Title</label>
+      <%%= f.text_field :title, class: 'kt-input', required: true %>
+    </div>
+    <div>
+      <label class="kt-label">Status</label>
+      <%%= f.text_field :status, class: 'kt-input' %>
+    </div>
+    <div>
+      <label class="kt-label">Description</label>
+      <%%= f.text_area :description, class: 'kt-textarea' %>
+    </div>
+  </div>
+
+  <%%= kt_card_footer(justify: 'justify-end') do %>
+    <div class="flex gap-2">
+      <%%= link_to <%= @namespace %>_<%= @parent_singular %>_issues_path(parent), class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-filled ki-arrow-left"></i> Cancel
+      <%% end %>
+      <%%= f.submit 'Create Issue', class: 'kt-btn kt-btn-primary' %>
+    </div>
+  <%% end %>
+<%% end %>

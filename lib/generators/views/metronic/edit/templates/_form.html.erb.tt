@@ -1,0 +1,35 @@
+<!--
+  Template: _form.html.erb (partials/form)
+  Tujuan: Form edit Issue pada <%= @parent_singular.capitalize %>.
+  Catatan: Gunakan model array [parent, record] agar rute nested otomatis,
+  dan method menyesuaikan (PATCH untuk edit, POST untuk baru jika dipakai ulang).
+-->
+
+<%% parent = local_assigns[:<%= @parent_singular %>] %>
+<%% record = local_assigns[:record] || Issue.new %>
+
+<%%= form_with model: [:<%= @namespace %>, parent, record], local: true do |f| %>
+  <div class="space-y-4">
+    <div>
+      <label class="kt-label">Title</label>
+      <%%= f.text_field :title, class: 'kt-input', required: true %>
+    </div>
+    <div>
+      <label class="kt-label">Status</label>
+      <%%= f.text_field :status, class: 'kt-input' %>
+    </div>
+    <div>
+      <label class="kt-label">Description</label>
+      <%%= f.text_area :description, class: 'kt-textarea' %>
+    </div>
+  </div>
+
+  <%%= kt_card_footer(justify: 'justify-end') do %>
+    <div class="flex gap-2">
+      <%%= link_to <%= @namespace %>_<%= @parent_singular %>_issues_path(parent), class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-filled ki-arrow-left"></i> Cancel
+      <%% end %>
+      <%%= f.submit 'Save Changes', class: 'kt-btn kt-btn-primary' %>
+    </div>
+  <%% end %>
+<%% end %>

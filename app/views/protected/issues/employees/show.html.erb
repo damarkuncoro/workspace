@@ -1,12 +1,31 @@
-<%# View: Issues Employees Show (Tailwind) %>
-<%# Tujuan: Tampilkan details + description dalam grid Tailwind %>
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <div class="grid grid-cols-1 gap-6">
-    <div>
-      <%= render 'protected/issues/employees/partials/details_card' %>
-    </div>
-    <div>
-      <%= render 'protected/issues/employees/partials/description_card' %>
-    </div>
-  </div>
-</div>
+<!--
+  Template: show.html.erb
+  Tujuan: Halaman show untuk Issue nested pada Employee.
+  Catatan: Mengasumsikan controller menyediakan @employee dan @issue.
+-->
+
+<%# Bangun actions_html untuk menghindari nested ERB dalam render %>
+<% actions_html = capture do %>
+  <%= link_to edit_protected_employee_issue_path(@employee, @issue), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-pencil"></i> Edit Issue
+  <% end %>
+  <%= link_to protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i> Back to Employee Issues
+  <% end %>
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Issue Detail',
+  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Employee'),
+  actions_html: actions_html %>
+
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <%= render partial: 'protected/issues/employees/partials/details',
+      locals: {
+        record: (@issue || nil),
+        namespace: :protected,
+        employee: @employee
+      } %>
+  <% end %>
+<% end %>

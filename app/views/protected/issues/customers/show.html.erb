@@ -1,49 +1,31 @@
-<%#
-  View: Customers Show
-  Tujuan: Menampilkan detail customers menggunakan KT card + info rows.
+<!--
+  Template: show.html.erb
+  Tujuan: Halaman show untuk Issue nested pada Customer.
+  Catatan: Mengasumsikan controller menyediakan @customer dan @issue.
+-->
+
+<%# Bangun actions_html untuk menghindari nested ERB dalam render %>
+<% actions_html = capture do %>
+  <%= link_to edit_protected_customer_issue_path(@customer, @issue), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-pencil"></i> Edit Issue
+  <% end %>
+  <%= link_to protected_customer_issues_path(@customer), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i> Back to Customer Issues
+  <% end %>
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Customers Details',
-  subtitle: (defined?(@issues_customer) && @issues_customer.respond_to?(:name) ? @issues_customer.name : @issues_customer.try(:title) || @issues_customer.try(:id)) %>
+  title: 'Issue Detail',
+  subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer'),
+  actions_html: actions_html %>
 
-<%= kt_grid(cols: 1) do %>
-  <%= kt_column(span: 1) do %>
-    <%= kt_card do %>
-      <%= kt_card_header(title: 'Customers Info') %>
-      <%= kt_card_content do %>
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="grid gap-3">
-            <div>
-              <label class="text-sm text-muted-foreground">ID</label>
-              <div class="text-sm text-foreground"><%= @issues_customer.try(:id) %></div>
-            </div>
-            <div>
-              <label class="text-sm text-muted-foreground">Created At</label>
-              <div class="text-sm text-foreground"><%= (@issues_customer.respond_to?(:created_at) && @issues_customer.created_at) ? l(@issues_customer.created_at) : '-' %></div>
-            </div>
-          </div>
-          <div class="grid gap-3">
-            <div>
-              <label class="text-sm text-muted-foreground">Updated At</label>
-              <div class="text-sm text-foreground"><%= (@issues_customer.respond_to?(:updated_at) && @issues_customer.updated_at) ? l(@issues_customer.updated_at) : '-' %></div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <%= render partial: 'protected/issues/customers/partials/details',
+      locals: {
+        record: (@issue || nil),
+        namespace: :protected,
+        customer: @customer
+      } %>
   <% end %>
 <% end %>
-
-<div class="flex gap-2 mt-6">
-  <% if @issues_customer.respond_to?(:persisted?) && @issues_customer.persisted? %>
-    <%= link_to send(:edit_protected_issues_customer_path, @issues_customer), class: 'kt-btn kt-btn-warning' do %>
-      <i class="ki-filled ki-pencil"></i>
-      Edit
-    <% end %>
-  <% end %>
-  <%= link_to send(:protected_issues_customers_path), class: 'kt-btn kt-btn-outline' do %>
-    <i class="ki-filled ki-arrow-left"></i>
-    Back to Customers
-  <% end %>
-</div>

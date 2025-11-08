@@ -1,0 +1,31 @@
+<!--
+  Template: _details.html.erb (partials/details)
+  Tujuan: Menampilkan detail Issue untuk Customer.
+  Catatan: Menggunakan parent customer sebagai konteks rute nested.
+-->
+
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <h3 class="kt-card-title">Issue</h3>
+  <% end %>
+
+  <%= kt_card_content do %>
+    <div class="space-y-2">
+      <div class="flex gap-2"><strong>ID:</strong> <span><%= record.try(:id) %></span></div>
+      <div class="flex gap-2"><strong>Title:</strong> <span><%= record.try(:title) %></span></div>
+      <div class="flex gap-2"><strong>Status:</strong> <span><%= record.try(:status) %></span></div>
+      <div class="flex gap-2"><strong>Description:</strong> <span><%= record.try(:description) %></span></div>
+    </div>
+  <% end %>
+
+  <%= kt_card_footer(justify: 'justify-start') do %>
+    <div class="flex gap-2">
+      <%= link_to edit_protected_customer_issue_path(local_assigns[:customer], record), class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-filled ki-pencil"></i> Edit
+      <% end %>
+      <%= link_to protected_customer_issues_path(local_assigns[:customer]), class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-filled ki-arrow-left"></i> Back to Customer Issues
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

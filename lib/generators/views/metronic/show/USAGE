@@ -1,0 +1,16 @@
+Description:
+    Generate Metronic show view for nested resource (e.g., issues/employees).
+
+Example:
+    rails g views:metronic:show issues/employees --namespace=protected
+    rails g views:metronic:show issues/employees --namespace=protected --force"
+
+Options:
+    --namespace=protected   Namespace for views
+
+Notes:
+    - Assumes nested routes exist like:
+      protected_employee_issue_path(parent, issue)
+      edit_protected_employee_issue_path(parent, issue)
+      protected_employee_issues_path(parent)
+    - The generator renders a page header with actions and a details partial.

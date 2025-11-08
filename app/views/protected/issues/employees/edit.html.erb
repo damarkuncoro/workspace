@@ -1,14 +1,28 @@
-<%# View: Issues Employees Edit (Tailwind + Helpers) %>
-<%# Tujuan: Render form_card dengan actions_html Tailwind agar konsisten %>
-<%= render 'protected/issues/employees/partials/form_card',
-  title: "Edit Issue untuk: #{@employee.person_name}",
-  actions_html: (
-    link_to(protected_employee_issue_path(@employee, @issue), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50') do
-      raw('<i class="ki-duotone ki-eye mr-2"></i> Show Issue')
-    end +
-    link_to(protected_employee_issues_path(@employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2') do
-      raw('<i class="ki-duotone ki-list mr-2"></i> Back to Issues')
-    end
-  ),
-  issue: @issue,
-  employee: @employee %>
+<!--
+  Template: edit.html.erb
+  Tujuan: Halaman edit Issue untuk Employee.
+  Catatan: Mengasumsikan controller menyediakan @employee dan @issue (atau Issue.new).
+-->
+
+<%# Bangun actions_html untuk menghindari nested ERB dalam render %>
+<% actions_html = capture do %>
+  <%= link_to protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i> Back to Employee Issues
+  <% end %>
+<% end %>
+
+<%= render 'protected/shared/partials/page_header',
+  title: 'Edit Issue',
+  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Employee'),
+  actions_html: actions_html %>
+
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <%= render partial: 'protected/issues/employees/partials/form',
+      locals: {
+        record: (@issue || Issue.new),
+        namespace: :protected,
+        employee: @employee
+      } %>
+  <% end %>
+<% end %>

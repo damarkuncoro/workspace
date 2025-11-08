@@ -1,0 +1,28 @@
+<!--
+  Template: new.html.erb
+  Tujuan: Halaman new Issue untuk <%= @parent_singular.capitalize %>.
+  Catatan: Mengasumsikan controller menyediakan @<%= @parent_singular %> dan @issue (atau Issue.new).
+-->
+
+<%%# Bangun actions_html untuk menghindari nested ERB dalam render %>
+<%% actions_html = capture do %>
+  <%%= link_to <%= @namespace %>_<%= @parent_singular %>_issues_path(@<%= @parent_singular %>), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i> Back to <%= @parent_singular.capitalize %> Issues
+  <%% end %>
+<%% end %>
+
+<%%= render 'protected/shared/partials/page_header',
+  title: 'New Issue',
+  subtitle: (@<%= @parent_singular %>&.respond_to?(:person_name) ? @<%= @parent_singular %>.person_name : '<%= @parent_singular.capitalize %>'),
+  actions_html: actions_html %>
+
+<%%= kt_card do %>
+  <%%= kt_card_content do %>
+    <%%= render partial: 'protected/issues/<%= @parent_plural %>/partials/form',
+      locals: {
+        record: (@issue || Issue.new),
+        namespace: :<%= @namespace %>,
+        <%= @parent_singular %>: @<%= @parent_singular %>
+      } %>
+  <%% end %>
+<%% end %>
