@@ -1,0 +1,11 @@
+/*! Utility: dark\:bg-orange-950\/30 | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.dark\:bg-orange-950\/30 {
+    &:is(.dark *) {
+      background-color: color-mix(in srgb, oklch(26.6% 0.079 36.259) 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-orange-950) 30%, transparent);
+      }
+    }
+  }
+}

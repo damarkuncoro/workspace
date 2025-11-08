@@ -1,0 +1,9 @@
+/*! Utility: stroke-primary\/10 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.stroke-primary\/10 {
+    stroke: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      stroke: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+}

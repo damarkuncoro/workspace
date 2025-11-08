@@ -1,0 +1,8 @@
+/*! Utility: border-spacing-0 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-spacing-0 {
+    --tw-border-spacing-x: calc(var(--spacing) * 0);
+    --tw-border-spacing-y: calc(var(--spacing) * 0);
+    border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
+  }
+}

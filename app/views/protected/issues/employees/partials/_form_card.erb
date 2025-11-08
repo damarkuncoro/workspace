@@ -9,16 +9,16 @@
       <% if defined?(actions_html) && actions_html.present? %>
         <%= actions_html %>
       <% else %>
-        <%# Fallback actions Tailwind %>
+        <%# Fallback actions: gunakan util metronic kt-btn untuk konsistensi %>
         <% if defined?(issue) && issue.respond_to?(:persisted?) && issue.persisted? %>
-          <%= link_to protected_employee_issue_path(employee, issue), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+          <%= link_to protected_employee_issue_path(employee, issue), class: 'kt-btn kt-btn-outline' do %>
             <i class="ki-duotone ki-eye mr-2"></i> Show Issue
           <% end %>
         <% end %>
-        <%= link_to protected_employee_issues_path(employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+        <%= link_to protected_employee_issues_path(employee), class: 'kt-btn kt-btn-outline' do %>
           <i class="ki-duotone ki-list mr-2"></i> Back to Issues
         <% end %>
-        <%= link_to protected_employee_path(employee), class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+        <%= link_to protected_employee_path(employee), class: 'kt-btn kt-btn-outline' do %>
           <i class="ki-duotone ki-user mr-2"></i> Back to Employee
         <% end %>
       <% end %>

@@ -1,0 +1,8 @@
+/*! Utility: lg\:grid-cols-5 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:grid-cols-5 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+}

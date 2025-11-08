@@ -1,0 +1,6 @@
+/*! Utility: border-t-border | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-t-border {
+    border-top-color: var(--border);
+  }
+}

@@ -1,0 +1,32 @@
+/*! Utility: outline | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+
+.outline-2 {
+    outline-style: var(--tw-outline-style);
+    outline-width: 2px;
+  }
+
+.outline-3 {
+    outline-style: var(--tw-outline-style);
+    outline-width: 3px;
+  }
+
+.outline-background {
+    outline-color: var(--background);
+  }
+
+.outline-gray-50 {
+    outline-color: var(--color-gray-50);
+  }
+
+.outline-muted\/70 {
+    outline-color: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      outline-color: color-mix(in oklab, var(--muted) 70%, transparent);
+    }
+  }
+}

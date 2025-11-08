@@ -1,0 +1,8 @@
+/*! Utility: dark\:inline-block | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.dark\:inline-block {
+    &:is(.dark *) {
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+/*! Component: kt-menu-badge | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-menu-badge, .kt-menu-arrow {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}
+/*! Component: kt-menu-badge | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-menu-badge {
+      margin-inline-start: calc(var(--spacing) * 2.5);
+    }
+}
+/*! Component: kt-menu-badge | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-menu-badge,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-title,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-arrow,	.demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu > .kt-menu-item > .kt-menu-label .kt-menu-badge {
+      display: none;
+    }
+}

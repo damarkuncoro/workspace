@@ -3,11 +3,11 @@
 <%= render 'protected/shared/partials/page_header',
   title: 'Employee Issues',
   subtitle: @employee.person_name,
-  actions_html: (link_to new_protected_employee_issue_path(@employee), class: 'inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700' do
+  actions_html: (link_to new_protected_employee_issue_path(@employee), class: 'kt-btn kt-btn-primary' do
     raw('<i class="ki-filled ki-plus mr-2"></i> New Issue')
   end) %>
 
-  <%= kt_content_grid(cols: 1) do %>
+  <%= kt_content_grid(cols: 1, gap: 'gap-6') do %>
   
     <%= render 'protected/issues/employees/partials/filters_toolbar' %>
     <%= render 'protected/issues/employees/partials/list_card' %>

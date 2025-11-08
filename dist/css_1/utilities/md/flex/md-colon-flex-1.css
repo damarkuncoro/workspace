@@ -1,0 +1,8 @@
+/*! Utility: md\:flex-1 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.md\:flex-1 {
+    @media (width >= 48rem) {
+      flex: 1;
+    }
+  }
+}

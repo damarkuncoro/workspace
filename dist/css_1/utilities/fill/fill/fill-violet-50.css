@@ -1,0 +1,6 @@
+/*! Utility: fill-violet-50 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.fill-violet-50 {
+    fill: var(--color-violet-50);
+  }
+}

@@ -1,0 +1,6 @@
+/*! Utility: w-12 | Layer: utilities | Generated 2025-11-08 02:53:05 +0000 */
+@layer utilities {
+.w-12 {
+    width: calc(var(--spacing) * 12);
+  }
+}

@@ -1,0 +1,8 @@
+/*! Utility: md\:w-80 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.md\:w-80 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 80);
+    }
+  }
+}

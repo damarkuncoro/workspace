@@ -1,0 +1,21 @@
+/*! Component: kt-btn-mono | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-btn-mono {
+    background-color: var(--mono);
+    color: var(--mono-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--mono);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--mono) 90%, transparent);
+        }
+      }
+    }
+    &.active {
+      background-color: var(--mono);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--mono) 90%, transparent);
+      }
+    }
+  }
+}

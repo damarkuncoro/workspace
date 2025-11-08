@@ -1,0 +1,7 @@
+/*! Component: kt-accordion-menu-sub | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-accordion-menu-sub {
+    width: 100%;
+    row-gap: calc(var(--spacing) * 1);
+  }
+}

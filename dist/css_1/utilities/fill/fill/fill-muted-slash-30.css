@@ -1,0 +1,9 @@
+/*! Utility: fill-muted\/30 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.fill-muted\/30 {
+    fill: var(--muted);
+    @supports (color: color-mix(in lab, red, red)) {
+      fill: color-mix(in oklab, var(--muted) 30%, transparent);
+    }
+  }
+}

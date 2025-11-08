@@ -1,0 +1,519 @@
+/*! Component: kt-btn | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-btn {
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    --tw-ring-offset-color: var(--background);
+    transition-property: color,box-shadow;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    &:focus-visible {
+      --tw-outline-style: none;
+      outline-style: none;
+      @media (forced-colors: active) {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    &:disabled {
+      pointer-events: none;
+    }
+    &:disabled {
+      opacity: 50%;
+    }
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    &:focus-visible {
+      --tw-ring-color: var(--ring);
+    }
+    &:focus-visible {
+      --tw-ring-offset-width: 2px;
+      --tw-ring-offset-shadow: var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    }
+    flex-shrink: 0;
+    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    --tw-shadow-color: rgba(0,0,0,0.05);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-shadow-color: color-mix(in oklab, rgba(0,0,0,0.05) var(--tw-shadow-alpha), transparent);
+    }
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+.kt-btn {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--primary);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+        }
+      }
+    }
+    &.active {
+      background-color: var(--primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+      }
+    }
+  }
+
+.kt-btn-mono {
+    background-color: var(--mono);
+    color: var(--mono-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--mono);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--mono) 90%, transparent);
+        }
+      }
+    }
+    &.active {
+      background-color: var(--mono);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--mono) 90%, transparent);
+      }
+    }
+  }
+
+.kt-btn-destructive {
+    background-color: var(--destructive);
+    color: var(--destructive-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--destructive);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+        }
+      }
+    }
+    &.active {
+      background-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+      }
+    }
+  }
+
+.kt-btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--secondary);
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        color: var(--foreground);
+      }
+    }
+    &.active {
+      background-color: var(--secondary);
+    }
+    &.active {
+      color: var(--foreground);
+    }
+    i {
+      color: var(--muted-foreground);
+    }
+    svg {
+      color: var(--muted-foreground);
+    }
+    &:hover,	&.active {
+      i {
+        color: var(--muted-foreground);
+      }
+      svg {
+        color: var(--muted-foreground);
+      }
+    }
+  }
+
+.kt-btn-outline {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--input);
+    background-color: var(--background);
+    color: var(--secondary-foreground);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--accent);
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        color: var(--accent-foreground);
+      }
+    }
+    &.active {
+      background-color: var(--accent);
+    }
+    &.active {
+      color: var(--accent-foreground);
+    }
+    i {
+      color: var(--muted-foreground);
+    }
+    svg {
+      color: var(--muted-foreground);
+    }
+    &:hover,	&.active {
+      i {
+        color: var(--secondary-foreground);
+      }
+      svg {
+        color: var(--secondary-foreground);
+      }
+    }
+    &.kt-btn-primary {
+      border-color: var(--primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--primary) 10%, transparent);
+      }
+      background-color: var(--primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+      }
+      color: var(--primary);
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--primary);
+        }
+      }
+      &:hover {
+        @media (hover: hover) {
+          color: var(--primary-foreground);
+        }
+      }
+      &.active {
+        border-color: var(--primary);
+      }
+      &.active {
+        background-color: var(--primary);
+      }
+      &.active {
+        color: var(--primary-foreground);
+      }
+      i {
+        color: var(--primary);
+      }
+      svg {
+        color: var(--primary);
+      }
+      &:hover,	&.active {
+        i {
+          color: var(--primary-foreground);
+        }
+        svg {
+          color: var(--primary-foreground);
+        }
+      }
+    }
+    &.kt-btn-destructive {
+      border-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--destructive) 10%, transparent);
+      }
+      background-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--destructive) 10%, transparent);
+      }
+      color: var(--destructive);
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--destructive);
+        }
+      }
+      &:hover {
+        @media (hover: hover) {
+          color: var(--destructive-foreground);
+        }
+      }
+      &.active {
+        border-color: var(--destructive);
+      }
+      &.active {
+        background-color: var(--destructive);
+      }
+      &.active {
+        color: var(--destructive-foreground);
+      }
+      i {
+        color: var(--destructive);
+      }
+      svg {
+        color: var(--destructive);
+      }
+      &:hover,	&.active {
+        i {
+          color: var(--destructive-foreground);
+        }
+        svg {
+          color: var(--destructive-foreground);
+        }
+      }
+    }
+  }
+
+.kt-btn-ghost {
+    background-color: transparent;
+    color: var(--accent-foreground);
+    --tw-shadow: 0 0 #0000;
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--accent);
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        color: var(--accent-foreground);
+      }
+    }
+    &.active {
+      background-color: var(--accent);
+    }
+    &.active {
+      color: var(--accent-foreground);
+    }
+    &:not(.kt-btn-primary):not(.kt-btn-destructive) {
+      i {
+        color: var(--muted-foreground);
+      }
+      svg {
+        color: var(--muted-foreground);
+      }
+      &:hover,	&.active {
+        i {
+          color: var(--secondary-foreground);
+        }
+        svg {
+          color: var(--secondary-foreground);
+        }
+      }
+    }
+    &.kt-btn-primary {
+      color: var(--primary);
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--primary);
+        }
+      }
+      &:hover {
+        @media (hover: hover) {
+          color: var(--primary-foreground);
+        }
+      }
+      &.active {
+        background-color: var(--primary);
+      }
+      &.active {
+        color: var(--primary-foreground);
+      }
+    }
+    &.kt-btn-destructive {
+      color: var(--destructive);
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--destructive);
+        }
+      }
+      &:hover {
+        @media (hover: hover) {
+          color: var(--destructive-foreground);
+        }
+      }
+      &.active {
+        background-color: var(--destructive);
+      }
+      &.active {
+        color: var(--destructive-foreground);
+      }
+    }
+  }
+
+.kt-btn-dim {
+    background-color: transparent;
+    color: var(--muted-foreground);
+    --tw-shadow: 0 0 #0000;
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    &:hover {
+      @media (hover: hover) {
+        background-color: transparent;
+      }
+    }
+    &:hover {
+      @media (hover: hover) {
+        color: var(--foreground);
+      }
+    }
+    &.active {
+      background-color: transparent;
+    }
+    &.active {
+      color: var(--foreground);
+    }
+    i {
+      color: var(--muted-foreground);
+    }
+    svg {
+      color: var(--muted-foreground);
+    }
+    &:hover,	&.active {
+      i {
+        color: var(--secondary-foreground);
+      }
+      svg {
+        color: var(--secondary-foreground);
+      }
+    }
+  }
+
+.kt-btn {
+    height: calc(var(--spacing) * 8.5);
+    gap: calc(var(--spacing) * 1.5);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 3);
+    font-size: 0.8125rem;
+    --tw-leading: var(--text-sm--line-height);
+    line-height: var(--text-sm--line-height);
+    svg {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+    }
+    i {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+    &.kt-btn-icon {
+      width: calc(var(--spacing) * 8.5);
+      height: calc(var(--spacing) * 8.5);
+      padding: calc(var(--spacing) * 0);
+    }
+  }
+
+.kt-btn-lg {
+    height: calc(var(--spacing) * 10);
+    gap: calc(var(--spacing) * 1.5);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    svg {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+    }
+    i {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+    &.kt-btn-icon {
+      width: calc(var(--spacing) * 10);
+      height: calc(var(--spacing) * 10);
+      padding: calc(var(--spacing) * 0);
+    }
+  }
+
+.kt-btn-sm {
+    height: calc(var(--spacing) * 7);
+    gap: calc(var(--spacing) * 1.25);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 2.5);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    svg {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+    }
+    i {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+    &.kt-btn-icon {
+      width: calc(var(--spacing) * 7);
+      height: calc(var(--spacing) * 7);
+      padding: calc(var(--spacing) * 0);
+    }
+  }
+}
+/*! Component: kt-btn | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-btn) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+
+.kt-btn {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+
+.kt-btn.kt-btn-outline {
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+
+.kt-btn + .kt-input,	.kt-input-addon + .kt-input {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+
+.kt-btn),	.kt-input:has(+ .kt-input-addon) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+}
+/*! Component: kt-btn | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-btn {
+      flex-grow: 1;
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-inline-end-style: var(--tw-border-style);
+      border-inline-end-width: 0px;
+      border-color: var(--border);
+      background-color: transparent;
+      color: var(--accent-foreground);
+      &:last-child {
+        border-inline-end-style: var(--tw-border-style);
+        border-inline-end-width: 1px;
+        border-color: var(--border);
+      }
+      &:not(:first-child) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+      }
+      &:not(:last-child) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+      svg,	i {
+        color: var(--muted-foreground);
+      }
+      input[type='checkbox'],	input[type='radio'] {
+        display: none;
+      }
+      &:hover,	&:focus,	&:active,	&:has(input:checked),	&.active {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+        svg,	i {
+          color: var(--accent-foreground);
+        }
+      }
+    }
+}

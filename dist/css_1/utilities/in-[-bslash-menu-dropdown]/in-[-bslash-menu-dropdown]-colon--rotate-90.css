@@ -1,0 +1,8 @@
+/*! Utility: in-\[\menu-dropdown\]\:-rotate-90 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.in-\[\.menu-dropdown\]\:-rotate-90 {
+    :where(*:is(.menu-dropdown)) & {
+      rotate: calc(90deg * -1);
+    }
+  }
+}

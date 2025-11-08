@@ -1,0 +1,6 @@
+/*! Utility: text-yellow-500 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.text-yellow-500 {
+    color: var(--color-yellow-500);
+  }
+}

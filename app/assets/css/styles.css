@@ -1,4 +1,5 @@
 /*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
+
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -5404,7 +5405,9 @@
       border-bottom-color: var(--mono);
     }
   }
+
   .kt-menu-item-active\:border-b-primary {
+
     &.kt-menu-item.active {
       border-bottom-color: var(--primary);
     }
@@ -5430,6 +5433,7 @@
       border-bottom-color: var(--primary);
     }
   }
+
   .kt-menu-item-active\:\!bg-background {
     &.kt-menu-item.active {
       background-color: var(--background) !important;
@@ -5688,19 +5692,19 @@
     .kt-menu-item.active > .kt-menu-link & {
       color: var(--primary);
     }
-    .kt-menu-item.active > .kt-menu-link.& {
+    .kt-menu-item.active > .kt-menu-link & {
       color: var(--primary);
     }
     .kt-menu-item.active > .kt-menu-label & {
       color: var(--primary);
     }
-    .kt-menu-item.active > .kt-menu-label.& {
+    .kt-menu-item.active > .kt-menu-label & {
       color: var(--primary);
     }
     .kt-menu-item.active > .kt-menu-toggle & {
       color: var(--primary);
     }
-    .kt-menu-item.active > .kt-menu-toggle.& {
+    .kt-menu-item.active > .kt-menu-toggle & {
       color: var(--primary);
     }
   }
@@ -5735,7 +5739,7 @@
         background-color: var(--primary);
       }
     }
-    .kt-menu-item.active > .kt-menu-label.& {
+    .kt-menu-item.active > .kt-menu-label & {
       &::before {
         content: var(--tw-content);
         background-color: var(--primary);
@@ -5747,7 +5751,7 @@
         background-color: var(--primary);
       }
     }
-    .kt-menu-item.active > .kt-menu-toggle.& {
+    .kt-menu-item.active > .kt-menu-toggle & {
       &::before {
         content: var(--tw-content);
         background-color: var(--primary);
@@ -6428,6 +6432,7 @@
     }
   }
 }
+
 :root {
   --background: var(--color-white);
   --foreground: var(--color-zinc-950);
@@ -6475,6 +6480,15 @@
   --input: var(--color-zinc-800);
   --ring: var(--color-zinc-600);
 }
+.appearance-none {
+  background-image: none !important;
+  box-shadow: none;
+  background-color: transparent;
+  border: 0;
+  width: 0;
+  height: 0;
+}
+
 @layer components {
   .kt-avatar {
     position: relative;
@@ -11197,14 +11211,7 @@
     }
   }
 }
-.appearance-none {
-  background-image: none !important;
-  box-shadow: none;
-  background-color: transparent;
-  border: 0;
-  width: 0;
-  height: 0;
-}
+
 @layer components {
   .apexcharts-text, .apexcharts-title-text, .apexcharts-legend-text {
     font-family: inherit !important;
@@ -11829,6 +11836,7 @@
     transition: inset-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-timing);
   }
 }
+
 @property --tw-border-spacing-x {
   syntax: "<length>";
   inherits: false;
@@ -12145,6 +12153,7 @@
     opacity: 0.5;
   }
 }
+
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {

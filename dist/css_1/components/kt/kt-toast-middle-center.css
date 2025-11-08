@@ -1,0 +1,11 @@
+/*! Component: kt-toast-middle-center | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-toast-middle-center {
+      top: calc(1/2 * 100%);
+      left: calc(1/2 * 100%);
+      --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+      --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+}

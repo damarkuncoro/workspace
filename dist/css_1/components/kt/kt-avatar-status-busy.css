@@ -1,0 +1,6 @@
+/*! Component: kt-avatar-status-busy | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-avatar-status-busy {
+      background-color: var(--color-yellow-600);
+    }
+}

@@ -1,0 +1,70 @@
+/*! Utility: ring | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.ring {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+.ring-1 {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+.ring-2 {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+.ring-background {
+    --tw-ring-color: var(--background);
+  }
+
+.ring-blue-300 {
+    --tw-ring-color: var(--color-blue-300);
+  }
+
+.ring-border {
+    --tw-ring-color: var(--border);
+  }
+
+.ring-destructive\/20 {
+    --tw-ring-color: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+    }
+  }
+
+.ring-green-200 {
+    --tw-ring-color: var(--color-green-200);
+  }
+
+.ring-input {
+    --tw-ring-color: var(--input);
+  }
+
+.ring-primary\/10 {
+    --tw-ring-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+
+.ring-primary\/20 {
+    --tw-ring-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-ring-color: color-mix(in oklab, var(--primary) 20%, transparent);
+    }
+  }
+
+.ring-violet-50 {
+    --tw-ring-color: var(--color-violet-50);
+  }
+
+.ring-violet-200 {
+    --tw-ring-color: var(--color-violet-200);
+  }
+
+.ring-yellow-200 {
+    --tw-ring-color: var(--color-yellow-200);
+  }
+}

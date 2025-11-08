@@ -1,0 +1,8 @@
+/*! Utility: lg\:pe-12\5 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:pe-12\.5 {
+    @media (width >= 64rem) {
+      padding-inline-end: calc(var(--spacing) * 12.5);
+    }
+  }
+}

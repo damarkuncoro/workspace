@@ -1,0 +1,8 @@
+/*! Utility: md\:gap-10 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.md\:gap-10 {
+    @media (width >= 48rem) {
+      gap: calc(var(--spacing) * 10);
+    }
+  }
+}

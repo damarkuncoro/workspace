@@ -1,0 +1,8 @@
+/*! Utility: group-has-checked\:inline | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.group-has-checked\:inline {
+    &:is(:where(.group):has(*:checked) *) {
+      display: inline;
+    }
+  }
+}

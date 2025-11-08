@@ -1,0 +1,9 @@
+/*! Utility: lg\:text-sm | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:text-sm {
+    @media (width >= 64rem) {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+}

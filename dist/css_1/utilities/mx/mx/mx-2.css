@@ -1,0 +1,6 @@
+/*! Utility: mx-2 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
+@layer utilities {
+.mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
+  }
+}

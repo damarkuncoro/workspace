@@ -1,0 +1,10 @@
+/*! Utility: ltr\:\[\&_tr\:nth-of-type\(12\)\>td\:last-child\]\:rounded-br-xl | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.ltr\:\[\&_tr\:nth-of-type\(12\)\>td\:last-child\]\:rounded-br-xl {
+    &:where(:dir(ltr), [dir="ltr"], [dir="ltr"] *) {
+      & tr:nth-of-type(12)>td:last-child {
+        border-bottom-right-radius: calc(var(--radius) + 4px);
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+/*! Utility: gap-7 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.gap-7 {
+    gap: calc(var(--spacing) * 7);
+  }
+
+.gap-7\.5 {
+    gap: calc(var(--spacing) * 7.5);
+  }
+}

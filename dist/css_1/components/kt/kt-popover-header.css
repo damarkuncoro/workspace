@@ -1,0 +1,13 @@
+/*! Component: kt-popover-header | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-popover-header {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: var(--border);
+    padding-inline: calc(var(--spacing) * 2.5);
+    padding-block: calc(var(--spacing) * 2);
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+    color: var(--mono);
+  }
+}

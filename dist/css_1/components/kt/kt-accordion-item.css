@@ -1,0 +1,19 @@
+/*! Component: kt-accordion-item | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-accordion-item {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: var(--border);
+    &:last-child {
+      border-bottom-style: var(--tw-border-style);
+      border-bottom-width: 0px;
+    }
+  }
+
+.kt-accordion-item {
+      border-radius: var(--radius);
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: var(--border);
+    }
+}

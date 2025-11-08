@@ -1,0 +1,8 @@
+/*! Utility: last\:me-5 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.last\:me-5 {
+    &:last-child {
+      margin-inline-end: calc(var(--spacing) * 5);
+    }
+  }
+}

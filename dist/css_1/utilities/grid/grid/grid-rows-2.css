@@ -1,0 +1,6 @@
+/*! Utility: grid-rows-2 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.grid-rows-2 {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+}

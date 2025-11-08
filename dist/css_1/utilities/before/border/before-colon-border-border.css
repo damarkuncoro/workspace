@@ -1,0 +1,9 @@
+/*! Utility: before\:border-border | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.before\:border-border {
+    &::before {
+      content: var(--tw-content);
+      border-color: var(--border);
+    }
+  }
+}

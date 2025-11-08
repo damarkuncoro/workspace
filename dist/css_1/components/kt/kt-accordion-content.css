@@ -1,0 +1,15 @@
+/*! Component: kt-accordion-content | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-accordion-content {
+    overflow: hidden;
+    transition-property: height;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+.kt-accordion-content {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 1px;
+      border-color: var(--border);
+    }
+}

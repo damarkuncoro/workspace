@@ -1,0 +1,13 @@
+/*! Component: kt-checkbox-sm | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-checkbox-sm {
+    width: calc(var(--spacing) * 4.5);
+    height: calc(var(--spacing) * 4.5);
+    &:checked,	&[aria-checked='true'] {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'%3E%3Cpath d='M8.4932 0.233321L4.03986 4.68665L1.4532 2.09999C1.32829 1.97582 1.15932 1.90613 0.983198 1.90613C0.807074 1.90613 0.638106 1.97582 0.513198 2.09999C0.38903 2.2249 0.319336 2.39386 0.319336 2.56999C0.319336 2.74611 0.38903 2.91508 0.513198 3.03999L3.5732 6.09999C3.69811 6.22415 3.86707 6.29385 4.0432 6.29385C4.21932 6.29385 4.38829 6.22415 4.5132 6.09999L9.4332 1.17999C9.49568 1.11801 9.54528 1.04428 9.57912 0.963038C9.61297 0.881799 9.6304 0.794662 9.6304 0.706655C9.6304 0.618647 9.61297 0.53151 9.57912 0.45027C9.54528 0.369031 9.49568 0.295296 9.4332 0.233321C9.30829 0.109154 9.13932 0.0394592 8.9632 0.0394592C8.78707 0.0394592 8.61811 0.109154 8.4932 0.233321Z' fill='white'/%3E%3C/svg%3E");
+    }
+    &:indeterminate {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/%3E%3C/svg%3E");
+    }
+  }
+}

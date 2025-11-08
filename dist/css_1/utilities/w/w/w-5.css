@@ -1,0 +1,14 @@
+/*! Utility: w-5 | Layer: utilities | Generated 2025-11-08 02:53:05 +0000 */
+@layer utilities {
+.w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+
+.w-52 {
+    width: calc(var(--spacing) * 52);
+  }
+
+.w-56 {
+    width: calc(var(--spacing) * 56);
+  }
+}

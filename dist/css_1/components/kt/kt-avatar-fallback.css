@@ -1,0 +1,17 @@
+/*! Component: kt-avatar-fallback | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-avatar-fallback {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(infinity * 1px);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--accent);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+}

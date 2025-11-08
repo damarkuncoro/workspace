@@ -1,11 +1,21 @@
-<%# Toolbar: Filter Issues untuk Karyawan (Tailwind) %>
-<%# Tujuan: Menyediakan filter status, priority, dan pencarian title/description via GET %>
-<%= kt_card do %>
-  <%= kt_card_content(padding: 'p-4') do %>
-    <%= form_with url: protected_employee_issues_path(@employee), method: :get, local: true do %>
-      <%= kt_content_grid(cols: 1, gap: 'gap-4', class_name: 'sm:grid-cols-2 lg:grid-cols-4') do %>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Status</label>
+<%# 
+      Partial: Filters Toolbar untuk Issues Karyawan 
+      Fungsi: Menampilkan filter (status, priority, search) via GET. 
+      Desain: kt_card + kt_card_header(title, actions) + kt_card_content. 
+      Catatan: Konsisten gap 'gap-6'. Reset dipindah ke actions di header. 
+    %> 
+    <%= kt_card do %> 
+      <%# Komposisi aksi Reset sebagai link terpisah untuk menghindari binding blok yang salah %>
+      <%# Aksi Reset: gunakan util metronic kt-btn outline untuk konsistensi %>
+      <% reset_action = link_to protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-duotone ki-arrow-rotate-left mr-2"></i> Reset
+      <% end %>
+      <%= kt_card_header(title: 'Filters', actions: reset_action) %>
+      <%= kt_card_content(padding: 'p-4') do %> 
+        <%= form_with url: protected_employee_issues_path(@employee), method: :get, local: true do %> 
+          <%= kt_content_grid(cols: 1, gap: 'gap-6', class_name: 'sm:grid-cols-2 lg:grid-cols-4') do %> 
+            <div> 
+              <label class="block text-sm font-medium text-gray-700">Status</label> 
           <%= select_tag :status,
             options_for_select([["All", ""]] + @status_options.map { |s| [s.humanize, s] }, params[:status]),
             class: 'mt-1 block w-full rounded-md border-gray-300 bg-white py-2 pl-3 pr-10 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500' %>
@@ -22,11 +32,8 @@
         </div>
       <% end %>
       <div class="mt-4 flex items-center gap-3">
-        <%= button_tag class: 'inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700' do %>
+        <%= button_tag class: 'kt-btn kt-btn-primary' do %>
           <i class="ki-filled ki-filter mr-2"></i> Filter
-        <% end %>
-        <%= link_to protected_employee_issues_path(@employee), class: 'inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
-          <i class="ki-duotone ki-arrow-rotate-left mr-2"></i> Reset
         <% end %>
       </div>
     <% end %>

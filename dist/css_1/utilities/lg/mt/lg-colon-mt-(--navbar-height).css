@@ -1,0 +1,8 @@
+/*! Utility: lg\:mt-\(--navbar-height\) | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:mt-\(--navbar-height\) {
+    @media (width >= 64rem) {
+      margin-top: var(--navbar-height);
+    }
+  }
+}

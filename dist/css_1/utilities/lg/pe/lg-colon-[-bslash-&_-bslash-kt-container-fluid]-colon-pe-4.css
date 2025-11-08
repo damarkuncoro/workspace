@@ -1,0 +1,10 @@
+/*! Utility: lg\:\[\&_\kt-container-fluid\]\:pe-4 | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.lg\:\[\&_\.kt-container-fluid\]\:pe-4 {
+    @media (width >= 64rem) {
+      & .kt-container-fluid {
+        padding-inline-end: calc(var(--spacing) * 4);
+      }
+    }
+  }
+}

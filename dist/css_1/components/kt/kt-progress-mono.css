@@ -1,0 +1,8 @@
+/*! Component: kt-progress-mono | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-progress-mono {
+    .kt-progress-indicator {
+      background-color: var(--mono);
+    }
+  }
+}

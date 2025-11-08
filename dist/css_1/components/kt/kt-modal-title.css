@@ -1,0 +1,10 @@
+/*! Component: kt-modal-title | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-modal-title {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+    color: var(--mono);
+  }
+}

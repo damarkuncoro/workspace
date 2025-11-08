@@ -1,0 +1,6 @@
+/*! Utility: pb-6 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
+  }
+}

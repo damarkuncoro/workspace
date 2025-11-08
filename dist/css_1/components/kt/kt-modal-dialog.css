@@ -1,0 +1,15 @@
+/*! Component: kt-modal-dialog | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-modal-dialog {
+    position: fixed;
+    inset-inline-start: calc(1/2 * 100%);
+    top: calc(1/2 * 100%);
+    display: none;
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    overflow: auto;
+    padding: calc(var(--spacing) * 4);
+  }
+}

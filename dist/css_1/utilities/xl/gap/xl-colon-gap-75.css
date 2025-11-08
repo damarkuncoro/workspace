@@ -1,0 +1,8 @@
+/*! Utility: xl\:gap-7\5 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.xl\:gap-7\.5 {
+    @media (width >= 80rem) {
+      gap: calc(var(--spacing) * 7.5);
+    }
+  }
+}

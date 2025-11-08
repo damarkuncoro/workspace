@@ -1,0 +1,7 @@
+/*! Utility: border-s-2 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-s-2 {
+    border-inline-start-style: var(--tw-border-style);
+    border-inline-start-width: 2px;
+  }
+}

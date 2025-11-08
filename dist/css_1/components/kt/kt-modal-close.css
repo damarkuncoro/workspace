@@ -1,0 +1,28 @@
+/*! Component: kt-modal-close | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-modal-close {
+    margin-inline-end: calc(var(--spacing) * -2.5);
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+    flex-shrink: 0;
+    cursor: pointer;
+    i {
+      font-size: var(--text-xs);
+      line-height: var(--tw-leading, var(--text-xs--line-height));
+      opacity: 70%;
+    }
+    > svg {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+      opacity: 70%;
+    }
+    &:focus,	&:hover {
+      i {
+        opacity: 100%;
+      }
+      > svg {
+        opacity: 100%;
+      }
+    }
+  }
+}

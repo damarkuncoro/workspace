@@ -1,0 +1,8 @@
+/*! Utility: last-of-type\:hidden | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.last-of-type\:hidden {
+    &:last-of-type {
+      display: none;
+    }
+  }
+}

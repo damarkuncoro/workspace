@@ -1,0 +1,11 @@
+/*! Utility: dark\:text-black\/30 | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.dark\:text-black\/30 {
+    &:is(.dark *) {
+      color: color-mix(in srgb, #000 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, var(--color-black) 30%, transparent);
+      }
+    }
+  }
+}

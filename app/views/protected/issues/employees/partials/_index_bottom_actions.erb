@@ -1,14 +1,15 @@
 <%# Card: Bottom Page Actions untuk Index Issues Employees (Tailwind + Helpers) %>
+<%# Card: Bottom actions. Standarisasi tombol ke util kt-btn untuk konsistensi. %>
 <%= kt_card do %>
   <%= kt_card_content(padding: 'p-4') do %>
     <div class="flex flex-wrap items-center justify-center gap-2">
-      <%= link_to protected_employee_issues_path(@employee), class: 'inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700' do %>
+      <%= link_to protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-primary' do %>
         <i class="ki-duotone ki-list mr-2"></i> View Issues
       <% end %>
-      <%= link_to protected_employees_path, class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+      <%= link_to protected_employees_path, class: 'kt-btn kt-btn-outline' do %>
         <i class="ki-duotone ki-people mr-2"></i> Back to Employees
       <% end %>
-      <%= link_to protected_dashboard_path, class: 'inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50' do %>
+      <%= link_to protected_dashboard_path, class: 'kt-btn kt-btn-outline' do %>
         <i class="ki-duotone ki-home mr-2"></i> Back to Dashboard
       <% end %>
     </div>

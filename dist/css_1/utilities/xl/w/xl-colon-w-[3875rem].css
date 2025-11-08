@@ -1,0 +1,8 @@
+/*! Utility: xl\:w-\[38\75rem\] | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.xl\:w-\[38\.75rem\] {
+    @media (width >= 80rem) {
+      width: 38.75rem;
+    }
+  }
+}

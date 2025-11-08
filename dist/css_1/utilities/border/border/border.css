@@ -1,0 +1,237 @@
+/*! Utility: border | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-collapse {
+    border-collapse: collapse;
+  }
+
+.border-separate {
+    border-collapse: separate;
+  }
+
+.border-spacing-0 {
+    --tw-border-spacing-x: calc(var(--spacing) * 0);
+    --tw-border-spacing-y: calc(var(--spacing) * 0);
+    border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
+  }
+
+.border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+
+.border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+  }
+
+.border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+
+.border-3 {
+    border-style: var(--tw-border-style);
+    border-width: 3px;
+  }
+
+.border-\[0\.5px\] {
+    border-style: var(--tw-border-style);
+    border-width: 0.5px;
+  }
+
+.border-x {
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: 1px;
+  }
+
+.border-y {
+    border-block-style: var(--tw-border-style);
+    border-block-width: 1px;
+  }
+
+.border-s {
+    border-inline-start-style: var(--tw-border-style);
+    border-inline-start-width: 1px;
+  }
+
+.border-s-2 {
+    border-inline-start-style: var(--tw-border-style);
+    border-inline-start-width: 2px;
+  }
+
+.border-e {
+    border-inline-end-style: var(--tw-border-style);
+    border-inline-end-width: 1px;
+  }
+
+.border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+
+.border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+
+.border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+
+.border-b-0 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
+
+.border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
+  }
+
+.border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+
+.border-dashed {
+    --tw-border-style: dashed;
+    border-style: dashed;
+  }
+
+.border-none {
+    --tw-border-style: none;
+    border-style: none;
+  }
+
+.border-black\/10\! {
+    border-color: color-mix(in srgb, #000 10%, transparent) !important;
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-black) 10%, transparent) !important;
+    }
+  }
+
+.border-blue-500 {
+    border-color: var(--color-blue-500);
+  }
+
+.border-border {
+    border-color: var(--border);
+  }
+
+.border-destructive\/10 {
+    border-color: var(--destructive);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--destructive) 10%, transparent);
+    }
+  }
+
+.border-gray-200 {
+    border-color: var(--color-gray-200);
+  }
+
+.border-gray-300 {
+    border-color: var(--color-gray-300);
+  }
+
+.border-green-200 {
+    border-color: var(--color-green-200);
+  }
+
+.border-green-500 {
+    border-color: var(--color-green-500);
+  }
+
+.border-input {
+    border-color: var(--input);
+  }
+
+.border-mono\/25 {
+    border-color: var(--mono);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--mono) 25%, transparent);
+    }
+  }
+
+.border-muted-foreground {
+    border-color: var(--muted-foreground);
+  }
+
+.border-orange-200 {
+    border-color: var(--color-orange-200);
+  }
+
+.border-primary {
+    border-color: var(--primary);
+  }
+
+.border-primary\/10 {
+    border-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+
+.border-transparent {
+    border-color: transparent;
+  }
+
+.border-violet-200 {
+    border-color: var(--color-violet-200);
+  }
+
+.border-white {
+    border-color: var(--color-white);
+  }
+
+.border-yellow-500 {
+    border-color: var(--color-yellow-500);
+  }
+
+.border-zinc-300 {
+    border-color: var(--color-zinc-300);
+  }
+
+.border-s-border {
+    border-inline-start-color: var(--border);
+  }
+
+.border-s-input {
+    border-inline-start-color: var(--input);
+  }
+
+.border-e-border {
+    border-inline-end-color: var(--border);
+  }
+
+.border-e-input {
+    border-inline-end-color: var(--input);
+  }
+
+.border-t-border {
+    border-top-color: var(--border);
+  }
+
+.border-r-input {
+    border-right-color: var(--input);
+  }
+
+.border-b-border {
+    border-bottom-color: var(--border);
+  }
+
+.border-b-input {
+    border-bottom-color: var(--input);
+  }
+
+.border-b-primary\/10 {
+    border-bottom-color: var(--primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-bottom-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+  }
+
+.border-b-transparent {
+    border-bottom-color: transparent;
+  }
+}

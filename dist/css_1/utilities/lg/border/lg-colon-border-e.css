@@ -1,0 +1,15 @@
+/*! Utility: lg\:border-e | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:border-e {
+    @media (width >= 64rem) {
+      border-inline-end-style: var(--tw-border-style);
+      border-inline-end-width: 1px;
+    }
+  }
+
+.lg\:border-e-border {
+    @media (width >= 64rem) {
+      border-inline-end-color: var(--border);
+    }
+  }
+}

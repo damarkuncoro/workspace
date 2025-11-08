@@ -1,0 +1,6 @@
+/*! Utility: bg-muted\! | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.bg-muted\! {
+    background-color: var(--muted) !important;
+  }
+}

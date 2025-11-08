@@ -1,0 +1,8 @@
+/*! Utility: xl\:min-w-24 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.xl\:min-w-24 {
+    @media (width >= 80rem) {
+      min-width: calc(var(--spacing) * 24);
+    }
+  }
+}

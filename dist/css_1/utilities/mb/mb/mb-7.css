@@ -1,0 +1,10 @@
+/*! Utility: mb-7 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
+@layer utilities {
+.mb-7 {
+    margin-bottom: calc(var(--spacing) * 7);
+  }
+
+.mb-7\.5 {
+    margin-bottom: calc(var(--spacing) * 7.5);
+  }
+}

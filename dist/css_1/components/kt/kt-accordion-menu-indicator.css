@@ -1,0 +1,33 @@
+/*! Component: kt-accordion-menu-indicator | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-accordion-menu-indicator {
+    margin-inline-start: auto;
+    width: calc(var(--spacing) * 3.5);
+    height: calc(var(--spacing) * 3.5);
+    flex-shrink: 0;
+    color: var(--muted-foreground);
+    &[data-kt-accordion-item].active {
+      rotate: 180deg;
+    }
+    [data-kt-accordion-item].active > [data-kt-accordion-toggle] & {
+      rotate: 180deg;
+    }
+    [data-kt-accordion-item].active > [data-kt-accordion-toggle]& {
+      rotate: 180deg;
+    }
+  }
+}
+/*! Component: kt-accordion-menu-indicator | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-accordion-menu-indicator {
+    &[data-kt-accordion-item].active {
+      rotate: calc(180deg * -1);
+    }
+    [data-kt-accordion-item].active > [data-kt-accordion-toggle] & {
+      rotate: calc(180deg * -1);
+    }
+    [data-kt-accordion-item].active > [data-kt-accordion-toggle]& {
+      rotate: calc(180deg * -1);
+    }
+  }
+}

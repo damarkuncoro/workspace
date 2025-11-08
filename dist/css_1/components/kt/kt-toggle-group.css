@@ -1,0 +1,52 @@
+/*! Component: kt-toggle-group | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-toggle-group {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--background);
+    --tw-leading: 1;
+    line-height: 1;
+  }
+
+.kt-toggle-group {
+    .kt-btn {
+      flex-grow: 1;
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-inline-end-style: var(--tw-border-style);
+      border-inline-end-width: 0px;
+      border-color: var(--border);
+      background-color: transparent;
+      color: var(--accent-foreground);
+      &:last-child {
+        border-inline-end-style: var(--tw-border-style);
+        border-inline-end-width: 1px;
+        border-color: var(--border);
+      }
+      &:not(:first-child) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
+      }
+      &:not(:last-child) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
+      }
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+      svg,	i {
+        color: var(--muted-foreground);
+      }
+      input[type='checkbox'],	input[type='radio'] {
+        display: none;
+      }
+      &:hover,	&:focus,	&:active,	&:has(input:checked),	&.active {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+        svg,	i {
+          color: var(--accent-foreground);
+        }
+      }
+    }
+  }
+}

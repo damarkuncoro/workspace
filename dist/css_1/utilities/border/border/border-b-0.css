@@ -1,0 +1,7 @@
+/*! Utility: border-b-0 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-b-0 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
+}

@@ -1,0 +1,6 @@
+/*! Utility: text-foreground | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.text-foreground {
+    color: var(--foreground);
+  }
+}

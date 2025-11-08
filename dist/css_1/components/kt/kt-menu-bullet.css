@@ -1,0 +1,14 @@
+/*! Component: kt-menu-bullet | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-menu-bullet, .kt-menu-badge, .kt-menu-arrow {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}
+/*! Component: kt-menu-bullet | Layer: components | Generated 2025-11-08 02:53:11 +0000 */
+@layer components {
+.kt-menu-bullet {
+      margin-inline-end: calc(var(--spacing) * 2.5);
+    }
+}

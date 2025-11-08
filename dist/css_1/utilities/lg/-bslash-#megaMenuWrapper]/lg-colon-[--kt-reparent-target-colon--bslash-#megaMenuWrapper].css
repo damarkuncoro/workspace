@@ -1,0 +1,8 @@
+/*! Utility: lg\:\[--kt-reparent-target\:\#megaMenuWrapper\] | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:\[--kt-reparent-target\:\#megaMenuWrapper\] {
+    @media (width >= 64rem) {
+      --kt-reparent-target: #megaMenuWrapper;
+    }
+  }
+}

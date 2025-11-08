@@ -1,0 +1,16 @@
+/*! Component: kt-link-sm | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-link-sm {
+    gap: calc(var(--spacing) * 1);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    svg {
+      width: calc(var(--spacing) * 3.5);
+      height: calc(var(--spacing) * 3.5);
+    }
+    i {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+}

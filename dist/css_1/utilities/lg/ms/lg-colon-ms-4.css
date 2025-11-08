@@ -1,0 +1,8 @@
+/*! Utility: lg\:ms-4 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.lg\:ms-4 {
+    @media (width >= 64rem) {
+      margin-inline-start: calc(var(--spacing) * 4);
+    }
+  }
+}

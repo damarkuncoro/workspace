@@ -1,0 +1,320 @@
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input {
+    display: block;
+    width: 100%;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--input);
+    background-color: var(--background);
+    color: var(--foreground);
+    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    --tw-shadow-color: rgba(0,0,0,0.05);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-shadow-color: color-mix(in oklab, rgba(0,0,0,0.05) var(--tw-shadow-alpha), transparent);
+    }
+    outline-style: var(--tw-outline-style);
+    outline-width: 0px;
+    transition-property: color,box-shadow;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    &::placeholder {
+      color: var(--muted-foreground);
+    }
+    &:focus-visible {
+      border-color: var(--ring);
+    }
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+    &:focus-visible {
+      --tw-ring-color: var(--ring);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--ring) 30%, transparent);
+      }
+    }
+    &:focus-visible {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    &:disabled {
+      cursor: not-allowed;
+    }
+    &:disabled {
+      opacity: 60%;
+    }
+    &[readonly] {
+      cursor: not-allowed;
+    }
+    &[readonly] {
+      background-color: var(--muted);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--muted) 80%, transparent);
+      }
+    }
+    &[readonly] {
+      color: var(--secondary-foreground);
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, var(--secondary-foreground) 80%, transparent);
+      }
+    }
+    &::file-selector-button {
+      height: 100%;
+    }
+    &[type=file] {
+      padding-block: calc(var(--spacing) * 0);
+    }
+    &::file-selector-button {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+    }
+    &::file-selector-button {
+      border-inline-end-style: var(--tw-border-style);
+      border-inline-end-width: 1px;
+    }
+    &::file-selector-button {
+      --tw-border-style: solid;
+      border-style: solid;
+    }
+    &::file-selector-button {
+      border-color: var(--input);
+    }
+    &::file-selector-button {
+      background-color: transparent;
+    }
+    &::file-selector-button {
+      padding: calc(var(--spacing) * 0);
+    }
+    &::file-selector-button {
+      --tw-font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-medium);
+    }
+    &::file-selector-button {
+      color: var(--foreground);
+    }
+    &::file-selector-button {
+      font-style: normal;
+    }
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--destructive) 60%, transparent);
+      }
+    }
+    &[aria-invalid="true"] {
+      --tw-ring-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 10%, transparent);
+      }
+    }
+  }
+
+.kt-input {
+    height: calc(var(--spacing) * 8.5);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 3);
+    font-size: 0.8125rem;
+    --tw-leading: var(--text-sm--line-height);
+    line-height: var(--text-sm--line-height);
+    &::file-selector-button {
+      margin-inline-end: calc(var(--spacing) * 3);
+    }
+    &::file-selector-button {
+      padding-inline-end: calc(var(--spacing) * 3);
+    }
+  }
+
+.kt-input-lg {
+    height: calc(var(--spacing) * 10);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    &::file-selector-button {
+      margin-inline-end: calc(var(--spacing) * 4);
+    }
+    &::file-selector-button {
+      padding-inline-end: calc(var(--spacing) * 4);
+    }
+  }
+
+.kt-input-sm {
+    height: calc(var(--spacing) * 7);
+    border-radius: calc(var(--radius) - 2px);
+    padding-inline: calc(var(--spacing) * 2.5);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    &::file-selector-button {
+      margin-inline-end: calc(var(--spacing) * 2.5);
+    }
+    &::file-selector-button {
+      padding-inline-end: calc(var(--spacing) * 2.5);
+    }
+  }
+}
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input:not(input) {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 1.5);
+    &:has(input:focus-visible) {
+      border-color: var(--ring);
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      --tw-ring-color: var(--ring);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--ring) 30%, transparent);
+      }
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    input {
+      display: flex;
+      height: auto;
+      width: 100%;
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+      background-color: transparent;
+      padding: calc(var(--spacing) * 0);
+      color: var(--foreground);
+      --tw-shadow: 0 0 #0000;
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      transition-property: color;
+      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+      transition-duration: var(--tw-duration, var(--default-transition-duration));
+      --tw-outline-style: none;
+      outline-style: none;
+      &::placeholder {
+        color: var(--muted-foreground);
+      }
+      &:focus-visible {
+        --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+      &:disabled {
+        opacity: 50%;
+      }
+      font-size: inherit;
+      list-style: inherit;
+    }
+    i {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+      color: var(--muted-foreground);
+    }
+    svg {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+      color: var(--muted-foreground);
+    }
+    &.kt-input-sm {
+      gap: calc(var(--spacing) * 1.25);
+      i {
+        font-size: var(--text-sm);
+        line-height: var(--tw-leading, var(--text-sm--line-height));
+      }
+      svg {
+        width: calc(var(--spacing) * 3.5);
+        height: calc(var(--spacing) * 3.5);
+        color: var(--muted-foreground);
+      }
+    }
+    &.kt-input-lg {
+      gap: calc(var(--spacing) * 1.5);
+      i {
+        font-size: var(--text-lg);
+        line-height: var(--tw-leading, var(--text-lg--line-height));
+      }
+      svg {
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
+        color: var(--muted-foreground);
+      }
+    }
+  }
+}
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input {
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+    }
+    &[aria-invalid="true"] {
+      --tw-ring-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+      }
+    }
+  }
+}
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    .kt-input {
+      z-index: 1;
+      flex-grow: 1;
+    }
+    .kt-input-addon:has(+ .kt-input) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+      border-inline-end-style: var(--tw-border-style) !important;
+      border-inline-end-width: 0px !important;
+    }
+    .kt-input + .kt-input-addon {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+    .kt-input-addon:has(+ .kt-btn) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+    .kt-input + .kt-btn {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+    .kt-input + .kt-btn.kt-btn-outline {
+      border-inline-start-style: var(--tw-border-style) !important;
+      border-inline-start-width: 0px !important;
+    }
+    .kt-btn + .kt-input,	.kt-input-addon + .kt-input {
+      border-start-start-radius: 0 !important;
+      border-end-start-radius: 0 !important;
+    }
+    .kt-input:has(+ .kt-btn),	.kt-input:has(+ .kt-input-addon) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+  }
+}
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+}
+/*! Component: kt-input | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-input {
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+    }
+    &[aria-invalid="true"] {
+      --tw-ring-color: var(--destructive);
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-ring-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+      }
+    }
+  }
+}

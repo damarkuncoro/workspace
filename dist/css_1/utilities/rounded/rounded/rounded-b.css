@@ -1,0 +1,12 @@
+/*! Utility: rounded-b | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.rounded-b {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+
+.rounded-b-xl {
+    border-bottom-right-radius: calc(var(--radius) + 4px);
+    border-bottom-left-radius: calc(var(--radius) + 4px);
+  }
+}

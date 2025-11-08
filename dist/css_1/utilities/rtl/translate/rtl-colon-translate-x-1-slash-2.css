@@ -1,0 +1,9 @@
+/*! Utility: rtl\:translate-x-1\/2 | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.rtl\:translate-x-1\/2 {
+    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+      --tw-translate-x: calc(1/2 * 100%);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+}

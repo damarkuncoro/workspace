@@ -1,0 +1,6 @@
+/*! Utility: bg-no-repeat | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.bg-no-repeat {
+    background-repeat: no-repeat;
+  }
+}

@@ -1,0 +1,6 @@
+/*! Utility: rounded-sm | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.rounded-sm {
+    border-radius: calc(var(--radius) - 4px);
+  }
+}

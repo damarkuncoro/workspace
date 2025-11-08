@@ -1,0 +1,9 @@
+/*! Utility: bg-accent\/50 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.bg-accent\/50 {
+    background-color: var(--accent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--accent) 50%, transparent);
+    }
+  }
+}

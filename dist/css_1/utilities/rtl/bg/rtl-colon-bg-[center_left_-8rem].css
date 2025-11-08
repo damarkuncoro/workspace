@@ -1,0 +1,8 @@
+/*! Utility: rtl\:bg-\[center_left_-8rem\] | Layer: utilities | Generated 2025-11-08 02:53:09 +0000 */
+@layer utilities {
+.rtl\:bg-\[center_left_-8rem\] {
+    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+      background-position: center left -8rem;
+    }
+  }
+}

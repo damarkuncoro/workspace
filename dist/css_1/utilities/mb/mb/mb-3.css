@@ -1,0 +1,10 @@
+/*! Utility: mb-3 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
+@layer utilities {
+.mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+.mb-3\.5 {
+    margin-bottom: calc(var(--spacing) * 3.5);
+  }
+}

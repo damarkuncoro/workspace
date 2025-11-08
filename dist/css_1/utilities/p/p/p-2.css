@@ -1,0 +1,10 @@
+/*! Utility: p-2 | Layer: utilities | Generated 2025-11-08 02:53:07 +0000 */
+@layer utilities {
+.p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+
+.p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
+  }
+}

@@ -1,0 +1,23 @@
+/*! Component: kt-modal-content | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-modal-content {
+    position: relative;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+.kt-modal-content {
+      top: calc(1/2 * 100%);
+      --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+}

@@ -1,0 +1,70 @@
+/*! Component: kt-avatar | Layer: components | Generated 2025-11-08 02:53:10 +0000 */
+@layer components {
+.kt-avatar {
+    position: relative;
+    display: flex;
+    width: calc(var(--spacing) * 10);
+    height: calc(var(--spacing) * 10);
+    flex-shrink: 0;
+  }
+
+.kt-avatar-image {
+    overflow: hidden;
+    border-radius: calc(infinity * 1px);
+    img {
+      aspect-ratio: 1 / 1;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+.kt-avatar-fallback {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(infinity * 1px);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--border);
+    background-color: var(--accent);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+
+.kt-avatar-indicator {
+    position: absolute;
+    display: flex;
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+    align-items: center;
+    justify-content: center;
+  }
+
+.kt-avatar-status {
+    display: flex;
+    width: calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 2);
+    align-items: center;
+    border-radius: calc(infinity * 1px);
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: var(--background);
+    &.kt-avatar-status-online {
+      background-color: var(--color-green-600);
+    }
+    &.kt-avatar-status-offline {
+      background-color: var(--mono);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--mono) 50%, transparent);
+      }
+    }
+    &.kt-avatar-status-busy {
+      background-color: var(--color-yellow-600);
+    }
+    &.kt-avatar-status-away {
+      background-color: var(--color-blue-600);
+    }
+  }
+}

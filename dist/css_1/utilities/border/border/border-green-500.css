@@ -1,0 +1,6 @@
+/*! Utility: border-green-500 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-green-500 {
+    border-color: var(--color-green-500);
+  }
+}

@@ -1,0 +1,8 @@
+/*! Utility: \32 | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.\32 xl\:-ml-\[60px\] {
+    @media (width >= 96rem) {
+      margin-left: calc(60px * -1);
+    }
+  }
+}

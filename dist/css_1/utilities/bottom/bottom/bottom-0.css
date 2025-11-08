@@ -1,0 +1,10 @@
+/*! Utility: bottom-0 | Layer: utilities | Generated 2025-11-08 02:53:04 +0000 */
+@layer utilities {
+.bottom-0 {
+    bottom: calc(var(--spacing) * 0);
+  }
+
+.bottom-0\.5 {
+    bottom: calc(var(--spacing) * 0.5);
+  }
+}

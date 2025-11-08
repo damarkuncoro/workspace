@@ -1,0 +1,8 @@
+/*! Utility: sm\:items-center | Layer: utilities | Generated 2025-11-08 02:53:08 +0000 */
+@layer utilities {
+.sm\:items-center {
+    @media (width >= 40rem) {
+      align-items: center;
+    }
+  }
+}

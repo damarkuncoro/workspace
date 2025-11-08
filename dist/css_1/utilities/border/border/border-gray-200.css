@@ -1,0 +1,6 @@
+/*! Utility: border-gray-200 | Layer: utilities | Generated 2025-11-08 02:53:06 +0000 */
+@layer utilities {
+.border-gray-200 {
+    border-color: var(--color-gray-200);
+  }
+}

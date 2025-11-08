@@ -1,25 +1,26 @@
-<%# Card: Daftar Issues untuk Karyawan (Tailwind + Helpers) %>
-<%# Tujuan: Tabel issues dengan styling Tailwind, dibungkus kt_card untuk konsistensi %>
+<%# Card: Daftar Issues untuk Karyawan (Metronic kt-table + Helpers) %>
+<%# Tujuan: Tabel issues menggunakan util Metronic kt-table demi konsistensi gaya %>
 <%= kt_card do %>
+  <%# Konten: Tabel issues. Actions tombol distandardkan ke util kt-btn (sm, varian). %>
   <%= kt_card_content(padding: 'p-4') do %>
     <% if @issues.any? %>
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="kt-table-wrapper">
+        <table class="kt-table kt-table-border">
+          <thead>
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned To</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Title</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Status</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Priority</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Assigned To</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Created At</th>
+              <th scope="col" class="kt-table-col kt-table-col-label">Actions</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody>
             <% @issues.each do |issue| %>
               <tr>
-                <td class="px-6 py-4 text-sm text-gray-900"><%= issue.title %></td>
-                <td class="px-6 py-4">
+                <td class="kt-table-col text-sm text-gray-900"><%= issue.title %></td>
+                <td class="kt-table-col">
                   <% status_class = case
                     when issue.open? then 'bg-red-100 text-red-800'
                     when issue.in_progress? then 'bg-yellow-100 text-yellow-800'
@@ -30,29 +31,28 @@
                     <%= issue.status&.humanize || 'Unknown' %>
                   </span>
                 </td>
-                <td class="px-6 py-4">
+                <td class="kt-table-col">
                   <% priority_class = case
                     when issue.high? then 'bg-red-100 text-red-800'
                     when issue.medium? then 'bg-yellow-100 text-yellow-800'
                     else 'bg-green-100 text-green-800'
                   end %>
-                  <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium <%= priority_class %>
-                  ">
+                  <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium <%= priority_class %>">
                     <%= issue.priority&.humanize || 'Unknown' %>
                   </span>
                 </td>
-                <td class="px-6 py-4 text-sm text-gray-700">
+                <td class="kt-table-col text-sm text-gray-700">
                   <%= issue.assigned_to&.person&.name || 'Unassigned' %>
                   <% if issue.assigned_accounts.any? %>
                     <br><span class="text-xs text-gray-500">+<%= issue.assigned_accounts.count %> more</span>
                   <% end %>
                 </td>
-                <td class="px-6 py-4 text-sm text-gray-700"><%= l(issue.created_at) %></td>
-                <td class="px-6 py-4 text-sm">
+                <td class="kt-table-col text-sm text-gray-700"><%= l(issue.created_at) %></td>
+                <td class="kt-table-col text-sm">
                   <div class="flex items-center gap-2">
-                    <%= link_to 'Show', protected_employee_issue_path(@employee, issue), class: 'inline-flex items-center rounded-md bg-blue-600 px-2.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700' %>
-                    <%= link_to 'Edit', edit_protected_employee_issue_path(@employee, issue), class: 'inline-flex items-center rounded-md bg-yellow-500 px-2.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-yellow-600' %>
-                    <%= link_to 'Destroy', protected_employee_issue_path(@employee, issue), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inline-flex items-center rounded-md bg-red-600 px-2.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-red-700' %>
+                    <%= link_to 'Show', protected_employee_issue_path(@employee, issue), class: 'kt-btn kt-btn-sm kt-btn-primary' %>
+                    <%= link_to 'Edit', edit_protected_employee_issue_path(@employee, issue), class: 'kt-btn kt-btn-sm kt-btn-secondary' %>
+                    <%= link_to 'Destroy', protected_employee_issue_path(@employee, issue), method: :delete, data: { confirm: 'Are you sure?' }, class: 'kt-btn kt-btn-sm kt-btn-destructive' %>
                   </div>
                 </td>
               </tr>
