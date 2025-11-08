@@ -6,6 +6,8 @@ module ApplicationHelper
   include KT::ContentHelper
   # - Topbar user: menyediakan `kt_topbar_user` dan pendukungnya
   include KT::TopbarHelper
+  # - Table dan elemen kt_* dinamis: menyediakan `kt_table`, `kt_table_col`, dll.
+  include KT::TableHelper
 
   # Render flash messages menggunakan Tailwind utility classes.
   # Tujuan: menggantikan penggunaan <%= notice %> dan <%= alert %> di view
@@ -137,31 +139,32 @@ module ApplicationHelper
     end
   end
 
+  # Fungsi: Menghasilkan kelas CSS untuk badge status berbasis KT.
+  # SRP: Hanya memetakan status -> kelas CSS.
+  # Return: String kelas, contoh "kt-badge kt-badge-sm kt-badge-success".
   def status_badge_class(status)
-    case status
-    when 'open'
-      'bg-red-100 text-red-800'
-    when 'in_progress'
-      'bg-yellow-100 text-yellow-800'
-    when 'completed'
-      'bg-green-100 text-green-800'
-    when 'closed'
-      'bg-gray-100 text-gray-800'
-    else
-      'bg-gray-100 text-gray-800'
-    end
+    key = status.to_s.downcase
+    variant = case key
+              when 'open' then 'destructive'
+              when 'in_progress' then 'warning'
+              when 'completed' then 'success'
+              when 'closed' then 'secondary'
+              else 'mono'
+              end
+    "kt-badge kt-badge-sm kt-badge-#{variant}"
   end
 
+  # Fungsi: Menghasilkan kelas CSS untuk badge prioritas berbasis KT.
+  # SRP: Hanya memetakan prioritas -> kelas CSS.
+  # Return: String kelas, contoh "kt-badge kt-badge-sm kt-badge-warning".
   def priority_badge_class(priority)
-    case priority
-    when 'high'
-      'bg-red-100 text-red-800'
-    when 'medium'
-      'bg-yellow-100 text-yellow-800'
-    when 'low'
-      'bg-green-100 text-green-800'
-    else
-      'bg-blue-100 text-blue-800'
-    end
+    key = priority.to_s.downcase
+    variant = case key
+              when 'high' then 'destructive'
+              when 'medium' then 'warning'
+              when 'low' then 'success'
+              else 'info'
+              end
+    "kt-badge kt-badge-sm kt-badge-#{variant}"
   end
 end

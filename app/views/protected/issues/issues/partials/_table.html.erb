@@ -1,0 +1,106 @@
+<%#
+  Partial: Issues Table (Protected)
+  Tujuan: Menampilkan daftar issues dalam kt_card + kt_table.
+  Prinsip: SRP, DRY — table terpisah dari index untuk reuse dan konsistensi.
+  Pemakaian:
+    <%= render 'protected/issues/issues/partials/table' %>
+
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <% if @issues.any? %>
+      <div class="kt-scrollable-x-auto">
+        <%= kt_table(class: "kt-table-border") do %>
+          <thead>
+            <tr>
+              <th><%= kt_table_col_label { "Issue" } %></th>
+              <th><%= kt_table_col_label { "Status" } %></th>
+              <th><%= kt_table_col_label { "Priority" } %></th>
+              <th><%= kt_table_col_label { "Customer/Employee" } %></th>
+              <th><%= kt_table_col_label { "Assigned To" } %></th>
+              <th><%= kt_table_col_label { "Created" } %></th>
+              <th class="w-[180px]"><%= kt_table_col_label { "Actions" } %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @issues.each do |issue| %>
+              <tr>
+                <td>
+                  <div class="text-sm font-medium text-foreground"><%= issue.title %></div>
+                  <div class="text-xs text-muted-foreground">ID: <%= issue.id %></div>
+                </td>
+                <td>
+                  <span class="<%= status_badge_class(issue.status) %>"><%= issue.status.titleize %></span>
+                </td>
+                <td>
+                  <span class="<%= priority_badge_class(issue.priority) %>"><%= issue.priority.titleize %></span>
+                </td>
+                <td>
+                  <% if issue.issueable.present? %>
+                    <div class="text-sm text-foreground"><%= issue.issueable.person_name %></div>
+                    <div class="text-xs text-muted-foreground"><%= issue.issueable_type %></div>
+                  <% else %>
+                    <div class="text-sm text-muted-foreground">N/A</div>
+                  <% end %>
+                </td>
+                <td>
+                  <% if issue.assigned_to.present? %>
+                    <div class="text-sm text-foreground"><%= issue.assigned_to.person_name %></div>
+                  <% else %>
+                    <div class="text-sm text-muted-foreground">Unassigned</div>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="text-sm text-secondary-foreground"><%= l(issue.created_at) %></div>
+                </td>
+                <td>
+                  <div class="flex gap-2">
+                    <% if issue.issueable_type == 'Customer' && issue.issueable.present? %>
+                      <%= link_to protected_customer_issue_path(issue.issueable, issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <% end %>
+                      <%= link_to edit_protected_customer_issue_path(issue.issueable, issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <% end %>
+                    <% elsif issue.issueable_type == 'Employee' && issue.issueable.present? %>
+                      <%= link_to protected_employee_issue_path(issue.issueable, issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <% end %>
+                      <%= link_to edit_protected_employee_issue_path(issue.issueable, issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <% end %>
+                    <% else %>
+                      <span class="text-xs text-muted-foreground">No actions</span>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-8">
+        <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-question text-4xl text-muted-foreground"></i>
+          <h3 class="text-lg font-medium text-foreground">No issues found</h3>
+          <p class="text-sm text-secondary-foreground">Create a new support ticket from Customer/Employee pages.</p>
+          <div class="flex gap-2">
+            <%= link_to protected_issues_customers_path, class: "kt-btn kt-btn-outline" do %>
+              raw('<i class="ki-filled ki-user"></i> Customer Issues')
+            <% end %>
+            <%= link_to protected_issues_employees_path, class: "kt-btn kt-btn-outline" do %>
+              raw('<i class="ki-filled ki-people"></i> Employee Issues')
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card_footer(justify: "justify-start") do %>
+    <%= link_to protected_dashboard_path, class: "kt-btn kt-btn-outline" do %>
+      <i class="ki-filled ki-arrow-left"></i> Back to Dashboard
+    <% end %>
+  <% end %>
+  
+<% end %>

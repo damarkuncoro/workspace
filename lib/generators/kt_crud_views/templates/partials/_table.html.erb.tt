@@ -1,0 +1,64 @@
+<%#
+  Partial: <%= plural_name.titleize %> Table
+  Tujuan: Menampilkan daftar <%= plural_name.humanize %> menggunakan kt_card + kt_table.
+  Prinsip: SRP — table terpisah dari index untuk reuse.
+  Pemakaian: <%%= render '<%= File.join(options[:namespace], file_path.pluralize, 'partials', 'table') %>' %>
+%>
+
+<%%= kt_card do %>
+  <%%= kt_card_content do %>
+    <%% if @<%= plural_table_name %>.any? %>
+      <div class="kt-scrollable-x-auto">
+        <%%= kt_table(class: 'kt-table-border') do %>
+          <thead>
+            <tr>
+              <th><%%= kt_table_col_label { 'Name' } %></th>
+              <th><%%= kt_table_col_label { 'Created At' } %></th>
+              <th class="w-[180px]"><%%= kt_table_col_label { 'Actions' } %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%% @<%= plural_table_name %>.each do |record| %>
+              <tr>
+                <td>
+                  <div class="text-sm font-medium text-foreground"><%%= record.respond_to?(:name) ? record.name : record.try(:title) || record.id %></div>
+                </td>
+                <td>
+                  <div class="text-sm text-secondary-foreground"><%%= l(record.created_at) %></div>
+                </td>
+                <td>
+                  <div class="flex gap-2">
+                    <%%= link_to send(:<%= show_path_helper %>, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                      <i class="ki-filled ki-eye"></i>
+                    <%% end %>
+                    <%%= link_to send(:<%= edit_path_helper %>, record), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                      <i class="ki-filled ki-pencil"></i>
+                    <%% end %>
+                  </div>
+                </td>
+              </tr>
+            <%% end %>
+          </tbody>
+        <%% end %>
+      </div>
+    <%% else %>
+      <div class="text-center py-8">
+        <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-question text-4xl text-muted-foreground"></i>
+          <h3 class="text-lg font-medium text-foreground">No <%= plural_name.humanize.downcase %> found</h3>
+          <p class="text-sm text-secondary-foreground">Create your first <%= singular_name %> to get started.</p>
+          <%%= link_to send(:<%= new_path_helper %>), class: 'kt-btn kt-btn-primary' do %>
+            <i class="ki-filled ki-plus"></i>
+            New <%= singular_name.titleize %>
+          <%% end %>
+        </div>
+      </div>
+    <%% end %>
+  <%% end %>
+
+  <%%= kt_card_footer(justify: 'justify-start') do %>
+    <%%= link_to send(:<%= index_path_helper %>), class: 'kt-btn kt-btn-outline' do %>
+      <%%= raw('<i class="ki-filled ki-arrow-left"></i> Back to <%= plural_name.titleize %>') %>
+    <%% end %>
+  <%% end %>
+<%% end %>

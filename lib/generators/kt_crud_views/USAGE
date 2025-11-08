@@ -1,0 +1,31 @@
+KT CRUD Views Generator
+=======================
+
+Membuat skeleton views CRUD (index, show, new, edit, _form, partials/_table)
+yang konsisten dengan komponen KT (Metronic) dan pola layout proyek.
+
+Cara Pakai:
+- Generate untuk resource sederhana:
+  bin/rails g kt_crud_views Account --namespace=protected
+
+- Generate untuk plural/lowercase:
+  bin/rails g kt_crud_views customers --namespace=protected
+
+- Generate untuk nested path (misal issues dalam folder issues):
+  bin/rails g kt_crud_views issues/issues --namespace=protected
+
+Opsi:
+- --namespace=protected (default): menentukan folder namespace views.
+- --[no-]partials (default true): mengontrol pembuatan _form dan partials/_table.
+
+Catatan:
+- Pastikan helpers KT tersedia: ApplicationHelper meng-include KT::TableHelper, dsb.
+- Pastikan layout memuat stylesheet: <%%= stylesheet_link_tag 'metronic/components/components' %>
+
+Struktur File yang Dihasilkan:
+app/views/<namespace>/<resource_plural>/index.html.erb
+app/views/<namespace>/<resource_plural>/show.html.erb
+app/views/<namespace>/<resource_plural>/new.html.erb
+app/views/<namespace>/<resource_plural>/edit.html.erb
+app/views/<namespace>/<resource_plural>/_form.html.erb
+app/views/<namespace>/<resource_plural>/partials/_table.html.erb

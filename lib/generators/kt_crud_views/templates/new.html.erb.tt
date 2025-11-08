@@ -1,0 +1,17 @@
+<%#
+  View: New <%= singular_name.titleize %>
+  Tujuan: Form pembuatan record baru dengan KT helpers.
+%>
+
+<%%= render 'protected/shared/partials/page_header',
+  title: 'New <%= singular_name.titleize %>',
+  subtitle: 'Create a new <%= singular_name.humanize %>' %>
+
+<%%= render '<%= File.join(options[:namespace], file_path.pluralize, 'form') %>' %>
+
+<div class="flex justify-center mt-6">
+  <%%= link_to send(:<%= index_path_helper %>), class: 'kt-btn kt-btn-outline' do %>
+    <i class="ki-filled ki-arrow-left"></i>
+    Back to <%= plural_name.titleize %>
+  <%% end %>
+</div>

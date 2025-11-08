@@ -1,0 +1,28 @@
+<%#
+  Partial: <%= singular_name.titleize %> Form
+  Tujuan: Menyediakan form minimal yang bisa diadaptasi untuk model apapun.
+  Catatan: Field dasar: name/title (jika ada), plus timestamps info hanya tampil.
+%>
+
+<%%= kt_card do %>
+  <%%= kt_card_header(title: '<%= singular_name.titleize %> Form') %>
+  <%%= kt_card_content do %>
+    <%%= form_with(model: @<%= singular_table_name %>, url: @<%= singular_table_name %>.persisted? ? send(:<%= show_path_helper %>, @<%= singular_table_name %>) : send(:<%= index_path_helper %>), method: @<%= singular_table_name %>.persisted? ? :patch : :post, class: 'grid gap-6') do |f| %>
+      <div class="grid gap-2">
+        <label class="text-sm text-muted-foreground">Name/Title</label>
+        <%% if @<%= singular_table_name %>.respond_to?(:name) %>
+          <%%= f.text_field :name, class: 'kt-input', placeholder: 'Enter name' %>
+        <%% elsif @<%= singular_table_name %>.respond_to?(:title) %>
+          <%%= f.text_field :title, class: 'kt-input', placeholder: 'Enter title' %>
+        <%% else %>
+          <%%= f.text_field :id, class: 'kt-input', disabled: true %>
+        <%% end %>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <%%= f.submit(@<%= singular_table_name %>.persisted? ? 'Update' : 'Create', class: 'kt-btn kt-btn-primary') %>
+        <%%= link_to 'Cancel', send(:<%= index_path_helper %>), class: 'kt-btn kt-btn-secondary' %>
+      </div>
+    <%% end %>
+  <%% end %>
+<%% end %>
