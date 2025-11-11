@@ -1,6 +1,0 @@
-/*! Utility: ps-4 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.ps-4 {
-    padding-inline-start: calc(var(--spacing) * 4);
-  }
-}

@@ -1,8 +1,0 @@
-/*! Utility: in-\[\authors-row\]\:start-\[64px\] | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.in-\[\.authors-row\]\:start-\[64px\] {
-    :where(*:is(.authors-row)) & {
-      inset-inline-start: 64px;
-    }
-  }
-}

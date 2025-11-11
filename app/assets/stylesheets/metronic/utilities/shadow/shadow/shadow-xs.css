@@ -1,7 +1,0 @@
-/*! Utility: shadow-xs | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.shadow-xs {
-    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-}

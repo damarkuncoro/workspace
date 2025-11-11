@@ -1,9 +1,0 @@
-/*! Component: kt-menu-space | Layer: components | Generated 2025-11-08 03:31:23 +0000 */
-@layer components {
-.kt-menu-space {
-    padding-block: calc(var(--spacing) * 2);
-    & .kt-menu-link, & .kt-menu-label {
-      margin-inline: calc(var(--spacing) * 2.5);
-    }
-  }
-}

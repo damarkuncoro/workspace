@@ -1,7 +1,0 @@
-/*! Component: kt-popover-content | Layer: components | Generated 2025-11-08 03:31:21 +0000 */
-@layer components {
-.kt-popover-content {
-    padding-inline: calc(var(--spacing) * 2.5);
-    padding-block: calc(var(--spacing) * 2);
-  }
-}

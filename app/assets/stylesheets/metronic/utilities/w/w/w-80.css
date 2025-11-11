@@ -1,6 +1,0 @@
-/*! Utility: w-80 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.w-80 {
-    width: calc(var(--spacing) * 80);
-  }
-}

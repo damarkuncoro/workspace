@@ -1,8 +1,0 @@
-/*! Utility: dark\:ring-yellow-950 | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
-@layer utilities {
-.dark\:ring-yellow-950 {
-    &:is(.dark *) {
-      --tw-ring-color: var(--color-yellow-950);
-    }
-  }
-}

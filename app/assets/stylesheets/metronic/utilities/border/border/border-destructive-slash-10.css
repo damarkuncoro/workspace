@@ -1,9 +1,0 @@
-/*! Utility: border-destructive\/10 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.border-destructive\/10 {
-    border-color: var(--destructive);
-    @supports (color: color-mix(in lab, red, red)) {
-      border-color: color-mix(in oklab, var(--destructive) 10%, transparent);
-    }
-  }
-}

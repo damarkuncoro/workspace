@@ -1,6 +1,0 @@
-/*! Component: kt-table-cell-center | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
-@layer components {
-.kt-table-cell-center {
-            padding-inline-end: calc(var(--spacing) * 5);
-          }
-}

@@ -1,6 +1,0 @@
-/*! Utility: pl-6 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.pl-6 {
-    padding-left: calc(var(--spacing) * 6);
-  }
-}

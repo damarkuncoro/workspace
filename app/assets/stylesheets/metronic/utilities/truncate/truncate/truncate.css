@@ -1,8 +1,0 @@
-/*! Utility: truncate | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}

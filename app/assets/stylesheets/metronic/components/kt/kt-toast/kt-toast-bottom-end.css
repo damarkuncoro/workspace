@@ -1,8 +1,0 @@
-/*! Component: kt-toast-bottom-end | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
-@layer components {
-.kt-toast-bottom-end {
-      inset-inline-end: calc(var(--spacing) * 0);
-      top: auto;
-      bottom: calc(var(--spacing) * 0);
-    }
-}

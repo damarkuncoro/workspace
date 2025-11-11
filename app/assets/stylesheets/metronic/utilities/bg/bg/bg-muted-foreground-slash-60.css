@@ -1,9 +1,0 @@
-/*! Utility: bg-muted-foreground\/60 | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.bg-muted-foreground\/60 {
-    background-color: var(--muted-foreground);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
-    }
-  }
-}

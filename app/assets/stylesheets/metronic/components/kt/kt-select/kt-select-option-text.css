@@ -1,9 +1,0 @@
-/*! Component: kt-select-option-text | Layer: components | Generated 2025-11-08 03:31:20 +0000 */
-@layer components {
-.kt-select-option-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-}

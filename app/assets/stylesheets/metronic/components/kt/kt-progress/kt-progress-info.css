@@ -1,8 +1,0 @@
-/*! Component: kt-progress-info | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
-@layer components {
-.kt-progress-info {
-    .kt-progress-indicator {
-      background-color: var(--color-violet-500);
-    }
-  }
-}

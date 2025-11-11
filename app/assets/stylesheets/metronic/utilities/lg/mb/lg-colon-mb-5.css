@@ -1,8 +1,0 @@
-/*! Utility: lg\:mb-5 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.lg\:mb-5 {
-    @media (width >= 64rem) {
-      margin-bottom: calc(var(--spacing) * 5);
-    }
-  }
-}

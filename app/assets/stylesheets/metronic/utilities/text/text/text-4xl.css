@@ -1,7 +1,0 @@
-/*! Utility: text-4xl | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
-}

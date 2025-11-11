@@ -1,6 +1,0 @@
-/*! Utility: -end-1 | Layer: utilities | Generated 2025-11-08 03:31:12 +0000 */
-@layer utilities {
-.-end-1 {
-    inset-inline-end: calc(var(--spacing) * -1);
-  }
-}

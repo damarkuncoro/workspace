@@ -1,8 +1,0 @@
-/*! Utility: lg\:ps-5 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.lg\:ps-5 {
-    @media (width >= 64rem) {
-      padding-inline-start: calc(var(--spacing) * 5);
-    }
-  }
-}

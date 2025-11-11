@@ -1,6 +1,0 @@
-/*! Utility: gap-4\5 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.gap-4\.5 {
-    gap: calc(var(--spacing) * 4.5);
-  }
-}

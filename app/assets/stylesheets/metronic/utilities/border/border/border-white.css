@@ -1,6 +1,0 @@
-/*! Utility: border-white | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.border-white {
-    border-color: var(--color-white);
-  }
-}

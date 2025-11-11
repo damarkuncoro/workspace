@@ -1,8 +1,0 @@
-/*! Component: kt-breadcrumb-page | Layer: components | Generated 2025-11-08 03:31:22 +0000 */
-@layer components {
-.kt-breadcrumb-page {
-    --tw-font-weight: var(--font-weight-normal);
-    font-weight: var(--font-weight-normal);
-    color: var(--foreground);
-  }
-}

@@ -1,7 +1,0 @@
-/*! Component: kt-link-dashed | Layer: components | Generated 2025-11-08 03:31:18 +0000 */
-@layer components {
-.kt-link-dashed {
-    text-decoration-style: dashed;
-    text-decoration-thickness: 1px;
-  }
-}

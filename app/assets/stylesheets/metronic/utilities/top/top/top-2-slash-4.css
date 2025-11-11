@@ -1,6 +1,0 @@
-/*! Utility: top-2\/4 | Layer: utilities | Generated 2025-11-08 03:31:12 +0000 */
-@layer utilities {
-.top-2\/4 {
-    top: calc(2/4 * 100%);
-  }
-}

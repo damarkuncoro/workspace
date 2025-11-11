@@ -1,6 +1,0 @@
-/*! Utility: start-\(--sidebar-width\) | Layer: utilities | Generated 2025-11-08 03:31:12 +0000 */
-@layer utilities {
-.start-\(--sidebar-width\) {
-    inset-inline-start: var(--sidebar-width);
-  }
-}

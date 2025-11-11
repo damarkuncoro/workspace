@@ -1,7 +1,0 @@
-/*! Utility: blur | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.blur {
-    --tw-blur: blur(8px);
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
-}

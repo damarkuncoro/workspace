@@ -1,6 +1,0 @@
-/*! Utility: flex-col-reverse | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.flex-col-reverse {
-    flex-direction: column-reverse;
-  }
-}

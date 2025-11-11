@@ -1,8 +1,0 @@
-/*! Utility: focus\:ring-blue-500 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.focus\:ring-blue-500 {
-    &:focus {
-      --tw-ring-color: var(--color-blue-500);
-    }
-  }
-}

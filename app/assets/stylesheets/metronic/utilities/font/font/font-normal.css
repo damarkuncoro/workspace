@@ -1,7 +1,0 @@
-/*! Utility: font-normal | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.font-normal {
-    --tw-font-weight: var(--font-weight-normal);
-    font-weight: var(--font-weight-normal);
-  }
-}

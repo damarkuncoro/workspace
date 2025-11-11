@@ -1,9 +1,0 @@
-/*! Utility: not-last\:border-b | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.not-last\:border-b {
-    &:not(*:last-child) {
-      border-bottom-style: var(--tw-border-style);
-      border-bottom-width: 1px;
-    }
-  }
-}

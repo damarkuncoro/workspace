@@ -1,8 +1,0 @@
-/*! Utility: \[\active\&\]\:border-border | Layer: utilities | Generated 2025-11-08 03:31:17 +0000 */
-@layer utilities {
-.\[\.active\&\]\:border-border {
-    .active& {
-      border-color: var(--border);
-    }
-  }
-}

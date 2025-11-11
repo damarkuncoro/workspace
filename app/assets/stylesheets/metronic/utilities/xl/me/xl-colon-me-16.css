@@ -1,8 +1,0 @@
-/*! Utility: xl\:me-16 | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.xl\:me-16 {
-    @media (width >= 80rem) {
-      margin-inline-end: calc(var(--spacing) * 16);
-    }
-  }
-}

@@ -1,8 +1,0 @@
-/*! Utility: lg\:border-t-border | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.lg\:border-t-border {
-    @media (width >= 64rem) {
-      border-top-color: var(--border);
-    }
-  }
-}

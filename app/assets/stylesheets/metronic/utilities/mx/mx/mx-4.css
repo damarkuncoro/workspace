@@ -1,6 +1,0 @@
-/*! Utility: mx-4 | Layer: utilities | Generated 2025-11-08 03:31:13 +0000 */
-@layer utilities {
-.mx-4 {
-    margin-inline: calc(var(--spacing) * 4);
-  }
-}

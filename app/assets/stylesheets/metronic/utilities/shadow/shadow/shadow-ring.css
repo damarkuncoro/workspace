@@ -1,9 +1,0 @@
-/*! Utility: shadow-ring | Layer: utilities | Generated 2025-11-08 03:31:15 +0000 */
-@layer utilities {
-.shadow-ring {
-    --tw-shadow-color: var(--ring);
-    @supports (color: color-mix(in lab, red, red)) {
-      --tw-shadow-color: color-mix(in oklab, var(--ring) var(--tw-shadow-alpha), transparent);
-    }
-  }
-}

@@ -1,6 +1,0 @@
-/*! Utility: gap-9 | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.gap-9 {
-    gap: calc(var(--spacing) * 9);
-  }
-}

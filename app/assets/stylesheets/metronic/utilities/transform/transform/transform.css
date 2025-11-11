@@ -1,6 +1,0 @@
-/*! Utility: transform | Layer: utilities | Generated 2025-11-08 03:31:14 +0000 */
-@layer utilities {
-.transform {
-    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-}

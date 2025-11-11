@@ -1,9 +1,0 @@
-/*! Utility: lg\:text-2xl | Layer: utilities | Generated 2025-11-08 03:31:16 +0000 */
-@layer utilities {
-.lg\:text-2xl {
-    @media (width >= 64rem) {
-      font-size: var(--text-2xl);
-      line-height: var(--tw-leading, var(--text-2xl--line-height));
-    }
-  }
-}
