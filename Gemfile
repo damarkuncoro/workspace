@@ -62,7 +62,7 @@ end
 gem "devise", "~> 4.9"
 
 # Pagination
-gem "pagy", "~> 6.0"
+gem "pagy", "~> 43.0"
 # gem 'kaminari'
 
 # Use Rack 3.x for better compatibility
