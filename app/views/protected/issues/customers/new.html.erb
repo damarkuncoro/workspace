@@ -4,14 +4,14 @@
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'New Customers',
-  subtitle: 'Create a new Customers' %>
+  title: 'New Issue',
+  subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer') %>
 
 <%= render 'protected/issues/customers/form' %>
 
 <div class="flex justify-center mt-6">
-  <%= link_to send(:protected_issues_customers_path), class: 'kt-btn kt-btn-outline' do %>
+  <%= link_to protected_customer_issues_path(@customer), class: 'kt-btn kt-btn-outline' do %>
     <i class="ki-filled ki-arrow-left"></i>
-    Back to Customers
+    Back to Customer Issues
   <% end %>
 </div>

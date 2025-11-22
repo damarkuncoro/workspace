@@ -4,14 +4,14 @@
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Edit Customers',
-  subtitle: (defined?(@issues_customer) && @issues_customer.respond_to?(:name) ? @issues_customer.name : @issues_customer.try(:title) || @issues_customer.try(:id)) %>
+  title: 'Edit Issue',
+  subtitle: (defined?(@issue) && @issue.respond_to?(:title) ? @issue.title : @issue.try(:id)) %>
 
 <%= render 'protected/issues/customers/form' %>
 
 <div class="flex justify-center mt-6">
-  <%= link_to send(:protected_issues_customers_path), class: 'kt-btn kt-btn-outline' do %>
+  <%= link_to protected_customer_issues_path(@customer), class: 'kt-btn kt-btn-outline' do %>
     <i class="ki-filled ki-arrow-left"></i>
-    Back to Customers
+    Back to Customer Issues
   <% end %>
 </div>
