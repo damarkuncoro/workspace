@@ -1,7 +1,7 @@
 # Tickets Cakramedia — Rails App
 
 Proyek ini adalah aplikasi Rails 8.1 untuk manajemen tiket dan pelanggan, berjalan bersama Nginx reverse proxy dan PostgreSQL. Aplikasi menggunakan Devise untuk autentikasi, Pagy untuk pagination, dan Solid* (Cache/Queue/Cable) untuk caching, job queue, dan ActionCable.
-
+ggg
 ## Stack
 - Ruby `3.3.7` dan Rails `8.1.0` (`Gemfile`:4)
 - PostgreSQL 16 sebagai database
