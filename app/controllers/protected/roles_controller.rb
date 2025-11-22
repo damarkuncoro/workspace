@@ -4,13 +4,19 @@ class Protected::RolesController < Protected::BaseController
   def index
     @roles = current_account.roles
   end
-  # GET /protected/roles
+  # GET /roles (My Roles page without ID)
+  # Menampilkan peran yang dimiliki oleh akun saat ini.
+  # Catatan: Rute `protected_roles_show_path` tidak membawa :id,
+  #          jadi kita TIDAK boleh melakukan find berdasarkan params[:id].
   def show
-    @roles = current_account.roles.find(params[:id])
+    # Tampilkan daftar roles; siapkan satu role pertama untuk detail jika view memerlukannya.
+    @role = current_account.roles.first
   end
 
+  # GET /roles/edit (Edit My Roles tanpa ID)
+  # Menyediakan halaman edit untuk peran akun saat ini.
   def edit
-    @roles = current_account.roles.find(params[:id])
+    # Tidak ada :id pada rute ini, cukup gunakan koleksi @roles dari before_action.
   end
 
   # PATCH/PUT /protected/roles

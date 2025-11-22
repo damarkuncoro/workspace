@@ -1,9 +1,17 @@
 class Protected::CustomerDevicesController < Protected::BaseController
+  # Menyiapkan record CustomerDevice untuk aksi berbasis id
   before_action :set_customer_device, only: %i[show edit update destroy return]
-  before_action :set_customer, only: %i[index new create edit]
+  # Konteks customer wajib untuk form (nested routes)
+  before_action :set_customer, only: %i[new create edit]
+  # Konteks customer opsional untuk index (mendukung non-nested dan nested)
+  before_action :set_customer_optional, only: %i[index]
 
+  # Index: daftar rental device
+  # - Jika params[:customer_id] tersedia (nested), tampilkan milik customer tsb
+  # - Jika tidak, tampilkan seluruh rental (non-nested)
   def index
-    @customer_devices = @customer.customer_devices.includes(:device).order(created_at: :desc)
+    base_scope = CustomerDevice.includes(:device).order(created_at: :desc)
+    @customer_devices = @customer.present? ? @customer.customer_devices.includes(:device).order(created_at: :desc) : base_scope
 
     # Filter by status if provided
     @customer_devices = @customer_devices.where(status: params[:status]) if params[:status].present?
@@ -93,8 +101,14 @@ class Protected::CustomerDevicesController < Protected::BaseController
     @customer_device = CustomerDevice.find(params[:id])
   end
 
+  # Customer wajib pada aksi form
   def set_customer
     @customer = Customer.find(params[:customer_id])
+  end
+
+  # Customer opsional pada index (non-nested tidak memiliki customer_id)
+  def set_customer_optional
+    @customer = Customer.find(params[:customer_id]) if params[:customer_id].present?
   end
 
   def customer_device_params
