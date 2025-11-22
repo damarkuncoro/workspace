@@ -5,44 +5,8 @@
 <!-- Sidebar -->
     <%= kt_sidebar do %>
       <%= kt_sidebar_header %>
-      <%= kt_sidebar_content do %>
-
-              <%= kt_menu_heading("Dashboard") %>
-              <%= kt_menu_link(title: "Dashboard", href: protected_dashboard_path ) %>
-
-              <%= kt_menu_heading("Account Management") %>
-              <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
-                    <%= kt_menu_link(title: "Accounts", href: protected_accounts_path ) %>
-                    <%= kt_menu_link(title: "Employees", href: protected_employees_path ) %>
-                    <%= kt_menu_link(title: "Customers", href: protected_customers_path ) %>
-               <% end %>
-
-
-              <%= kt_menu_item("Issue Management", icon: "ki-element-11") do %>
-                  <%= kt_menu_link(title: "Issues", href: protected_issues_path ) %>
-                  <%= kt_menu_link(title: "Customer Issues", href: protected_issues_customers_path ) %>
-                  <%= kt_menu_link(title: "Employee Issues", href: protected_issues_employees_path ) %>
-              <% end %>
-              
-              <%= kt_menu_heading("Device Management") %>
-              <%= kt_menu_item("Devices", icon: "ki-cpu", href: protected_devices_path) %>
-              <%= kt_menu_item("Device Types", icon: "ki-cpu-2", href: protected_device_types_path) %>
-
-              <%= kt_menu_heading("Network Monitoring") %>
-              <%= kt_menu_item("Networks", icon: "ki-route", href: protected_networks_path) %>
-              <%= kt_menu_item("Network Devices", icon: "ki-router", href: protected_network_devices_path) %>
-              <%= kt_menu_item("Network Activities", icon: "ki-activity", href: protected_network_activities_path) %>
-              <%= kt_menu_item("Link Connections", icon: "ki-link", href: protected_link_connections_path) %>
-
-              <%= kt_menu_heading("Account Management") %>
-              <%= kt_menu_item("Accounts", icon: "ki-shield", href: protected_accounts_path) %>
-              <%= kt_menu_item("Role Requests", icon: "ki-key", href: protected_role_requests_path) %>
-
-              <%= kt_menu_heading("Profile & Roles") %>
-              <%= kt_menu_item("Profile", icon: "ki-profile-circle", href: protected_profile_show_path) %>
-              <%= kt_menu_item("Roles", icon: "ki-badge", href: protected_roles_show_path) %>
-
-      <% end %>
+      <%= render "metronic/layouts/partials/page/main/kt-sidebar/kt-sidebar-content" %>
+ 
     <% end %>
 <!-- End of Sidebar -->
 
