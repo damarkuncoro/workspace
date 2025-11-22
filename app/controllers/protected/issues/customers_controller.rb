@@ -1,6 +1,9 @@
 class Protected::Issues::CustomersController < Protected::BaseController
+  # Menetapkan customer dari rute nested
   before_action :set_customer
   before_action :authenticate_account!
+  # Menyediakan koleksi akun yang dapat dipilih sebagai assignee
+  before_action :set_assignable_accounts, only: %i[new edit]
 
   def index
     @issues = @customer.issues
@@ -11,6 +14,8 @@ class Protected::Issues::CustomersController < Protected::BaseController
     @issue_comment = IssueComment.new
   end
 
+  # GET /protected/customers/:customer_id/issues/new
+  # Membuat instance Issue baru untuk customer (issueable polymorphic)
   def new
     @issue = Issue.new(issueable: @customer)
   end
@@ -32,6 +37,8 @@ class Protected::Issues::CustomersController < Protected::BaseController
     end
   end
 
+  # GET /protected/customers/:customer_id/issues/:id/edit
+  # Mengedit issue untuk customer tertentu
   def edit
     @issue = @customer.issues.find(params[:id])
   end
@@ -76,6 +83,12 @@ class Protected::Issues::CustomersController < Protected::BaseController
 
   def set_customer
     @customer = Customer.find(params[:customer_id])
+  end
+
+  # Menyediakan koleksi akun untuk pilihan assignee (primary dan additional)
+  # Catatan: disusun dengan nama person agar mudah dipilih di UI.
+  def set_assignable_accounts
+    @assignable_accounts = Account.includes(:person).order("people.created_at ASC")
   end
 
   def issue_comment_params

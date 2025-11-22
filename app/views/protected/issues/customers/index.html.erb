@@ -5,9 +5,7 @@
 <%= render 'protected/shared/partials/page_header',
   title: 'Customer Issues',
   subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer'),
-  actions_html: (<%= link_to(new_protected_customer_issue_path(@customer), class: 'kt-btn kt-btn-primary') do %>
-    <%= raw('<i class="ki-filled ki-plus"></i> New Issue') %>
-  <% end %>) %>
+  actions_html: link_to(new_protected_customer_issue_path(@customer), class: 'kt-btn kt-btn-primary') { raw('<i class="ki-filled ki-plus"></i> New Issue') } %>
 
 <%= kt_card do %>
   <%= kt_card_content do %>

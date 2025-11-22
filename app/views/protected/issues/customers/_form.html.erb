@@ -7,6 +7,17 @@
 <%= kt_card do %>
   <%= kt_card_header(title: 'Customers Form') %>
   <%= kt_card_content do %>
+    <%# Tampilkan error validasi jika ada %>
+    <% if (defined?(f) && f.object.errors.any?) || (defined?(@issue) && @issue&.errors&.any?) %>
+      <div class="rounded-md border border-red-200 bg-red-50 p-3 mb-4">
+        <div class="text-sm font-medium text-red-700">There were errors with your submission:</div>
+        <ul class="mt-2 list-disc list-inside text-sm text-red-700">
+          <% (defined?(f) && f.object.errors.any? ? f.object.errors.full_messages : @issue.errors.full_messages).each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <%# Form Issue Customer: gunakan nested model dengan namespace :protected agar helper rute benar %>
     <%# Model: [:protected, @customer, (@issue || Issue.new)] akan memetakan ke protected_customer_issues_path(@customer) %>
     <%= form_with(model: [:protected, @customer, (@issue || Issue.new)], class: 'grid gap-6') do |f| %>
@@ -17,6 +28,50 @@
         <% else %>
           <%= f.text_field :id, class: 'kt-input', disabled: true %>
         <% end %>
+      </div>
+
+      <div class="grid gap-2">
+        <label class="text-sm text-muted-foreground">Description</label>
+        <%= f.text_area :description, class: 'kt-input', placeholder: 'Describe the issue', rows: 4 %>
+      </div>
+
+      <div class="grid gap-2 md:grid-cols-2">
+        <div class="grid gap-2">
+          <label class="text-sm text-muted-foreground">Status</label>
+          <%= f.select :status,
+            options_for_select(Issue.statuses.keys.map { |k| [k.titleize, k] }, (defined?(@issue) ? @issue.status : 'open')),
+            { include_blank: false },
+            { class: 'kt-input' } %>
+        </div>
+        <div class="grid gap-2">
+          <label class="text-sm text-muted-foreground">Priority</label>
+          <%= f.select :priority,
+            options_for_select(Issue.priorities.keys.map { |k| [k.titleize, k] }, (defined?(@issue) ? @issue.priority : 'medium')),
+            { include_blank: false },
+            { class: 'kt-input' } %>
+        </div>
+      </div>
+
+      <div class="grid gap-2 md:grid-cols-2">
+        <div class="grid gap-2">
+          <label class="text-sm text-muted-foreground">Assigned To (Primary)</label>
+          <%# Gunakan collection jika tersedia (@assignable_accounts), fallback text_field untuk ID %>
+          <% if defined?(@assignable_accounts) && @assignable_accounts.present? %>
+            <%= f.collection_select :assigned_to_id, @assignable_accounts, :id, :person_name,
+              { include_blank: 'Unassigned' }, { class: 'kt-input' } %>
+          <% else %>
+            <%= f.text_field :assigned_to_id, class: 'kt-input', placeholder: 'Account UUID (optional)' %>
+          <% end %>
+        </div>
+        <div class="grid gap-2">
+          <label class="text-sm text-muted-foreground">Additional Assignees</label>
+          <%# Multi-select untuk assigned_account_ids[], hanya jika collection tersedia %>
+          <%= f.collection_select :assigned_account_ids,
+            (defined?(@assignable_accounts) && @assignable_accounts.present? ? @assignable_accounts : []),
+            :id, :person_name,
+            { include_hidden: false },
+            { multiple: true, class: 'kt-input', size: 4 } %>
+        </div>
       </div>
 
       <div class="flex items-center gap-3">
