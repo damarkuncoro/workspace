@@ -19,7 +19,8 @@
   <%= kt_menu_item("Devices", icon: "ki-element-11") do %>
     <%= kt_menu_link("Devices", href: protected_devices_path) %>
     <%= kt_menu_link("Device Types", href: protected_device_types_path) %>
-    <%= kt_menu_link("Customer Devices", href: protected_customer_devices_path) %>
+    <%# Gunakan path absolut untuk menghindari konflik helper nested yang menuntut customer_id %>
+    <%= kt_menu_link("Customer Devices", href: "/protected/customer_devices") %>
   <% end %>
 
   <%= kt_menu_item("Networks", icon: "ki-element-11") do %>
