@@ -88,7 +88,12 @@ class Protected::Issues::CustomersController < Protected::BaseController
   # Menyediakan koleksi akun untuk pilihan assignee (primary dan additional)
   # Catatan: disusun dengan nama person agar mudah dipilih di UI.
   def set_assignable_accounts
-    @assignable_accounts = Account.includes(:person).order("people.created_at ASC")
+    # Ambil akun dengan role yang relevan (employee/administrator) dan urutkan stabil
+    @assignable_accounts = Account
+      .left_joins(:account_roles, :roles)
+      .where(account_roles: { revoked_at: nil }, roles: { name: ["employee", "administrator"] })
+      .includes(:person)
+      .order("accounts.created_at ASC")
   end
 
   def issue_comment_params

@@ -22,31 +22,33 @@
     <%# Model: [:protected, @customer, (@issue || Issue.new)] akan memetakan ke protected_customer_issues_path(@customer) %>
     <%= form_with(model: [:protected, @customer, (@issue || Issue.new)], class: 'grid gap-6') do |f| %>
       <div class="grid gap-2">
-        <label class="text-sm text-muted-foreground">Name/Title</label>
+        <label class="text-sm text-muted-foreground">Judul</label>
         <% if defined?(@issue) && @issue.respond_to?(:title) %>
-          <%= f.text_field :title, class: 'kt-input', placeholder: 'Enter title' %>
+          <%= f.text_field :title, class: 'kt-input', placeholder: 'Masukkan judul' %>
         <% else %>
           <%= f.text_field :id, class: 'kt-input', disabled: true %>
         <% end %>
       </div>
 
       <div class="grid gap-2">
-        <label class="text-sm text-muted-foreground">Description</label>
-        <%= f.text_area :description, class: 'kt-input', placeholder: 'Describe the issue', rows: 4 %>
+        <label class="text-sm text-muted-foreground">Deskripsi</label>
+        <%= f.text_area :description, class: 'kt-input', placeholder: 'Jelaskan masalah', rows: 4 %>
       </div>
 
       <div class="grid gap-2 md:grid-cols-2">
         <div class="grid gap-2">
           <label class="text-sm text-muted-foreground">Status</label>
+          <% status_labels = { 'open' => 'Dibuka', 'in_progress' => 'Dalam Proses', 'completed' => 'Selesai', 'closed' => 'Ditutup' } %>
           <%= f.select :status,
-            options_for_select(Issue.statuses.keys.map { |k| [k.titleize, k] }, (defined?(@issue) ? @issue.status : 'open')),
+            options_for_select(Issue.statuses.keys.map { |k| [status_labels[k] || k.titleize, k] }, (defined?(@issue) ? @issue.status : 'open')),
             { include_blank: false },
             { class: 'kt-input' } %>
         </div>
         <div class="grid gap-2">
-          <label class="text-sm text-muted-foreground">Priority</label>
+          <label class="text-sm text-muted-foreground">Prioritas</label>
+          <% priority_labels = { 'low' => 'Rendah', 'medium' => 'Sedang', 'high' => 'Tinggi' } %>
           <%= f.select :priority,
-            options_for_select(Issue.priorities.keys.map { |k| [k.titleize, k] }, (defined?(@issue) ? @issue.priority : 'medium')),
+            options_for_select(Issue.priorities.keys.map { |k| [priority_labels[k] || k.titleize, k] }, (defined?(@issue) ? @issue.priority : 'medium')),
             { include_blank: false },
             { class: 'kt-input' } %>
         </div>
@@ -54,17 +56,17 @@
 
       <div class="grid gap-2 md:grid-cols-2">
         <div class="grid gap-2">
-          <label class="text-sm text-muted-foreground">Assigned To (Primary)</label>
+          <label class="text-sm text-muted-foreground">Ditugaskan ke (Utama)</label>
           <%# Gunakan collection jika tersedia (@assignable_accounts), fallback text_field untuk ID %>
           <% if defined?(@assignable_accounts) && @assignable_accounts.present? %>
             <%= f.collection_select :assigned_to_id, @assignable_accounts, :id, :person_name,
               { include_blank: 'Unassigned' }, { class: 'kt-input' } %>
           <% else %>
-            <%= f.text_field :assigned_to_id, class: 'kt-input', placeholder: 'Account UUID (optional)' %>
+            <%= f.text_field :assigned_to_id, class: 'kt-input', placeholder: 'Account UUID (opsional)' %>
           <% end %>
         </div>
         <div class="grid gap-2">
-          <label class="text-sm text-muted-foreground">Additional Assignees</label>
+          <label class="text-sm text-muted-foreground">Penanggung Tambahan</label>
           <%# Multi-select untuk assigned_account_ids[], hanya jika collection tersedia %>
           <%= f.collection_select :assigned_account_ids,
             (defined?(@assignable_accounts) && @assignable_accounts.present? ? @assignable_accounts : []),
