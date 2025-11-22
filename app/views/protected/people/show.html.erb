@@ -1,0 +1,14 @@
+<h1>Person</h1>
+<div class="card">
+  <div class="card-body">
+    <p><strong>ID:</strong> <%= @person.id %></p>
+    <p><strong>Name:</strong> <%= @person.name %></p>
+    <p><strong>Email:</strong> <%= @person.person_email %></p>
+    <p><strong>Date of Birth:</strong> <%= @person.date_of_birth %></p>
+    <p><strong>Metadata:</strong> <%= @person.metadata %></p>
+  </div>
+</div>
+<div class="mt-4">
+  <%= link_to "Edit", edit_protected_person_path(@person), class: "btn btn-primary" %>
+  <%= link_to "Back", protected_people_path, class: "btn btn-light" %>
+</div>

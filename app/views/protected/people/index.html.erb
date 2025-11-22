@@ -1,0 +1,27 @@
+<h1>People</h1>
+<div class="row g-6 g-xl-9">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+          <td><%= person.id %></td>
+          <td><%= person.name %></td>
+          <td><%= person.person_email %></td>
+          <td>
+            <%= link_to "Show", protected_person_path(person), class: "btn btn-sm btn-light" %>
+            <%= link_to "Edit", edit_protected_person_path(person), class: "btn btn-sm btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "New Person", new_protected_person_path, class: "btn btn-success" %>
+</div>

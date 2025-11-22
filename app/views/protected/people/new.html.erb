@@ -1,0 +1,17 @@
+<h1>New Person</h1>
+<%= form_with model: @person, url: protected_people_path, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :date_of_birth %>
+    <%= f.date_field :date_of_birth, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :metadata %>
+    <%= f.text_area :metadata, class: "form-control" %>
+  </div>
+  <%= f.submit "Create", class: "btn btn-success" %>
+  <%= link_to "Back", protected_people_path, class: "btn btn-light" %>
+<% end %>
