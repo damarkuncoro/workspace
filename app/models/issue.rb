@@ -32,6 +32,11 @@ class Issue < ApplicationRecord
   # Callbacks (optional)
   before_create :default_status
 
+  # Catat aktivitas setelah issue berhasil dibuat
+  after_create_commit :log_issue_created
+  # Jika ada assignment awal pada saat dibuat, catat juga
+  after_create_commit :log_initial_assignment, if: -> { assigned_to_id.present? }
+
   after_update :log_status_change, if: :saved_change_to_status?
   after_update :log_priority_change, if: :saved_change_to_priority?
   after_update :log_assignment_change, if: :saved_change_to_assigned_to_id?
@@ -67,6 +72,29 @@ class Issue < ApplicationRecord
       action: "assignment_changed",
       field_name: "assigned_to_id",
       old_value: assigned_to_id_before_last_save,
+      new_value: assigned_to_id
+    )
+  end
+
+  # log_issue_created
+  # Tujuan: Mencatat aktivitas pembuatan issue.
+  # SRP: Hanya membuat satu entri IssueActivity dengan action 'created'.
+  # Output: Baris IssueActivity baru tanpa nilai old/new.
+  def log_issue_created
+    issue_activities.create!(
+      action: "created",
+      account_id: assigned_to_id
+    )
+  end
+
+  # log_initial_assignment
+  # Tujuan: Mencatat assignment awal jika sudah terisi saat pembuatan.
+  # SRP: Menangani logging khusus untuk penugasan awal.
+  # Output: Baris IssueActivity 'assignment_changed' dengan new_value berisi assigned_to_id.
+  def log_initial_assignment
+    issue_activities.create!(
+      action: "assignment_changed",
+      field_name: "assigned_to_id",
       new_value: assigned_to_id
     )
   end

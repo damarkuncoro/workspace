@@ -1,0 +1,41 @@
+<!--
+  Partial: _activities.html.erb
+  Tujuan: Menampilkan timeline aktivitas issue (status, prioritas, assignment, komentar, dll.)
+  Catatan: Menggunakan IssueActivity#description untuk ringkasan aksi.
+-->
+
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <h3 class="kt-card-title">Aktivitas</h3>
+  <% end %>
+
+  <%= kt_card_content do %>
+    <% activities = @issue.issue_activities.order(created_at: :desc) %>
+    <% if activities.any? %>
+      <div class="space-y-3">
+        <% activities.each do |activity| %>
+          <div class="p-3 border rounded flex items-start gap-3">
+            <div class="text-gray-500 text-xs whitespace-nowrap">
+              <%= l(activity.created_at, format: :short) rescue activity.created_at %>
+            </div>
+            <div class="flex-1">
+              <div class="font-medium"><%= activity.description %></div>
+              <% if activity.old_value.present? || activity.new_value.present? %>
+                <div class="text-sm text-gray-600">
+                  <% if activity.old_value.present? %>
+                    <span>Lama: <%= activity.old_value %></span>
+                  <% end %>
+                  <% if activity.new_value.present? %>
+                    <span class="ml-4">Baru: <%= activity.new_value %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-sm text-gray-500">Belum ada aktivitas.</div>
+    <% end %>
+  <% end %>
+<% end %>

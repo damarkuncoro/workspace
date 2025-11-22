@@ -1,0 +1,62 @@
+<!--
+  Partial: _comments.html.erb
+  Tujuan: Menampilkan daftar komentar issue dan form untuk menambah komentar baru.
+  Catatan: Form submit ke rute nested: protected_customer_issue_comments_path(@customer, @issue)
+-->
+
+<%= kt_card do %>
+  <%= kt_card_header do %>
+    <h3 class="kt-card-title">Komentar</h3>
+  <% end %>
+
+  <%= kt_card_content do %>
+    <%# Daftar komentar %>
+    <div class="space-y-4 mb-6">
+      <% @issue.issue_comments.order(created_at: :desc).each do |comment| %>
+        <div class="p-3 border rounded">
+          <div class="text-sm text-gray-600">
+            <strong><%= comment.account&.person&.name || comment.account&.email %></strong>
+            • <%= l(comment.created_at, format: :short) rescue comment.created_at %>
+            <% if comment.respond_to?(:internal) && comment.internal %>
+              <span class="ml-2 px-2 py-1 text-xs rounded bg-yellow-100 text-yellow-800">Internal</span>
+            <% end %>
+          </div>
+          <div class="mt-2 whitespace-pre-line"><%= comment.content %></div>
+        </div>
+      <% end %>
+      <% if @issue.issue_comments.count == 0 %>
+        <div class="text-sm text-gray-500">Belum ada komentar.</div>
+      <% end %>
+    </div>
+
+    <%# Form tambah komentar %>
+    <%= form_with model: @issue_comment, url: protected_customer_issue_comments_path(@customer, @issue), local: true do |f| %>
+      <% if @issue_comment.errors.any? %>
+        <div class="mb-4 p-3 rounded bg-red-50 text-red-700">
+          <strong>Terjadi kesalahan:</strong>
+          <ul class="list-disc ml-5">
+            <% @issue_comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="space-y-4">
+        <div>
+          <%= f.label :content, "Komentar", class: "kt-label" %>
+          <%= f.text_area :content, rows: 4, class: "kt-input", placeholder: "Tulis komentar Anda di sini..." %>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <%= f.check_box :internal %>
+          <%= f.label :internal, "Internal (hanya staff)", class: "kt-label" %>
+        </div>
+
+        <div>
+          <%= f.submit "Tambah Komentar", class: "kt-btn kt-btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
