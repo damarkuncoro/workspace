@@ -1,45 +1,46 @@
+<%# Sidebar: gunakan kt_menu_item_link sesuai KT::Menu::ItemHelper %>
 <%= kt_sidebar_content do %>
   <%= kt_menu_item("Dashboard", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Dashboard", href: protected_dashboard_path) %>
+    <%= kt_menu_item_link(title: "Dashboard", href: protected_dashboard_path) %>
   <% end %>
 
   <%= kt_menu_item("Accounts", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Accounts", href: protected_accounts_path) %>
-    <%= kt_menu_link("Employees", href: protected_employees_path) %>
-    <%= kt_menu_link("Customers", href: protected_customers_path) %>
-    <%= kt_menu_link("People", href: protected_people_path) %>
+    <%= kt_menu_item_link(title: "Accounts", href: protected_accounts_path) %>
+    <%= kt_menu_item_link(title: "Employees", href: protected_employees_path) %>
+    <%= kt_menu_item_link(title: "Customers", href: protected_customers_path) %>
+    <%= kt_menu_item_link(title: "People", href: protected_people_path) %>
   <% end %>
 
   <%= kt_menu_item("Tickets", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Issues", href: protected_issues_path) %>
-    <%= kt_menu_link("Customer Issues", href: protected_issues_customers_path) %>
-    <%= kt_menu_link("Employee Issues", href: protected_issues_employees_path) %>
+    <%= kt_menu_item_link(title: "Issues", href: protected_issues_path) %>
+    <%= kt_menu_item_link(title: "Customer Issues", href: protected_issues_customers_path) %>
+    <%= kt_menu_item_link(title: "Employee Issues", href: protected_issues_employees_path) %>
   <% end %>
 
   <%= kt_menu_item("Devices", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Devices", href: protected_devices_path) %>
-    <%= kt_menu_link("Device Types", href: protected_device_types_path) %>
+    <%= kt_menu_item_link(title: "Devices", href: protected_devices_path) %>
+    <%= kt_menu_item_link(title: "Device Types", href: protected_device_types_path) %>
     <%# Gunakan path absolut untuk menghindari konflik helper nested yang menuntut customer_id %>
-    <%= kt_menu_link("Customer Devices", href: "/protected/customer_devices") %>
+    <%= kt_menu_item_link(title: "Customer Devices", href: "/protected/customer_devices") %>
   <% end %>
 
   <%= kt_menu_item("Networks", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Networks", href: protected_networks_path) %>
-    <%= kt_menu_link("Network Devices", href: protected_network_devices_path) %>
-    <%= kt_menu_link("Device Interfaces", href: protected_device_interfaces_path) %>
-    <%= kt_menu_link("Network Activities", href: protected_network_activities_path) %>
-    <%= kt_menu_link("Link Connections", href: protected_link_connections_path) %>
+    <%= kt_menu_item_link(title: "Networks", href: protected_networks_path) %>
+    <%= kt_menu_item_link(title: "Network Devices", href: protected_network_devices_path) %>
+    <%= kt_menu_item_link(title: "Device Interfaces", href: protected_device_interfaces_path) %>
+    <%= kt_menu_item_link(title: "Network Activities", href: protected_network_activities_path) %>
+    <%= kt_menu_item_link(title: "Link Connections", href: protected_link_connections_path) %>
   <% end %>
 
   <%= kt_menu_item("Roles", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Roles", href: protected_roles_path) %>
-    <%= kt_menu_link("Role Requests", href: protected_role_requests_path) %>
+    <%= kt_menu_item_link(title: "Roles", href: protected_roles_path) %>
+    <%= kt_menu_item_link(title: "Role Requests", href: protected_role_requests_path) %>
   <% end %>
 
   <%= kt_menu_item("Profile", icon: "ki-element-11") do %>
-    <%= kt_menu_link("Profile", href: protected_profile_show_path) %>
-    <%= kt_menu_link("Edit Profile", href: protected_profile_edit_path) %>
-    <%= kt_menu_link("My Roles", href: protected_roles_show_path) %>
-    <%= kt_menu_link("Edit Roles", href: protected_roles_edit_path) %>
+    <%= kt_menu_item_link(title: "Profile", href: protected_profile_show_path) %>
+    <%= kt_menu_item_link(title: "Edit Profile", href: protected_profile_edit_path) %>
+    <%= kt_menu_item_link(title: "My Roles", href: protected_roles_show_path) %>
+    <%= kt_menu_item_link(title: "Edit Roles", href: protected_roles_edit_path) %>
   <% end %>
 <% end %>
