@@ -7,8 +7,8 @@
 <%= kt_card do %>
   <%= kt_card_header(title: 'Role Form') %>
   <%= kt_card_content do %>
-    <%# Gunakan form_with(model: (@role || Role.new)) agar aman saat instance nil %>
-    <%= form_with(model: (@role || Role.new), class: 'grid gap-6') do |f| %>
+    <%# Form: gunakan namespace :protected agar helper rute benar (protected_roles_path/protected_role_path) %>
+    <%= form_with(model: [:protected, (@role || Role.new)], class: 'grid gap-6') do |f| %>
       <div class="grid gap-2">
         <label class="text-sm text-muted-foreground">Name/Title</label>
         <% if @role.respond_to?(:name) %>
