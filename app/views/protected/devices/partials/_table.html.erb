@@ -1,0 +1,101 @@
+<%#
+  Partial: Tabel Perangkat
+  Tujuan: Menampilkan daftar perangkat menggunakan kt_card + kt_table.
+  Prinsip: SRP & KISS — partial independen, menerima locals agar tidak bergantung instance variables.
+  Locals yang diharapkan:
+    - records: koleksi Device (Array/ActiveRecord::Relation)
+    - namespace: simbol namespace routes, contoh: :protected
+    - resource_singular: simbol singular resource, contoh: :device
+    - resource_plural: simbol plural resource, contoh: :devices
+%>
+
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <% if (records || []).present? %>
+      <div class="kt-scrollable-x-auto">
+        <%= kt_table(class: 'kt-table-border') do %>
+          <thead>
+            <tr>
+              <th><%= kt_table_col_label { 'Label' } %></th>
+              <th><%= kt_table_col_label { 'Tipe' } %></th>
+              <th><%= kt_table_col_label { 'Serial' } %></th>
+              <th><%= kt_table_col_label { 'Status' } %></th>
+              <th><%= kt_table_col_label { 'Customer Saat Ini' } %></th>
+              <th class="w-[220px]"><%= kt_table_col_label { 'Aksi' } %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% (records || []).each do |device| %>
+              <tr>
+                <td>
+                  <div class="text-sm font-medium text-foreground"><%= device.label %></div>
+                  <div class="text-xs text-secondary-foreground"><%= device.try(:created_at) ? l(device.created_at) : '-' %></div>
+                </td>
+                <td>
+                  <div class="text-sm text-foreground"><%= device.device_type&.name %></div>
+                </td>
+                <td>
+                  <div class="text-sm font-mono bg-muted px-2 py-1 rounded"><%= device.serial_number %></div>
+                </td>
+                <td>
+                  <% status_text = if device.respond_to?(:available?) && device.available?
+                    'Tersedia'
+                  elsif device.respond_to?(:rented?) && device.rented?
+                    'Disewa'
+                  else
+                    device.status.to_s.titleize.presence || '-'
+                  end %>
+                  <span class="text-sm text-muted-foreground"><%= status_text %></span>
+                </td>
+                <td>
+                  <% if device.respond_to?(:current_customer) && device.current_customer %>
+                    <div class="text-sm text-foreground"><%= device.current_customer.person_name %></div>
+                    <div class="text-xs text-secondary-foreground"><%= device.current_customer.account_email %></div>
+                  <% else %>
+                    <span class="text-sm text-muted-foreground">Tidak sedang disewa</span>
+                  <% end %>
+                </td>
+                <td>
+                  <% if device.persisted? %>
+                    <div class="flex gap-2">
+                      <%= link_to polymorphic_path([namespace, resource_singular], device), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <% end %>
+                      <%= link_to polymorphic_path([:edit, namespace, resource_singular], device), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <% end %>
+                      <%= link_to polymorphic_path([namespace, resource_singular], device), method: :delete, data: { confirm: 'Yakin hapus perangkat ini?' }, class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-trash"></i>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-sm text-muted-foreground">-</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-8">
+        <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-device text-4xl text-muted-foreground"></i>
+          <h3 class="text-lg font-medium text-foreground">Belum ada perangkat</h3>
+          <p class="text-sm text-secondary-foreground">Tambahkan perangkat pertama untuk mulai mengelola inventaris.</p>
+          <div class="flex gap-2 justify-center">
+            <%= link_to polymorphic_path([:new, namespace, resource_singular]), class: 'kt-btn kt-btn-primary' do %>
+              <%= raw('<i class="ki-filled ki-plus"></i> Tambah Perangkat') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card_footer(justify: 'justify-start') do %>
+    <%= link_to protected_device_types_path, class: 'kt-btn kt-btn-outline' do %>
+      <%= raw('<i class="ki-filled ki-setting-2"></i> Kelola Tipe Perangkat') %>
+    <% end %>
+  <% end %>
+<% end %>

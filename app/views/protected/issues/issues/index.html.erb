@@ -6,17 +6,17 @@
 
 <%= render 'protected/shared/partials/page_header',
   title: 'Issues',
-  subtitle: 'Manage Issues',
+  subtitle: 'Kelola Issues',
   actions_html: (content_tag(:div, class: 'flex gap-2') do
-    # Actions: tautan menuju halaman Issues untuk Customers dan Employees
+    # Tautan cepat ke halaman Issues Customer dan Issues Karyawan
     concat(
       link_to(protected_issues_customers_path, class: 'kt-btn kt-btn-outline') do
-        raw('<i class="ki-filled ki-user"></i> Customer Issues')
+        raw('<i class="ki-filled ki-user"></i> Issues Customer')
       end
     )
     concat(
       link_to(protected_issues_employees_path, class: 'kt-btn kt-btn-outline') do
-        raw('<i class="ki-filled ki-people"></i> Employee Issues')
+        raw('<i class="ki-filled ki-people"></i> Issues Karyawan')
       end
     )
   end) %>
