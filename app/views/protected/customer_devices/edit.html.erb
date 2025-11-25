@@ -1,32 +1,20 @@
-<div class="max-w-2xl mx-auto p-6">
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <div class="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-4">
-      <h1 class="text-2xl font-bold text-white">Edit Device Rental</h1>
-      <p class="text-yellow-100 mt-1">Update rental information for <%= @customer_device.device.name %></p>
-    </div>
+<%# Header halaman edit mengikuti pola Accounts#edit %>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Edit Device Rental',
+  subtitle: "Update rental information for #{device_label(@customer_device.device)}" %>
 
-    <div class="p-6">
-      <%= render "form", customer_device: @customer_device %>
-    </div>
-  </div>
+<%# Form edit rental: gunakan partial lokal agar tidak memecah struktur saat ini %>
+<%= render 'form', customer_device: @customer_device %>
 
-  <!-- Navigation Links -->
-  <div class="mt-6 text-center">
-    <div class="flex justify-center space-x-4">
-      <%= link_to protected_customer_device_path(@customer_device.customer, @customer_device), class: "text-sm text-gray-600 hover:text-gray-900" do %>
-        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-        </svg>
-        View Rental
-      <% end %>
-
-      <%= link_to protected_customer_devices_path(@customer_device.customer), class: "text-sm text-gray-600 hover:text-gray-900" do %>
-        <svg class="inline h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Back to Rentals
-      <% end %>
-    </div>
-  </div>
-</div>
+<%# Quick actions: selaraskan tombol navigasi ke shared page_actions (KT styles) %>
+<%= render 'protected/shared/partials/page_actions',
+  card: false,
+  justify: 'justify-center',
+  links: [
+    link_to(protected_customer_device_path(@customer_device.customer, @customer_device), class: "kt-btn kt-btn-outline") do
+      raw('<i class="ki-filled ki-eye"></i> View Rental')
+    end,
+    link_to(protected_customer_devices_path(@customer_device.customer), class: "kt-btn kt-btn-outline") do
+      raw('<i class="ki-filled ki-arrow-left"></i> Back to Rentals')
+    end
+  ] %>

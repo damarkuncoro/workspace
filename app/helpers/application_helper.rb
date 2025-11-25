@@ -8,6 +8,8 @@ module ApplicationHelper
   include KT::TopbarHelper
   # - Table dan elemen kt_* dinamis: menyediakan `kt_table`, `kt_table_col`, dll.
   include KT::TableHelper
+  # - Button helper: menyediakan `kt_button`, `kt_submit_button`, dsb.
+  include KT::ButtonHelper
 
   # Render flash messages menggunakan Tailwind utility classes.
   # Tujuan: menggantikan penggunaan <%= notice %> dan <%= alert %> di view

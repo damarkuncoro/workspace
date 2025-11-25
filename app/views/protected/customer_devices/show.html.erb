@@ -1,32 +1,30 @@
-<div class="max-w-4xl mx-auto p-6">
-  <!-- Header -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gradient-to-r from-teal-600 to-cyan-600 px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-2xl font-bold text-white">Device Rental Details</h1>
-          <%%# Gunakan helper untuk label perangkat dan nama pelanggan (DRY/KISS) %>
-          <p class="text-teal-100 mt-1"><%= device_label(@customer_device.device) %> - <%= customer_name(@customer_device.customer) %></p>
-        </div>
-        <div class="flex space-x-3">
-          <% if @customer_device.active? %>
-            <%= button_to return_protected_customer_device_path(@customer_device), method: :patch, data: { confirm: 'Are you sure you want to return this device?' }, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" do %>
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              Return Device
-            <% end %>
-          <% end %>
-          <%= link_to edit_protected_customer_device_path(@customer_device.customer, @customer_device), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" do %>
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-            </svg>
-            Edit Rental
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'protected/shared/partials/page_header',
+    title: 'Device Rental Details',
+    subtitle: "#{device_label(@customer_device.device)} • #{customer_name(@customer_device.customer)}" %>
+
+  <%# Quick Actions menggunakan partial shared agar konsisten dengan Accounts#show %>
+  <% action_links = [] %>
+  <% if @customer_device.active? %>
+    <% action_links << link_to('Return Device',
+      return_protected_customer_device_path(@customer_device),
+      method: :patch,
+      data: { confirm: 'Are you sure you want to return this device?' },
+      class: 'kt-btn kt-btn-success') %>
+  <% end %>
+  <% action_links << link_to('Edit Rental', edit_protected_customer_device_path(@customer_device.customer, @customer_device), class: 'kt-btn kt-btn-warning') %>
+  <% action_links << link_to('Back to Rentals', protected_customer_devices_path(@customer_device.customer), class: 'kt-btn kt-btn-outline') %>
+  <% action_links << link_to('View Customer', protected_customer_path(@customer_device.customer), class: 'kt-btn kt-btn-outline') %>
+
+  <%= kt_grid(cols: 1) do %>
+    <%= kt_column(span: 1) do %>
+      <%= render 'protected/shared/partials/page_actions',
+        card: true,
+        title: 'Quick Actions',
+        justify: 'justify-start',
+        gap_class: 'gap-3',
+        links: action_links %>
+    <% end %>
+  <% end %>
 
   <!-- Rental Information Cards -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -38,7 +36,7 @@
       <div class="px-6 py-4 space-y-4">
         <div class="flex justify-between items-center">
           <span class="text-sm font-medium text-gray-500">Device Name</span>
-          <%%# Gunakan device_label agar konsisten dan aman terhadap atribut yang tidak ada %>
+          
           <span class="text-sm text-gray-900"><%= device_label(@customer_device.device) %></span>
         </div>
         <div class="flex justify-between items-center">
@@ -66,7 +64,7 @@
       <div class="px-6 py-4 space-y-4">
         <div class="flex justify-between items-center">
           <span class="text-sm font-medium text-gray-500">Customer Name</span>
-          <%%# Hapus jejak debug, gunakan helper customer_name %>
+          
           <span class="text-sm text-gray-900"><%= customer_name(@customer_device.customer) %></span>
         </div>
         <div class="flex justify-between items-center">
@@ -97,13 +95,13 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Rental Status</label>
           <div class="mt-1">
-            <%%# Gunakan helper status_tag untuk konsistensi tampilan status rental %>
+            
             <%= status_tag(@customer_device) %>
           </div>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Rented From</label>
-          <%%# Gunakan helper rented_from_label untuk format tanggal DRY %>
+          
           <p class="mt-1 text-sm text-gray-900"><%= rented_from_label(@customer_device, '%B %d, %Y') %></p>
         </div>
         <div>
@@ -164,21 +162,3 @@
       <% end %>
     </div>
   </div>
-
-  <!-- Action Buttons -->
-  <div class="flex justify-center space-x-4">
-    <%= link_to protected_customer_path(@customer_device.customer), class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      Back to Rentals
-    <% end %>
-
-    <%= link_to protected_customer_path(@customer_device.customer), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-      </svg>
-      View Customer
-    <% end %>
-  </div>
-</div>
