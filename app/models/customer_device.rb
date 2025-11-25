@@ -24,7 +24,6 @@ class CustomerDevice < ApplicationRecord
 
   # Callbacks
   after_create :update_device_status_to_rented
-  after_update :update_device_status_on_return, if: :saved_change_to_status?
   after_update :log_configuration_update, if: :saved_change_to_config?
 
   # Check if rental is overdue
@@ -38,11 +37,34 @@ class CustomerDevice < ApplicationRecord
   end
 
   # Return the device
+  # return_device!
+  # Tujuan: Menandai perangkat sebagai dikembalikan dan mencatat aktivitas pengembalian.
+  # SRP: Hanya mengubah status CustomerDevice, status Device, lalu log satu aktivitas.
+  # Parameter: returned_at [Time] waktu pengembalian (default: Time.current)
+  # Output: Mengubah kolom status/kapan dikembalikan dan membuat satu DeviceActivity dengan event_type 'returned'.
   def return_device!(returned_at = Time.current)
-    update!(
-      status: 'returned',
-      rented_until: returned_at.to_date
-    )
+    transaction do
+      # Update customer device status and return date
+      update_columns(
+        status: 'returned',
+        rented_until: returned_at.to_date,
+        updated_at: Time.current
+      )
+
+      # Update device status back to available
+      device.update_columns(
+        status: 'available',
+        updated_at: Time.current
+      )
+
+      # Log the return activity
+      DeviceActivity.log!(
+        self,
+        'returned',
+        { returned_at: returned_at },
+        returned_at
+      )
+    end
   end
 
   # Mark as overdue

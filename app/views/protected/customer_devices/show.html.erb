@@ -5,7 +5,7 @@
   <%# Quick Actions menggunakan partial shared agar konsisten dengan Accounts#show %>
   <% action_links = [] %>
   <% if @customer_device.active? %>
-    <% action_links << link_to('Return Device',
+    <% action_links << button_to('Return Device',
       return_protected_customer_device_path(@customer_device),
       method: :patch,
       data: { confirm: 'Are you sure you want to return this device?' },

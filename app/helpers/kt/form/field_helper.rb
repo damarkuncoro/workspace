@@ -134,7 +134,7 @@ module KT
         content_tag(:div) do
           content_tag(:label, label, class: "block text-sm font-medium text-gray-700") +
           content_tag(:div, class: "mt-1") do
-            content_tag(:input, type: "text", value: value, class: classes, readonly: true, **options.except(:class))
+            tag.input(type: "text", value: value, class: classes, readonly: true, **options.except(:class))
           end
         end
       end
