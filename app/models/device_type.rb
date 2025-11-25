@@ -3,6 +3,9 @@ class DeviceType < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   
+  def schema
+    self[:schema] || {}
+  end
 
   # Scope for active device types
   scope :active, -> { where.not(name: nil) }

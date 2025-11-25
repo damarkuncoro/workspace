@@ -26,4 +26,51 @@ class Device < ApplicationRecord
     maintenance: 2,
     retired: 3
   }
+
+  def configuration_schema
+    device_type&.schema || {}
+  end
+
+  def valid_configuration?(data)
+    schema = configuration_schema
+    return true if schema.blank? || data.blank?
+
+    begin
+      data = data.is_a?(String) ? JSON.parse(data) : data
+    rescue JSON::ParserError
+      return false
+    end
+
+    required = Array(schema['required'])
+    properties = schema['properties'] || {}
+
+    # Check required keys
+    required.each do |key|
+      return false unless data.key?(key)
+    end
+
+    # Basic type check based on properties
+    data.each do |key, value|
+      next unless properties[key]
+      expected_type = properties[key]['type']
+      next unless expected_type
+
+      case expected_type
+      when 'string'
+        return false unless value.is_a?(String)
+      when 'number'
+        return false unless value.is_a?(Numeric)
+      when 'integer'
+        return false unless value.is_a?(Integer)
+      when 'boolean'
+        return false unless value == true || value == false
+      when 'object'
+        return false unless value.is_a?(Hash)
+      when 'array'
+        return false unless value.is_a?(Array)
+      end
+    end
+
+    true
+  end
 end

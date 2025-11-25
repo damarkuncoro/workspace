@@ -25,6 +25,7 @@ class CustomerDevice < ApplicationRecord
   # Callbacks
   after_create :update_device_status_to_rented
   after_update :update_device_status_on_return, if: :saved_change_to_status?
+  after_update :log_configuration_update, if: :saved_change_to_config?
 
   # Check if rental is overdue
   def overdue?
@@ -75,6 +76,10 @@ class CustomerDevice < ApplicationRecord
     if saved_change_to_status? && status == 'returned'
       device.update!(status: 'available')
     end
+  end
+
+  def log_configuration_update
+    DeviceActivity.log!(self, 'config_updated', { config: config, changed_at: Time.current })
   end
 
   private

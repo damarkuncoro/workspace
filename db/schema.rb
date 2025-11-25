@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_25_091500) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_25_095000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -46,9 +46,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_091500) do
   end
 
   create_table "customer_devices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.uuid "customer_id", null: false
     t.uuid "device_id", null: false
+    t.text "notes"
     t.date "rented_from", null: false
     t.date "rented_until"
     t.string "status", default: "active", null: false
@@ -95,12 +97,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_091500) do
     t.datetime "created_at", null: false
     t.text "description"
     t.string "name", null: false
+    t.jsonb "schema", default: {}, null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_device_types_on_name", unique: true
   end
 
   create_table "devices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.jsonb "default_config", default: {}, null: false
     t.uuid "device_type_id", null: false
     t.string "firmware_version"
     t.string "label", null: false
