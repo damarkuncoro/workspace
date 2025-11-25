@@ -1,0 +1,39 @@
+<%# Partial: Metrics ringkas untuk DeviceTypes
+  Tujuan: Menampilkan metrik utama (jumlah tipe, total perangkat, ketersediaan)
+  Prinsip: DRY & KISS — gunakan KT helpers agar konsisten.
+%>
+<% total_types = @device_types.size %>
+<% total_devices = @device_types.sum { |dt| dt.devices.size } %>
+<% available_devices = @device_types.sum { |dt| dt.devices.available.size } %>
+<% rented_devices = @device_types.sum { |dt| dt.devices.rented.size } %>
+
+<%= kt_grid(cols: 1, cols_sm: 2, cols_lg: 4, gap: 4, gap_lg: 6, margin_bottom: "mb-6 lg:mb-8") do %>
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <div class="text-gray-600 text-sm">Jumlah Tipe</div>
+      <div class="text-2xl font-semibold"><%= total_types %></div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <div class="text-gray-600 text-sm">Total Perangkat</div>
+      <div class="text-2xl font-semibold"><%= total_devices %></div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <div class="text-gray-600 text-sm">Tersedia</div>
+      <div class="text-2xl font-semibold"><%= available_devices %></div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card(height: "h-full") do %>
+    <%= kt_card_content(padding: "p-4 lg:p-6") do %>
+      <div class="text-gray-600 text-sm">Disewa</div>
+      <div class="text-2xl font-semibold"><%= rented_devices %></div>
+    <% end %>
+  <% end %>
+<% end %>
+

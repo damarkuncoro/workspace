@@ -1452,9 +1452,9 @@ employees.each do |employee|
 end
 
 # Create admin account
-admin_account = Account.find_or_create_by!(email: "admin@supportcakra.com") do |a|
-  a.password = "admin123"
-  a.password_confirmation = "admin123"
+admin_account = Account.find_or_create_by!(email: "damarkuncoro@gmail.com") do |a|
+  a.password = "password123"
+  a.password_confirmation = "password123"
 end
 
 # Create person for admin

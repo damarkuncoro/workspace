@@ -1,0 +1,39 @@
+<%# Partial: Detail halaman Show DeviceType
+  Tujuan: Menampilkan informasi utama tipe perangkat dalam KT Card.
+  Prinsip: SRP — hanya detail; data diambil dari @device_type pada view.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: "Detail Tipe Perangkat") %>
+  <%= kt_card_content do %>
+    <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+      <div>
+        <div class="text-sm text-secondary-foreground">Nama Tipe</div>
+        <div class="text-base font-semibold"><%= @device_type.name %></div>
+      </div>
+
+      <div>
+        <div class="text-sm text-secondary-foreground">ID Tipe</div>
+        <div class="text-sm font-mono"><%= @device_type.id %></div>
+      </div>
+
+      <div>
+        <div class="text-sm text-secondary-foreground">Dibuat</div>
+        <div class="text-sm"><%= l(@device_type.created_at, format: :long) %></div>
+      </div>
+
+      <div>
+        <div class="text-sm text-secondary-foreground">Diperbarui</div>
+        <div class="text-sm"><%= l(@device_type.updated_at, format: :long) %></div>
+      </div>
+    <% end %>
+
+    <% if @device_type.description.present? %>
+      <div class="mt-6">
+        <div class="text-sm text-secondary-foreground mb-1">Deskripsi</div>
+        <p class="text-sm"><%= @device_type.description %></p>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+

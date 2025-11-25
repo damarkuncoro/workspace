@@ -1,0 +1,12 @@
+<%# Partial: Wrapper form halaman Edit DeviceType
+  Tujuan: Konsistensi layout menggunakan KT Card/Content dan render _form.
+  Prinsip: SRP — wrapper hanya tata letak; form tetap di _form.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: "Form Ubah Tipe Perangkat") %>
+  <%= kt_card_content do %>
+    <%= render 'protected/device_types/form', device_type: @device_type %>
+  <% end %>
+<% end %>
+

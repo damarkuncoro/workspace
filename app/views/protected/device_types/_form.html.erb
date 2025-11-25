@@ -1,17 +1,23 @@
-<%= form_with(model: [:protected, device_type], local: true, class: "space-y-6") do |form| %>
+<%#
+  Partial: DeviceTypes Form (Unified)
+  Tujuan: Satu partial form untuk halaman New/Edit DeviceType.
+  Prinsip: DRY, SRP, KISS — menerima local `device_type` dan membuat `form_with` internal.
+  Pemakaian:
+    <%= render 'protected/device_types/form', device_type: @device_type %>
+%>
+
+<%= form_with(model: [:protected, device_type], local: true) do |form| %>
   <% if device_type.errors.any? %>
-    <div class="bg-red-50 border border-red-200 rounded-md p-4">
-      <div class="flex">
+    <div class="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded-lg">
+      <div class="flex gap-3">
         <div class="flex-shrink-0">
-          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-          </svg>
+          <i class="ki-filled ki-information text-destructive text-lg"></i>
         </div>
-        <div class="ml-3">
-          <h3 class="text-sm font-medium text-red-800">
-            <%= pluralize(device_type.errors.count, "error") %> prohibited this device type from being saved:
+        <div>
+          <h3 class="text-sm font-medium text-destructive">
+            <%= pluralize(device_type.errors.count, "error") %> menghalangi penyimpanan tipe perangkat ini:
           </h3>
-          <div class="mt-2 text-sm text-red-700">
+          <div class="mt-2 text-sm text-destructive">
             <ul role="list" class="list-disc pl-5 space-y-1">
               <% device_type.errors.each do |error| %>
                 <li><%= error.full_message %></li>
@@ -23,67 +29,45 @@
     </div>
   <% end %>
 
-  <!-- Device Type Information -->
-  <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-xl border border-purple-100">
-    <h3 class="text-lg font-semibold text-purple-900 mb-6 flex items-center">
-      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-      </svg>
-      Device Type Information
-    </h3>
-    <div class="space-y-6">
-      <div>
-        <label for="device_type_name" class="block text-sm font-semibold text-gray-700 mb-2">
-          Type Name <span class="text-red-500">*</span>
-        </label>
-        <div class="relative">
-          <%= form.text_field :name,
-              class: "block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 sm:text-sm transition-colors duration-200",
-              placeholder: "e.g., Laptop, Tablet, Smartphone",
-              required: true %>
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-            </svg>
+  <div class="grid gap-6">
+    <!-- Informasi Tipe Perangkat -->
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Informasi Tipe Perangkat</h3>
+      </div>
+      <div class="kt-card-content">
+        <%= kt_grid(cols: 1, gap: 4) do %>
+          <div>
+            <%= form.label :name, 'Nama Tipe', class: 'form-label' %>
+            <%= form.text_field :name,
+                class: 'kt-input',
+                placeholder: 'Contoh: Laptop, Tablet, Smartphone',
+                required: true %>
+            <p class="mt-1 text-sm text-secondary-foreground">Masukkan nama kategori perangkat yang deskriptif</p>
           </div>
-        </div>
-        <p class="mt-2 text-sm text-gray-600">Enter a descriptive name for this device category.</p>
+
+          <div>
+            <%= form.label :description, 'Deskripsi', class: 'form-label' %>
+            <%= form.text_area :description,
+                rows: 4,
+                class: 'kt-input',
+                placeholder: 'Opsional: jelaskan karakteristik/ruang lingkup tipe perangkat ini' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Tambahkan detail bila diperlukan</p>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 
-  <!-- Description -->
-  <div>
-    <label for="device_type_description" class="block text-sm font-semibold text-gray-700 mb-2">
-      Description
-    </label>
-    <div class="relative">
-      <%= form.text_area :description,
-          rows: 4,
-          class: "block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors duration-200 resize-vertical",
-          placeholder: "Describe the characteristics and specifications of this device type..." %>
-      <div class="absolute top-3 right-3 pointer-events-none">
-        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-        </svg>
-      </div>
-    </div>
-    <p class="mt-2 text-sm text-gray-600">Optional: Provide additional details about this device category.</p>
-  </div>
-
-
-
-  <!-- Form Actions -->
-  <div class="flex justify-end space-x-4 pt-8 border-t border-gray-200 bg-gray-50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl">
-    <%= link_to protected_device_types_path, class: "inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      Cancel
+  <!-- Aksi Form -->
+  <%= kt_card_footer(justify: "justify-end", class_name: "gap-3") do %>
+    <%= link_to protected_device_types_path, class: "kt-btn kt-btn-outline" do %>
+      <i class="ki-filled ki-cross"></i>
+      Batal
     <% end %>
 
-    <%= form.submit "Save Device Type",
-        class: "inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200",
-        data: { disable_with: "Saving..." } %>
-  </div>
+    <%= form.submit (device_type.new_record? ? 'Buat Tipe' : 'Perbarui Tipe'),
+        class: "kt-btn kt-btn-primary",
+        data: { disable_with: device_type.new_record? ? "Menyimpan..." : "Memperbarui..." } %>
+  <% end %>
 <% end %>

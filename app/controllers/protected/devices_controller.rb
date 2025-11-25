@@ -74,7 +74,7 @@ class Protected::DevicesController < Protected::BaseController
   end
 
   def device_params
-    params.require(:device).permit(:name, :serial_number, :device_type_id, :status, default_config: {}, config: {}).tap do |whitelisted|
+    params.require(:device).permit(:label, :name, :serial_number, :device_type_id, :status, default_config: {}, config: {}).tap do |whitelisted|
       # Handle JSON textarea input
       if whitelisted[:default_config].is_a?(String) && whitelisted[:default_config].present?
         begin

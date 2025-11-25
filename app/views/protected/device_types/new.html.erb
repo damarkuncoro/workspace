@@ -1,33 +1,19 @@
-<div class="max-w-3xl mx-auto p-6">
-  <div class="bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
-    <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 px-8 py-6">
-      <div class="flex items-center">
-        <div class="flex-shrink-0">
-          <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-          </div>
-        </div>
-        <div class="ml-4">
-          <h1 class="text-3xl font-bold text-white">Add New Device Type</h1>
-          <p class="text-purple-100 mt-2 text-lg">Create a new category for device classification</p>
-        </div>
-      </div>
-    </div>
+<%# View: New DeviceType
+  Tujuan: Konsistensi layout dengan page_header, kt_card, dan page_actions.
+  Prinsip: DRY — gunakan partial wrapper new_form.
+%>
 
-    <div class="p-8">
-      <%= render "form", device_type: @device_type %>
-    </div>
-  </div>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Buat Tipe Perangkat Baru',
+  subtitle: 'Tambah kategori perangkat baru untuk klasifikasi' %>
 
-  <!-- Navigation Links -->
-  <div class="mt-6 text-center">
-    <%= link_to protected_device_types_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      Back to Device Types
-    <% end %>
-  </div>
-</div>
+<%= render 'protected/device_types/partials/new_form' %>
+
+<%= render 'protected/shared/partials/page_actions',
+  card: false,
+  justify: 'justify-center',
+  links: [
+    link_to(protected_device_types_path, class: "kt-btn kt-btn-outline") do
+      'Kembali ke Daftar Tipe'
+    end
+  ] %>
