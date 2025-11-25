@@ -9,12 +9,12 @@
   title: 'Detail Orang',
   subtitle: (defined?(account_display_name) ? account_display_name(@person.account) : (@person.name.presence || @person.person_email.presence || '-')) %>
 
-<%# Baris 1: Info + Quick Actions dalam grid 2 kolom %>
+
+
 <%= kt_grid(cols: 3) do %>
   <%= kt_column(span: 2) do %>
     <%= render 'protected/people/partials/person_info', person: @person %>
   <% end %>
-
   <%= kt_column(span: 1) do %>
     <%= render 'protected/shared/partials/page_actions',
       card: true,
@@ -29,9 +29,9 @@
   <% end %>
 <% end %>
 
-<%# Baris 2: Status & Relasi (full width) %>
-<%= kt_grid(cols: 1) do %>
-  <%= kt_column(span: 1) do %>
+
+<%= kt_grid(cols: 3) do %>
+  
     <%= render 'protected/people/partials/relations_stats', person: @person %>
-  <% end %>
+  
 <% end %>

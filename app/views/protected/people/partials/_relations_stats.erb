@@ -3,7 +3,7 @@
   Tujuan: Menampilkan status kelengkapan data, relasi Customer/Employee, dan statistik sederhana.
   Prinsip: SRP/DRY/KISS — kumpulkan info relasi dan metrik ringan.
 %>
-
+<%= kt_column(span: 1) do %>
 <%= kt_card do %>
   <%= kt_card_header(title: 'Status & Relasi') %>
   <%= kt_card_content do %>
@@ -37,7 +37,9 @@
     </div>
   <% end %>
 <% end %>
+<% end %>
 
+<%= kt_column(span: 1) do %>
 <%= kt_card do %>
   <%= kt_card_header(title: 'Statistik') %>
   <%= kt_card_content do %>
@@ -61,4 +63,4 @@
     </div>
   <% end %>
 <% end %>
-
+<% end %>
