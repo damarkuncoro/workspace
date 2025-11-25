@@ -12,10 +12,13 @@
   <%= kt_card_content do %>
     <%# Toolbar filter internal vs semua %>
     <div class="flex items-center justify-end gap-2 mb-4">
-      <%= link_to protected_employee_issue_path(@employee, @issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+      <% internal_active = params[:internal_only].present? %>
+      <% all_class = "kt-btn kt-btn-sm #{internal_active ? 'kt-btn-outline' : 'kt-btn-primary'}" %>
+      <% internal_class = "kt-btn kt-btn-sm #{internal_active ? 'kt-btn-primary' : 'kt-btn-outline'}" %>
+      <%= link_to protected_employee_issue_path(@employee, @issue), class: all_class do %>
         Semua
       <% end %>
-      <%= link_to protected_employee_issue_path(@employee, @issue, internal_only: 1), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+      <%= link_to protected_employee_issue_path(@employee, @issue, internal_only: 1), class: internal_class do %>
         Internal saja
       <% end %>
     </div>

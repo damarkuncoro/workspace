@@ -29,6 +29,8 @@
           <span>-</span>
         <% end %>
       </div>
+      <div class="flex gap-2"><strong>Ditugaskan ke:</strong> <span><%= issue_assignee_label(record) %></span></div>
+      <div class="flex gap-2"><strong>Penanggung tambahan:</strong> <span><%= issue_additional_assignees_label(record) %></span></div>
       <div class="flex gap-2"><strong>Deskripsi:</strong> <span><%= record.try(:description) %></span></div>
     </div>
   <% end %>
@@ -39,7 +41,7 @@
         <i class="ki-filled ki-pencil"></i> Edit
       <% end %>
       <%= link_to protected_customer_issues_path(local_assigns[:customer]), class: 'kt-btn kt-btn-outline' do %>
-        <i class="ki-filled ki-arrow-left"></i> Back to Customer Issues
+        <i class="ki-filled ki-arrow-left"></i> Kembali ke Issues Customer
       <% end %>
     </div>
   <% end %>

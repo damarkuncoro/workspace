@@ -60,4 +60,31 @@ module IssuesHelper
     else priority.to_s
     end
   end
+
+  # account_display_name
+  # Tujuan: Menghasilkan nama tampilan untuk akun (person.name lalu email)
+  # Input: Account atau nil
+  # Output: String nama tampilan atau "-" jika tidak tersedia
+  def account_display_name(account)
+    account&.person&.name || account&.email || "-"
+  end
+
+  # issue_assignee_label
+  # Tujuan: Mengembalikan label assignee utama (assigned_to) dalam format ramah
+  # Input: Issue
+  # Output: String nama tampilan atau "Tidak ada" jika kosong
+  def issue_assignee_label(issue)
+    name = account_display_name(issue&.assigned_to)
+    name.present? && name != "-" ? name : "Tidak ada"
+  end
+
+  # issue_additional_assignees_label
+  # Tujuan: Mengembalikan label untuk penanggung tambahan dari issue_assignments
+  # Input: Issue
+  # Output: Gabungan nama dipisah koma atau "Tidak ada" jika kosong
+  def issue_additional_assignees_label(issue)
+    assignments = issue.issue_assignments.includes(:account)
+    names = assignments.map { |ia| account_display_name(ia.account) }.compact.reject { |n| n == "-" }
+    names.any? ? names.join(", ") : "Tidak ada"
+  end
 end

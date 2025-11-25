@@ -18,9 +18,9 @@
         <%= kt_table(class: 'kt-table-border') do %>
           <thead>
             <tr>
-              <th><%= kt_table_col_label { 'Name' } %></th>
-              <th><%= kt_table_col_label { 'Created At' } %></th>
-              <th class="w-[180px]"><%= kt_table_col_label { 'Actions' } %></th>
+              <th><%= kt_table_col_label { 'Nama' } %></th>
+              <th><%= kt_table_col_label { 'Dibuat' } %></th>
+              <th class="w-[180px]"><%= kt_table_col_label { 'Aksi' } %></th>
             </tr>
           </thead>
           <tbody>
@@ -61,12 +61,12 @@
       <div class="text-center py-8">
         <div class="flex flex-col items-center gap-4">
           <i class="ki-filled ki-question text-4xl text-muted-foreground"></i>
-          <h3 class="text-lg font-medium text-foreground">No customers found</h3>
-          <p class="text-sm text-secondary-foreground">Create your first customers to get started.</p>
+          <h3 class="text-lg font-medium text-foreground">Belum ada data customer</h3>
+          <p class="text-sm text-secondary-foreground">Buat issue pertama Anda untuk memulai.</p>
           <%# CTA untuk membuat Issue baru pada customer aktif %>
           <%= link_to new_protected_customer_issue_path(local_assigns[:customer]), class: 'kt-btn kt-btn-primary' do %>
             <i class="ki-filled ki-plus"></i>
-            New Issue
+            Issue Baru
           <% end %>
         </div>
       </div>
@@ -76,7 +76,7 @@
   <%= kt_card_footer(justify: 'justify-start') do %>
     <%# Back ke halaman Customer %>
     <%= link_to protected_customer_path(local_assigns[:customer]), class: 'kt-btn kt-btn-outline' do %>
-      <%= raw('<i class="ki-filled ki-arrow-left"></i> Back to Customer') %>
+      <%= raw('<i class="ki-filled ki-arrow-left"></i> Kembali ke Customer') %>
     <% end %>
   <% end %>
 <% end %>

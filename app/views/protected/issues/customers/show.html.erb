@@ -10,12 +10,12 @@
     <i class="ki-filled ki-pencil"></i> Edit Issue
   <% end %>
   <%= link_to protected_customer_issues_path(@customer), class: 'kt-btn kt-btn-outline' do %>
-    <i class="ki-filled ki-arrow-left"></i> Back to Customer Issues
+    <i class="ki-filled ki-arrow-left"></i> Kembali ke Issues Customer
   <% end %>
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Issue Detail',
+  title: 'Detail Issue',
   subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer'),
   actions_html: actions_html %>
 

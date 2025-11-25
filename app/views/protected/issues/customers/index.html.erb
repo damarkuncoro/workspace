@@ -3,9 +3,9 @@
 <%# Catatan: Mengasumsikan controller menyediakan @<%= @parent_singular %> dan @issues. %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Customer Issues',
+  title: 'Issues Customer',
   subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer'),
-  actions_html: link_to(new_protected_customer_issue_path(@customer), class: 'kt-btn kt-btn-primary') { raw('<i class="ki-filled ki-plus"></i> New Issue') } %>
+  actions_html: link_to(new_protected_customer_issue_path(@customer), class: 'kt-btn kt-btn-primary') { raw('<i class="ki-filled ki-plus"></i> Issue Baru') } %>
 
 <%= kt_card do %>
   <%= kt_card_content do %>
