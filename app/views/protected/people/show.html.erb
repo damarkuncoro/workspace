@@ -1,22 +1,37 @@
-<%# Template: People#show - menampilkan detail satu orang %>
-<h1>Orang</h1>
-<div class="card">
-  <div class="card-body">
-    <%# Field: ID %>
-    <p><strong>ID:</strong> <%= @person.id %></p>
-    <%# Field: Nama %>
-    <p><strong>Nama:</strong> <%= @person.name %></p>
-    <%# Field: Email (diambil dari Account terkait) %>
-    <p><strong>Email:</strong> <%= @person.person_email %></p>
-    <%# Field: Tanggal Lahir %>
-    <p><strong>Tanggal Lahir:</strong> <%= @person.date_of_birth %></p>
-    <%# Field: Metadata (opsional) - hanya tampil jika atribut tersedia) %>
-    <% if @person.respond_to?(:metadata) && @person.metadata.present? %>
-      <p><strong>Metadata:</strong> <%= @person.metadata.is_a?(String) ? @person.metadata : @person.metadata.to_json %></p>
-    <% end %>
-  </div>
-</div>
-<div class="mt-4">
-  <%= link_to "Edit", edit_protected_person_path(@person), class: "btn btn-primary" %>
-  <%= link_to "Back", protected_people_path, class: "btn btn-light" %>
-</div>
+<%#
+  View: People Show (Protected)
+  Tujuan: Konsistensi desain dengan Accounts Show menggunakan KT helpers (kt_grid/kt_column) dan shared page_actions.
+  Prinsip: DRY, SRP, KISS — wrapper layout menggunakan helper, konten via partials.
+%>
+
+<%# Header terpadu menggunakan helper shared %>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Detail Orang',
+  subtitle: (defined?(account_display_name) ? account_display_name(@person.account) : (@person.name.presence || @person.person_email.presence || '-')) %>
+
+<%# Baris 1: Info + Quick Actions dalam grid 2 kolom %>
+<%= kt_grid(cols: 3) do %>
+  <%= kt_column(span: 2) do %>
+    <%= render 'protected/people/partials/person_info', person: @person %>
+  <% end %>
+
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/shared/partials/page_actions',
+      card: true,
+      title: 'Quick Actions',
+      justify: 'justify-start',
+      gap_class: 'gap-3',
+      links: [
+        link_to('Ubah Orang', edit_protected_person_path(@person), class: 'kt-btn kt-btn-warning'),
+        link_to('Kembali ke Orang', protected_people_path, class: 'kt-btn kt-btn-outline'),
+        link_to('Kembali ke Dashboard', protected_dashboard_path, class: 'kt-btn kt-btn-outline')
+      ] %>
+  <% end %>
+<% end %>
+
+<%# Baris 2: Status & Relasi (full width) %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/people/partials/relations_stats', person: @person %>
+  <% end %>
+<% end %>

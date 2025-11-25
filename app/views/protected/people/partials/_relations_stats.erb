@@ -1,0 +1,64 @@
+<%#
+  Partial: people/partials/_relations_stats
+  Tujuan: Menampilkan status kelengkapan data, relasi Customer/Employee, dan statistik sederhana.
+  Prinsip: SRP/DRY/KISS — kumpulkan info relasi dan metrik ringan.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Status & Relasi') %>
+  <%= kt_card_content do %>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Kelengkapan Data</span>
+        <% if person.incomplete? %>
+          <span class="kt-badge kt-badge-warning">Tidak Lengkap</span>
+        <% else %>
+          <span class="kt-badge kt-badge-success">Lengkap</span>
+        <% end %>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Customer</span>
+        <% if person.customer.present? %>
+          <span class="kt-badge kt-badge-info"><%= person.customer.status.titleize %></span>
+        <% else %>
+          <span class="text-sm text-muted-foreground">-</span>
+        <% end %>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Employee</span>
+        <% if person.employee.present? %>
+          <span class="kt-badge kt-badge-primary"><%= person.employee.status.titleize %></span>
+        <% else %>
+          <span class="text-sm text-muted-foreground">-</span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Statistik') %>
+  <%= kt_card_content do %>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Total Telepon</span>
+        <span class="text-sm font-semibold"><%= person.person_phones.count %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Total Rental</span>
+        <span class="text-sm font-semibold"><%= person.customer&.customer_devices&.count || 0 %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Rental Aktif</span>
+        <span class="text-sm font-semibold"><%= (person.customer&.customer_devices || []).count { |cd| cd.status == 'active' } %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Rental Selesai</span>
+        <span class="text-sm font-semibold"><%= (person.customer&.customer_devices || []).count { |cd| cd.status == 'returned' } %></span>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+

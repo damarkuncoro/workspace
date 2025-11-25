@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_03_144458) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_25_091500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -267,7 +267,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_144458) do
     t.index ["customer_phone_id"], name: "index_phone_activities_on_customer_phone_id"
   end
 
-  create_table "phones", force: :cascade do |t|
+  create_table "phones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -311,6 +311,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_144458) do
   add_foreign_key "link_connections", "device_interfaces", column: "device_interface_b_id"
   add_foreign_key "link_connections", "networks"
   add_foreign_key "people", "accounts"
+  add_foreign_key "person_phones", "phones"
   add_foreign_key "role_requests", "accounts"
   add_foreign_key "role_requests", "accounts", column: "approved_by_id"
   add_foreign_key "role_requests", "accounts", column: "requested_by_id"

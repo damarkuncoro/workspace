@@ -1,0 +1,30 @@
+<%#
+  Partial: people/partials/_person_info
+  Tujuan: Menampilkan kartu informasi dasar orang menggunakan KT helpers.
+  Prinsip: SRP/DRY/KISS — hanya tanggung jawab menampilkan data dasar.
+%>
+
+<%= kt_card do %>
+  <%= kt_card_header(title: 'Informasi Dasar') %>
+  <%= kt_card_content do %>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Nama</span>
+        <span class="text-sm"><%= person.name.presence || '-' %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Email</span>
+        <span class="text-sm"><%= person.person_email.presence || '-' %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Tanggal Lahir</span>
+        <span class="text-sm"><%= person.date_of_birth.present? ? l(person.date_of_birth) : '-' %></span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-medium text-muted-foreground">Dibuat</span>
+        <span class="text-sm"><%= l(person.created_at) %></span>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
