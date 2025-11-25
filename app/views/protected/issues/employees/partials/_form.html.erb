@@ -8,7 +8,7 @@
 <% parent = local_assigns[:employee] %>
 <% record = local_assigns[:record] || Issue.new %>
 
-<%= form_with model: [parent, record], local: true do |f| %>
+<%= form_with model: [:protected, parent, record], local: true do |f| %>
   <div class="space-y-4">
     <div>
       <label class="kt-label">Title</label>
