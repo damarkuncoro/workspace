@@ -1,275 +1,220 @@
-<div class="max-w-6xl mx-auto p-6">
-  <%# View: Protected::Devices#show — Menampilkan detail Device.
-     Catatan: Gunakan atribut `label` sebagai nama tampil, bukan `name`.
-     SRP: Header, Info, Rental, Statistik, Riwayat, Aktivitas dipisah blok. %>
-  <!-- Header -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gradient-to-r from-teal-600 to-cyan-600 px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-2xl font-bold text-white">Device Details</h1>
-          <%# Tampilkan label perangkat sebagai nama utama %>
-          <p class="text-teal-100 mt-1"><%= @device.label %> - <%= @device.serial_number %></p>
-        </div>
-        <div class="flex space-x-3">
-          <%= link_to edit_protected_device_path(@device), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" do %>
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-            </svg>
-            Edit Device
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
+<%# View: Protected::Devices#show
+    Tujuan: Refactor layout mengikuti pola Accounts#show (page_header, kt_grid, page_actions).
+    Catatan: Gunakan atribut `label` sebagai nama tampil, bukan `name`.
+    Prinsip: SRP, DRY, KISS, YAGNI. %>
 
-  <!-- Device Information Cards -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-    <!-- Basic Information -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="bg-gray-50 px-6 py-4">
-        <h3 class="text-lg font-medium text-gray-900">Device Information</h3>
-      </div>
-      <div class="px-6 py-4 space-y-4">
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Device Name</span>
-          <%# Gunakan label sebagai nama tampil perangkat %>
-          <span class="text-sm text-gray-900"><%= @device.label %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Device Type</span>
-          <span class="text-sm text-gray-900"><%= @device.device_type.name %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Serial Number</span>
-          <span class="text-sm text-gray-900 font-mono bg-gray-100 px-2 py-1 rounded"><%= @device.serial_number %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Status</span>
-          <% if @device.available? %>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-              Available
-            </span>
-          <% elsif @device.rented? %>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-              Rented
-            </span>
-          <% else %>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-              <%= @device.status.titleize %>
-            </span>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Detail Perangkat',
+  subtitle: "#{@device.label} • #{@device.serial_number}" %>
 
-    <!-- Current Rental -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="bg-gray-50 px-6 py-4">
-        <h3 class="text-lg font-medium text-gray-900">Current Rental</h3>
+<%# Baris 1: Informasi Perangkat %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Informasi Perangkat</h3>
       </div>
-      <div class="px-6 py-4">
-        <% if @device.current_customer %>
-          <div class="space-y-3">
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-medium text-gray-500">Customer</span>
-              <span class="text-sm text-gray-900"><%= @device.current_customer.person_name %></span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-medium text-gray-500">Email</span>
-              <span class="text-sm text-gray-900"><%= @device.current_customer.account_email %></span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-medium text-gray-500">Rented Since</span>
-              <span class="text-sm text-gray-900"><%= @device.current_customer_device.rented_from.strftime('%b %d, %Y') %></span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-medium text-gray-500">Due Date</span>
-              <span class="text-sm text-gray-900">
-                <% if @device.current_customer_device.rented_until %>
-                  <%= @device.current_customer_device.rented_until.strftime('%b %d, %Y') %>
-                <% else %>
-                  <span class="text-gray-500">Ongoing</span>
-                <% end %>
-              </span>
-            </div>
+      <div class="kt-card-content">
+        <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Nama Perangkat</div>
+            <div class="text-sm"><%= @device.label %></div>
           </div>
-        <% else %>
-          <div class="text-center py-8">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900">Available</h3>
-            <p class="mt-1 text-sm text-gray-500">This device is currently available for rental.</p>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Tipe</div>
+            <div class="text-sm"><%= @device.device_type.name %></div>
+          </div>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Nomor Seri</div>
+            <div class="text-sm font-mono"><%= @device.serial_number %></div>
+          </div>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Status</div>
+            <div>
+              <% if @device.available? %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Available</span>
+              <% elsif @device.rented? %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Rented</span>
+              <% else %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><%= @device.status.titleize %></span>
+              <% end %>
+            </div>
           </div>
         <% end %>
       </div>
     </div>
+  <% end %>
 
-    <!-- Statistics -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="bg-gray-50 px-6 py-4">
-        <h3 class="text-lg font-medium text-gray-900">Rental Statistics</h3>
+  <%# Baris 1b: Sewa Saat Ini %>
+  <%= kt_column(span: 1) do %>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Sewa Saat Ini</h3>
       </div>
-      <div class="px-6 py-4 space-y-4">
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Total Rentals</span>
-          <span class="text-sm text-gray-900 font-semibold"><%= @customer_devices.count %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Active Rentals</span>
-          <span class="text-sm text-gray-900 font-semibold"><%= @customer_devices.where(status: 'active').count %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Completed Rentals</span>
-          <span class="text-sm text-gray-900 font-semibold"><%= @customer_devices.where(status: 'returned').count %></span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Created</span>
-          <span class="text-sm text-gray-900"><%= @device.created_at.strftime('%b %d, %Y') %></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Rental History -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gray-50 px-6 py-4">
-      <h3 class="text-lg font-medium text-gray-900">Rental History</h3>
-    </div>
-    <div class="px-6 py-4">
-      <% if @customer_devices.any? %>
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Customer
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Rental Period
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <% @customer_devices.each do |customer_device| %>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">
-                      <%= customer_device.customer.person_name %>
-                    </div>
-                    <div class="text-sm text-gray-500">
-                      <%= customer_device.customer.account_email %>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">
-                      <%= customer_device.rented_from.strftime('%b %d, %Y') %>
-                    </div>
-                    <div class="text-sm text-gray-500">
-                      <% if customer_device.rented_until %>
-                        to <%= customer_device.rented_until.strftime('%b %d, %Y') %>
-                      <% else %>
-                        Ongoing
-                      <% end %>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <% if customer_device.active? %>
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Active
-                      </span>
-                    <% else %>
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        <%= customer_device.status.titleize %>
-                      </span>
-                    <% end %>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <%= link_to protected_customer_device_path(customer_device.customer, customer_device), class: "text-indigo-600 hover:text-indigo-900" do %>
-                      View Details
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% else %>
-        <div class="text-center py-8">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-          </svg>
-          <h3 class="mt-2 text-sm font-medium text-gray-900">No rental history</h3>
-          <p class="mt-1 text-sm text-gray-500">This device hasn't been rented yet.</p>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Device Activities -->
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-    <div class="bg-gray-50 px-6 py-4">
-      <h3 class="text-lg font-medium text-gray-900">Device Activities</h3>
-    </div>
-    <div class="px-6 py-4">
-      <% if @device_activities.any? %>
-        <div class="space-y-3">
-          <% @device_activities.each do |activity| %>
-            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div class="flex items-center space-x-3">
-                <div class="flex-shrink-0">
-                  <div class="w-8 h-8 rounded-full flex items-center justify-center <%= activity.event_type == 'rented' ? 'bg-green-100' : activity.event_type == 'returned' ? 'bg-blue-100' : 'bg-gray-100' %>">
-                    <svg class="w-4 h-4 <%= activity.event_type == 'rented' ? 'text-green-600' : activity.event_type == 'returned' ? 'text-blue-600' : 'text-gray-600' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= activity.event_type == 'rented' ? 'M12 6v6m0 0v6m0-6h6m-6 0H6' : activity.event_type == 'returned' ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' %>"></path>
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <p class="text-sm font-medium text-gray-900"><%= activity.description %></p>
-                  <p class="text-xs text-gray-500"><%= activity.recorded_at.strftime('%B %d, %Y %H:%M') %></p>
-                </div>
+      <div class="kt-card-content">
+        <% if @device.current_customer %>
+          <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+            <div class="space-y-1">
+              <div class="text-sm font-medium text-muted-foreground">Pelanggan</div>
+              <div class="text-sm"><%= @device.current_customer.person_name %></div>
+            </div>
+            <div class="space-y-1">
+              <div class="text-sm font-medium text-muted-foreground">Email</div>
+              <div class="text-sm"><%= @device.current_customer.account_email %></div>
+            </div>
+            <div class="space-y-1">
+              <div class="text-sm font-medium text-muted-foreground">Disewa Sejak</div>
+              <div class="text-sm"><%= @device.current_customer_device.rented_from.strftime('%b %d, %Y') %></div>
+            </div>
+            <div class="space-y-1">
+              <div class="text-sm font-medium text-muted-foreground">Jatuh Tempo</div>
+              <div class="text-sm">
+                <% if @device.current_customer_device.rented_until %>
+                  <%= @device.current_customer_device.rented_until.strftime('%b %d, %Y') %>
+                <% else %>
+                  <span class="text-muted-foreground">Ongoing</span>
+                <% end %>
               </div>
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                <%= activity.event_type.titleize %>
-              </span>
             </div>
           <% end %>
-        </div>
-      <% else %>
-        <div class="text-center py-8">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h3 class="mt-2 text-sm font-medium text-gray-900">No activities</h3>
-          <p class="mt-1 text-sm text-gray-500">Activity tracking will be available soon.</p>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="text-center py-6 text-sm text-muted-foreground">Perangkat tersedia untuk disewa.</div>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
-  <!-- Action Buttons -->
-  <div class="flex justify-center space-x-4">
-    <%= link_to protected_devices_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      Back to Devices
-    <% end %>
+  <%# Baris 1c: Statistik Rental %>
+  <%= kt_column(span: 1) do %>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Statistik Rental</h3>
+      </div>
+      <div class="kt-card-content">
+        <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Total Penyewaan</div>
+            <div class="text-sm font-semibold"><%= @customer_devices.count %></div>
+          </div>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Aktif</div>
+            <div class="text-sm font-semibold"><%= @customer_devices.where(status: 'active').count %></div>
+          </div>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Selesai</div>
+            <div class="text-sm font-semibold"><%= @customer_devices.where(status: 'returned').count %></div>
+          </div>
+          <div class="space-y-1">
+            <div class="text-sm font-medium text-muted-foreground">Dibuat</div>
+            <div class="text-sm"><%= @device.created_at.strftime('%b %d, %Y') %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 
-    <% unless @device.customer_devices.active.exists? %>
-      <%= button_to protected_device_path(@device), method: :delete, data: { confirm: 'Are you sure you want to delete this device?' }, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" do %>
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-        </svg>
-        Delete Device
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%# Baris 2: Tindakan Cepat %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= render 'protected/shared/partials/page_actions',
+      card: true,
+      title: 'Tindakan',
+      justify: 'justify-start',
+      gap_class: 'gap-3',
+      links: [
+        link_to('Edit Perangkat', edit_protected_device_path(@device), class: 'kt-btn kt-btn-warning'),
+        link_to('Kembali ke Daftar', protected_devices_path, class: 'kt-btn kt-btn-outline'),
+        link_to('Kembali ke Dashboard', protected_dashboard_path, class: 'kt-btn kt-btn-outline')
+      ] %>
+  <% end %>
+<% end %>
+
+<%# Baris 3: Riwayat Penyewaan %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Riwayat Penyewaan</h3>
+      </div>
+      <div class="kt-card-content">
+        <% if @customer_devices.any? %>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-border">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Pelanggan</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Periode</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <% @customer_devices.each do |customer_device| %>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm"><%= customer_device.customer.person_name %></div>
+                      <div class="text-xs text-muted-foreground"><%= customer_device.customer.account_email %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm"><%= customer_device.rented_from.strftime('%b %d, %Y') %></div>
+                      <div class="text-xs text-muted-foreground">
+                        <% if customer_device.rented_until %>
+                          s/d <%= customer_device.rented_until.strftime('%b %d, %Y') %>
+                        <% else %>
+                          Berjalan
+                        <% end %>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <% if customer_device.active? %>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktif</span>
+                      <% else %>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"><%= customer_device.status.titleize %></span>
+                      <% end %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <%= link_to protected_customer_device_path(customer_device.customer, customer_device), class: 'text-primary hover:underline' do %>
+                        Lihat Detail
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="text-center py-6 text-sm text-muted-foreground">Belum ada riwayat penyewaan.</div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%# Baris 4: Aktivitas Perangkat %>
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Aktivitas Perangkat</h3>
+      </div>
+      <div class="kt-card-content">
+        <% if @device_activities.any? %>
+          <div class="space-y-3">
+            <% @device_activities.each do |activity| %>
+              <div class="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <div>
+                  <p class="text-sm font-medium"><%= activity.description %></p>
+                  <p class="text-xs text-muted-foreground"><%= activity.recorded_at.strftime('%B %d, %Y %H:%M') %></p>
+                </div>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"><%= activity.event_type.titleize %></span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-6 text-sm text-muted-foreground">Belum ada aktivitas.</div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
