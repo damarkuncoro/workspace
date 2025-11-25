@@ -6,7 +6,7 @@
 
 <%= kt_card do %>
   <%= kt_card_header do %>
-    <h3 class="kt-card-title">Issues</h3>
+    <h3 class="kt-card-title">Daftar Issues</h3>
   <% end %>
 
   <%= kt_card_content do %>
@@ -15,9 +15,9 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Title</th>
+            <th>Judul</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -58,13 +58,13 @@
       <%# CTA untuk membuat Issue baru pada parent aktif %>
       <%= link_to new_protected_employee_issue_path(local_assigns[:employee]), class: 'kt-btn kt-btn-primary' do %>
         <i class="ki-filled ki-plus"></i>
-        New Issue
+        Issue Baru
       <% end %>
     </div>
 
     <%# Back ke halaman parent %>
     <%= link_to protected_employee_path(local_assigns[:employee]), class: 'kt-btn kt-btn-outline' do %>
-      <i class="ki-filled ki-arrow-left"></i> Back to Employee
+      <i class="ki-filled ki-arrow-left"></i> Kembali ke Karyawan
     <% end %>
   <% end %>
 <% end %>

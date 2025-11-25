@@ -12,8 +12,8 @@
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Employee Issues',
-  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Employee'),
+  title: 'Issues Karyawan',
+  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Karyawan'),
   actions_html: actions_html %>
 
 <%= kt_card do %>

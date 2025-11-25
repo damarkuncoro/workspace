@@ -6,15 +6,30 @@
 
 <%= kt_card do %>
   <%= kt_card_header do %>
-    <h3 class="kt-card-title">Issue</h3>
+    <h3 class="kt-card-title">Detail Issue</h3>
   <% end %>
 
   <%= kt_card_content do %>
     <div class="space-y-2">
       <div class="flex gap-2"><strong>ID:</strong> <span><%= record.try(:id) %></span></div>
-      <div class="flex gap-2"><strong>Title:</strong> <span><%= record.try(:title) %></span></div>
-      <div class="flex gap-2"><strong>Status:</strong> <span><%= record.try(:status) %></span></div>
-      <div class="flex gap-2"><strong>Description:</strong> <span><%= record.try(:description) %></span></div>
+      <div class="flex gap-2"><strong>Judul:</strong> <span><%= record.try(:title) %></span></div>
+      <div class="flex gap-2 items-center">
+        <strong>Status:</strong>
+        <% if record.try(:status).present? %>
+          <span class="px-2 py-1 rounded text-xs <%= issue_status_badge_class(record.status) %>"><%= issue_status_label(record.status) %></span>
+        <% else %>
+          <span>-</span>
+        <% end %>
+      </div>
+      <div class="flex gap-2 items-center">
+        <strong>Prioritas:</strong>
+        <% if record.try(:priority).present? %>
+          <span class="px-2 py-1 rounded text-xs <%= issue_priority_badge_class(record.priority) %>"><%= issue_priority_label(record.priority) %></span>
+        <% else %>
+          <span>-</span>
+        <% end %>
+      </div>
+      <div class="flex gap-2"><strong>Deskripsi:</strong> <span><%= record.try(:description) %></span></div>
     </div>
   <% end %>
 

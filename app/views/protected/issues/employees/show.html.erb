@@ -10,13 +10,13 @@
     <i class="ki-filled ki-pencil"></i> Edit Issue
   <% end %>
   <%= link_to protected_employee_issues_path(@employee), class: 'kt-btn kt-btn-outline' do %>
-    <i class="ki-filled ki-arrow-left"></i> Back to Employee Issues
+    <i class="ki-filled ki-arrow-left"></i> Kembali ke Issues Karyawan
   <% end %>
 <% end %>
 
 <%= render 'protected/shared/partials/page_header',
-  title: 'Issue Detail',
-  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Employee'),
+  title: 'Detail Issue',
+  subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Karyawan'),
   actions_html: actions_html %>
 
 <%= kt_card do %>
@@ -29,3 +29,9 @@
       } %>
   <% end %>
 <% end %>
+
+<%# Komentar Issue %>
+<%= render partial: 'protected/issues/employees/partials/comments' %>
+
+<%# Aktivitas Issue %>
+<%= render partial: 'protected/issues/employees/partials/activities' %>

@@ -1,7 +1,7 @@
 <!--
-  Partial: _comments.html.erb
-  Tujuan: Menampilkan daftar komentar issue dan form untuk menambah komentar baru.
-  Catatan: Form submit ke rute nested: protected_customer_issue_comments_path(@customer, @issue)
+  Partial: _comments.html.erb (Employees)
+  Tujuan: Menampilkan daftar komentar issue dan form untuk menambah komentar baru pada Issue milik Employee.
+  Catatan: Form submit ke rute nested: protected_employee_issue_comments_path(@employee, @issue)
 -->
 
 <%= kt_card do %>
@@ -12,10 +12,10 @@
   <%= kt_card_content do %>
     <%# Toolbar filter internal vs semua %>
     <div class="flex items-center justify-end gap-2 mb-4">
-      <%= link_to protected_customer_issue_path(@customer, @issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+      <%= link_to protected_employee_issue_path(@employee, @issue), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
         Semua
       <% end %>
-      <%= link_to protected_customer_issue_path(@customer, @issue, internal_only: 1), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+      <%= link_to protected_employee_issue_path(@employee, @issue, internal_only: 1), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
         Internal saja
       <% end %>
     </div>
@@ -43,7 +43,7 @@
     </div>
 
     <%# Form tambah komentar %>
-    <%= form_with model: @issue_comment, url: protected_customer_issue_comments_path(@customer, @issue), local: true do |f| %>
+    <%= form_with model: @issue_comment, url: protected_employee_issue_comments_path(@employee, @issue), local: true do |f| %>
       <% if @issue_comment.errors.any? %>
         <div class="mb-4 p-3 rounded bg-red-50 text-red-700">
           <strong>Terjadi kesalahan:</strong>

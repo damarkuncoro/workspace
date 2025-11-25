@@ -9,27 +9,78 @@
 <% record = local_assigns[:record] || Issue.new %>
 
 <%= form_with model: [:protected, parent, record], local: true do |f| %>
+  <%# Tampilkan error validasi jika ada %>
+  <% if f.object.errors.any? %>
+    <div class="mb-4 p-3 rounded bg-red-50 text-red-700">
+      <strong>Terjadi kesalahan:</strong>
+      <ul class="list-disc ml-5">
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="space-y-4">
     <div>
-      <label class="kt-label">Title</label>
-      <%= f.text_field :title, class: 'kt-input', required: true %>
+      <label class="kt-label">Judul</label>
+      <%= f.text_field :title, class: 'kt-input', required: true, placeholder: 'Judul issue' %>
     </div>
+
+    <div>
+      <label class="kt-label">Deskripsi</label>
+      <%= f.text_area :description, class: 'kt-textarea', rows: 4, placeholder: 'Deskripsi singkat' %>
+    </div>
+
     <div>
       <label class="kt-label">Status</label>
-      <%= f.text_field :status, class: 'kt-input' %>
+      <%= f.select :status,
+        options_for_select(Issue.statuses.keys.map { |k| [issue_status_label(k), k] }, f.object.status),
+        {},
+        class: 'kt-select' %>
     </div>
+
     <div>
-      <label class="kt-label">Description</label>
-      <%= f.text_area :description, class: 'kt-textarea' %>
+      <label class="kt-label">Prioritas</label>
+      <%= f.select :priority,
+        options_for_select(Issue.priorities.keys.map { |k| [issue_priority_label(k), k] }, f.object.priority),
+        {},
+        class: 'kt-select' %>
+    </div>
+
+    <div>
+      <label class="kt-label">Ditugaskan ke (Utama)</label>
+      <% if defined?(@assignable_accounts) && @assignable_accounts.present? %>
+        <%= f.select :assigned_to_id,
+          options_for_select(@assignable_accounts.map { |a| [a.person&.name || a.email, a.id] }, f.object.assigned_to_id),
+          { include_blank: 'Pilih penanggung utama' },
+          class: 'kt-select' %>
+      <% else %>
+        <%= f.number_field :assigned_to_id, class: 'kt-input', placeholder: 'ID akun penanggung utama' %>
+      <% end %>
+    </div>
+
+    <div>
+      <label class="kt-label">Penanggung Tambahan</label>
+      <% if defined?(@assignable_accounts) && @assignable_accounts.present? %>
+        <%= f.select :assigned_account_ids,
+          options_for_select(@assignable_accounts.map { |a| [a.person&.name || a.email, a.id] }, f.object.assigned_accounts&.pluck(:id)),
+          {},
+          multiple: true,
+          class: 'kt-select' %>
+      <% else %>
+        <%= f.text_field :assigned_account_ids, class: 'kt-input', placeholder: 'Masukkan ID akun (pisahkan dengan koma)' %>
+      <% end %>
+      <p class="text-xs text-gray-500 mt-1">Tahan Ctrl/Cmd untuk memilih lebih dari satu.</p>
     </div>
   </div>
 
   <%= kt_card_footer(justify: 'justify-end') do %>
     <div class="flex gap-2">
       <%= link_to protected_employee_issues_path(parent), class: 'kt-btn kt-btn-outline' do %>
-        <i class="ki-filled ki-arrow-left"></i> Cancel
+        <i class="ki-filled ki-arrow-left"></i> Batal
       <% end %>
-      <%= f.submit 'Save Changes', class: 'kt-btn kt-btn-primary' %>
+      <%= f.submit 'Simpan Perubahan', class: 'kt-btn kt-btn-primary' %>
     </div>
   <% end %>
 <% end %>

@@ -1,6 +1,8 @@
 class Protected::Issues::EmployeesController < Protected::BaseController
   before_action :set_employee
   before_action :authenticate_account!
+  # Menyediakan koleksi akun yang dapat dipilih sebagai assignee (new/edit)
+  before_action :set_assignable_accounts, only: %i[new edit]
 
   # Action: Index
   # Tujuan: Menampilkan daftar issues untuk karyawan dengan dukungan filter status, priority, dan pencarian.
@@ -16,6 +18,8 @@ class Protected::Issues::EmployeesController < Protected::BaseController
 
   def show
     @issue = @employee.issues.find(params[:id])
+    # Siapkan instance IssueComment baru untuk form komentar di halaman show
+    @issue_comment = IssueComment.new
   end
 
   def new
@@ -74,6 +78,17 @@ class Protected::Issues::EmployeesController < Protected::BaseController
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
+  end
+
+  # set_assignable_accounts
+  # Tujuan: Menyediakan koleksi akun untuk pilihan assignee (primary & additional)
+  # SRP: Mengambil akun dengan role relevan dan mengurutkan stabil untuk UI
+  def set_assignable_accounts
+    @assignable_accounts = Account
+      .left_joins(:account_roles, :roles)
+      .where(account_roles: { revoked_at: nil }, roles: { name: ["employee", "administrator"] })
+      .includes(:person)
+      .order("accounts.created_at ASC")
   end
 
   # Method: apply_filters

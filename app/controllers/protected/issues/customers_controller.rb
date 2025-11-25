@@ -23,6 +23,8 @@ class Protected::Issues::CustomersController < Protected::BaseController
   def create
     @issue = Issue.new(issue_params.except(:assigned_account_ids))
     @issue.issueable = @customer
+    # Default: assign ke akun pembuat agar ada penanggung utama
+    @issue.assigned_to = current_account if current_account.present?
 
     if @issue.save
       # Handle additional assignees
