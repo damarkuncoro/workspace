@@ -1,0 +1,8 @@
+<%# Partial: Protected::CustomerDevices::new_form
+    Tujuan: Wrapper konten form CustomerDevice menggunakan helper KT agar konsisten.
+    Isi: Render partial form utama dengan objek @customer_device.
+    Prinsip: SRP (wrapper terpisah), DRY (reuse _form), KISS. %>
+
+<%= kt_content_container do %>
+  <%= render 'protected/customer_devices/form', customer_device: @customer_device %>
+<% end %>

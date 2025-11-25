@@ -1,0 +1,106 @@
+<%# Partial: CustomerDevices::partials/_table
+  Tanggung jawab:
+  - Menampilkan daftar rental perangkat (search bar, tabel, pagination)
+  - Menangani empty state ketika tidak ada rental
+  - Menyediakan aksi footer kembali ke halaman customer (bila nested)
+  Catatan implementasi:
+  - Gunakan Device#label sebagai nama tampil (hindari pemanggilan #name)
+  - SRP: logic tampil dipisah dari header (index)
+%>
+
+<%= kt_grid(cols: 1) do %>
+  <%= kt_column(span: 1) do %>
+    <%= kt_card do %>
+      <%= kt_card_content do %>
+        <% if @customer_devices.any? %>
+          <div class="kt-scrollable-x-auto">
+            <%= kt_table(class: "kt-table-border") do %>
+              <thead>
+                <tr>
+                  <th><%= kt_table_col_label { "Device" } %></th>
+                  <th><%= kt_table_col_label { "Customer" } %></th>
+                  <th><%= kt_table_col_label { "Rental Period" } %></th>
+                  <th><%= kt_table_col_label { "Status" } %></th>
+                  <th class="w-[200px]"><%= kt_table_col_label { "Actions" } %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @customer_devices.each do |customer_device| %>
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
+                          <i class="ki-filled ki-monitor text-muted-foreground"></i>
+                        </div>
+                        <div class="flex flex-col">
+                          <div class="text-sm font-medium text-foreground"><%= device_label(customer_device.device) %></div>
+                          <div class="text-sm text-secondary-foreground"><%= device_meta(customer_device.device) %></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-sm text-foreground"><%= customer_name(customer_device.customer) %></div>
+                      <div class="text-sm text-secondary-foreground"><%= customer_email(customer_device.customer) %></div>
+                    </td>
+                    <td>
+                      <div class="text-sm text-foreground"><%= rented_from_label(customer_device) %></div>
+                      <div class="text-sm text-secondary-foreground"><%= rented_until_label(customer_device) %></div>
+                    </td>
+                    <td>
+                      <%= status_tag(customer_device) %>
+                    </td>
+                    <td>
+                      <div class="flex gap-2 justify-end">
+                        <%= link_to protected_customer_device_path(customer_device.customer, customer_device), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                          <i class="ki-filled ki-eye"></i>
+                        <% end %>
+                        <% if customer_device.active? %>
+                          <%= button_to return_protected_customer_device_path(customer_device), method: :patch, data: { confirm: 'Are you sure you want to return this device?' }, class: "kt-btn kt-btn-sm kt-btn-success" do %>
+                            <i class="ki-filled ki-check"></i>
+                          <% end %>
+                        <% end %>
+                        <%= link_to edit_protected_customer_device_path(customer_device.customer, customer_device), class: "kt-btn kt-btn-sm kt-btn-outline" do %>
+                          <i class="ki-filled ki-pencil"></i>
+                        <% end %>
+                        <%= link_to protected_customer_device_path(customer_device.customer, customer_device), method: :delete, data: { confirm: 'Are you sure you want to delete this rental record?' }, class: "kt-btn kt-btn-sm kt-btn-destructive" do %>
+                          <i class="ki-filled ki-trash"></i>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-8">
+            <div class="flex flex-col items-center gap-4">
+              <i class="ki-filled ki-monitor text-4xl text-muted-foreground"></i>
+              <h3 class="text-lg font-medium text-foreground">No device rentals</h3>
+              <p class="text-sm text-secondary-foreground">Get started by renting a device to a customer.</p>
+              <% if @customer.present? %>
+                <%= link_to new_protected_customer_device_path(@customer), class: "kt-btn kt-btn-primary" do %>
+                  <i class="ki-filled ki-plus"></i>
+                  Rent First Device
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= kt_card_footer(justify: "justify-start") do %>
+        <% if @customer.present? %>
+          <%= link_to protected_customer_path(@customer), class: "kt-btn kt-btn-outline" do %>
+            <i class="ki-filled ki-arrow-left"></i>
+            Back to Customer
+          <% end %>
+        <% else %>
+          <%= link_to protected_dashboard_path, class: "kt-btn kt-btn-outline" do %>
+            <i class="ki-filled ki-arrow-left"></i>
+            Back to Dashboard
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

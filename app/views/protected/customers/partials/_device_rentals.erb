@@ -29,7 +29,8 @@
                 </div>
               </div>
               <div>
-                <p class="text-sm font-medium text-gray-900"><%= rental.device.name %></p>
+                <%# Gunakan Device#label sebagai nama tampil (bukan #name) %>
+                <p class="text-sm font-medium text-gray-900"><%= rental.device.label %></p>
                 <p class="text-xs text-gray-500">
                   <%= rental.device.device_type.name %> • Serial: <%= rental.device.serial_number %>
                   <% if rental.overdue? %>

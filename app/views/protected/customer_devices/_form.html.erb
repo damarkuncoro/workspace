@@ -1,3 +1,8 @@
+<%# Partial: Protected::CustomerDevices form
+    Tujuan: Form penyewaan perangkat untuk Customer.
+    Catatan: Gunakan atribut `Device#label` sebagai nama tampil (bukan `name`).
+    Prinsip: SRP, DRY, KISS, YAGNI. %>
+
 <%= form_with(model: [:protected, customer_device], local: true, class: "space-y-6") do |form| %>
 
   <% if customer_device.errors.any? %>
@@ -51,7 +56,7 @@
     <div class="mt-1">
     <% if @available_devices%>
       <%= form.select :device_id,
-          options_for_select(@available_devices.map { |device| ["#{device.name} (#{device.device_type.name}) - SN: #{device.serial_number}", device.id] }, customer_device.device_id),
+          options_for_select(@available_devices.map { |device| ["#{device.label} (#{device.device_type.name}) - SN: #{device.serial_number}", device.id] }, customer_device.device_id),
           { include_blank: "Choose a device..." },
           class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
     </div>
