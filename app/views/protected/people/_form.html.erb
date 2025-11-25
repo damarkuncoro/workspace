@@ -1,0 +1,70 @@
+<%#
+  Partial: People Form (Unified)
+  Tujuan: Satu partial form untuk halaman New/Edit Person.
+  Prinsip: DRY, SRP, KISS — menerima local `person` dan membuat `form_with` internal.
+  Pemakaian:
+    <%= render 'protected/people/form', person: @person %>
+
+<%= form_with(model: [:protected, person], local: true) do |form| %>
+  <% if person.errors.any? %>
+    <div class="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded-lg">
+      <div class="flex gap-3">
+        <div class="flex-shrink-0">
+          <i class="ki-filled ki-information text-destructive text-lg"></i>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-destructive">
+            <%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:
+          </h3>
+          <div class="mt-2 text-sm text-destructive">
+            <ul role="list" class="list-disc pl-5 space-y-1">
+              <% person.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Informasi Orang -->
+  <div class="grid gap-6">
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Informasi Orang</h3>
+      </div>
+      <div class="kt-card-content">
+        <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+          <div>
+            <%= form.label :name, class: 'form-label' %>
+            <%= form.text_field :name,
+                class: 'kt-input',
+                placeholder: 'Masukkan nama lengkap' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Nama tampilan Anda di sistem</p>
+          </div>
+
+          <div>
+            <%= form.label :date_of_birth, class: 'form-label' %>
+            <%= form.date_field :date_of_birth,
+                class: 'kt-input' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Format: YYYY-MM-DD</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Aksi Form -->
+    <%= kt_card_footer(justify: "justify-end", class_name: "gap-3") do %>
+      <%= link_to protected_people_path, class: "kt-btn kt-btn-outline" do %>
+        <i class="ki-filled ki-cross"></i>
+        Batal
+      <% end %>
+
+      <%= form.submit (person.new_record? ? 'Buat Orang' : 'Simpan Perubahan'),
+          class: "kt-btn kt-btn-primary",
+          data: { disable_with: person.new_record? ? "Membuat..." : "Menyimpan..." } %>
+    <% end %>
+  </div>
+<% end %>
+

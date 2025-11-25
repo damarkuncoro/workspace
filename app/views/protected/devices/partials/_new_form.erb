@@ -1,0 +1,10 @@
+<%#
+  Partial: Devices New Form Wrapper
+  Tujuan: Bungkus kontainer konten dan render form Devices.
+  Pemakaian: dipanggil dari new.html.erb.
+%>
+
+<%= kt_content_container do %>
+  <%= render 'protected/devices/form', device: @device %>
+<% end %>
+

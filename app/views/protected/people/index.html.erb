@@ -1,27 +1,20 @@
-<h1>People</h1>
-<div class="row g-6 g-xl-9">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @people.each do |person| %>
-        <tr>
-          <td><%= person.id %></td>
-          <td><%= person.name %></td>
-          <td><%= person.person_email %></td>
-          <td>
-            <%= link_to "Show", protected_person_path(person), class: "btn btn-sm btn-light" %>
-            <%= link_to "Edit", edit_protected_person_path(person), class: "btn btn-sm btn-primary" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to "New Person", new_protected_person_path, class: "btn btn-success" %>
-</div>
+<%#
+  Halaman: Index People
+  Tujuan: Konsistensi layout dengan helper `page_header` dan partial tabel KT.
+  Prinsip: SRP/KISS/DRY — header + render partial tabel.
+%>
+
+<%= render 'protected/shared/partials/page_header',
+            title: 'Orang',
+            subtitle: 'Kelola data orang',
+            actions_html: (
+              link_to new_protected_person_path, class: 'kt-btn kt-btn-primary' do
+                raw('<i class="ki-filled ki-plus"></i> Tambah Orang')
+              end
+            ) %>
+
+<%= render 'protected/people/partials/table',
+            records: @people,
+            namespace: :protected,
+            resource_singular: :person,
+            resource_plural: :people %>

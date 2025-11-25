@@ -1,11 +1,19 @@
-<h1>Person</h1>
+<%# Template: People#show - menampilkan detail satu orang %>
+<h1>Orang</h1>
 <div class="card">
   <div class="card-body">
+    <%# Field: ID %>
     <p><strong>ID:</strong> <%= @person.id %></p>
-    <p><strong>Name:</strong> <%= @person.name %></p>
+    <%# Field: Nama %>
+    <p><strong>Nama:</strong> <%= @person.name %></p>
+    <%# Field: Email (diambil dari Account terkait) %>
     <p><strong>Email:</strong> <%= @person.person_email %></p>
-    <p><strong>Date of Birth:</strong> <%= @person.date_of_birth %></p>
-    <p><strong>Metadata:</strong> <%= @person.metadata %></p>
+    <%# Field: Tanggal Lahir %>
+    <p><strong>Tanggal Lahir:</strong> <%= @person.date_of_birth %></p>
+    <%# Field: Metadata (opsional) - hanya tampil jika atribut tersedia) %>
+    <% if @person.respond_to?(:metadata) && @person.metadata.present? %>
+      <p><strong>Metadata:</strong> <%= @person.metadata.is_a?(String) ? @person.metadata : @person.metadata.to_json %></p>
+    <% end %>
   </div>
 </div>
 <div class="mt-4">

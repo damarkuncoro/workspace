@@ -58,13 +58,13 @@
                 <td>
                   <% if device.persisted? %>
                     <div class="flex gap-2">
-                      <%= link_to polymorphic_path([namespace, resource_singular], device), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                      <%= link_to polymorphic_path([namespace, device]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
                         <i class="ki-filled ki-eye"></i>
                       <% end %>
-                      <%= link_to polymorphic_path([:edit, namespace, resource_singular], device), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                      <%= link_to polymorphic_path([:edit, namespace, device]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
                         <i class="ki-filled ki-pencil"></i>
                       <% end %>
-                      <%= link_to polymorphic_path([namespace, resource_singular], device), method: :delete, data: { confirm: 'Yakin hapus perangkat ini?' }, class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                      <%= link_to polymorphic_path([namespace, device]), method: :delete, data: { confirm: 'Yakin hapus perangkat ini?' }, class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
                         <i class="ki-filled ki-trash"></i>
                       <% end %>
                     </div>

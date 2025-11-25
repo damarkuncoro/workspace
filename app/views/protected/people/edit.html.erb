@@ -1,17 +1,18 @@
-<h1>Edit Person</h1>
-<%= form_with model: @person, url: protected_person_path(@person), method: :patch, local: true do |f| %>
-  <div class="mb-3">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :date_of_birth %>
-    <%= f.date_field :date_of_birth, class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <%= f.label :metadata %>
-    <%= f.text_area :metadata, class: "form-control" %>
-  </div>
-  <%= f.submit "Update", class: "btn btn-primary" %>
-  <%= link_to "Back", protected_people_path, class: "btn btn-light" %>
-<% end %>
+<%# Template: People#edit - gunakan page_header & partial form %>
+<%= render 'protected/shared/partials/page_header',
+  title: 'Ubah Orang',
+  subtitle: 'Perbarui informasi orang' %>
+
+<%= render 'protected/people/partials/edit_form' %>
+
+<%= render 'protected/shared/partials/page_actions',
+  card: false,
+  justify: 'justify-center',
+  links: [
+    link_to(protected_person_path(@person), class: "kt-btn kt-btn-outline") do
+      raw('<i class="ki-filled ki-eye"></i> Lihat Orang')
+    end,
+    link_to(protected_people_path, class: "kt-btn kt-btn-outline") do
+      raw('<i class="ki-filled ki-arrow-left"></i> Kembali ke Daftar Orang')
+    end
+  ] %>

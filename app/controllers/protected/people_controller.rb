@@ -43,6 +43,8 @@ class Protected::PeopleController < Protected::BaseController
   end
 
   def person_params
-    params.require(:person).permit(:name, :date_of_birth, :metadata)
+    # Strong params: hanya field yang ada pada tabel people
+    # Hindari :metadata karena kolom tersebut tidak ada di people
+    params.require(:person).permit(:name, :date_of_birth)
   end
 end

@@ -1,0 +1,10 @@
+<%#
+  Partial: People New Form Wrapper
+  Tujuan: Bungkus kontainer konten dan render form People.
+  Pemakaian: dipanggil dari new.html.erb.
+%>
+
+<%= kt_content_container do %>
+  <%= render 'protected/people/form', person: @person %>
+<% end %>
+

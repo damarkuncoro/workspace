@@ -1,0 +1,81 @@
+<%#
+  Partial: Tabel People
+  Tujuan: Menampilkan daftar orang menggunakan kt_card + kt_table.
+  Prinsip: SRP & KISS — partial independen, menerima locals agar tidak bergantung instance variables.
+  Locals yang diharapkan:
+    - records: koleksi Person (Array/ActiveRecord::Relation)
+    - namespace: simbol namespace routes, contoh: :protected
+    - resource_singular: simbol singular resource, contoh: :person
+    - resource_plural: simbol plural resource, contoh: :people
+%>
+
+<%= kt_card do %>
+  <%= kt_card_content do %>
+    <% if (records || []).present? %>
+      <div class="kt-scrollable-x-auto">
+        <%= kt_table(class: 'kt-table-border') do %>
+          <thead>
+            <tr>
+              <th><%= kt_table_col_label { 'ID' } %></th>
+              <th><%= kt_table_col_label { 'Nama' } %></th>
+              <th><%= kt_table_col_label { 'Email' } %></th>
+              <th><%= kt_table_col_label { 'Dibuat' } %></th>
+              <th class="w-[180px]"><%= kt_table_col_label { 'Aksi' } %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% (records || []).each do |person| %>
+              <tr>
+                <td>
+                  <div class="text-sm text-secondary-foreground"><%= person.id %></div>
+                </td>
+                <td>
+                  <div class="text-sm font-medium text-foreground"><%= person.name %></div>
+                </td>
+                <td>
+                  <div class="text-sm text-secondary-foreground"><%= person.person_email %></div>
+                </td>
+                <td>
+                  <div class="text-sm text-secondary-foreground"><%= person.try(:created_at) ? l(person.created_at) : '-' %></div>
+                </td>
+                <td>
+                  <% if person.persisted? %>
+                    <div class="flex gap-2">
+                      <%= link_to polymorphic_path([namespace, person]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-eye"></i>
+                      <% end %>
+                      <%= link_to polymorphic_path([:edit, namespace, person]), class: 'kt-btn kt-btn-sm kt-btn-outline' do %>
+                        <i class="ki-filled ki-pencil"></i>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-sm text-muted-foreground">-</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-8">
+        <div class="flex flex-col items-center gap-4">
+          <i class="ki-filled ki-user text-4xl text-muted-foreground"></i>
+          <h3 class="text-lg font-medium text-foreground">Belum ada data orang</h3>
+          <p class="text-sm text-secondary-foreground">Tambahkan orang pertama untuk mulai mengelola.</p>
+          <div class="flex gap-2 justify-center">
+            <%= link_to polymorphic_path([:new, namespace, resource_singular]), class: 'kt-btn kt-btn-primary' do %>
+              <%= raw('<i class="ki-filled ki-plus"></i> Tambah Orang') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= kt_card_footer(justify: 'justify-start') do %>
+    <%= link_to polymorphic_path([namespace, resource_plural]), class: 'kt-btn kt-btn-outline' do %>
+      <%= raw('<i class="ki-filled ki-arrow-left"></i> Kembali ke People') %>
+    <% end %>
+  <% end %>
+<% end %>

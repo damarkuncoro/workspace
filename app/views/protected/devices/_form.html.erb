@@ -1,17 +1,23 @@
-<%= form_with(model: [:protected, device], local: true, class: "space-y-6") do |form| %>
+<%#
+  Partial: Devices Form (Unified)
+  Tujuan: Satu partial form untuk halaman New/Edit Device.
+  Prinsip: DRY, SRP, KISS — menerima local `device` dan membuat `form_with` internal.
+  Pemakaian:
+    <%= render 'protected/devices/form', device: @device %>
+
+
+<%= form_with(model: [:protected, device], local: true) do |form| %>
   <% if device.errors.any? %>
-    <div class="bg-red-50 border border-red-200 rounded-md p-4">
-      <div class="flex">
+    <div class="bg-destructive/10 border border-destructive text-destructive px-4 py-3 rounded-lg">
+      <div class="flex gap-3">
         <div class="flex-shrink-0">
-          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-          </svg>
+          <i class="ki-filled ki-information text-destructive text-lg"></i>
         </div>
-        <div class="ml-3">
-          <h3 class="text-sm font-medium text-red-800">
+        <div>
+          <h3 class="text-sm font-medium text-destructive">
             <%= pluralize(device.errors.count, "error") %> prohibited this device from being saved:
           </h3>
-          <div class="mt-2 text-sm text-red-700">
+          <div class="mt-2 text-sm text-destructive">
             <ul role="list" class="list-disc pl-5 space-y-1">
               <% device.errors.each do |error| %>
                 <li><%= error.full_message %></li>
@@ -23,107 +29,78 @@
     </div>
   <% end %>
 
-  <!-- Device Information -->
-  <div class="bg-blue-50 p-4 rounded-lg">
-    <h3 class="text-sm font-medium text-blue-900 mb-4">Device Information</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label for="device_label" class="block text-sm font-medium text-blue-700">
-          Device Label <span class="text-red-500">*</span>
-        </label>
-        <div class="mt-1">
-          <%= form.text_field :label,
-              class: "block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm placeholder-blue-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-              placeholder: "e.g., MacBook Pro 16-inch",
-              required: true %>
-        </div>
-        <p class="mt-1 text-sm text-blue-600">Enter a descriptive label for the device.</p>
+  <div class="grid gap-6">
+    <div class="kt-card">
+      <div class="kt-card-header">
+        <h3 class="kt-card-title">Informasi Perangkat</h3>
       </div>
-      <div>
-        <label for="device_device_type_id" class="block text-sm font-medium text-blue-700">
-          Device Type <span class="text-red-500">*</span>
-        </label>
-        <div class="mt-1">
-          <%= form.select :device_type_id,
-              options_for_select(@device_types.map { |dt| [dt.name, dt.id] }, device.device_type_id),
-              { include_blank: "Select device type..." },
-              class: "block w-full px-3 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
-              required: true %>
-        </div>
-        <p class="mt-1 text-sm text-blue-600">Choose the category this device belongs to.</p>
+      <div class="kt-card-content">
+        <%= kt_grid(cols: 1, cols_md: 2, gap: 4) do %>
+          <div>
+            <%= form.label :label, 'Label Perangkat', class: 'form-label' %>
+            <%= form.text_field :label,
+                class: 'kt-input',
+                placeholder: 'Contoh: MacBook Pro 16-inch',
+                required: true %>
+            <p class="mt-1 text-sm text-secondary-foreground">Nama deskriptif untuk perangkat.</p>
+          </div>
+
+          <div>
+            <%= form.label :device_type_id, 'Tipe Perangkat', class: 'form-label' %>
+            <%= form.select :device_type_id,
+                options_for_select(@device_types.map { |dt| [dt.name, dt.id] }, device.device_type_id),
+                { include_blank: 'Pilih tipe perangkat…' },
+                class: 'kt-input',
+                required: true %>
+            <p class="mt-1 text-sm text-secondary-foreground">Kategori perangkat.</p>
+          </div>
+
+          <div>
+            <%= form.label :serial_number, 'Nomor Seri', class: 'form-label' %>
+            <%= form.text_field :serial_number,
+                class: 'kt-input',
+                placeholder: 'Masukkan nomor seri perangkat',
+                required: true %>
+            <p class="mt-1 text-sm text-secondary-foreground">Identifier unik untuk pelacakan.</p>
+          </div>
+
+          <div>
+            <%= form.label :model, 'Model', class: 'form-label' %>
+            <%= form.text_field :model,
+                class: 'kt-input',
+                placeholder: 'Contoh: MacBook Pro 16-inch' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Spesifikasi model perangkat.</p>
+          </div>
+
+          <div>
+            <%= form.label :firmware_version, 'Versi Firmware', class: 'form-label' %>
+            <%= form.text_field :firmware_version,
+                class: 'kt-input',
+                placeholder: 'Contoh: 1.2.3' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Versi firmware saat ini.</p>
+          </div>
+
+          <div>
+            <%= form.label :status, 'Status Awal', class: 'form-label' %>
+            <%= form.select :status,
+                options_for_select(Device.statuses.keys.map { |s| [s.humanize, s] }, device.status || 'available'),
+                {},
+                class: 'kt-input' %>
+            <p class="mt-1 text-sm text-secondary-foreground">Setel status ketersediaan.</p>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
 
-  <!-- Technical Details -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div>
-      <label for="device_serial_number" class="block text-sm font-medium text-gray-700">
-        Serial Number <span class="text-red-500">*</span>
-      </label>
-      <div class="mt-1">
-        <%= form.text_field :serial_number,
-            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-            placeholder: "Enter device serial number",
-            required: true %>
-      </div>
-      <p class="mt-1 text-sm text-gray-500">Unique identifier for tracking.</p>
-    </div>
+    <%= kt_card_footer(justify: 'justify-end', class_name: 'gap-3') do %>
+      <%= link_to protected_devices_path, class: 'kt-btn kt-btn-outline' do %>
+        <i class="ki-filled ki-cross"></i>
+        Batal
+      <% end %>
 
-    <div>
-      <label for="device_model" class="block text-sm font-medium text-gray-700">
-        Model
-      </label>
-      <div class="mt-1">
-        <%= form.text_field :model,
-            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-            placeholder: "e.g., MacBook Pro 16-inch" %>
-      </div>
-      <p class="mt-1 text-sm text-gray-500">Device model specification.</p>
-    </div>
-  </div>
-
-  <!-- Additional Details -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div>
-      <label for="device_firmware_version" class="block text-sm font-medium text-gray-700">
-        Firmware Version
-      </label>
-      <div class="mt-1">
-        <%= form.text_field :firmware_version,
-            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
-            placeholder: "e.g., 1.2.3" %>
-      </div>
-      <p class="mt-1 text-sm text-gray-500">Current firmware version.</p>
-    </div>
-
-    <div>
-      <label for="device_status" class="block text-sm font-medium text-gray-700">
-        Initial Status <span class="text-red-500">*</span>
-      </label>
-      <div class="mt-1">
-        <%= form.select :status,
-            [['Available', 'available'], ['Rented', 'rented'], ['Maintenance', 'maintenance'], ['Retired', 'retired']],
-            { selected: device.status || 'available' },
-            class: "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
-      </div>
-      <p class="mt-1 text-sm text-gray-500">Set the initial availability status.</p>
-    </div>
-  </div>
-
-
-
-  <!-- Form Actions -->
-  <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
-    <%= link_to protected_devices_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      Cancel
+      <%= form.submit (device.new_record? ? 'Simpan Perangkat' : 'Perbarui Perangkat'),
+          class: 'kt-btn kt-btn-primary',
+          data: { disable_with: device.new_record? ? 'Menyimpan...' : 'Memperbarui...' } %>
     <% end %>
-
-    <%= form.submit "Save Device",
-        class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-        data: { disable_with: "Saving..." } %>
   </div>
 <% end %>
