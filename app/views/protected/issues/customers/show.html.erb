@@ -19,16 +19,12 @@
   subtitle: (@customer&.respond_to?(:person_name) ? @customer.person_name : 'Customer'),
   actions_html: actions_html %>
 
-<%= kt_card do %>
-  <%= kt_card_content do %>
-    <%= render partial: 'protected/issues/customers/partials/details',
+<%= render partial: 'protected/issues/customers/partials/details',
       locals: {
         record: (@issue || nil),
         namespace: :protected,
         customer: @customer
       } %>
-  <% end %>
-<% end %>
 
 <%# Komentar Issue %>
 <%= render partial: 'protected/issues/customers/partials/comments' %>
