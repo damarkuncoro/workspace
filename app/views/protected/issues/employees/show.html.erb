@@ -19,16 +19,12 @@
   subtitle: (@employee&.respond_to?(:person_name) ? @employee.person_name : 'Karyawan'),
   actions_html: actions_html %>
 
-<%= kt_card do %>
-  <%= kt_card_content do %>
     <%= render partial: 'protected/issues/employees/partials/details',
       locals: {
         record: (@issue || nil),
         namespace: :protected,
         employee: @employee
       } %>
-  <% end %>
-<% end %>
 
 <%# Komentar Issue %>
 <%= render partial: 'protected/issues/employees/partials/comments' %>
