@@ -46,7 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_095000) do
   end
 
   create_table "customer_devices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.jsonb "config", default: {}, null: false
+    t.jsonb "config"
     t.datetime "created_at", null: false
     t.uuid "customer_id", null: false
     t.uuid "device_id", null: false
